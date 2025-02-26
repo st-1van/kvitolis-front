@@ -1,0 +1,72 @@
+.carousel{
+    margin-bottom: 25px;
+    position: relative;
+    height: 40rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+    overflow: hidden;
+    border-radius: 6.25rem 0rem;
+    background-size:cover;
+    background-position: center;
+    
+    &__content {
+      align-self: flex-start;
+      z-index: 2;
+      font-size: 2rem;
+      padding: 0 9rem;
+      max-width: 45%;
+    }
+    &__description{
+        line-height: 1.625rem;
+        margin-bottom: 3rem;
+    }
+  
+    &__overlay {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .carousel__overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+    }
+
+    .carousel,
+    .carousel__overlay {
+    box-sizing: border-box;
+    }
+      
+  
+    &--dark {
+      color: white;
+  
+      .carousel__overlay {
+        background: linear-gradient(90deg, #101916 0%, rgba(16, 25, 22, 0) 100%);
+      }
+    }
+  
+    &--light {
+      color: black;
+  
+      .carousel__overlay {
+        background: linear-gradient(90deg, #F4F2EF 0%, rgba(244, 242, 239, 0) 100%);
+      }
+    }
+  }
+
+
+
+  

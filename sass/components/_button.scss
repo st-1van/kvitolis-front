@@ -1,0 +1,52 @@
+.btn {
+  font-size: 1.125rem;
+  
+
+  &--small {
+    padding: 1rem 1.8rem;
+    border-radius: 1.2rem 0.3rem 1.2rem 0.3rem;
+  }
+
+  &--medium {
+    padding: 1.22rem 2.25rem;
+    border-radius: 1.6rem 0.3rem 1.6rem 0.3rem;
+    font-weight:600;
+  }
+
+  &--white {
+    background-color: white;
+    border: 2px white solid;
+    color: black;
+    &:hover,
+    &:focus {
+      background-color: $green;
+      border: 2px white solid;
+      color:white;
+      animation-duration: 0.2s;
+    }
+  }
+
+  &--green {
+    background-color: $green;
+    border: 2px $green solid;
+    color: white;
+    &:hover,
+    &:focus {
+      background-color: white;
+      border: 2px $green solid;
+      color:$green;
+      animation-duration: 0.2s;
+    }
+  }
+
+  &--fiolet {
+    background-color: $fiolet;
+    color: white;
+  }
+  &--purple {
+    background-color: $purple;
+    color: white;
+  }
+
+
+}

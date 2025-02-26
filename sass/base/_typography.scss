@@ -1,0 +1,55 @@
+@mixin font-face($name, $path, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: quote($name);
+    src: url("#{$path}.ttf") format("truetype");
+    font-weight: $weight;
+    font-style: $style;
+    font-display: swap;
+  }
+}
+
+@include font-face('NAMU-pro', '/fonts/NAMU/NAMU-Pro', 400);
+@include font-face('NAMU-1400', '/fonts/NAMU/NAMU-1400', 400);
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'NAMU-pro', sans-serif;
+}
+
+h1 {
+  font-size: 3.75rem;
+  line-height: 4.375rem; 
+  margin-bottom: 1.8rem;
+}
+
+h2 {
+  font-size: 3.75rem !important;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 6rem;
+  line-height: 7rem;
+}
+
+h4 {
+  font-size: 4rem;
+  line-height: 4.7rem;
+}
+
+h5 {
+  font-size: 2.5rem;
+  line-height: 6rem;
+}
+
+.sub {
+  font-size: 1.125rem;
+}
+
+p{
+  font-size: 1rem;
+  line-height: 1.25rem;
+  // margin-bottom: 1rem;
+}
