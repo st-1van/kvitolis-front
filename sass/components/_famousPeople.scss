@@ -1,0 +1,76 @@
+.famousPeople {
+    &__headline{
+        margin-bottom: 10rem;
+        text-align: center;
+    }
+
+    &__items {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 3rem;
+      justify-content: center;
+    }
+  
+    &__person {
+      position: relative; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    img {
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      z-index: 2;
+    }
+  
+    .light-green {
+      position: relative;
+      background-color: #d4edda; 
+      border-radius: 2.75rem;
+    //   width: 22rem;
+      height: 27rem;
+      padding:  17rem 1.7rem 1.7rem  1.7rem ;
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+      text-align: left;
+      z-index: 1;
+      div:first-child{
+        margin-bottom: 1.75rem;
+        p{
+            text-wrap: balance;
+            text-wrap-mode: wrap;
+            text-wrap-style: balance;
+        }
+
+      }
+      div:last-child{
+
+        color: $green;
+        button{
+            color:white;
+            background-color: $green;
+            border-radius: 50px;
+            border: 2px white solid;
+            width: 3.54844rem;
+            height: 3.54844rem;
+        }
+      }
+    }
+
+    .free{
+        display: flex;
+        justify-content: space-between;   
+        align-items:center;
+    }
+  
+    .sub {  
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+  }
+  

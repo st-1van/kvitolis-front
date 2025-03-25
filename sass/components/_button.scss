@@ -1,6 +1,7 @@
 .btn {
   font-size: 1.125rem;
-  
+  margin-right: 1rem;
+  margin-bottom: 1rem;
 
   &--small {
     padding: 1rem 1.8rem;
@@ -39,6 +40,19 @@
     }
   }
 
+  &--outlined {
+    background-color: white;
+    border: 2px $green solid;
+    color: black;
+    &:hover,
+    &:focus {
+      background-color: $green;
+      border: 2px $green solid;
+      color:white;
+      animation-duration: 0.2s;
+    }
+  }
+
   &--fiolet {
     background-color: $fiolet;
     color: white;
@@ -46,6 +60,23 @@
   &--purple {
     background-color: $purple;
     color: white;
+  }
+
+  &--minimal {
+    background: none;
+    border: none;
+    // font-size: 16px;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #0056b3;
+    }
+
+    &:disabled {
+      color: #bbb;
+      cursor: not-allowed;
+    }
   }
 
 

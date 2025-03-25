@@ -8,7 +8,7 @@ export const Footer = ()=>{
     const year = new Date().getFullYear();
 
     return(
-        <footer className='footer'>
+        <footer id="contacts" className='footer'>
             <div className="container">
                 <div className="body footer__title">
                 <h2>

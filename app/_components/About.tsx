@@ -5,7 +5,7 @@ import InterMap from './InterMap'
 export default function About(){
     
     return(
-        <section className="about green">
+        <section id='about' className="about green">
             <div className='container'>
                 <div className='body'>
                     <div className='content'>

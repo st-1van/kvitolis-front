@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-interface AttractionProps {
+interface HeadBannerProps {
   title: string;
   src: string;
   desc: string;
@@ -13,16 +13,16 @@ interface AttractionProps {
   gradient?: string; 
 }
 
-export default function Attraction({ title, src, desc, slug, slug2, button1, button2, gradient }: AttractionProps) {
+export default function HeadBanner({ title, src, desc, slug, slug2, button1, button2, gradient }: HeadBannerProps) {
   return (
     <div 
-      className={`attraction attraction--${gradient}`} 
+      className={`headBanner headBanner--${gradient}`} 
       style={{ backgroundImage: `url(${src})` }}
     >
-      <div className="attraction__overlay"></div>
-      <div className="attraction__content">
-        <h2 className="attraction__headline">{title}</h2>
-        <p className="attraction__description">{desc}</p>
+      <div className="headBanner__overlay"></div>
+      <div className="headBanner__content">
+        <h2 className="headBanner__headline">{title}</h2>
+        <p className="headBanner__description">{desc}</p>
         <div>
           {src && (
             <Link href={slug || '#'}>

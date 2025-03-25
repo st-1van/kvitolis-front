@@ -50,6 +50,7 @@ html {
   font-optical-sizing: auto;
   font-weight: normal;
   font-style: normal;
+  scroll-behavior: smooth
 }
 
 html {
@@ -85,16 +86,22 @@ section{
 
 .content{
   padding: 0 9rem;
-
 }
 
 .grey{
-    background: rgba(255, 255, 255, 0.7);
+    background: $grey;
+}
+.light-grey{
+  background: $light-grey;
 }
 
 .green{
   background-color: $green;
   color:white;
+}
+
+.light-green{
+  background-color: $light-green;
 }
 
 .row{

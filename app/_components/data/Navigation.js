@@ -4,24 +4,24 @@ export const navItems = [
             slug: '/'
         },
         {
-            display:'Карта парку',
-            slug: '/experience'
+            display:'Про парк',
+            slug: '/about'
         },
         {
-            display:'Про парк',
-            slug: '/blog'
+            display:'Карта парку',
+            slug: '#map'
         },
         {
             display:'Активності',
-            slug: '/blog1'
+            slug: '#attractions'
+        },
+        {
+            display:'Сад українства',
+            slug: '/garden'
         },
         {
             display:'Контакти',
-            slug: '/blog2'
-        },
-        {
-            display:'Сад української ідентичності',
-            slug: '/blog3'
+            slug: '#contacts'
         },
     ]
 

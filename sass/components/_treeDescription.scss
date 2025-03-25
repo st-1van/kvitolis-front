@@ -1,0 +1,21 @@
+.treeDescription{
+    padding: 3.3rem 0;
+    .row{
+        padding-right: 4.2rem;
+    }
+    &__img{
+
+    }
+    &__content{
+        padding-left: 4.2rem;
+    }
+
+    &__description{
+
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 2rem;
+        margin-bottom: 4.7rem;
+    }
+}
