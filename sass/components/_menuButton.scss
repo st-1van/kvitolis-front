@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0; 
+}
+
+#menu-button {
+  width: 35px;
+  height: 24px;
+  position: relative;
+  z-index: 50;
+
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+  cursor: pointer;
+}
+
+#menu-button span {
+  display: block;
+  position: absolute;
+  height: 2px;  
+  width: 100%;
+  background: #000000;
+  border-radius: 2px;  
+  opacity: 1;
+  left: 0;
+  transition: .25s ease-in-out;
+
+}
+
+#menu-button span:nth-child(1) {
+  top: 0px;
+}
+
+#menu-button span:nth-child(2) {
+  top: 9px;
+}
+
+#menu-button span:nth-child(3) {
+  top: 18px;
+}
+
+#menu-button.open span:nth-child(1) {
+  top: 9px;
+  transform: rotate(135deg);
+}
+
+#menu-button.open span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+#menu-button.open span:nth-child(3) {
+  top: 9px;
+  transform: rotate(-135deg);
+}

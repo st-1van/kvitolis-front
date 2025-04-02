@@ -12,6 +12,17 @@
     .container{
         margin-bottom: 7.5rem;
     }
+
+    @media screen and (max-width: 426px) {
+
+        &__cards{
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+
+    }
 }
 .card{
     &__number{
@@ -22,10 +33,37 @@
     &__img{
         border-radius: 100px 0rem;    
         margin-bottom: 1.5rem;
-        min-height: 300px;
+        height: 60%;
         width: 100%;
     }
     &__title{
         font-size: 2.27rem;
     }
+
+    @media screen and (max-width: 769px) {
+        .card{
+                   
+            &__img{
+                min-width: 150px;
+                border-radius: 70px 0rem;    
+
+            }
+        } 
+    }
+
+    @media screen and (max-width: 426px) {
+
+        .card{
+            // &__number{
+            //     font-size: 4rem;
+            //     margin-bottom: 2.5rem;
+            // }
+        
+            // &__img{
+            //     border-radius: 50px 0rem;    
+            // }
+        } 
+    }
 }
+
+

@@ -64,6 +64,20 @@
       justify-content: space-between;
       margin-top: 16px;
     }
+
+    @media screen and (max-width: 426px) {
+      &__headline{
+        flex-direction: column;
+      }
+      .col-sm{
+        width: 100%;
+        font-size: 1.3rem;
+      }
+      &__navigation{
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      }
   
   }
   

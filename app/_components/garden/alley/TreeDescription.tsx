@@ -1,6 +1,7 @@
 
 "use client"; 
 import Image from "next/image";
+import Link from "next/link";
 // import Link from "next/link";
 
 interface TreeDescProps {
@@ -17,20 +18,25 @@ export default function TreeDescription(props: TreeDescProps) {
         <section className="treeDescription">
             <div className="container">
                 <div className="row">
+                    <div className="col col-bg">
                     <Image 
                         className='treeDescription__img' 
                         src={src} 
                         alt={`фото-${name}`}
+                        // fill={true}
                         height={456}
                         width={650}
                     />
-                    <div className="treeDescription__content">
+                    </div>
+                    <div className="treeDescription__content col col-bg">
                         <p>Дерева алеї</p>
                         <h2>{name}</h2>
                         <p className="treeDescription__description">{desc}</p>
-                        <button className="btn btn--medium btn--green">
-                            {button1}
-                        </button>
+                        <Link href='/garden/alley5/plant-dyb-person'>
+                            <button className="btn btn--medium btn--green">
+                                {button1}
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -5,15 +5,15 @@ export const navItems = [
         },
         {
             display:'Про парк',
-            slug: '/about'
+            slug: '/#about'
         },
         {
             display:'Карта парку',
-            slug: '#map'
+            slug: '/#map'
         },
         {
             display:'Активності',
-            slug: '#attractions'
+            slug: '/#attractions'
         },
         {
             display:'Сад українства',

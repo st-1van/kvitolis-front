@@ -9,24 +9,21 @@
 
 
   
-  .FAQ__title {
+  &__title {
     width: 30%;
   }
   
-//   .FAQ__title h2 {
-//     font-size: 2rem;
-//   }
   
-  .FAQ__accordion {
+  &__accordion {
     width: 60%;
   }
   
-  .FAQ__item {
+  &__item {
     border-bottom: 1px solid #ccc;
     padding: 15px 0;
   }
   
-  .FAQ__question {
+  &__question {
     width: 100%;
     background: none;
     border: none;
@@ -39,7 +36,7 @@
     padding: 10px 0;
   }
   
-  .FAQ__icon {
+  &__icon {
     font-size: 3.75rem;
     transition: transform 0.3s ease;
   }
@@ -48,7 +45,7 @@
     transform: rotate(180deg);
   }
   
-  .FAQ__answer {
+  &__answer {
     font-size: 1.125rem;
     overflow: hidden;
     max-height: 0;
@@ -58,9 +55,22 @@
   line-height: 1.625rem;
   }
   
-  .FAQ__answer p {
+  &__answer p {
     margin: 10px 0 0;
     font-size: 1rem;
     line-height: 1.4;
+  }
+
+  @media screen and (max-width: 426px) {
+    .container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    &__title{
+      width: 100%;
+      text-align: center;
+    }
+
   }
 }

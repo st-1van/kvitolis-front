@@ -53,7 +53,7 @@ export default function NumbersBlock({ title, desc, numbers }: NumbersProps) {
     return (
       <section className="numbers">
         <div className="container">
-          <div className="numbers__text">
+          <div className="numbers__text center">
             {title && <h2>{title}</h2>}
             {desc && <p className="desc">{desc}</p>}
           </div>

@@ -77,6 +77,8 @@
       justify-content: space-between;
       margin-top: 16px;
     }
+
+
   
 }
   
@@ -140,4 +142,21 @@
   background: #777;
   height: 10px;
 }
+
+@media screen and (max-width: 426px) {
+  .trees{
+    &__headline{
+      max-width: 60%;
+    }
+    &__navigation{
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    &__items{
+      padding-left: 1rem;
+    }
+    }
+
+  }
+
 

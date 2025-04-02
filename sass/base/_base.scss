@@ -14,6 +14,9 @@ body {
 main {
   min-height: calc(100vh - 13rem);
   padding-top: 26rem;
+  @media screen and (max-width: 769px) {
+    padding-top: 18rem;
+  }
 }
 
 section {
@@ -82,12 +85,34 @@ section{
   padding-left: 4.8rem;
   padding-right: 4.8rem;
   max-width: 1390px;
+
 }
 
 .content{
   padding: 0 9rem;
 }
 
+@media screen and (max-width: 769px) {
+  .content{
+    padding: 0 5rem;
+  }
+  .container{
+    max-width: 768px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .container{
+    padding: 0;
+  }
+  .content{
+    padding: 0 3rem;
+  }
+  section{
+    margin-bottom: 5rem;
+  }
+
+}
 .grey{
     background: $grey;
 }

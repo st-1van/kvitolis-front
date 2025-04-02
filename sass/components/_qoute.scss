@@ -61,4 +61,24 @@
     }
   }
 
+  @media screen and (max-width: 426px) {
+    .content {
+      flex-direction: column;
+    }
+
+    &__ceo {
+      padding: 0;
+      img{
+        margin:0
+      }
+    }
+
+    &__background {
+      width: 100%;
+    }
+    .col-bg{
+      width: 100%;
+    }
+  }
+
 }

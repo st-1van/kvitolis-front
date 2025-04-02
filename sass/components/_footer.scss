@@ -1,13 +1,22 @@
 .footer {  
 
-  .body {
+  .body{
     display: flex;
     justify-content: space-between; 
     align-items: flex-end;
   }
   &__title{
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-end;
     margin-top: 75px;
     margin-bottom: 20px;
+    h2{
+      margin: 0;
+    }
+    p{
+      font-size: 1.6rem;
+    }
   }
   &__map{
     width: 100%;
@@ -33,9 +42,13 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      width: fit-content;
       & div{
         margin-bottom: 2.5rem;
       }
+    }
+    h5{
+      text-wrap-mode: nowrap;
     }
   }
 
@@ -68,6 +81,9 @@
 
   &__policies {
     padding: 2rem 0;
+    .body{
+      align-items: center
+    }
   }
 
   &__policies-nav, a {
@@ -79,4 +95,81 @@
       margin-right: 3.5rem;
     }
   }
+  .btn{
+    margin-right: 0;
+  }
+
+  @media screen and (max-width: 769px) {
+    .body{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    }
+    
+    &__actions {
+      display: flex;
+      flex-direction: row;
+      align-items: end;
+      text-align: right;
+      flex-wrap: wrap;
+      font-size: 1rem;
+      min-height: 287px;
+
+      & .col{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        & div{
+          margin-bottom: 2.5rem;
+        }
+      }
+    }
+
+    &__policies{
+      .body{
+        flex-direction: column-reverse;
+      }
+      &-nav{
+        margin-bottom: 5px;
+      }
+    }
+  }
+  
+}
+
+// @media screen and (max-width: 1026px) {
+
+// }
+
+
+
+
+@media screen and (max-width: 426px) {
+  .body{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-content: center;
+    align-items: flex-start;
+  }
+  .footer{
+    .container{
+      padding: 0 3rem;
+    }
+    &__contacts {
+      align-self: center;
+    }
+
+    &__actions {
+      flex-wrap: wrap;
+    }
+    &__policies{
+      .footer .body{
+        flex-direction: column-reverse;
+      }
+    }
+  }
+
 }

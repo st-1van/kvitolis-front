@@ -10,19 +10,20 @@ export const Footer = ()=>{
     return(
         <footer id="contacts" className='footer'>
             <div className="container">
-                <div className="body footer__title">
-                <h2>
-                    Нас легко знайти
-                </h2>
-                <p>{adresse}</p>
+                <div className="footer__title">
+                    <h2>
+                        Нас легко знайти
+                    </h2>
+                    <p>{adresse}</p>
                 </div>
             </div>
             <section className="green">
             <GoogleMap />
+            
             <div className="container">
                 <div className="footer__main body">
                     <div className="body">
-                        <div className="footer__contacts col-sm">
+                        <div className="footer__contacts col">
                             <Image 
                                 className="footer__logo" 
                                 src='/assets/logo-white.svg' 
@@ -47,7 +48,7 @@ export const Footer = ()=>{
                             
                         </div>
                         <div className="footer__actions col-bg">
-                            <div className="col col-bg">
+                            <div className="col">
                                 <h5>Квитки на фест</h5>
                                 <div>
                                     <p>
@@ -58,7 +59,7 @@ export const Footer = ()=>{
                                     Замовити
                                 </button>
                             </div>
-                            <div className="col col-bg">
+                            <div className="col">
                                 <h5>Відпочинок</h5>
                                 <div>
                                     <p>
@@ -76,23 +77,23 @@ export const Footer = ()=>{
                 <div className="footer__policies">
                     <div className="body">
                         <p>kvitolis.com.ua ⓒ {year}</p>
-                            <ul className='footer__policies-nav'>
-                            {socials.map((item)=>(
-                                <li key={item.slug}>
-                                    <Link href={item.to} key={item.slug}>
-                                        {item.text}
-                                        <Image 
-                                            className="footer__icons" 
-                                            src={item.icon||''} 
-                                            alt={item.text||'logo'} 
-                                            width={25} 
-                                            height={25}
-                                            key={item.slug}
-                                        />
-                                    </Link>
-                                </li>
-                            ))}
-                            </ul>
+                        <ul className='footer__policies-nav'>
+                        {socials.map((item)=>(
+                            <li key={item.slug}>
+                                <Link href={item.to} key={item.slug}>
+                                    {item.text}
+                                    <Image 
+                                        className="footer__icons" 
+                                        src={item.icon||''} 
+                                        alt={item.text||'logo'} 
+                                        width={25} 
+                                        height={25}
+                                        key={item.slug}
+                                    />
+                                </Link>
+                            </li>
+                        ))}
+                        </ul>
                     </div>
                 </div>
             </div>

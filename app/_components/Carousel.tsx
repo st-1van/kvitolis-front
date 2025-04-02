@@ -18,8 +18,8 @@ export default function Carousel() {
   }, [length]);
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 10000);
-    return () => clearInterval(interval);
+    // const interval = setInterval(nextSlide, 10000);
+    // return () => clearInterval(interval);
   }, [nextSlide]);
 
   return (
@@ -32,7 +32,6 @@ export default function Carousel() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 1 }}
-            // className={styles.imageWrapper}
           >
             <div 
               className={`carousel carousel--${CarouselData[currentIndex].gradient}`} 

@@ -105,6 +105,26 @@
       font-size: 1.125rem !important;
     }
 
+  // @media screen and (max-width: 1026px) {
+
+  // }
+  @media screen and (max-width: 769px) {
+    &__trade{
+      flex-wrap: wrap;
+    }
+  // &__label{
+  //   font-size: 14px;
+  // }
+
+  }
+  @media screen and (max-width: 426px) {
+    .row{
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+  }
+
 }
 
 

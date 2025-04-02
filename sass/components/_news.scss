@@ -26,6 +26,7 @@
     &__img{
         border-radius: 100px 0 0 0;
         width: 100%;
+        max-height: 334px;
     }
 
     &__date{
@@ -46,4 +47,44 @@
     a{  
         font-weight: 600;
     }
+
+
+    @media screen and (max-width: 1025px) {
+        &__img{
+            max-height: 250px;
+            border-radius: 70px 0 0 0;  
+        }
+        // &__list{
+        //     display: flex;
+        //     flex-direction: column;
+        //     position: relative;
+        // }
+    }
+
+    @media screen and (max-width: 769px) {
+        &__img{
+            max-height: 200px;
+            border-radius: 70px 0 0 0;  
+        }
+    }
+
+    @media screen and (max-width: 426px) {
+
+        &__list{
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        &__date{   
+            margin-left: 70%;
+            margin-right: 10%
+        }
+
+        &__img{
+            max-height: none;
+            border-radius: 70px 0 0 0;  
+        }
+    }
 }
+

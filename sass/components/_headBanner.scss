@@ -1,7 +1,7 @@
 .headBanner {
     margin-bottom: 25px;
     position: relative;
-    height: 37rem;
+    height: 40rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -9,10 +9,10 @@
     padding-top: 3rem;
     padding-bottom: 3rem;
     overflow: hidden;
-    // border-radius: 6.25rem 0rem;
     background-repeat: no-repeat;
-    background-size:70%;
-    background-position: right;
+    background-size: fill;
+    background-position: 100% 40%;
+
     
     &__content {
       align-self: flex-start;
@@ -36,7 +36,7 @@
       z-index: 1;
     }
 
-    .headBanner__overlay {
+    &__overlay {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -46,7 +46,7 @@
     }
 
     .headBanner,
-    .headBanner__overlay {
+    &__overlay {
     box-sizing: border-box;
     }
       
@@ -72,6 +72,52 @@
         background-repeat: no-repeat;
       }
     }
+    @media screen and (max-width: 1026px) {
+      background-size:100%;
+    }
+    @media screen and (max-width: 769px) {
+      height: 40rem;
+      background-position: 70% 0%;
+        &__content {
+          align-self: flex-start;
+          z-index: 2;
+          font-size: 2rem;
+          padding: 2rem 9rem;
+          max-width: 60%;
+        }  
+
+    }
+    @media screen and (max-width: 426px) {
+    
+
+      flex-direction: column-reverse;
+      background-size:180%;
+      height: 60rem;
+      background-position: 70% 0%;
+
+    &__content {
+      align-self: flex-start;
+      z-index: 2;
+      font-size: 2rem;
+      padding: 0 3rem;
+      max-width: none;
+    }
+    
+    &--dark {
+      .headBanner__overlay {
+        background: linear-gradient(0deg, #101916 16%, rgba(16, 25, 22, 0) 100%);
+      }
+    }
+  
+    &--light {
+      .headBanner__overlay {
+        background: linear-gradient(0deg, #F4F2EF 16%, rgba(244, 242, 239, 0) 100%);
+      }
+    }
+
+
+    }
+
   }
 
 

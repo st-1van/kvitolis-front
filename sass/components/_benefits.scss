@@ -1,8 +1,18 @@
 .benefits{
 
     .row{
-        border-radius: 2.75rem;
-    }
+        border-radius: 44px;
+
+        &__img{
+          border-radius: 44px;
+        }
+        // .content1{
+        //   padding: 0px !important;
+        //   width:50% !important;
+        // }
+
+    } 
+
     &__items, .type{
       padding-left: 0px;
     }
@@ -20,7 +30,7 @@
         padding-top: 4.26rem;
         padding-bottom: 2.27rem;
         padding-left: 7rem;
-        margin-bottom: 1.25rem;
+
 
         ul {
           list-style: none; 
@@ -41,13 +51,41 @@
         li::before {
           content: "";
           background: url('/assets/custom-bullet.svg') no-repeat center / contain;
-          width: 20px; /* Розмір іконки */
+          width: 20px;
           height: 20px;
           position: absolute;
           left: 0;
           top: 50%;
           transform: translateY(-50%);
         }
+    }
+    @media screen and (max-width: 1025px) {
+      &__items{
+        // padding-top: 4.26rem;
+        // padding-bottom: 2.27rem;
+        padding-left: 4rem;
+      }
+    }
+
+    @media screen and (max-width: 769px) {
+      .container{
+        padding:0;
+      }
+      &__img{
+        width: 50%;
+        height: fit-content;
+      }
+    }
+
+    @media screen and (max-width: 426px) {
+      .row{
+        display: flex;
+        flex-direction: column-reverse;
+      }
+      &__img{
+        width: 100%;
+        height: fit-content;
+      }
     }
 
 }

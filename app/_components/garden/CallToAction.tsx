@@ -1,5 +1,6 @@
 "use client"; 
 import Image from "next/image";
+import Link from "next/link";
 
 type BenefitsProps = {
     title: string;
@@ -29,9 +30,11 @@ export default function CallToAction({ title, desc, btn }: BenefitsProps) {
             <div className="center">
                 <h2>{title}</h2>
                 <p className="desc">{desc}</p>
-                <button className="btn btn--medium btn--green">
-                    {btn}
-                </button>
+                <Link href='/garden/alley5/plant-dyb-person'>
+                    <button className="btn btn--medium btn--green">
+                        {btn}
+                    </button>
+                </Link>
             </div>
 
             <div className="right">
