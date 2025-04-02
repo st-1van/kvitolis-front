@@ -1,3 +1,5 @@
+@use "../base/variables";
+
 .trees {
     .container {
       position: relative;
@@ -83,7 +85,7 @@
 }
   
 .tree{
-  background: $light-green;
+  background: variables.$light-green;
   border-radius: 2.75rem;
   padding: 2rem 1.2rem 3rem;
 

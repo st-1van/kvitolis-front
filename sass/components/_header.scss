@@ -1,3 +1,5 @@
+@use "../base/variables";
+
 .header {
   position: absolute;
   top: 0;
@@ -17,7 +19,7 @@
 
       &.active {
         padding: 2px 3px;
-        border-bottom: solid 3px $fiolet;
+        border-bottom: solid 3px variables.$fiolet;
       }
     }
   }
@@ -153,7 +155,7 @@
 
       &.active {
         padding: 2px 3px;
-        border-bottom: solid 3px $fiolet;
+        border-bottom: solid 3px variables.$fiolet;
       }
     }
   }

@@ -1,3 +1,5 @@
+@use "../base/variables";
+
 .famousPeople {
     &__headline{
         margin-bottom: 10rem;
@@ -52,10 +54,10 @@
       }
       div:last-child{
 
-        color: $green;
+        color: variables.$green;
         button{
             color:white;
-            background-color: $green;
+            background-color: variables.$green;
             border-radius: 50px;
             border: 2px white solid;
             width: 3.54844rem;

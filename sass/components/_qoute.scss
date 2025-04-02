@@ -1,3 +1,5 @@
+@use "../base/variables";
+
 .qoute {
   position: relative;
   padding-top: 50px;
@@ -25,7 +27,7 @@
     width: calc(100% - 4.8rem);
     height: 100%;
     z-index: 1;
-    background-color: $green;
+    background-color: variables.$green;
     color:white;
   }
 

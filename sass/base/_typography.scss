@@ -1,6 +1,7 @@
+@use "sass:string";
 @mixin font-face($name, $path, $weight: normal, $style: normal) {
   @font-face {
-    font-family: quote($name);
+    font-family: string.quote($name);
     src: url("#{$path}.ttf") format("truetype");
     font-weight: $weight;
     font-style: $style;

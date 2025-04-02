@@ -1,3 +1,5 @@
+@use "../base/variables";
+
 .interMap {
   position: relative;
   width: 100%;
@@ -12,7 +14,7 @@
   &__title {
     align-self: flex-start; 
     font-size: 2rem;
-    color: $green;
+    color: variables.$green;
     z-index: 2;
   }
 
