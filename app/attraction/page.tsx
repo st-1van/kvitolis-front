@@ -1,5 +1,9 @@
 // function generateStaticParams() {}
  
-export default function SingleAtractionPage() {
-  return <h1>Hello, Blog Post Page!</h1>
+export default function AttractionPage() {
+  return(
+    <main>
+        <h1>Hello, Attraction Page!</h1>
+    </main>
+  )
 }
