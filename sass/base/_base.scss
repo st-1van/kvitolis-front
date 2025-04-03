@@ -34,7 +34,7 @@ a {
   &:hover,
   &:focus {
     text-decoration: none;
-    color: variables.$purple;
+    color: variables.$purple !important;
   }
 }
 
