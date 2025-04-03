@@ -28,7 +28,7 @@ export default function NumbersBlock({ title, desc, numbers }: NumbersProps) {
       }
   
       return () => observer.disconnect();
-    }, []);
+    }, [numbers]);
   
     const animateNumber = (index: number, target: number) => {
       let start = 0;

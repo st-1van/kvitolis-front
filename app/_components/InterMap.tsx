@@ -11,8 +11,7 @@ export default function InterMap() {
         </div>
       </div>
       
-
-      <img src="/assets/map.png" alt="map" className="interMap__map" />
+      <Image fill={true} src="/assets/map.png" alt="map" className="interMap__map" />
 
       <div className="interMap__legend">
         <div className="container grey">

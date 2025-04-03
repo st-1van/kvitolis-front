@@ -1,7 +1,8 @@
-export default function Button({text}){
-    return(
-       <button>
-        {text}
-       </button> 
-    )
-}
+interface ButtonProps {
+    text: string;
+  }
+  
+  export default function Button({ text }: ButtonProps) {
+    return <button>{text}</button>;
+  }
+  
