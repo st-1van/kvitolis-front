@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link"
 
 type AlleyItemProps = {
   title: string;
@@ -151,9 +152,11 @@ function AlleyCard({ title, tree, src }: AlleyItemProps) {
           <p className="tree__name">{title}</p>
           <p>{tree}</p>
         </div>
-          <button className="btn btn--medium btn--green">
-            Посадити дерево
-          </button>
+        <Link href='/garden/alley/plant-a-tree' >
+            <button className="btn btn--medium btn--green">
+              Посадити дерево
+            </button>
+          </Link>
     </div>
   );
 }

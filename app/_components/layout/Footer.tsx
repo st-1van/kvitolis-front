@@ -17,7 +17,7 @@ export const Footer = ()=>{
                     <p>{adresse}</p>
                 </div>
             </div>
-            <section className="green">
+            <div className="green">
             <GoogleMap />
             
             <div className="container">
@@ -97,7 +97,7 @@ export const Footer = ()=>{
                     </div>
                 </div>
             </div>
-            </section>
+            </div>
         </footer>
     )
 }
