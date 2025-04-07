@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { AlleysData } from '../../../_components/data/AlleysData'
+import { AlleyData } from '../../../_components/data/AlleyData'
 import { useRouter } from "next/navigation";
 
 interface BannerSliderProps {
@@ -19,7 +19,7 @@ export default function BannerSlider(props: BannerSliderProps) {
 
 
   function handleMove(direction: "back" | "forward", id: number) {
-    const lastId = AlleysData.length;
+    const lastId = AlleyData.length;
     let newId = id;
   
     if (direction === "back") {
@@ -30,8 +30,8 @@ export default function BannerSlider(props: BannerSliderProps) {
       if (newId > lastId) newId = 1; 
     }
   
-    const alleyData = AlleysData.find((item) => Number(item.id) === newId);
-    return alleyData?.slug;
+    const alley = AlleyData.find((item) => Number(item.id) === newId);
+    return alley?.slug;
   }
   
   return (

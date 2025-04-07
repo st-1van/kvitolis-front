@@ -5,8 +5,8 @@ import Link from "next/link";
 
 type AlleyItemProps = {
   title: string;
-  alleyName: string;
-  src: string;
+  tree: string;
+  alleyImg: string;
   slug: string;
 };
 
@@ -148,13 +148,13 @@ export default function Alleys({ alleysData }: AlleysDataProps) {
   );
 }
 
-function AlleyCard({ title, alleyName, src, slug}: AlleyItemProps) {
+function AlleyCard({ title, tree, alleyImg, slug}: AlleyItemProps) {
   return (
     <div className="alley col">
-      <Link href={slug}>
-        {src && <Image className="alley__img" src={src} alt={title} width={394} height={400} />}
+      <Link href={`/garden/${slug}`}>
+        {alleyImg && <Image className="alley__img" src={alleyImg} alt={title} width={394} height={400} />}
         <p className="alley__name">{title}</p>
-        <p>{alleyName}</p>
+        <p>{tree}</p>
       </Link>
     </div>
   );

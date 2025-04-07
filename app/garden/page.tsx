@@ -1,26 +1,21 @@
 
 import HeadBanner from "../_components/HeadBanner";
 import { banner, numbersData, benefitsData, callToActionData, faqData } from '../_components/data/Garden'
-import { AlleysData } from '../_components/data/AlleysData'
+// import { AlleysData } from '../_components/data/AlleysData'
+import { AlleyData } from '../_components/data/AlleyData'
 import Alleys from "../_components/garden/Alleys";
 import Benefits from "../_components/garden/Benefits";
 import CallToAction from "../_components/garden/CallToAction";
 import FAQ from "../_components/garden/FAQ";
 import NumbersBlock from "../_components/garden/NumbersBlock";
 import Trees from "../_components/garden/Tress";
-import SeoQoute from "../_components/SeoQoute";
+import SeoQoute from "../_components/SeoQoute"
 
-const transformedData = AlleysData.map(({ alleyName, title, src, slug }) => ({
-  title: title,
-  alleyName: alleyName,
-  src,
-  slug,
-}));
-
-const transformedData2 = AlleysData.map(({ tree, title, slug }) => ({
+const transformedData = AlleyData.map(({ tree, title, alleyImg, slug }) => ({
   title: title,
   tree: tree.name,
-  src: tree.src,
+  alleyImg,
+  treeImg:tree.treeImg,
   slug,
 }));
 
@@ -44,7 +39,7 @@ export default function Garden() {
         <Alleys alleysData={transformedData}/>
         {/* <InterMap /> */}
         <SeoQoute />
-        <Trees treesData={transformedData2}/>
+        <Trees treesData={transformedData}/>
         <Benefits {...benefitsData} />
         <CallToAction {...callToActionData} />
         <FAQ {...faqData} />

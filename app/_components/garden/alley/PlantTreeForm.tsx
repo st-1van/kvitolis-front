@@ -9,6 +9,8 @@ export default function PlantTreeForm() {
     person: "",
     name: "",
     email: "",
+    phone:'',
+    treeNumber:''
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
@@ -28,16 +30,16 @@ export default function PlantTreeForm() {
         {/* Dropdown для вибору дерева */}
         <label>
           <select name="tree" value={formData.tree} onChange={handleChange}>
-            <option value="">Оберіть дерево</option>
-            <option value="oak">Дуб</option>
-            <option value="pine">Сосна</option>
-            <option value="birch">Береза</option>
+            <option value="">Оберіть алею</option>
+            <option value="oak">Наукова алея</option>
+            <option value="pine">Літературна алея</option>
+            <option value="birch">Архітектурна алея</option>
           </select>
-          <small>*Алея №1 (Наука і культура)</small>
+          {/* <small>*Алея №1 (Наука і культура)</small> */}
         </label>
 
         {/* Dropdown для вибору особи */}
-        <label>
+        {/* <label>
           <select name="person" value={formData.person} onChange={handleChange}>
             <option value="">Оберіть діяча</option>
             <option value="lesya">Леся Українка</option>
@@ -45,12 +47,22 @@ export default function PlantTreeForm() {
             <option value="franko">Іван Франко</option>
           </select>
           <small>*Можна обрати лише з вільних діячів</small>
+        </label> */}
+
+        <label>
+          <input type="text" name="treeNumber" value={formData.treeNumber} onChange={handleChange} placeholder="Кількість дерев" required />
+          {/* <small>*Щоб </small> */}
         </label>
 
         {/* Ім'я */}
         <label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Ваше ім'я" required />
-          <small>*Буде зазначено на сайті у полі обраного діяча</small>
+          {/* <small>*Щоб </small> */}
+        </label>
+
+        <label>
+          <input type="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="Номер мобільного" required />
+          <small>*Щоб ми могли з вами зв'язатися</small>
         </label>
 
         {/* Email */}

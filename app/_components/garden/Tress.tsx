@@ -6,7 +6,7 @@ import Link from "next/link"
 type AlleyItemProps = {
   title: string;
   tree: string;
-  src: string;
+  treeImg: string;
   slug: string;
 };
 
@@ -142,11 +142,11 @@ export default function Trees({ treesData }: TreesDataProps) {
   );
 }
 
-function AlleyCard({ title, tree, src }: AlleyItemProps) {
+function AlleyCard({ title, tree, treeImg }: AlleyItemProps) {
   return (
     <div>
       <div className="tree col">
-        {src && <Image className="tree__img" src={src} alt={title} width={394} height={400} />}
+        {treeImg && <Image className="tree__img" src={treeImg} alt={title} width={394} height={400} />}
       </div>
         <div className="tree__text">
           <p className="tree__name">{title}</p>

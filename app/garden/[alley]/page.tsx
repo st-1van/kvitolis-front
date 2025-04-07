@@ -1,7 +1,7 @@
 'use client'
 import BannerSlider from '@/app/_components/garden/alley/BannerSlider';
 import {  callToActionData, faqData } from '../../_components/data/Garden'
-import { AlleysData } from '../../_components/data/AlleysData'
+import { AlleyData } from '../../_components/data/AlleyData'
 import CallToAction from "../../_components/garden/CallToAction";
 import FAQ from "../../_components/garden/FAQ";
 import { useParams } from "next/navigation";
@@ -13,18 +13,19 @@ import TreeDescription from '@/app/_components/garden/alley/TreeDescription';
 export default function SingleAlley() {
 
   const { alley } = useParams();
-  const alleyData = AlleysData.find((item) => item.slug === `/garden/${alley}`);
-  
+  const alleyData = AlleyData.find((item) => item.slug === alley);
+
 
   if (!alleyData) {
-    return <p>Сторінка не знайдена</p>;
+
+    return     <main><p>Сторінка не знайдена</p>;</main>
   }
 
   const transformedData = {
     id: alleyData.id,
     title: alleyData.title,
     desc: alleyData.desc,
-    gradient: alleyData.gradient,
+    gradient: 'light',
     tree: alleyData.tree.name,
     src: alleyData.tree.srcBanner,
     slug: alleyData.slug,
@@ -34,7 +35,7 @@ export default function SingleAlley() {
   const transformedData2 = {
     name:alleyData.tree.name,
     desc:alleyData.tree.desc,
-    src: alleyData.tree.src,
+    src: alleyData.tree.treeImg,
     button1: "Посадити дерево",
   }
 
