@@ -18,7 +18,7 @@ export default function SingleAlley() {
 
   if (!alleyData) {
 
-    return     <main><p>Сторінка не знайдена</p>;</main>
+    return  <main><p>Сторінка не знайдена</p>;</main>
   }
 
   const transformedData = {
@@ -28,7 +28,7 @@ export default function SingleAlley() {
     gradient: 'light',
     tree: alleyData.tree.name,
     src: alleyData.tree.srcBanner,
-    slug: alleyData.slug,
+    slug: '/garden/plant-tree',
     button1: "Посадити дерево",
   };
 
@@ -37,6 +37,7 @@ export default function SingleAlley() {
     desc:alleyData.tree.desc,
     src: alleyData.tree.treeImg,
     button1: "Посадити дерево",
+    slug: '/garden/plant-tree',
   }
 
 

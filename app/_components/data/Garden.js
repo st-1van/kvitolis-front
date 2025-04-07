@@ -2,7 +2,7 @@ export const banner = {
         title:'Станьте частиною нашої історії',
         desc:'Текст, що пояснює суть парку і можливість кожного читача долучитись до доброї справи, задонативши на дерево',
         src:'/assets/banners/alleyBanner2.png',
-        slug:'/garden/alley/plant-a-tree',
+        slug:'/garden/plant-tree',
         slug2:'/garden/#about',
         button1:'Посадити дерево',
         button2:'Про проект',

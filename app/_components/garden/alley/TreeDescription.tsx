@@ -9,10 +9,11 @@ interface TreeDescProps {
     desc:string,
     src:string,
     button1?:string;
+    slug:string
   }
 
 export default function TreeDescription(props: TreeDescProps) {
-    const { name, desc, src, button1 } = props;
+    const { name, desc, src, button1, slug } = props;
 
     return (
         <section className="treeDescription">
@@ -32,7 +33,7 @@ export default function TreeDescription(props: TreeDescProps) {
                         <p>Дерева алеї</p>
                         <h2>{name}</h2>
                         <p className="treeDescription__description">{desc}</p>
-                        <Link href='/garden/alley5/plant-dyb-person'>
+                        <Link href={slug}>
                             <button className="btn btn--medium btn--green">
                                 {button1}
                             </button>
