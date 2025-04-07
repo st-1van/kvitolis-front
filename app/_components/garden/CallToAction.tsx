@@ -30,7 +30,7 @@ export default function CallToAction({ title, desc, btn }: BenefitsProps) {
             <div className="center">
                 <h2>{title}</h2>
                 <p className="desc">{desc}</p>
-                <Link href='/garden/alley5/plant-dyb-person'>
+                <Link href='#'>
                     <button className="btn btn--medium btn--green">
                         {btn}
                     </button>
