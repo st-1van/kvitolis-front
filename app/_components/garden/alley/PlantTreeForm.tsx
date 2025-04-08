@@ -62,7 +62,7 @@ export default function PlantTreeForm() {
 
         <label>
           <input type="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="Номер мобільного" required />
-          <small>*Щоб ми могли з вами зв'язатися</small>
+          <small>*Щоб ми могли з вами зв{"'"}язатися</small>
         </label>
 
         {/* Email */}
