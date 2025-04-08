@@ -2,10 +2,12 @@
 import Image from "next/image";
 import Link from "next/link"
 import { navItems } from "../data/Navigation";
-import { phones, socials } from "../data/Contacts";
+import { phones } from "../data/Contacts";
 import MenuButton from "./MenuButton";
 import { useState } from "react";
 import { usePathname } from "next/navigation"
+import  FacebookIcon from '../ui/FacebookIcon'
+import InstagramIcon from "../ui/InstagramIcon";
 
 export const Header = () => {
     const path = usePathname()?.split("#")[0];
@@ -20,11 +22,12 @@ export const Header = () => {
         <header className="header">
             <div className="header__top">
                 <div className="header__socials">
-                    {socials.map((item, index) => (
-                        <a href={item.to} key={index}>
-                            <Image className="header__icon" src={item.icon} alt="logo" width={35} height={35} />
-                        </a>
-                    ))}
+                    <a href="#">
+                        <FacebookIcon type='filled' />
+                    </a>
+                    <a href="#">
+                        <InstagramIcon type='filled' />
+                    </a>
                 </div>
                 <Image
                     className="header__logo"
@@ -92,11 +95,12 @@ const Humburger = ({ open, closeMenu }: { open: boolean, closeMenu: () => void }
                 ))}
             </div>
             <div className="humburger__socials">
-                {socials.map((item, index) => (
-                    <a href={item.to} key={index}>
-                        <Image className="header__icon" src={item.icon} alt="logo" width={35} height={35} />
-                    </a>
-                ))} 
+                <a href="#">
+                    <FacebookIcon type='filled' />
+                </a>
+                <a href="#">
+                    <InstagramIcon type='filled' />
+                </a>
             </div>
         </div>
     );

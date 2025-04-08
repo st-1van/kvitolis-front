@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import { phones, socials, email, adresse } from "../data/Contacts";
+import { phones, email, adresse } from "../data/Contacts";
 import GoogleMap from "../data/GoogleMap";
 
 export const Footer = ()=>{
@@ -78,21 +77,16 @@ export const Footer = ()=>{
                     <div className="body">
                         <p>kvitolis.com.ua ⓒ {year}</p>
                         <ul className='footer__policies-nav'>
-                        {socials.map((item)=>(
-                            <li key={item.slug}>
-                                <Link href={item.to} key={item.slug}>
-                                    {item.text}
-                                    <Image 
-                                        className="footer__icons" 
-                                        src={item.icon||''} 
-                                        alt={item.text||'logo'} 
-                                        width={25} 
-                                        height={25}
-                                        key={item.slug}
-                                    />
-                                </Link>
+                            <li>
+                                <a href='#'>
+                                    facebook
+                                </a>
                             </li>
-                        ))}
+                            <li>
+                                <a href='#'>
+                                    instagram
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

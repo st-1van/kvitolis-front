@@ -1,0 +1,29 @@
+@use "../../base/variables";
+
+.svg-icon {
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.svg-icon.filled:hover .bg {
+    fill: #006a4ea6;
+}
+// .svg-icon.filled:hover .icon {
+//     fill: #006A4E;
+// }
+
+// .svg-icon.outlined .bg {
+//     fill: white;
+// }
+// .svg-icon.outlined .icon {
+//     fill: #006A4E;
+// }
+
+// .svg-icon.outlined:hover .bg {
+//     fill: #006A4E;
+// }
+
+// .svg-icon.outlined:hover .icon {
+//     fill: white;
+// }
+
