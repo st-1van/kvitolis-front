@@ -9,7 +9,7 @@ interface TreeDescProps {
     desc:string,
     src:string,
     button1?:string;
-    slug:string
+    slug?:string
   }
 
 export default function TreeDescription(props: TreeDescProps) {
@@ -33,7 +33,7 @@ export default function TreeDescription(props: TreeDescProps) {
                         <p>Дерева алеї</p>
                         <h2>{name}</h2>
                         <p className="treeDescription__description">{desc}</p>
-                        <Link href={slug}>
+                        <Link href={slug||'#'}>
                             <button className="btn btn--medium btn--green">
                                 {button1}
                             </button>
