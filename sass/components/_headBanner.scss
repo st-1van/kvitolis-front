@@ -1,5 +1,5 @@
 .headBanner {
-    margin-bottom: 25px;
+    margin-bottom: 9.8rem;
     position: relative;
     height: 40rem;
     display: flex;
@@ -11,7 +11,14 @@
     overflow: hidden;
     background-repeat: no-repeat;
     background-size: fill;
-    background-position: 100% 40%;
+    background-position: 100% 40%; //відрізняється
+
+    .carousel{
+      border-radius: 6.25rem 0rem;
+    }
+    .bannerSlider{
+      border-radius: 2.75rem;
+    }
 
     
     &__content {
@@ -35,11 +42,50 @@
       z-index: 1;
     }
 
-    .headBanner,
-    &__overlay {
-    box-sizing: border-box;
+    .headBanner, &__overlay {
+      box-sizing: border-box;
     }
+    
+    &__arrows {
+      position: absolute;
+      z-index: 10;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       
+      .headBanner__arrow {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        
+        &:hover {
+          transition: 0.3s ease;
+          background: rgba(0, 0, 0, 0.2);
+          border-radius: 50%;
+        }
+  
+        img {
+          width: 35px;
+          height: 35px;
+        }
+      }
+  
+      .left {
+        position: relative;
+        left: 0;
+      }
+  
+      .right {
+        position: relative;
+        right: 0;
+      }
+    }
   
     &--dark {
       color: white;
@@ -92,6 +138,12 @@
         font-size: 2rem;
         padding: 0 3rem;
         max-width: none;
+      }
+
+      &__arrows {
+        top: 85.5%;
+        padding-right: 2rem;
+        justify-content: flex-end;
       }
       
       &--dark {

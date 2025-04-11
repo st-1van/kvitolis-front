@@ -34,13 +34,13 @@ export default function Carousel() {
             transition={{ duration: 1 }}
           >
             <div 
-              className={`carousel carousel--${CarouselData[currentIndex].gradient}`} 
+              className={`carousel headBanner--${CarouselData[currentIndex].gradient}`} 
               style={{ backgroundImage: `url(${CarouselData[currentIndex].src})` }}
             >
-              <div className="carousel__overlay"></div>
-              <div className="carousel__content">
+              <div className="headBanner__overlay"></div>
+              <div className="headBanner__content">
                 <h1>{CarouselData[currentIndex].title}</h1>
-                <p className="carousel__description">{CarouselData[currentIndex].desc}</p>
+                <p className="headBanner__description">{CarouselData[currentIndex].desc}</p>
                 {CarouselData[currentIndex].src && (
                   <Link href={CarouselData[currentIndex].slug || '#'}>
                     <button className="btn btn--medium btn--green">Дізнатися більше</button>
@@ -52,14 +52,14 @@ export default function Carousel() {
         </AnimatePresence>
 
         {/* Navigation Buttons */}
-        <div className="carousel__arrows">
+        <div className="headBanner__arrows">
           <button onClick={prevSlide}
-            className="carousel__arrow left"
+            className="headBanner__arrow left"
           >
             <Image src="/assets/LeftArrow.svg" alt="arrowLeft" width={35} height={35} />
           </button>
           <button onClick={nextSlide}
-            className="carousel__arrow right"
+            className="headBanner__arrow right"
           >
             <Image src="/assets/RightArrow.svg" alt="arrowRight" width={35} height={35} />
           </button>

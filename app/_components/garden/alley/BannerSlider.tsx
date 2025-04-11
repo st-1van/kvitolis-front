@@ -37,15 +37,15 @@ export default function BannerSlider(props: BannerSliderProps) {
   return (
     <section className="container">
         <div 
-          className={`bannerSlider bannerSlider--${gradient}`} 
+          className={`bannerSlider headBanner--${gradient}`} 
           style={{ backgroundImage: `url(${src})` }}
         >
 
 
-          <div className="bannerSlider__overlay"></div>
-          <div className="bannerSlider__content">
-            <h2 className="bannerSlider__headline">{title}</h2>
-            <p className="bannerSlider__description">{desc}</p>
+          <div className="headBanner__overlay"></div>
+          <div className="headBanner__content">
+            <h2 className="headBanner__headline">{title}</h2>
+            <p className="headBanner__description">{desc}</p>
             <div>
               {src && (
                 <Link href={slug || '#'}>
@@ -58,7 +58,7 @@ export default function BannerSlider(props: BannerSliderProps) {
 
 
         </div>
-        <div className="bannerSlider__arrows">
+        <div className="headBanner__arrows">
               <button 
                 className="alleys__arrow left"
                 onClick={() => {
