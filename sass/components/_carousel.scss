@@ -16,12 +16,10 @@
     &__content {
       align-self: flex-start;
       z-index: 2;
-      font-size: 2rem;
       padding: 0 9rem;
       max-width: 45%;
     }
     &__description{
-        line-height: 1.625rem;
         margin-bottom: 3rem;
     }
   
@@ -48,7 +46,47 @@
     .carousel__overlay {
       box-sizing: border-box;
     }
+    
+    &__arrows {
+      position: absolute;
+      z-index: 10;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       
+      .carousel__arrow {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        
+        &:hover {
+          transition: 0.3s ease;
+          background: rgba(0, 0, 0, 0.2);
+          border-radius: 50%;
+        }
+  
+        img {
+          width: 35px;
+          height: 35px;
+        }
+      }
+  
+      .left {
+        position: relative;
+        left: 0;
+      }
+  
+      .right {
+        position: relative;
+        right: 0;
+      }
+    }
   
     &--dark {
       color: white;
@@ -85,26 +123,30 @@
    
     .carousel{
       border-radius: 0;
-      height: 60rem;
+      min-height: calc(100vh - 11rem);
       flex-direction: column-reverse;
+      padding-bottom: 10rem;
 
       &__content {
         align-self: flex-start;
         z-index: 2;
-        font-size: 2rem;
         padding: 0 3rem;
         max-width: none;
       }
+
+      &__arrows {
+        top: 85.5%;
+        padding-right: 2rem;
+        justify-content: flex-end;
+      }
       
       &--dark {
-    
         .carousel__overlay {
           background: linear-gradient(0deg, #101916 0%, rgba(16, 25, 22, 0) 100%);
         }
       }
     
       &--light {
-   
         .carousel__overlay {
           background: linear-gradient(0deg, #F4F2EF 0%, rgba(244, 242, 239, 0) 100%);
         }

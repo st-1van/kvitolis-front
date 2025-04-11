@@ -84,14 +84,16 @@
   @media screen and (max-width: 426px) {
     .attraction{
       border-radius: 0;
-      height: 60rem;
+      min-height: 70vh ;
+      // height: 60rem;
+      padding-bottom: 5rem;
       flex-direction: column-reverse;
 
       &__content {
         align-self: flex-start;
         z-index: 2;
         font-size: 2rem;
-        padding: 0 9rem;
+        padding: 0 3rem;
         max-width: none;
       }
     

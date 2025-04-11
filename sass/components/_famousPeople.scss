@@ -35,9 +35,9 @@
       position: relative;
       background-color: #d4edda; 
       border-radius: 2.75rem;
-    //   width: 22rem;
-      height: 27rem;
-      padding:  17rem 1.7rem 1.7rem  1.7rem ;
+      // height: 27rem;
+      height: 100%;
+      padding:  17rem 1.75rem 1.75rem  1.75rem ;
       display: flex;
       flex-direction: column;
       align-items: left;
@@ -72,11 +72,6 @@
         align-items:center;
     }
   
-    .sub {  
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-
     @media screen and (max-width: 1026px) {
       img {
         height:185px;
@@ -91,18 +86,25 @@
 
     }
     @media screen and (max-width: 426px) {
+
+      &__headline{
+        padding: 1rem;
+      }
       &__items{
         flex-wrap: wrap;
+        gap: 5.75rem;
       }
 
       &__person {
         position:relative;
         margin-bottom: 35px;
-        width: 45%;
-        // display: flex;
-        // flex-direction: column;
-        // align-items: center;
+        width: 75%;
       }
+
+        
+    .sub {  
+      font-size: 1.9rem;
+    }
 
     }
   

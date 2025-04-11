@@ -46,13 +46,18 @@ h5 {
 }
 
 .sub {
-  font-size: 1.125rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: bold;
 }
 
 p{
-  font-size: 1rem;
-  line-height: 1.25rem;
-  // margin-bottom: 1rem;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  @media screen and (max-width: 426px) {
+    font-size: 1.75rem;
+    line-height: 2.5rem;
+  }
 }
 
 .desc{

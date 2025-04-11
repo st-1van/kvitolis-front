@@ -18,6 +18,7 @@ export default function PlantTree() {
   }
 
   return (
+    <main>
     <section className="plantTree">
       <div className="container">
         <div className="row">
@@ -26,7 +27,7 @@ export default function PlantTree() {
         </div>
       </div>
       {/* <div className="breadCrunches"></div> */}
-
     </section>
+    </main>
   )
 }

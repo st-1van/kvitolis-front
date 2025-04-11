@@ -2,8 +2,8 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CarouselData } from './data/Carousel';
+import Image from "next/image";
 
 export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,7 +23,7 @@ export default function Carousel() {
   }, [nextSlide]);
 
   return (
-    <div className="container">
+    <section className="container">
         {/* Images */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -52,16 +52,18 @@ export default function Carousel() {
         </AnimatePresence>
 
         {/* Navigation Buttons */}
-        <button onClick={prevSlide} 
-        // className={styles.navButtonLeft}
-        >
-          <ChevronLeft />
-        </button>
-        <button onClick={nextSlide} 
-        // className={styles.navButtonRight}
-        >
-          <ChevronRight />
-        </button>
+        <div className="carousel__arrows">
+          <button onClick={prevSlide}
+            className="carousel__arrow left"
+          >
+            <Image src="/assets/LeftArrow.svg" alt="arrowLeft" width={35} height={35} />
+          </button>
+          <button onClick={nextSlide}
+            className="carousel__arrow right"
+          >
+            <Image src="/assets/RightArrow.svg" alt="arrowRight" width={35} height={35} />
+          </button>
+        </div>
 
         {/* Pagination Dots */}
         <div 
@@ -76,6 +78,6 @@ export default function Carousel() {
           ))}
         </div>
 
-    </div>
+    </section>
   );
 }

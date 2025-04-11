@@ -16,7 +16,7 @@ export default function CardItem({ card, index }: CardItemProps) {
 
   return (
     <div className="card col">
-      <p className="card__number">{`0${index}`}</p>
+      <p className="card__number">{`0${index+1}`}</p>
       {src && (
         <Image
           className="card__img"

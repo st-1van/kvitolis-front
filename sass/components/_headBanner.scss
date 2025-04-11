@@ -22,7 +22,6 @@
       max-width: 45%;
     }
     &__description{
-        line-height: 1.625rem;
         margin-bottom: 3rem;
     }
   
@@ -34,15 +33,6 @@
       width: 100%;
       height: 100%;
       z-index: 1;
-    }
-
-    &__overlay {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 1;
     }
 
     .headBanner,
@@ -72,6 +62,7 @@
         background-repeat: no-repeat;
       }
     }
+
     @media screen and (max-width: 1026px) {
       background-size:100%;
     }
@@ -88,32 +79,32 @@
 
     }
     @media screen and (max-width: 426px) {
-    
-
       flex-direction: column-reverse;
-      background-size:180%;
-      height: 60rem;
-      background-position: 70% 0%;
+      background-size:300%;
+      min-height: calc(100vh - 11rem);
+      background-position: 68% 0%;
+      padding-bottom: 10rem;
+      margin-bottom: 10rem;
 
-    &__content {
-      align-self: flex-start;
-      z-index: 2;
-      font-size: 2rem;
-      padding: 0 3rem;
-      max-width: none;
-    }
+      &__content {
+        align-self: flex-start;
+        z-index: 2;
+        font-size: 2rem;
+        padding: 0 3rem;
+        max-width: none;
+      }
+      
+      &--dark {
+        .headBanner__overlay {
+          background: linear-gradient(0deg, #101916 16%, rgba(16, 25, 22, 0) 100%);
+        }
+      }
     
-    &--dark {
-      .headBanner__overlay {
-        background: linear-gradient(0deg, #101916 16%, rgba(16, 25, 22, 0) 100%);
+      &--light {
+        .headBanner__overlay {
+          background: linear-gradient(0deg, #F4F2EF 16%, rgba(244, 242, 239, 0) 100%);
+        }
       }
-    }
-  
-    &--light {
-      .headBanner__overlay {
-        background: linear-gradient(0deg, #F4F2EF 16%, rgba(244, 242, 239, 0) 100%);
-      }
-    }
 
 
     }

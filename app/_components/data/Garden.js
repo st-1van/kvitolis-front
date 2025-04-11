@@ -16,7 +16,7 @@ export const numbersData = {
                 {
                     number:10,
                     type:'га',
-                    text:'площа сауд'
+                    text:'площа саду'
                 },
                 {
                     number:12,

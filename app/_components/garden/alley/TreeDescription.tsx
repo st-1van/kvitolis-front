@@ -19,9 +19,8 @@ export default function TreeDescription(props: TreeDescProps) {
         <section className="treeDescription">
             <div className="container">
                 <div className="row">
-                    <div className="col col-bg">
+                    <div className="treeDescription__img col col-bg">
                     <Image 
-                        className='treeDescription__img' 
                         src={src} 
                         alt={`фото-${name}`}
                         // fill={true}
@@ -49,7 +48,7 @@ export function TreeVertical (props: TreeDescProps) {
     const { name, desc, src } = props;
 
     return (
-                <div className="treeDescription grey">
+                <div className="treeDescription grey vertical">
                     <Image 
                         className='treeDescription__img' 
                         src={src} 

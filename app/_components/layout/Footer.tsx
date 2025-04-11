@@ -76,7 +76,7 @@ export const Footer = ()=>{
                 <div className="footer__policies">
                     <div className="body">
                         <p>kvitolis.com.ua ⓒ {year}</p>
-                        <ul className='footer__policies-nav'>
+                        <ul>
                             <li>
                                 <a href='#'>
                                     facebook

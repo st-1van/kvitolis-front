@@ -3,7 +3,6 @@
         margin-bottom: 3rem;
     }
     &__cards{
-        // justify-content: space-between;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 1rem;
@@ -14,6 +13,9 @@
     }
 
     @media screen and (max-width: 426px) {
+        &__title{
+            margin-bottom: 5.75rem;
+        }
 
         &__cards{
             display: flex;
@@ -31,8 +33,7 @@
     }
 
     &__img{
-        border-radius: 100px 0rem;    
-        margin-bottom: 1.5rem;
+        border-radius: 100px 0rem; 
         height: 60%;
         width: 100%;
     }
@@ -41,29 +42,23 @@
     }
 
     @media screen and (max-width: 769px) {
-        .card{
                    
             &__img{
                 min-width: 150px;
                 border-radius: 70px 0rem;    
 
             }
-        } 
     }
 
     @media screen and (max-width: 426px) {
 
-        .card{
-            // &__number{
-            //     font-size: 4rem;
-            //     margin-bottom: 2.5rem;
-            // }
-        
-            // &__img{
-            //     border-radius: 50px 0rem;    
-            // }
+            margin-bottom: 5.75rem;
+
+            &__number{
+                font-size: 4rem;
+                margin-bottom: 2.5rem;
+            }
         } 
-    }
 }
 
 

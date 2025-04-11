@@ -14,9 +14,6 @@
     h2{
       margin: 0;
     }
-    p{
-      font-size: 1.6rem;
-    }
   }
   &__map{
     width: 100%;
@@ -36,7 +33,7 @@
     flex-direction: row;
     align-items: end;
     text-align: right;
-    font-size: 1rem;
+    // font-size: 1rem;
     min-height: 287px;
     & .col{
       display: flex;
@@ -84,17 +81,18 @@
     .body{
       align-items: center
     }
-  }
-
-  &__policies-nav, a {
-    display: inline-flex;
-    list-style: none;
-    align-items: center;
-
-    & li:not(:last-of-type) {
-      margin-right: 3.5rem;
+    ul, a {
+      display: inline-flex;
+      list-style: none;
+      align-items: center;
+  
+      & li:not(:last-of-type) {
+        margin-right: 3.5rem;
+      }
     }
   }
+
+
   .btn{
     margin-right: 0;
   }
@@ -139,31 +137,28 @@
   
 }
 
-// @media screen and (max-width: 1026px) {
-
-// }
-
-
-
-
 @media screen and (max-width: 426px) {
   .body{
     display: flex;
-    justify-content: flex-end;
+    text-align: center;
     flex-direction: column;
     align-content: center;
-    align-items: flex-start;
   }
   .footer{
+    a{
+      font-size: 1.75rem;
+    }
     .container{
       padding: 0 3rem;
     }
     &__contacts {
-      align-self: center;
+      align-items: center;
+      
     }
 
     &__actions {
       flex-wrap: wrap;
+      text-align: center;
     }
     &__policies{
       .footer .body{

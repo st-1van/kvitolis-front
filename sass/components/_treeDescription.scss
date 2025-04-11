@@ -1,35 +1,51 @@
 .treeDescription{
     padding: 3.3rem 0;
+
     .row{
         padding-right: 4.2rem;
     }
+
     &__img{
-        width: 100%;
-        height: 456px;
+        display: flex;
+        justify-content: center;
+        img{
+            height: 100%;
+            width: fit-content;
+        }
+
     }
+    .vertical{
+        &__img, img{
+            width: 100%;
+            height: fit-content;
+        }
+    }
+
     &__content{
         padding-left: 4.2rem;
     }
 
     &__description{
-
-        font-size: 1.25rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 2rem;
         margin-bottom: 4.7rem;
     }
 
     @media screen and (max-width: 426px) {
         .row{
             flex-direction: column;
+            padding: 0;
         }
 
         .col-bg{
             width: 100%;
         }
 
-
+        &__content{
+            padding-right: 4.2rem;
+        }
+    
+        &__img, img{
+            width: 50%;
+        }
     }
 
 }
