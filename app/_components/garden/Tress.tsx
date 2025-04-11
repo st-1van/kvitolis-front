@@ -142,7 +142,7 @@ export default function Trees({ treesData }: TreesDataProps) {
   );
 }
 
-function AlleyCard({ title, tree, treeImg }: AlleyItemProps) {
+function AlleyCard({ title, tree, treeImg, slug }: AlleyItemProps) {
   return (
     <div>
       <div className="tree col">
@@ -152,7 +152,7 @@ function AlleyCard({ title, tree, treeImg }: AlleyItemProps) {
           <p className="tree__name">{title}</p>
           <p>{tree}</p>
         </div>
-        <Link href='/garden/alley/plant-a-tree' >
+        <Link href={`/garden/${slug}`} >
             <button className="btn btn--medium btn--green">
               Посадити дерево
             </button>
