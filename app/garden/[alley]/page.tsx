@@ -27,7 +27,8 @@ export default function SingleAlley() {
     desc: alleyData.desc,
     gradient: 'light',
     tree: alleyData.tree.name,
-    src: alleyData.tree.srcBanner,
+    src:"/assets/banners/alleyBanner.png",
+    // src: alleyData.tree.srcBanner,
     slug: '/garden/plant-tree',
     button1: "Посадити дерево",
   };

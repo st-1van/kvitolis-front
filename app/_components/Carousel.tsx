@@ -34,7 +34,7 @@ export default function Carousel() {
             transition={{ duration: 1 }}
           >
             <div 
-              className={`carousel headBanner--${CarouselData[currentIndex].gradient}`} 
+              className={`headBanner carousel headBanner--${CarouselData[currentIndex].gradient}`} 
               style={{ backgroundImage: `url(${CarouselData[currentIndex].src})` }}
             >
               <div className="headBanner__overlay"></div>

@@ -37,7 +37,7 @@ export default function BannerSlider(props: BannerSliderProps) {
   return (
     <section className="container">
         <div 
-          className={`bannerSlider headBanner--${gradient}`} 
+          className={`headBanner bannerSlider headBanner--${gradient}`} 
           style={{ backgroundImage: `url(${src})` }}
         >
 
