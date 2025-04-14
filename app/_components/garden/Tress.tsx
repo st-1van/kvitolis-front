@@ -149,8 +149,8 @@ function AlleyCard({ title, tree, treeImg, slug }: AlleyItemProps) {
         {treeImg && <Image className="tree__img" src={treeImg} alt={title} width={394} height={400} />}
       </div>
         <div className="tree__text">
-          <p className="tree__name">{title}</p>
-          <p>{tree}</p>
+          <p className="tree__name">{tree}</p>
+          <p>{title}</p>
         </div>
         <Link href={`/garden/${slug}`} >
             <button className="btn btn--medium btn--green">

@@ -20,6 +20,7 @@ export default function Alleys({ alleysData }: AlleysDataProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [scrollbarWidth, setScrollbarWidth] = useState(0);
   const [scrollThumbLeft, setScrollThumbLeft] = useState(0);
+  const [isShowed, setShow] = useState(false);
   const startX = useRef(0);
   const startScrollLeft = useRef(0);
 
@@ -95,6 +96,10 @@ export default function Alleys({ alleysData }: AlleysDataProps) {
     };
   }, [isDragging]);
 
+  const handleShow = () => {
+    setShow(prev => !prev);
+  }
+
   return (
     <section className="alleys">
       <div className="container">
@@ -112,15 +117,15 @@ export default function Alleys({ alleysData }: AlleysDataProps) {
         </div>
 
         <div className="alleys__wrapper">
-          <div className="alleys__items row" ref={scrollContainerRef}>
+          <div className={`alleys__items row ${isShowed ? '--showed' : ''} `} ref={scrollContainerRef}>
             {alleysData.map((card, index) => (
-              <AlleyCard key={card.slug + index} {...card} />
+              <AlleyCard key={card.slug + index} {...card} title={`${index + 1}. ${card.title}`}/>
             ))}
           </div>
         </div>
 
-        <div className="alleys__navigation">
-          <button className="btn btn--minimal">Переглянути всі</button>
+        <div className={`alleys__navigation row ${isShowed ? '--hide' : ''} `}>
+          <button className="btn btn--minimal" onClick={handleShow}>Переглянути всі</button>
 
           <div className="alleys__scrollbar">
             <div
@@ -143,18 +148,19 @@ export default function Alleys({ alleysData }: AlleysDataProps) {
             </button>
           </div>
         </div>
+
+        <button className={`btn btn--minimal ${isShowed ? '--revealed' : '--hide'} `} onClick={handleShow}>Сховати</button>
       </div>
     </section>
   );
 }
 
-function AlleyCard({ title, tree, alleyImg, slug}: AlleyItemProps) {
+function AlleyCard({ title, alleyImg, slug}: AlleyItemProps) {
   return (
     <div className="alley col">
       <Link href={`/garden/${slug}`}>
         {alleyImg && <Image className="alley__img" src={alleyImg} alt={title} width={394} height={400} />}
         <p className="alley__name">{title}</p>
-        <p>{tree}</p>
       </Link>
     </div>
   );

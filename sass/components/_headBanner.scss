@@ -11,12 +11,12 @@
     overflow: hidden;
     background-repeat: no-repeat;
     background-size: fill;
-    background-position: 100% 40%; //відрізняється
+    background-position: 100% 40%; 
 
-    .carousel{
+    &.carousel{
       border-radius: 6.25rem 0rem;
     }
-    .bannerSlider{
+    &.bannerSlider{
       border-radius: 2.75rem;
     }
 

@@ -24,9 +24,8 @@
       min-width: 100%;
       display: flex;
       flex-wrap: nowrap;
-
-      display: flex;
-      gap: 16px;
+      gap:auto;
+      // gap: 16px;
       overflow-x: auto;
       scroll-behavior: smooth;
       scrollbar-width: none;
@@ -34,6 +33,25 @@
       &::-webkit-scrollbar {
         display: none;
       }
+    }
+
+    &__items.--showed{
+      display: flex;
+      flex-wrap: wrap !important;
+      overflow-x: hidden;
+      // justify-content: center;
+    }
+
+    .--hide{
+      display: none;
+    }
+
+    .--revealed{
+      display:block;
+    }
+    .btn.--revealed{
+      display: block; 
+      margin: 0 auto; 
     }
   
     &__arrows{
@@ -86,7 +104,8 @@
 .alley{
   &__img{
     width: 22.625rem;
-    height: 27.25rem;
+    max-height: 27.25rem;
+    // box-sizing: content-box;
     border-radius: 2.75rem
   }
   &__name{
