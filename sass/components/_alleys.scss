@@ -8,6 +8,13 @@
       justify-content: space-between;
       align-items: baseline;
     }
+
+  @media screen and (max-width:769px)  {
+    &__description{
+      display: none;
+    }
+
+  }
   
   }
   
@@ -15,7 +22,6 @@
   &__img{
     width: 22.625rem;
     max-height: 27.25rem;
-    // box-sizing: content-box;
     border-radius: 2.75rem
   }
   &__name{

@@ -1,14 +1,16 @@
 
 "use client"; 
 import Image from "next/image";
+import { MasonryBlock } from "../MasonaryBlock";
 
 type FamousPerson = {
+    id:string;
     name: string;
     photo: string;
-    desc: string;
+    desc?: string;
     free: boolean;
-    date: string;
-    mecenat: string;
+    date?: string;
+    mecenat?: string;
   };
   
   type FamousPeopleProps = {
@@ -16,6 +18,7 @@ type FamousPerson = {
   };
   
 export default function FamousPeople({ famousPeople }: FamousPeopleProps) {
+    console.log(famousPeople[1].free)
     return (
         <section className="famousPeople">
             <div className="container">
@@ -23,54 +26,43 @@ export default function FamousPeople({ famousPeople }: FamousPeopleProps) {
                     <h2>Відомі діячі</h2>
                     <p>Кожне висаджене дерево - присвячене відомій ісоричній постаті. Ви можете обрати когось із доступних</p>
                 </div>
-                <div className="row">
-                    <div className="famousPeople__items">
-                    {famousPeople.map((person, index) => (
-                        <div className='famousPeople__person' key={person.name}>
-                            <Image
-                                key={person.name}
-                                src={person.photo} 
-                                alt={person.name}
-                                height={202}
-                                width={202}
-                            />
-                            <div key={index} className="light-green">
-                                <div>
-                                    <p className="sub">{person.name}</p>
-                                    <p>{person.desc}</p>
-                                </div>
-                                
-                                    {!person.free?
-                                        <div className="free">
-                                            <p className="sub">доступно</p>
-                                            <button>+</button>
-                                        </div>
-                                    :
-                                        <div>
-                                            <p>Дерево висаджено: {person.date}</p>
-                                            <p>Меценат: {person.mecenat}</p> 
-                                        </div>
-                                    }
-                            </div>
-                        </div>
-                        ))}
-                    </div>
-                </div>
+                    <MasonryBlock data={famousPeople} Card={PersonCard} />
             </div>
         </section>
     );
 }
 
 
-{/* <h2>Відомі особистості</h2>
-<ul>
-  {famousPeople.map((person, index) => (
-    <li key={index} className="famous-person">
-      <h3>{person.name}</h3>
-      <p>{person.desc}</p>
-      <p>{person.free ? "Вільний" : "Зайнятий"}</p>
-      <p>Дата: {person.date}</p>
-      <p>Меценат: {person.mecenat}</p>
-    </li>
-  ))}
-</ul> */}
+function PersonCard({name, photo, desc, free, mecenat}:FamousPerson) {
+
+    return(
+        <div className='famousPeople__card' key={name}>
+            <Image
+                className="famousPeople__img"
+                key={name}
+                src={photo}
+                alt={name}
+                height={202}
+                width={202} />
+            <div className="famousPeople__text">
+                <div>
+                    <p className="sub">{name}</p>
+                    <p className="famousPeople__info">{desc}</p>
+                </div>
+
+                {free===true ?
+                    <div className="famousPeople__free">
+                        <p style={{ fontWeight: 'bold' }}>доступно</p>
+                        <button>+</button>
+                    </div>
+                    :
+                    <div className="test">
+                        {/* <p>Дерево висаджено: {date||''}</p> */}
+                        <p className="famousPeople__info">Меценат: {mecenat||''}</p>
+                    </div>}
+            </div>
+        </div>
+    )
+
+
+}

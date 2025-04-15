@@ -4,10 +4,11 @@ import Link from "next/link"
 import { MasonryBlock } from "./MasonaryBlock";
 
 type AlleyItemProps = {
+  id:string;
   title: string;
   tree: string;
   treeImg: string;
-  slug: string;
+  slug?: string;
 };
 
 type TreesDataProps = {
@@ -33,19 +34,19 @@ export default function Trees({ treesData }: TreesDataProps) {
 
 function TreeCard({ title, tree, treeImg, slug }: AlleyItemProps) {
   return (
-    <div>
-      <div className="tree col">
-        {treeImg && <Image className="tree__img" src={treeImg} alt={title} width={394} height={400} />}
+    <div className="tree">
+      <div className="tree__img">
+        {treeImg && <Image  src={treeImg} alt={title} width={394} height={400} />}
       </div>
-        <div className="tree__text">
-          <p className="tree__name">{tree}</p>
-          <p>{title}</p>
-        </div>
-        <Link href={`/garden/${slug}`} >
-            <button className="btn btn--medium btn--green">
-              Посадити дерево
-            </button>
-          </Link>
+      <div className="tree__text">
+        <p className="tree__name">{tree}</p>
+        <p>{title}</p>
+      </div>
+      <Link href={`/garden/${slug}`} >
+          <button className="btn btn--medium btn--green">
+            Посадити дерево
+          </button>
+      </Link>
     </div>
   );
 }

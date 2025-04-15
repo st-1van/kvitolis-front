@@ -4,7 +4,7 @@ import { AlleyData } from '../../../_components/data/AlleyData'
 import { useRouter } from "next/navigation";
 
 interface BannerSliderProps {
-  id:number,
+  id: string;
   title: string;
   src: string;
   desc: string;
@@ -18,20 +18,17 @@ export default function BannerSlider(props: BannerSliderProps) {
   const router = useRouter();
 
 
-  function handleMove(direction: "back" | "forward", id: number) {
-    const lastId = AlleyData.length;
-    let newId = id;
+  function handleMove(direction: "back" | "forward", id: string) {
+    const currentIndex = AlleyData.findIndex(item => item.id === id);
+    if (currentIndex === -1) return;
   
-    if (direction === "back") {
-      newId = id - 1;
-      if (newId < 1) newId = lastId; 
-    } else {
-      newId = id + 1;
-      if (newId > lastId) newId = 1; 
-    }
+    const lastIndex = AlleyData.length - 1;
   
-    const alley = AlleyData.find((item) => Number(item.id) === newId);
-    return alley?.slug;
+    const newIndex = direction === "back"
+      ? (currentIndex === 0 ? lastIndex : currentIndex - 1)
+      : (currentIndex === lastIndex ? 0 : currentIndex + 1);
+  
+    return AlleyData[newIndex]?.slug;
   }
   
   return (
@@ -60,7 +57,7 @@ export default function BannerSlider(props: BannerSliderProps) {
         </div>
         <div className="headBanner__arrows">
               <button 
-                className="alleys__arrow left"
+                className="headBanner__arrow left"
                 onClick={() => {
                   const newSlug = handleMove("back", id);
                   if (newSlug) router.push(newSlug);
@@ -69,7 +66,7 @@ export default function BannerSlider(props: BannerSliderProps) {
                   <Image src="/assets/LeftArrow.svg" alt="arrowLeft" width={35} height={35} />
               </button>
               <button 
-                className="alleys__arrow right"
+                className="headBanner__arrow right"
                 onClick={() => {
                   const newSlug = handleMove("forward", id);
                   if (newSlug) router.push(newSlug);

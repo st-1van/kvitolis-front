@@ -5,10 +5,11 @@ import Link from "next/link";
 import { MasonryBlock } from "./MasonaryBlock";
 
 type AlleyItemProps = {
+  id:string;
   title: string;
   tree: string;
   alleyImg: string;
-  slug: string;
+  slug?: string;
 };
 
 type AlleysDataProps = {
@@ -25,10 +26,9 @@ export default function Alleys({ alleysData }: AlleysDataProps) {
             <p>12 алей</p>
             <h2>Алеї українства</h2>
           </div>
-          <div className="col col-sm">
+          <div className="alleys__description col col-md">
             <p>
-              Кожна алея парку висаджена одним типом дерев і присвячена певній тематиці і на своєму
-              шляху розповідає про видатних українських постатей цього напрямку.
+              Кожна алея парку висаджена одним типом дерев і присвячена певній тематиці.
             </p>
           </div>
         </div>
@@ -40,7 +40,7 @@ export default function Alleys({ alleysData }: AlleysDataProps) {
 
 function AlleyCard({ title, alleyImg, slug}: AlleyItemProps) {
   return (
-    <div className="alley col">
+    <div className="alley">
       <Link href={`/garden/${slug}`}>
         {alleyImg && <Image className="alley__img" src={alleyImg} alt={title} width={394} height={400} />}
         <p className="alley__name">{title}</p>

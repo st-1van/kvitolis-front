@@ -21,25 +21,37 @@
         line-height: normal;
     }
 
-    } 
+    }
+    @media screen and (max-width:769px){
+      &__headline{
+        max-width: fit-content;
+      }
+    }
 }
   
 .tree{
-  background: variables.$light-green;
-  border-radius: 2.75rem;
-  padding: 2rem 1.2rem 3rem;
 
 
   &__img{
+    background: variables.$light-green;
+    border-radius: 2.75rem;
+    padding: 2rem 1.2rem 3rem;
+    margin-bottom: 1rem;
+  }
+  &__img,img{
     width: 22.625rem;
     height: 27.25rem;
     border-radius: 2.75rem
   }
+
   &__text{
     margin-bottom: 1rem;
+    :last-child{
+      font-size: 1.4rem;
+    }
   }
   &__name{
-    font-size: 1.5rem;
+    font-size: 1.55rem;
     font-weight: 600;
     line-height: 1.5;
   }

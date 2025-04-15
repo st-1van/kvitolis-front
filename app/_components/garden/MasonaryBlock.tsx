@@ -8,7 +8,7 @@ type MasonryBlockProps<T> = {
     Card: React.ComponentType<T & { index: number }>;
   };
   
-export function MasonryBlock<T extends { slug: string }>({ data, Card }: MasonryBlockProps<T>) {
+export function MasonryBlock<T extends { id: string }>({ data, Card }: MasonryBlockProps<T>) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const scrollbarThumbRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -100,7 +100,7 @@ export function MasonryBlock<T extends { slug: string }>({ data, Card }: Masonry
             <div className="masonary__wrapper">
             <div className={`masonary__items row ${isShowed ? '--showed' : ''} `} ref={scrollContainerRef}>
                 {data.map((card, index) => (
-                    <Card key={card.slug + index} {...card} index={index} />
+                    <Card key={card.id} {...card} index={index} />
                 ))}
             </div>
             </div>
