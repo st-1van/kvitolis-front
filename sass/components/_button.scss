@@ -67,7 +67,6 @@
   &--minimal {
     background: none;
     border: none;
-    // font-size: 16px;
     cursor: pointer;
     transition: color 0.2s;
 
@@ -82,8 +81,12 @@
   }
 
   @media screen and (max-width: 426px) {
-    font-size: 1.75rem;
+    font-size: 1.4rem;
     line-height: 1.75rem;
+
+    &--medium {
+      padding: 1.45rem 2.25rem;
+    }
   }
 
 }
