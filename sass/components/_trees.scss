@@ -31,17 +31,16 @@
   
 .tree{
 
-
   &__img{
     background: variables.$light-green;
     border-radius: 2.75rem;
     padding: 2rem 1.2rem 3rem;
     margin-bottom: 1rem;
-  }
-  &__img,img{
-    width: 22.625rem;
-    height: 27.25rem;
-    border-radius: 2.75rem
+    img{
+      width: 22.625rem;
+      height: 27.25rem;
+      border-radius: 2.75rem
+    }
   }
 
   &__text{
