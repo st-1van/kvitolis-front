@@ -4,7 +4,7 @@ import Link from "next/link"
 import { navItems } from "../data/Navigation";
 import { phones } from "../data/Contacts";
 import MenuButton from "./MenuButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation"
 import  FacebookIcon from '../ui/FacebookIcon'
 import InstagramIcon from "../ui/InstagramIcon";
@@ -16,7 +16,12 @@ export const Header = () => {
 
     const clickMenu = () => {
         setOpen(!open);
+        document.getElementsByTagName('html')[0].style.overflow = 'hidden';
     };
+
+    useEffect(() => {
+        document.getElementsByTagName('html')[0].style.overflow = open ? 'hidden' : 'auto';
+      }, [open]);
 
     return (
         <header className="header">

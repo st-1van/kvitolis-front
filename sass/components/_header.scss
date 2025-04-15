@@ -96,85 +96,86 @@
     }
   }
 
-.humburger {
-  position: fixed;
-  top: -100%;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgb(255, 255, 255);
-  transition: top 0.5s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-  z-index: 30;
-
-  &__mid{
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  &.open {
-    top: 0;
-  }
-
-  &__top {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  .humburger {
+    position: fixed;
+    flex-direction: column;
     align-items: center;
-  }
+    top: -100%;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(255, 255, 255);
+    transition: top .5s ease-in-out;
 
-  &__logo {
-    width: 150px;
-  }
+    padding: 2rem;
+    z-index: 30;
 
-  &__nav {
-    width: 100%;
+    &__mid{
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
 
-    ul {
+    &.open {
+      display: flex;
+      top: 0;
+    }
+
+    &__top {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__logo {
+      width: 150px;
+    }
+
+    &__nav {
+      width: 100%;
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+      }
+
+      li {
+        text-align: center;
+      }
+      
+
+      a {
+        font-size: 2.25rem;
+        line-height: 5.75rem;
+        font-weight: 600;
+        text-decoration: none;
+        color: black;
+        transition: color 0.2s;
+
+        &.active {
+          padding: 2px 3px;
+          border-bottom: solid 3px variables.$fiolet;
+        }
+      }
+    }
+
+    &__contacts {
       display: flex;
       flex-direction: column;
-      padding: 0;
-    }
-
-    li {
+      justify-content: space-between;
       text-align: center;
-    }
-    
-
-    a {
-      font-size: 2.25rem;
-      line-height: 5.75rem;
+      line-height: 4.75rem;
       font-weight: 600;
-      text-decoration: none;
-      color: black;
-      transition: color 0.2s;
-
-      &.active {
-        padding: 2px 3px;
-        border-bottom: solid 3px variables.$fiolet;
+      font-size: 2rem;
+    }
+    &__socials{
+      display: flex;
+      & > a {
+        margin: 0.65rem;
       }
     }
   }
-
-  &__contacts {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-align: center;
-    line-height: 4.75rem;
-    font-weight: 600;
-    font-size: 2rem;
-  }
-  &__socials{
-    display: flex;
-    & > a {
-      margin: 0.65rem;
-    }
-  }
-}
 }
 
 
