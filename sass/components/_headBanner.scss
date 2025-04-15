@@ -1,17 +1,19 @@
 .headBanner {
-    margin-bottom: 9.8rem;
+
     position: relative;
-    height: 40rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    height: 40rem;
+    margin-bottom: 9.8rem;
     padding-top: 3rem;
     padding-bottom: 3rem;
     overflow: hidden;
     background-repeat: no-repeat;
-    background-size: fill;
-    background-position: 100% 40%; 
+    background-size: cover;
+    background-position: 100% 40%;
+
 
     &.carousel{
       border-radius: 6.25rem 0rem;
@@ -109,9 +111,6 @@
       }
     }
 
-    @media screen and (max-width: 1026px) {
-      background-size:100%;
-    }
     @media screen and (max-width: 769px) {
       height: 40rem;
       background-position: 70% 0%;
@@ -126,11 +125,11 @@
     }
     @media screen and (max-width: 426px) {
       flex-direction: column-reverse;
-      background-size:300%;
-      min-height: calc(100vh - 11rem);
-      background-position: 68% 0%;
       padding-bottom: 10rem;
       margin-bottom: 4.5rem;
+      min-height: calc(100vh - 11rem);
+      background-size: cover;
+      background-position: 66% 0%;
 
       &__content {
         align-self: flex-start;

@@ -21,7 +21,7 @@ export default function HeadBanner({ title, src, desc, slug, slug2, button1, but
     >
       <div className="headBanner__overlay"></div>
       <div className="headBanner__content">
-        <h2 className="headBanner__headline">{title}</h2>
+        <h1 className="headBanner__headline">{title}</h1>
         <p className="headBanner__description">{desc}</p>
         <div>
           {src && (
