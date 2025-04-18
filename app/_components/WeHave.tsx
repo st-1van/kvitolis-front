@@ -1,6 +1,6 @@
 import Attraction from "./Attraction";
 import CardItem from "./CardItem";
-import { title, text, attractions, cards } from "./data/WeHave"
+import { title, attractions, cards } from "./data/WeHave"
 
 export default function WeHave(){
     
@@ -12,9 +12,9 @@ export default function WeHave(){
                         <h2 >
                             {title}
                         </h2>
-                        <p>
+                        {/* <p>
                             {text}
-                        </p>
+                        </p> */}
                     </div>
                     <div className="weHave__cards">
                         {cards.map((card, index)=>(
