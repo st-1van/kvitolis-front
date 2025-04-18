@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { phones, email, adresse } from "../data/Contacts";
 import GoogleMap from "../data/GoogleMap";
+import Link from "next/link";
 
 export const Footer = ()=>{
     const year = new Date().getFullYear();
@@ -11,7 +12,7 @@ export const Footer = ()=>{
             <div className="container">
                 <div className="footer__title">
                     <h2>
-                        Нас легко знайти
+                        Наше розташування
                     </h2>
                     <p>{adresse}</p>
                 </div>
@@ -20,53 +21,47 @@ export const Footer = ()=>{
             <GoogleMap />
             
             <div className="container">
-                <div className="footer__main body">
+                <div className="footer__main">
                     <div className="body">
-                        <div className="footer__contacts col">
+                        <div className="col">
                             <Image 
                                 className="footer__logo" 
                                 src='/assets/logo-white.svg' 
                                 alt='logo'
                                 width={240} 
                                 height={129}
-                            />
-                            <ul className="footer__links">
-                            {phones.map((item, index)=>(
-                                <li key={index}>
-                                    <a key={index} href={`tel:${item.replaceAll(" ", "")}`}>
-                                        {item}
-                                    </a>
-                                </li>
-                            ))}
-                            </ul>
-                            <ul className="footer__links">
-                            <li>
-                                <a href={`mailto:${email}`}>{email}</a>
-                            </li>
-                            </ul>
-                            
+                            />                            
                         </div>
                         <div className="footer__actions col-bg">
                             <div className="col">
-                                <h5>Квитки на фест</h5>
-                                <div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    </p>
+                                <h5>Контакти</h5>
+                                <div className="footer__links">
+                                    <ul>
+                                        {phones.map((item, index)=>(
+                                            <li key={index}>
+                                                <a key={index} href={`tel:${item.replaceAll(" ", "")}`}>
+                                                    {item}
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <a href={`mailto:${email}`}>{email}</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <button className="btn btn--medium btn--white ">
-                                    Замовити
-                                </button>
                             </div>
-                            <div className="col">
-                                <h5>Відпочинок</h5>
+                            <div className="footer__contacts col">
+                                <h5>Квитки</h5>
                                 <div>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                     </p>
+
                                 </div>
                                 <button className="btn btn--medium btn--white ">
-                                    Замовити
+                                        Замовити
                                 </button>
                             </div>
                         </div>
@@ -75,7 +70,7 @@ export const Footer = ()=>{
                 </div>
                 <div className="footer__policies">
                     <div className="body">
-                        <p>kvitolis.com.ua ⓒ {year}</p>
+                        <Link href='/'>kvitolis.com.ua ⓒ {year}</Link>
                         <ul>
                             <li>
                                 <a href='#'>

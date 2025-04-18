@@ -3,29 +3,29 @@ export const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, se
 export const cards = [
     {
         title:'Фудкорт',
-        desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        desc:'Смачна їжа від учасників подій ',
         src:'/assets/cards/card-1.jpg',
     },
     {
-        title:'Атракціони',
-        desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        title:'Розваги',
+        desc:'Описати, що і коли Для дорослих (музичний супровід, баггі) для дітей (батути чи шо там)',
         src:'/assets/cards/card-2.jpg',
     },
     {
-        title:'Ярмарка',
+        title:'Ярмарок',
         desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         src:'/assets/cards/card-3.jpg',
     },
 ]
 
 export const attractions = [
-    {
-        title:'Відпочинок серед природи',
-        desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco',
-        src:'/assets/banners/banner-1.jpg',
-        slug:'/#',
-        gradient:'dark'
-    },
+    // {
+    //     title:'Відпочинок серед природи',
+    //     desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco',
+    //     src:'/assets/banners/banner-1.jpg',
+    //     slug:'/#',
+    //     gradient:'dark'
+    // },
     {
         title:'Сад українства',
         desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco',

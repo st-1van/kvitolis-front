@@ -11,12 +11,12 @@ type CardItemProps = {
   index: number;
 };
 
-export default function CardItem({ card, index }: CardItemProps) {
+export default function CardItem({ card }: CardItemProps) {
   const { title, desc, src } = card;
 
   return (
     <div className="card col">
-      <p className="card__number">{`0${index+1}`}</p>
+      {/* <p className="card__number">{`0${index+1}`}</p> */}
       {src && (
         <Image
           className="card__img"
