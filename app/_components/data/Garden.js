@@ -54,15 +54,15 @@ export const faqData = {
     qa:[
         {
             question:'Як ми обирали гідних діячів?',
-            answer:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor '
+            answer:'Професори історії та культурології ВНУ, богослови з семніраії.'
         },
         {
-            question:'Як ми обирали гідних діячів?',
-            answer:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor '
+            question:'Чи можу я купити цілу алею?',
+            answer:'Так! Залиште заявку на сайті або звʼяжіться з нами через email чи номер телефону.'
         },
         {
-            question:'Як ми обирали гідних діячів?',
-            answer:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor '
+            question:'Коли будуть висаджені дерева?',
+            answer:'Висадка частини дерев запланована на осінь 2025 року, але її можуть перенести, якщо ми зберемо менше ніж 160 донорів.'
         },
     ],
 }
