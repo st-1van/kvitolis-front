@@ -24,7 +24,6 @@ export default function InterMap() {
                 </div>
               ))}
             </div>
-          {/* </div> */}
         </div>
       </div>
     </div>
