@@ -6,7 +6,7 @@ type SvgIconProps = {
 export default function FacebookIcon({ type }: SvgIconProps) {
     return(
         <svg className={`svg-icon ${type}`} width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_386_226)">
+            <g clipPath="url(#clip0_386_226)">
                 <path d="M34.5163 21.5888C36.7742 12.1912 30.9863 2.74264 21.5888 0.484753C12.1912 -1.77313 2.74263 4.0147 0.484748 13.4122C-1.77314 22.8098 4.0147 32.2584 13.4122 34.5163C22.8098 36.7742 32.2584 30.9863 34.5163 21.5888Z" 
                     className="bg"
                     fill="#006A4E"
