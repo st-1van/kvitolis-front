@@ -49,7 +49,6 @@
   }
   
   &__answer {
-    font-size: 1.125rem;
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.3s ease;
@@ -59,8 +58,8 @@
   }
   
   &__answer p {
+    font-size: 1.5rem;
     margin: 10px 0 0;
-    font-size: 1rem;
     line-height: 1.4;
   }
 
