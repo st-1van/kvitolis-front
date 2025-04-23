@@ -31,6 +31,7 @@ export default function WeHave(){
                         desc={item.desc} 
                         src={item.src}
                         gradient={item.gradient}
+                        slug={item.slug}
                     />
                 ))}
             </div>

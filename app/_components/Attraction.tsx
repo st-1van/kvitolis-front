@@ -24,11 +24,11 @@ export default function Attraction({ title, src, desc, slug, slug2, button1, but
         <h2 className="attraction__headline">{title}</h2>
         <p className="attraction__description">{desc}</p>
         <div>
-          {src && (
+          {src && slug ?(
             <Link href={slug || '#'}>
               <button className="btn btn--medium btn--green">{ button1 || `Більше`}</button>
             </Link>
-          )}
+          ):''}
           {(src && slug2) && (
             <Link href={slug2 || '#'}>
               <button className="btn btn--medium btn--outlined">{ button2 || `Більше`}</button>
