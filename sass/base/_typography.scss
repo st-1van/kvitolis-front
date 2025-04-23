@@ -28,6 +28,9 @@ h1 {
 h2 {
   font-size: 3.75rem;
   margin-bottom: 1rem;
+  @media screen and (max-width: 426px) {
+    font-size: 3rem;
+  }
 }
 
 h3 {
