@@ -11,10 +11,7 @@ export const navItems = [
             display:'Карта парку',
             slug: '/#map'
         },
-        // {
-        //     display:'Активності',
-        //     slug: '/#attractions'
-        // },
+
         {
             display:'Сад українства',
             slug: '/garden'
@@ -22,6 +19,10 @@ export const navItems = [
         {
             display:'Контакти',
             slug: '#contacts'
+        },
+        {
+            display:'Test map',
+            slug: '/test'
         },
     ]
 
