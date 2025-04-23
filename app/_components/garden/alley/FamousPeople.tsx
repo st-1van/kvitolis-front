@@ -18,7 +18,6 @@ type FamousPerson = {
   };
   
 export default function FamousPeople({ famousPeople }: FamousPeopleProps) {
-    console.log(famousPeople[1].free)
     return (
         <section className="famousPeople">
             <div className="container">

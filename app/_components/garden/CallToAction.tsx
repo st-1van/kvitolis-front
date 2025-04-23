@@ -1,14 +1,14 @@
 "use client"; 
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 
 type BenefitsProps = {
     title: string;
-    desc: string;
+    steps: string[];
     btn: string;
 };
 
-export default function CallToAction({ title, desc, btn }: BenefitsProps) {
+export default function CallToAction({ title, steps }: BenefitsProps) {
     return (
         <section className="callToAction">
             <div className="left">
@@ -29,12 +29,17 @@ export default function CallToAction({ title, desc, btn }: BenefitsProps) {
             </div>
             <div className="center">
                 <h2>{title}</h2>
-                <p className="desc">{desc}</p>
-                <Link href='#'>
+                {/* <p className="desc">{}</p> */}
+                <ul>
+                {steps.map((step, index)=>(
+                    <li className="desc" key={index}>{step}</li>
+                ))}
+                </ul>
+                {/* <Link href='#'>
                     <button className="btn btn--medium btn--green">
                         {btn}
                     </button>
-                </Link>
+                </Link> */}
             </div>
 
             <div className="right">
