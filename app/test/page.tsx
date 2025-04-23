@@ -1,5 +1,5 @@
 'use client'
-import InterMap2 from "../_components/InterMap2";
+import InterMap2 from "../_components/InterMap3";
 
 
 export default function TestPage() {
