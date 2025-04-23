@@ -28,16 +28,16 @@ export const attractions = [
     // },
     {
         title:'Сад українства',
-        desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco',
+        desc:'Це простір пам’яті й гордості за тих, хто зробив Україну такою, якою ми її знаємо. ',
         src:'/assets/banners/banner-2.jpg',
         slug:'/garden',
         gradient:'light'
     },
     {
         title:'Також ви можете провести',
-        desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco',
+        desc:'Семінари, конференції, фотосесії, модні покази, тренінги, майстер-класи',
         src:'/assets/banners/banner-3.jpg',
-        slug:'/#',
+        // slug:'/#',
         gradient:'light'
     },
 ]
