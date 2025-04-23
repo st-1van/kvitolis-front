@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { MapLegend } from "./data/Map";
-import { MapPin } from "lucide-react";
 
 export default function InterMap() {
   return (
@@ -12,15 +11,15 @@ export default function InterMap() {
         </div>
       </div>
       
-      <Image fill={true} src="/assets/map.png" alt="map" className="interMap__map" />
+      <Image src="/assets/map/staticMap.svg" alt="map" className="interMap__map" width={1591} height={805}/>
 
       <div className="interMap__legend">
-        <div className="container grey">
+        <div className="container">
             <div className="interMap__legend-body">
               {MapLegend.map((item) => (
-                <div key={item.slug} className="interMap__items">
-                  <MapPin width={40} height={40} color="#006A4E"/>
-                  <p>{item.text}</p>
+                <div key={item.name} className="interMap__item">
+                  <Image width={31} height={50} src={item.pin} alt={item.name}/>
+                  <p>{item.name}</p>
                 </div>
               ))}
             </div>
