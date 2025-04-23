@@ -56,13 +56,13 @@ export const Footer = ()=>{
                                 <h5>Квитки</h5>
                                 <div>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Можна придбати на вході 
                                     </p>
 
                                 </div>
-                                <button className="btn btn--medium btn--white ">
+                                {/* <button className="btn btn--medium btn--white ">
                                         Замовити
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                     </div>
