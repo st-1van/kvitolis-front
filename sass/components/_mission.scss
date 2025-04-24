@@ -1,0 +1,139 @@
+@use "../base/variables";
+
+.mission {
+  &__title {
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 2.5rem;
+  }
+  
+  .accordion {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 13.8rem;
+
+    .mobile{
+      display: none;
+    }
+
+    &__base{
+      width: 40%;
+    }
+    &__item {
+      border-bottom: 1px solid #ccc;
+    }
+    .desc{
+      display: block;
+    }
+    
+    &__question {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 2.3rem;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      padding: 2rem 0;
+      span{
+        color:black;
+      }
+    }
+    
+    &__icon {
+      font-size: 3.75rem;
+      transition: transform 0.3s ease;
+    }
+    
+    &__item.open{
+      border-bottom: 2px solid variables.$fiolet;
+      transition: border 0.2s ease;
+      .accordion__icon {
+        transform: rotate(180deg);
+      }
+    }
+
+    &__answer.desc{
+      width: 50%;
+      background-color: rgb(235, 235, 235);
+      border-radius: 2.75rem;
+      padding: 2rem 4rem;
+      p {
+        font-size: 2rem;
+        margin: 10px 0 0;
+        line-height: 1.7;
+        white-space: pre-line !important;
+      }
+    }
+
+    &__answer.mobile {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.3s ease;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.625rem;
+      p{
+        font-size: 2rem;
+        padding-bottom: 2rem;
+        line-height: 1.5;
+        white-space: pre-line !important;
+      }
+    }
+
+    .hidden{
+      display: none !important;
+    }
+    .block {
+      display: block !important;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.625rem;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .accordion{
+      padding: 0 4.8rem;
+      &__base{
+        width: 100%;
+      }
+    }
+
+    .mobile{
+      display: block !important;
+    }
+    .desc{
+      display: none !important;
+    }
+    
+  }
+
+  @media screen and (max-width: 426px) {
+    // .container{
+    //   display: flex;
+    //   flex-direction: column;
+    //   align-items: center;
+    //   padding: 1rem;
+    // }
+    // .accordion {
+    //   width: 100%;
+    //   &__title{
+    //     font-size: 2rem;
+    //     width: 100%;
+    //     text-align: center;
+    //   }
+    //   &__answer p {
+    //     margin: 10px 0 0;
+    //     font-size: 1.5rem;
+    //     line-height: 1.4;
+    //   }
+    // }
+
+
+  }
+}
