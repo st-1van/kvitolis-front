@@ -6,9 +6,11 @@ import Alleys from "../_components/garden/Alleys";
 import Benefits from "../_components/garden/Benefits";
 import CallToAction from "../_components/garden/CallToAction";
 import FAQ from "../_components/garden/FAQ";
-import NumbersBlock from "../_components/garden/NumbersBlock";
+// import NumbersBlock from "../_components/garden/NumbersBlock";
 import Trees from "../_components/garden/Tress";
 import SeoQoute from "../_components/SeoQoute"
+import Mission from "../_components/garden/Mission";
+import MissionData from "../_components/data/MissionData";
 
 const transformedData = AlleyData.map(({ id, tree, title, alleyImg, slug }) => ({
   id:id,
@@ -35,7 +37,8 @@ export default function Garden() {
                 gradient={banner.gradient}
         />
         </section>
-        <NumbersBlock {...numbersData}/>
+        <Mission title='Місія, цілі та цінності' data={MissionData} />
+        {/* <NumbersBlock {...numbersData}/> */}
         <Alleys alleysData={transformedData}/>
         {/* <InterMap /> */}
         <SeoQoute />
