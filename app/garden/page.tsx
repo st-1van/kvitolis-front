@@ -1,6 +1,6 @@
 
 import HeadBanner from "../_components/HeadBanner";
-import { banner, numbersData, benefitsData, callToActionData, faqData } from '../_components/data/Garden';
+import { banner, benefitsData, callToActionData, faqData } from '../_components/data/Garden';
 import { AlleyData } from '../_components/data/AlleyData';
 import Alleys from "../_components/garden/Alleys";
 import Benefits from "../_components/garden/Benefits";
