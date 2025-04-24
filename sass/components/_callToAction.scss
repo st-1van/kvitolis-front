@@ -1,3 +1,5 @@
+@use "../base/variables";
+
 .callToAction {
   display: flex;
   align-items: center;
@@ -7,68 +9,135 @@
   padding: 50px 5vw;
   position: relative;
   overflow: hidden;
-}
 
-.callToAction .left, 
-.callToAction .right {
-  position: relative;
-  width: 25%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
+  &__steps{
+    display: flex;
+    flex-direction: row;
+    gap:2rem;
 
-.callToAction .left img, 
-.callToAction .right img {
-  position: absolute;
-  width: 100%;
-  max-width: 250px;
-  height: auto;
-  transition: transform 0.3s ease;
-}
-
-.callToAction .left img:first-child {
-  left: -20px;
-  z-index: 2;
-}
-
-.callToAction .left img:last-child {
-  left: -50%;
-  z-index: 1;
-}
-
-.callToAction .right img:first-child {
-  right: -20px;
-  z-index: 2;
-}
-
-.callToAction .right img:last-child {
-  right: -50%;
-  z-index: 1;
-}
-
-.callToAction .center {
-  width: 50%;
-  text-align: center;
-  padding: 20px;
-  ul{
-    text-align: left;
-    margin-bottom: 20px;
+    .step{
+      width: 100%;
+      background-color: variables.$light-green;
+      border-radius: 2.75rem;
+      padding: 1rem;
+    }
+    
+    span{
+      position: relative;
+      top: -25px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color:white;
+      width: 4rem;
+      min-width: 4rem;
+      min-height: 4rem;
+      font-size: 25px;
+      background-color: variables.$green;
+      border-radius: 50px;
+    }
   }
-  li{
+  p{
+    position: relative;
+    top: -15px;
     line-height: 2.5rem;
-    margin-left: 2rem;
-    list-style-type: decimal;
   }
-}
 
-.callToAction h2 {
-  margin-bottom: 10px;
-}
+  .center {
+    width: 50%;
+    text-align: center;
+  }
 
+  .left, .right {
+    position: relative;
+    width: 25%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 
-@media screen and (max-width: 426px) {
-  .callToAction .center{
+ .left img, 
+ .right img {
+    position: absolute;
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+
+ .left img:first-child {
+    left: -20px;
+    z-index: 2;
+  }
+
+ .left img:last-child {
+    left: -50%;
+    z-index: 1;
+  }
+
+ .right img:first-child {
+    right: -20px;
+    z-index: 2;
+  }
+
+ .right img:last-child {
+    right: -50%;
+    z-index: 1;
+  }
+
+  h2 {
+    margin-bottom: 4rem;
+  }
+
+  .trees{
+    display: none;
+  }
+  @media screen and (max-width: 769px) {
+    &__steps{
+      flex-direction: column;
+      .step{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: left;
+        height: 80px;
+        gap:20px;
+      }
+      span{
+        top: 0;
+        left:-3rem;
+        margin:0;
+      }
+      p{
+        top:0;
+        left:-3rem;
+        text-align: left;
+      }
+    }
+  }
+
+  @media screen and (max-width: 426px) {
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .center{
+      width: 70%;
+    }
+    .left, .right{
+      display: none;
+    }
+
+    .trees{
+      margin-top: 2rem;
+      height: 100px;
+      width: 100%;
+      display: block;
+      background-image: url('/assets/alleys/tree1.png'), url('/assets/alleys/tree1.png');
+      background-repeat: repeat-x, repeat-x;
+      background-size: 20%;
+      background-position: 0 0px, 30px 0px,
+    }
   }
 }

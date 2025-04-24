@@ -30,18 +30,22 @@ export default function CallToAction({ title, steps }: BenefitsProps) {
             <div className="center">
                 <h2>{title}</h2>
                 {/* <p className="desc">{}</p> */}
-                <ul>
-                {steps.map((step, index)=>(
-                    <li className="desc" key={index}>{step}</li>
-                ))}
-                </ul>
+                <div className="callToAction__steps">
+                    {steps.map((step, index)=>(
+                        <div className='step' key={index}>
+                            <span>{index+1}</span>
+                            <p className="desc" key={index}>{step}</p>
+                        </div>
+                    ))}
+                </div>
+
+
                 {/* <Link href='#'>
                     <button className="btn btn--medium btn--green">
                         {btn}
                     </button>
                 </Link> */}
             </div>
-
             <div className="right">
                     <Image 
                         className='benefits__img' 
@@ -57,7 +61,9 @@ export default function CallToAction({ title, steps }: BenefitsProps) {
                         height={362}
                         width={300}
                     />
-            </div>        
+            </div> 
+            <div className="trees">
+            </div>      
         </section>
     );
 }
