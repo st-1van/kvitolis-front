@@ -6,7 +6,7 @@
   min-height: 65rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding-top: 3rem;
 
@@ -16,6 +16,7 @@
     font-size: 2rem;
     color: variables.$green;
     z-index: 2;
+    margin-bottom: auto;
   }
 
   &__map {
@@ -55,12 +56,8 @@
     color: black;
     width: 150px;
   }
-  @media screen and (max-width: 1441px) {
-
-  }
 
   @media screen and (max-width: 1026px) {
-
     &__legend .container{
       background-color:rgb(255, 255, 255)
     }

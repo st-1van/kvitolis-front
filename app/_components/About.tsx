@@ -1,5 +1,6 @@
 import { title, text } from './data/About'
 import InterMap from './InterMap'
+import { MapLegend } from './data/Map'
 
 
 export default function About(){
@@ -19,8 +20,11 @@ export default function About(){
                 </div>
             </div>
 
-            <InterMap />
-            
+            <InterMap 
+                title='Мапа території' 
+                src="/assets/map/staticMap.svg"
+                legend={MapLegend}
+            />
         </section>
     )
 }
