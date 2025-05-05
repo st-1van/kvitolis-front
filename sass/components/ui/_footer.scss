@@ -14,6 +14,9 @@
     h2{
       margin: 0;
     }
+    p{
+      text-align: right;
+    }
   }
   &__map{
     width: 100%;
@@ -104,41 +107,6 @@
   }
 
   @media screen and (max-width: 769px) {
-    // .body{
-    // display: flex;
-    // justify-content: space-around;
-    // align-items: center;
-    // flex-wrap: nowrap;
-    // flex-direction: column;
-    // }
-    
-    // &__actions {
-    //   display: flex;
-    //   flex-direction: row;
-    //   align-items: end;
-    //   text-align: right;
-    //   flex-wrap: wrap;
-    //   font-size: 1rem;
-    //   min-height: 287px;
-
-    //   & .col{
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: space-between;
-    //     & div{
-    //       margin-bottom: 2.5rem;
-    //     }
-    //   }
-    // }
-
-    // &__policies{
-    //   .body{
-    //     flex-direction: column-reverse;
-    //   }
-    //   &-nav{
-    //     margin-bottom: 5px;
-    //   }
-    // }
   }
   
 }
@@ -153,6 +121,17 @@
     align-content: center;
   }
   .footer{
+
+    &__title{
+
+      h2{
+        font-size: 2.5rem;
+      }
+      p{
+        font-size: 1.5rem;
+        text-align: right;
+      }
+    }
 
     &__main {
       height: 100%;
@@ -197,11 +176,7 @@
       //   // margin-bottom: 5px;
       // }
     }
-    // &__policies{
-    //   // .footer .body{
-    //   //   flex-direction: column-reverse;
-    //   // }
-    // }
+
   }
 
 }

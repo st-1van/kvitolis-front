@@ -5,8 +5,10 @@ import { AlleyData } from '../../_components/data/AlleyData'
 import CallToAction from "../../_components/garden/CallToAction";
 import FAQ from "../../_components/garden/FAQ";
 import { useParams } from "next/navigation";
-import FamousPeople from '@/app/_components/garden/alley/FamousPeople';
-import TreeDescription from '@/app/_components/garden/alley/TreeDescription';
+import AboutAlley from '@/app/_components/garden/alley/AboutAlley';
+
+// import FamousPeople from '@/app/_components/garden/alley/FamousPeople';
+// import TreeDescription from '@/app/_components/garden/alley/TreeDescription';
 
 
 
@@ -17,7 +19,6 @@ export default function SingleAlley() {
 
 
   if (!alleyData) {
-
     return  <main><p>Сторінка не знайдена</p>;</main>
   }
 
@@ -28,7 +29,6 @@ export default function SingleAlley() {
     gradient: 'light',
     tree: alleyData.tree.name,
     src:"/assets/banners/alleyBanner.png",
-    // src: alleyData.tree.srcBanner,
     slug: '/garden/plant-tree',
     button1: "Посадити дерево",
   };
@@ -36,7 +36,7 @@ export default function SingleAlley() {
   const transformedData2 = {
     name:alleyData.tree.name,
     desc:alleyData.tree.desc,
-    src: alleyData.tree.treeImg,
+    src: alleyData.tree.img,
     button1: "Посадити дерево",
     slug: '/garden/plant-tree',
   }
@@ -45,8 +45,7 @@ export default function SingleAlley() {
   return (
   <main>
               <BannerSlider  {...transformedData} />
-              <TreeDescription {...transformedData2} />
-              <FamousPeople famousPeople={alleyData.famousPeople} />
+              <AboutAlley treeData={transformedData2} personsData={alleyData.famousPeople} alleyName={alleyData.title}/>
               <CallToAction {...callToActionData} />
               <FAQ {...faqData} />
 
@@ -54,3 +53,7 @@ export default function SingleAlley() {
   );
 }
 
+
+              {/* <TreeDescription {...transformedData2} />
+              <FamousPeople famousPeople={alleyData.famousPeople} /> */}
+              {/* <Persons famousPeople={alleyData.famousPeople} /> */}

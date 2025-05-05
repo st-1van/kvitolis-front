@@ -1,0 +1,44 @@
+.aboutAlley{
+    height: fit-content;
+    max-height: 800px;
+
+    @media screen and (max-width: 769px) {
+        .container1{
+            height: 450px !important;
+        }
+
+        .row{
+            display: flex !important;
+            flex-direction: column !important;
+        }
+        .treeDescription.vertical{
+            display: flex;
+            flex-direction: row;
+            img{
+                // height: 30% !important;
+                width: 170px !important;
+            }
+        }
+    }
+
+    @media screen and (max-width: 425px) {
+        margin-bottom: 12.5rem;
+        .container1{
+            height: 300px !important;
+        }
+        .grey{
+            background: none !important;
+        }
+        .treeDescription.vertical{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            img{
+                width: 120px !important;
+            }
+        }
+        .treeDescription__content{
+            padding: 1rem;
+        }   
+    }
+}

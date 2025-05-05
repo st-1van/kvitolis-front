@@ -6,7 +6,11 @@
     &__headline{
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: flex-end;
+      margin-bottom: 1.75rem;
+      h2{
+        margin:0; 
+      }
     }
 
   @media screen and (max-width:769px)  {
@@ -22,7 +26,8 @@
   &__img{
     width: 22.625rem;
     max-height: 27.25rem;
-    border-radius: 2.75rem
+    border-radius: 2.75rem;
+    margin-bottom: 1rem;
   }
   &__name{
     font-size: 1.5rem;

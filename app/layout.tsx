@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 import { Header } from "./_components/layout/Header";
 import { Footer } from "./_components/layout/Footer";
 import { Montserrat } from 'next/font/google'
+import { ScrollLockProvider } from './_components/context/scroll-lock-context';
+import { ModalProvider } from './_components/context/modal-context';
+
 
 
 const montserrat = Montserrat({ 
@@ -28,9 +31,13 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/NAMU/NAMU-1400.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
       </head>
       <body>
-        <Header/>
-          {children}
-        <Footer/>
+        <ScrollLockProvider>
+          <ModalProvider>
+            <Header/>
+              {children}
+            <Footer/>
+          </ModalProvider>
+        </ScrollLockProvider>
       </body>
     </html>
   );

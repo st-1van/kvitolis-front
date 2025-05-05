@@ -1,0 +1,246 @@
+@use "../base/variables";
+
+.persons {
+    padding: 0 20px;
+    height: 100%;
+
+    &__headline{
+        text-align: left;
+    }
+
+    &__list{
+        display: flex;
+        flex-direction: column;
+        gap:20px;
+        padding-right: 1rem;
+        .item{
+            border-bottom: 1px solid;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            .btn{
+                margin-top:15px;
+            }        
+        }
+        >div:first-child{
+            margin-top: 35px;
+        }
+        >div:last-child{
+            margin-bottom: 200px;
+        }
+    }
+    &__card {
+        margin-top: 10rem;
+        position: relative; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // width:25%;
+        max-width: 280px;
+        height:auto
+    }
+    &__img {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    z-index: 6;
+    }
+
+    &__text {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: space-between;
+    background-color: #d4edda; 
+    border-radius: 2.75rem;
+
+    min-width:280px;
+    height: 100%;
+    padding:  17rem 1.75rem 1.75rem  1.75rem;
+
+    z-index: 1;
+    div:first-child{
+        margin-bottom: 1.75rem;
+    }
+    div:last-child{
+        color: variables.$green;
+        p{
+        display: flex;
+        align-items: center;
+        }
+        button{
+            color:white;
+            background-color: variables.$green;
+            border-radius: 50px;
+            border: 2px white solid;
+            width: 3.54844rem;
+            height: 3.54844rem;
+        }
+    }
+    }
+
+    &__free{
+        display: flex;
+        justify-content: space-between;   
+        align-items:center;
+    }
+
+    .status{
+        border-radius: 20px;
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap:5px;
+        &.--free{
+            color:variables.$green;
+            background-color: variables.$light-green;
+            border: 2px variables.$light-green solid;
+            &:hover,
+            &:focus {
+              background-color: white ;
+              border: 2px variables.$green solid;
+              color: variables.$green;
+              animation-duration: 0.2s;
+              transition: 0.3s;
+              
+            }
+        }
+        
+        &.--taken{
+            background-color: variables.$green;
+            color: white;
+            &:focus{
+                cursor: none;
+            }
+        }
+    }
+    
+
+
+
+
+    @media screen and (max-width: 1026px) {
+    &__img {
+        height:185px;
+        width:185px;
+    }
+    &__text{
+        min-width:230px;
+    }
+    }
+    @media screen and (max-width: 769px) {
+    &__img {
+        height:130px;
+        width:130px;
+    }
+
+    &__card{
+        width: 32%;
+    }
+
+    &__text {
+        padding-top: 11rem;
+        min-width:200px;
+    }
+
+    }
+    @media screen and (max-width: 426px) {
+    
+    &__headline{
+        padding: 1rem;
+    }
+
+    .item{
+        padding-left: 1rem;
+    }
+
+    &__card{
+        width: 45%;
+        height: 215px
+    }
+
+    &__img {
+        height:120px;
+        width:120px;
+    }
+
+    &__person {
+        position:relative;
+        margin-bottom: 35px;
+        width: 75%;
+    }
+
+    &__text {
+        padding-top:  10rem;
+        min-width: 160px;
+    }
+
+    &__info,p{
+        font-size: 1.5rem;
+        line-height: 2.2rem;
+    }
+
+    .status{
+        padding: 0.5rem 1rem;
+        font-size: 1.5rem;
+        &.icon{
+            width: 15px !important;
+            height: 15px !important;
+        }
+    }
+
+    }
+  }
+
+
+.persons__search {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 8px 12px;
+    font-size: 16px;
+}
+
+.container1{
+    flex: 1;
+    position: relative;
+    height: 800px;
+    background: white;  
+}
+.scrollable{
+    height: 100%;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.fade-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 3;
+}
+  
+.fade-overlay .top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, white, rgba(255, 255, 255, 0));
+}
+
+.fade-overlay .bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
+}
+

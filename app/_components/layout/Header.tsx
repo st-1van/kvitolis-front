@@ -8,24 +8,19 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation"
 import  FacebookIcon from '../ui/FacebookIcon'
 import InstagramIcon from "../ui/InstagramIcon";
+import { useScrollLock } from "../context/scroll-lock-context";
 
 export const Header = () => {
     const path = usePathname()?.split("#")[0];
+    const [ showBurger, setShowBurger ] = useState(false);
 
-    const [open, setOpen] = useState(false);
-
-    const clickMenu = () => {
-        setOpen(!open);
-        document.getElementsByTagName('html')[0].style.overflow = 'hidden';
+    const clickOnMenu = () => {
+        setShowBurger(!showBurger);
     };
-
-    useEffect(() => {
-        document.getElementsByTagName('html')[0].style.overflow = open ? 'hidden' : 'auto';
-      }, [open]);
 
     return (
         <header className="header">
-            <div className="header__top">
+            <div className="header__top container">
                 <div className="header__socials">
                     <a href="#">
                         <FacebookIcon type='filled' />
@@ -48,8 +43,8 @@ export const Header = () => {
                         </a>
                     ))}
                 </div>
-                <MenuButton onClick={clickMenu} open={open} />
-                <Humburger open={open} closeMenu={() => setOpen(false)} />
+                <MenuButton onClick={clickOnMenu} open={showBurger} />
+                <Humburger open={showBurger} onClose={() => setShowBurger(false)} />
             </div>
             <div>
                 <ul className="header__nav">
@@ -69,7 +64,24 @@ export const Header = () => {
     );
 };
 
-const Humburger = ({ open, closeMenu }: { open: boolean, closeMenu: () => void }) => {
+type BurgerProps = {
+    open: boolean;
+    onClose: () => void;
+  };
+
+const Humburger = ({ open, onClose }: BurgerProps) => {
+    const { lockScroll, unlockScroll } = useScrollLock();
+
+
+    useEffect(() => {
+        if (open) lockScroll();
+        else unlockScroll();
+      
+        return () => unlockScroll();
+      }, [open, lockScroll, unlockScroll]);
+
+      if (!open) return null;
+   
     return (
         <div className={`humburger ${open ? "open" : ""}`}>
             <div className="humburger__top">
@@ -85,7 +97,7 @@ const Humburger = ({ open, closeMenu }: { open: boolean, closeMenu: () => void }
                 <ul className="humburger__nav">
                     {navItems.map((item) => (
                         <li key={item.slug}>
-                            <Link href={item.slug} onClick={closeMenu}>
+                            <Link href={item.slug} onClick={onClose}>
                                 {item.display}
                             </Link>
                         </li>

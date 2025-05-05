@@ -20,12 +20,12 @@ export default function Mission({ title, data }: MissionProps) {
 
   return (
     <section className="mission">
-        <div className="mission__title">
+        <div className="mission__title fade-in-up">
           <h2>{title}</h2>
         </div>
 
 
-        <div className="accordion container">
+        <div className="accordion container fade-sides">
 
           <div className="accordion__base">
             {data.map((item, index) => (

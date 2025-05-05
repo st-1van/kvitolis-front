@@ -1,12 +1,19 @@
 'use client'
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { BenefitsItems } from "../Benefits";
 import { benefitsData } from "../../data/Garden";
+import { AlleyData } from "../../data/AlleyData";
 
-export default function PlantTreeForm() {
+export type FormProps = {
+  chosenAlley?:string;
+  chosenName?:string;
+  handleAlleyChange: (newName: string) => void;
+};
+
+export default function PlantTreeForm({ chosenName, chosenAlley, handleAlleyChange }:FormProps) {
+
   const [formData, setFormData] = useState({
     tree: "",
-    person: "",
     name: "",
     email: "",
     phone:'',
@@ -23,34 +30,44 @@ export default function PlantTreeForm() {
     console.log("Форма відправлена:", formData);
   };
 
+  useEffect(() => {
+    if (chosenAlley) {
+      setFormData(prev => ({ ...prev, tree: chosenAlley }));
+    }
+  }, [chosenAlley]);
+
   return (
     <div className="plantTree__form light-green">
       <h2>Посадити дерево</h2>
       <form onSubmit={handleSubmit}>
         {/* Dropdown для вибору дерева */}
         <label>
-          <select name="tree" value={formData.tree} onChange={handleChange}>
-            <option value="">Оберіть алею</option>
-            <option value="oak">Наукова алея</option>
-            <option value="pine">Літературна алея</option>
-            <option value="birch">Архітектурна алея</option>
+        <select
+            name="tree"
+            value={formData.tree}
+            onChange={(e) => {
+              const value = e.target.value;
+              setFormData({ ...formData, tree: value });
+              handleAlleyChange(value);
+            }}
+          >
+            {AlleyData.map((alley) => (
+              <option key={alley.slug} value={alley.tree.name}>
+                {alley.title}
+              </option>
+            ))}
           </select>
-          {/* <small>*Алея №1 (Наука і культура)</small> */}
+          <small>*Оберіть алею</small>
         </label>
 
-        {/* Dropdown для вибору особи */}
-        {/* <label>
-          <select name="person" value={formData.person} onChange={handleChange}>
-            <option value="">Оберіть діяча</option>
-            <option value="lesya">Леся Українка</option>
-            <option value="shevchenko">Тарас Шевченко</option>
-            <option value="franko">Іван Франко</option>
-          </select>
-          <small>*Можна обрати лише з вільних діячів</small>
-        </label> */}
-
         <label>
-          <input type="text" name="treeNumber" value={formData.treeNumber} onChange={handleChange} placeholder="Кількість дерев" required />
+          <input 
+            type="text" 
+            name="treeNumber" 
+            value={formData.treeNumber||chosenName} 
+            onChange={handleChange}
+            placeholder="Кількість дерев або імена діячів" 
+            required />
           {/* <small>*Щоб </small> */}
         </label>
 

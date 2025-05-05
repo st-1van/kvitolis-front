@@ -1,7 +1,8 @@
 export const banner = {
         title:'Станьте частиною нашої історії',
         desc:'Сад українства – це більше, ніж дерева. Це простір пам’яті й гордості за тих, хто зробив Україну такою, якою ми її знаємо. Долучайтеся до людей, які цінують і хочуть передати історію далі.',
-        src:'/assets/banners/alleyBanner2.png',
+        // src:'/assets/banners/alleyBanner2.png',
+        src:'/assets/banners/gardenBanner.jpg',
         slug:'/garden/plant-tree',
         slug2:'/garden/#about',
         button1:'Посадити дерево',

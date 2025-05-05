@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 // import Link from "next/link";
 
-interface TreeDescProps {
+export interface TreeDescProps {
     name:string,
     desc:string,
     src:string,
@@ -23,7 +23,6 @@ export default function TreeDescription(props: TreeDescProps) {
                     <Image 
                         src={src} 
                         alt={`фото-${name}`}
-                        // fill={true}
                         height={456}
                         width={650}
                     />
