@@ -16,13 +16,11 @@ export default function CardItem({ card }: CardItemProps) {
 
   return (
     <div className="card col">
-      {/* <p className="card__number">{`0${index+1}`}</p> */}
       {src && (
         <Image
           className="card__img"
           src={src}
           alt={title || "Image"}
-          // fill={true}
           width={394}
           height={400}
         />

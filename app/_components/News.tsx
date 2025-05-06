@@ -18,14 +18,14 @@ type NewsItemProps = {
 
 const news: NewsItemProps[] = [
   {
-    title: "Перша новина",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.и",
+    title: "Сезон лаванди у квітолісі",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. фффффффф ффффффф ффффффффффф ффффффф",
     date: "14.02.2025",
     src: "/assets/news/news-1.jpg",
     slug: "/news/1",
   },
   {
-    title: "Друга новина",
+    title: "Сад Українства",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     date: "15.02.2025",
     src: "/assets/news/news-2.jpg",
@@ -71,14 +71,15 @@ function NewsItem({ item }: { item: NewsItemProps }) {
       {src && <Image src={src} alt={title || "News Image"}
               width={371}
               height={324}
-              // fill={true}
               className="news__img"
       />}
 
       <div className="news__headline">
         <h5>{title}</h5>
-        <p className="news__description">{desc}</p>
-        {slug && <Link href={slug}>Більше</Link>}
+        <div>
+          <p className="news__description">{desc}</p>
+          {slug && <Link href={slug}>Більше</Link>}
+        </div>
       </div>
     </div>
   );
