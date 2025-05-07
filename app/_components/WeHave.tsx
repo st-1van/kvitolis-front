@@ -12,9 +12,6 @@ export default function WeHave(){
                         <h2 >
                             {title}
                         </h2>
-                        {/* <p>
-                            {text}
-                        </p> */}
                     </div>
                     <div className="weHave__cards">
                         {cards.map((card, index)=>(

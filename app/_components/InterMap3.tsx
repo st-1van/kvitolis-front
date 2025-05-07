@@ -2,58 +2,60 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-const mapData = [
-    {
-        name: "Парковка",
-        pin:'/assets/map/pins/1.png',
-        color: "#4C7AFF" 
-    },
-    {
-        name: "Розваги",
-        pin:'/assets/map/pins/2.png',
-        color: "#009257" 
-    },
-    {
-        name: "Тюльпанове поле",
-        pin:'/assets/map/pins/3.png', 
-        color: "#E75481" 
-    },
-    {
-        name: "Розсадник",
-        pin:'/assets/map/pins/4.png', 
-        color: "#9C51B6" 
-    },
-    {
-        name: "Осінній парк",
-        pin:'/assets/map/pins/5.png', 
-        color: "#009257" 
-    },
-    {
-        name: "Сад Українства", 
-        pin:'/assets/map/pins/6.png',
-        color: "#E75481" 
-    },
-    {
-        name: "Лавандове поле",
-        pin:'/assets/map/pins/7.png', 
-        color: "#9C51B6" 
-    },
-    {
-        name: "Фудкорт", 
-        pin:'/assets/map/pins/8.png',
-        color: "#009257" 
-    },
-    {
-        name: "Парковка 2", 
-        pin:'/assets/map/pins/1.png',
-        color: "#E75481" 
-    },
-    {
-        name: "Туалет", 
-        pin:'/assets/map/pins/10.png',
-        color: "#E75481" 
-    }
-];
+import { MapLegend } from './data/Map'
+
+// const mapData = [
+//     {
+//         name: "Парковка",
+//         pin:'/assets/map/pins/1.png',
+//         color: "#4C7AFF" 
+//     },
+//     {
+//         name: "Розваги",
+//         pin:'/assets/map/pins/2.png',
+//         color: "#009257" 
+//     },
+//     {
+//         name: "Тюльпанове поле",
+//         pin:'/assets/map/pins/3.png', 
+//         color: "#E75481" 
+//     },
+//     {
+//         name: "Розсадник",
+//         pin:'/assets/map/pins/4.png', 
+//         color: "#9C51B6" 
+//     },
+//     {
+//         name: "Осінній парк",
+//         pin:'/assets/map/pins/5.png', 
+//         color: "#009257" 
+//     },
+//     {
+//         name: "Сад Українства", 
+//         pin:'/assets/map/pins/6.png',
+//         color: "#E75481" 
+//     },
+//     {
+//         name: "Лавандове поле",
+//         pin:'/assets/map/pins/7.png', 
+//         color: "#9C51B6" 
+//     },
+//     {
+//         name: "Фудкорт", 
+//         pin:'/assets/map/pins/8.png',
+//         color: "#009257" 
+//     },
+//     {
+//         name: "Парковка 2", 
+//         pin:'/assets/map/pins/1.png',
+//         color: "#E75481" 
+//     },
+//     {
+//         name: "Туалет", 
+//         pin:'/assets/map/pins/10.png',
+//         color: "#E75481" 
+//     }
+// ];
 
 
 type SVGElementWithHandlers = SVGElement & {
@@ -66,7 +68,8 @@ type SVGElementWithHandlers = SVGElement & {
 
 export default function InterMap3 () {
   const svgRef = useRef<SVGSVGElement | null>(null);
-  const [ active, setActive ] = useState({name:'Виберіть зону', color:'#009257', icon:''}) 
+  const [ active, setActive ] = useState({name:'', color:'', icon:'', pin:''}) 
+  const legend = MapLegend;
 
   useEffect(() => {
     const svg = svgRef.current;
@@ -74,7 +77,7 @@ export default function InterMap3 () {
   
     const elements: SVGElementWithHandlers[] = [];
   
-    mapData.forEach(({ name, color }) => {
+    MapLegend.forEach(({ name, color, pin, icon }) => {
       const element = svg.querySelector(`[data-name="${name}"]`) as SVGElementWithHandlers | null;
       if (!element) return;
       
@@ -86,26 +89,26 @@ export default function InterMap3 () {
   
       const handleEnter = () => {
         if (active.name !== name) {
-          element.style.opacity = "1";
+          element.style.opacity = "0.7";
         }
       };
   
       const handleLeave = () => {
         if (active.name !== name) {
-          element.style.opacity = "0.7";
+          element.style.opacity = "1";
         }
       };
   
       const handleClick = () => {
-        setActive({ name, color, icon: "" });
+        setActive({ name, color, icon, pin});
         elements.forEach(el => {
           const elName = el.getAttribute("data-name");
-          el.style.opacity = elName === name ? "1" : "0.7";
+          el.style.opacity = elName === name ? "0.7" : "1";
         });
       };
+      console.log(active.icon)
   
-      // Початковий стиль
-      element.style.opacity = "0.7";
+      element.style.opacity = "1";
   
       element.addEventListener("mouseenter", handleEnter);
       element.addEventListener("mouseleave", handleLeave);
@@ -115,7 +118,7 @@ export default function InterMap3 () {
     });
   
     return () => {
-      mapData.forEach(({ name }) => {
+      MapLegend.forEach(({ name }) => {
         const element = svg.querySelector(`[data-name="${name}"]`) as SVGElementWithHandlers | null;
         if (element?._hoverHandlers) {
           const { handleEnter, handleLeave, handleClick } = element._hoverHandlers;
@@ -227,24 +230,43 @@ export default function InterMap3 () {
       </div>
       <div className="interMap2__legend">
 
-          <div 
-            className="interMap2__card" 
-            style={{backgroundColor: `${active.color}`}}
-          >
-              <Image
-                // className="card__img"
-                src='/assets/map/icons/parking.svg'
-                // src={active.icon||''}
-                alt={active.name || "Image"}
-                width={62}
-                height={62}
-              />
+                {legend ? 
+                <>
+                      <div className="container">
+                          <div className="interMap2__legend-body">
+                            {legend.map((item) => (
+                              <div key={item.name} className={`interMap2__item`}>
+                                <Image 
+                                  width={31} 
+                                  height={50} 
+                                  src={item.icon} 
+                                  alt={item.name}
+                                />
+                                <p>{item.name}</p>
+                              </div>
+                            ))}
+                          </div>
+                      </div>
+                    {active.icon?
+                    <div
+                      className="interMap2__card" 
+                      style={{backgroundColor: `${active.color}`}}
+                    >
+                        <Image
+                          // className="card__img"
+                          src={active.icon}
+                          alt={active.name || "Image"}
+                          width={62}
+                          height={62}
+                        />
 
-              <p className="sub">{active.name}</p>
-              <p>опис зони</p>
+                        <p className="sub">{active.name}</p>
+                        <p>опис зони</p>
 
+                    </div> : ''}
 
-          </div> 
+                </>                   
+                :''}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import Image from "next/image";
 type LegendProps = {
   name:string;
   pin:string;
+  icon:string;
 }
 
 type MapProps = {
@@ -28,12 +29,12 @@ export default function InterMap({ title, src, legend } : MapProps) {
       
       <Image src={src} alt={title||"map"} className="interMap__map" width={1591} height={805}/>
       {legend ? 
-            <div className="interMap__legend">
+          <div className="interMap__legend">
             <div className="container">
                 <div className="interMap__legend-body">
                   {legend.map((item) => (
                     <div key={item.name} className="interMap__item">
-                      <Image width={31} height={50} src={item.pin} alt={item.name}/>
+                      <Image width={31} height={50} src={item.icon} alt={item.name}/>
                       <p>{item.name}</p>
                     </div>
                   ))}
