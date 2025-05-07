@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Парковка",
+    "pin": "/assets/map/pins/1.png",
+    "icon": "/assets/map/icons/1.svg",
+    "color": "#B2B2B2",
+    "left": "18.95%",
+    "bottom": "46.21%"
+  },
+  {
+    "name": "Розваги",
+    "pin": "/assets/map/pins/2.png",
+    "icon": "/assets/map/icons/2.svg",
+    "color": "#9C51B6",
+    "left": "25.99%",
+    "bottom": "46.21%"
+  },
+  {
+    "name": "Тюльпанове поле",
+    "pin": "/assets/map/pins/3.png",
+    "icon": "/assets/map/icons/3.svg",
+    "color": "#E75481",
+    "left": "34.48%",
+    "bottom": "53.79%"
+  },
+  {
+    "name": "Розсадник",
+    "pin": "/assets/map/pins/4.png",
+    "icon": "/assets/map/icons/4.svg",
+    "color": "#00C676",
+    "left": "49.56%",
+    "bottom": "50.81%"
+  },
+  {
+    "name": "Осінній парк",
+    "pin": "/assets/map/pins/5.png",
+    "icon": "/assets/map/icons/5.svg",
+    "color": "#512789",
+    "left": "60.12%",
+    "bottom": "50.81%"
+  },
+  {
+    "name": "Сад Українства",
+    "pin": "/assets/map/pins/6.png",
+    "icon": "/assets/map/icons/6.svg",
+    "color": "#009257",
+    "left": "68.60%",
+    "bottom": "50.81%"
+  },
+  {
+    "name": "Лавандове поле",
+    "pin": "/assets/map/pins/7.png",
+    "icon": "/assets/map/icons/7.svg",
+    "color": "#783FAA",
+    "left": "75.39%",
+    "bottom": "50.81%"
+  },
+  {
+    "name": "Фудкорт",
+    "pin": "/assets/map/pins/8.png",
+    "icon": "/assets/map/icons/8.svg",
+    "color": "#FB004D",
+    "left": "74.64%",
+    "bottom": "36.89%"
+  },
+  {
+    "name": "Парковка 2",
+    "pin": "/assets/map/pins/1.png",
+    "icon": "/assets/map/icons/1.svg",
+    "color": "#B2B2B2",
+    "left": "71.06%",
+    "bottom": "35.00%"
+  },
+  {
+    "name": "Туалет",
+    "pin": "/assets/map/pins/10.png",
+    "icon": "/assets/map/icons/10.svg",
+    "color": "#B2B2B2",
+    "left": "56.98%",
+    "bottom": "38.63%"
+  }
+]
