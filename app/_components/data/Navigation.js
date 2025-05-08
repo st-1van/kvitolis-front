@@ -20,10 +20,6 @@ export const navItems = [
             display:'Контакти',
             slug: '#contacts'
         },
-        {
-            display:'Test map',
-            slug: '/test'
-        },
     ]
 
 
