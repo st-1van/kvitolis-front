@@ -39,7 +39,7 @@ export default function Mission({ title, data }: MissionProps) {
                 </button>
                 <div
                   key={index}
-                  style={{ maxHeight: openIndex === index ? "200px" : "0" }}
+                  style={{ maxHeight: openIndex === index ? "500px" : "0" }}
                   className="accordion__answer mobile"
                 >
                   <p>
