@@ -30,6 +30,7 @@ section {
 a {
   color: inherit;
   text-decoration: none;
+  -webkit-text-fill-color: inherit !important;
 
   &:hover,
   &:focus {
@@ -49,6 +50,10 @@ button {
   cursor: pointer;
   outline: none;
   font-weight: 400;
+}
+
+button, .btn, [role="button"] {
+  color: inherit;
 }
 
 html {

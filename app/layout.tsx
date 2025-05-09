@@ -27,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="uk-UA" className={`${montserrat.variable}`}>
       <head>
+        <meta name="format-detection" content="telephone=no, email=no, address=no"/>
         <link rel="preload" href="/fonts/NAMU/NAMU-Pro.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/NAMU/NAMU-1400.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
       </head>
