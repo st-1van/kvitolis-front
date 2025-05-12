@@ -68,15 +68,15 @@
     "pin": "/assets/map/pins/1.png",
     "icon": "/assets/map/icons/1.svg",
     "color": "#B2B2B2",
-    "left": "1131px",
-    "bottom": "269px"
+    "left": "907px",
+    "bottom": "311px"
   },
   {
     "name": "Туалет",
     "pin": "/assets/map/pins/10.png",
     "icon": "/assets/map/icons/10.svg",
     "color": "#B2B2B2",
-    "left": "907px",
-    "bottom": "311px"
+    "left": "1131px",
+    "bottom": "269px"
   }
 ]

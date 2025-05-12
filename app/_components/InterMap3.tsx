@@ -89,6 +89,21 @@ export default function InterMap3 () {
   const [ active, setActive ] = useState({name:'', color:'', icon:'', pin:''}) 
   const legend = MapData;
 
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const wrapEl = wrapRef.current;
+    if (wrapEl) {
+      const scrollLeft = (1600 - wrapEl.clientWidth) / 5.5;
+      const scrollTop = (805 - wrapEl.clientHeight) / 1.5;
+      wrapEl.scrollTo({
+        left: scrollLeft,
+        top: scrollTop,
+        behavior: 'smooth',
+      });
+    }
+  }, []);
+
   useEffect(() => {
     const svg = svgRef.current;
     if (!svg) return;
@@ -108,8 +123,8 @@ export default function InterMap3 () {
           <h2>Мапа території</h2>
         </div>
       </div>
-      <div className="wrap">
-      <svg ref={svgRef} width="1600" height="805" viewBox="0 0 1600 805" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div className="wrap" ref={wrapRef}>
+      <svg className="interMap2__zones" ref={svgRef} width="1600" height="805" viewBox="0 0 1600 805" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M347.95 398.231L437.661 559.861L392.085 572.841L356.428 582.067L344.211 579.561L271.119 459.66C271.119 459.66 277.995 450.894 294.099 431.544C309.885 412.576 347.95 398.231 347.95 398.231Z" 
             fill="#A2A09D" 
             stroke="#B2B2B2"
@@ -205,23 +220,23 @@ export default function InterMap3 () {
                 {legend ? 
                 <>
                   {/* легенда з іконками */}
-                        <div className="interMap2__legend-body">
-                          {legend.map((item) => (
-                            <div 
-                              key={item.name} 
-                              className={`interMap2__item`}
-                              data-name={item.name}
-                            >
-                              <Image 
-                                width={31} 
-                                height={50} 
-                                src={item.icon} 
-                                alt={item.name}
-                              />
-                              <p className="--hiden">{item.name}</p>
-                            </div>
-                          ))}
+                    <div className="interMap2__legend-body">
+                      {legend.map((item) => (
+                        <div 
+                          key={item.name} 
+                          className={`interMap2__item`}
+                          data-name={item.name}
+                        >
+                          <Image 
+                            width={31} 
+                            height={50} 
+                            src={item.icon} 
+                            alt={item.name}
+                          />
+                          <p className="--hiden">{item.name}</p>
                         </div>
+                      ))}
+                    </div>
                   {/* інтерактивна картка */}
                     {active.icon?
                     <div
