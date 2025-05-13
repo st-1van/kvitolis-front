@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type MissionProps = {
   title: string;
@@ -12,10 +12,21 @@ type DataProps = {
 };
 
 export default function Mission({ title, data }: MissionProps) {
-  const [openIndex, setOpenIndex] = useState<number | 0>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  useEffect(()=>{
+    const handleResize = () => {
+      const isMobile= window.innerWidth <= 431;
+      setOpenIndex(isMobile ? null : 0);
+    };
+    handleResize(); 
+      window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [])
 
   const toggleAccordion = (index: number) => {
-    setOpenIndex(openIndex === index ? 0 : index);
+    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
