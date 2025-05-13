@@ -117,7 +117,7 @@ export default function InterMap3 () {
   }, [active.name]);
 
   return (
-    <div className="interMap2">
+    <div className="interMap2" id='map'>
       <div className="interMap2__title container">
         <div className="content">
           <h2>Мапа території</h2>
