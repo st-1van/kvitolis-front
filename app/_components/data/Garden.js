@@ -4,7 +4,7 @@ export const banner = {
         // src:'/assets/banners/alleyBanner2.png',
         src:'/assets/banners/gardenBanner.jpg',
         slug:'/garden/plant-tree',
-        slug2:'/garden/#about',
+        slug2:'/garden#about-garden',
         button1:'Посадити дерево',
         button2:'Про проект',
         gradient:'light'

@@ -19,7 +19,7 @@ export default function Mission({ title, data }: MissionProps) {
   };
 
   return (
-    <section className="mission">
+    <section className="mission" id='about-garden'>
         <div className="mission__title fade-in-up">
           <h2>{title}</h2>
         </div>
