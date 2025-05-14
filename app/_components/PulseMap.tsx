@@ -124,7 +124,11 @@ export default function PulseMap() {
               <div className="dot"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setActive(alley);
+                  setActive({
+                    title: alley.title,
+                    desc: alley.desc,
+                    ...getAlleyXY(index),
+                  });
                 }}
               >
                 <div className="pulse pulse1" />
