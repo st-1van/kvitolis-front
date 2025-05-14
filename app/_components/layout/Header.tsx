@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation"
 import  FacebookIcon from '../ui/FacebookIcon'
 import InstagramIcon from "../ui/InstagramIcon";
 import { useScrollLock } from "../context/scroll-lock-context";
+import ScrollToTopButton from "../ui/ScrollToTopButton";
 
 export const Header = () => {
     const path = usePathname()?.split("#")[0];
@@ -29,13 +30,15 @@ export const Header = () => {
                         <InstagramIcon type='filled' />
                     </a>
                 </div>
-                <Image
-                    className="header__logo"
-                    src="/assets/logo.svg"
-                    alt="logo"
-                    width={240}
-                    height={129}
-                />
+                <Link href='/'>
+                    <Image
+                        className="header__logo"
+                        src="/assets/logo.svg"
+                        alt="logo"
+                        width={240}
+                        height={129}
+                    />
+                </Link>
                 <div className="header__phones">
                     {phones.map((item, index) => (
                         <a key={index} href={`tel:${item.replaceAll(" ", "")}`}>
@@ -60,6 +63,7 @@ export const Header = () => {
                     ))}
                 </ul>
             </div>
+            <ScrollToTopButton />
         </header>
     );
 };
@@ -113,10 +117,10 @@ const Humburger = ({ open, onClose }: BurgerProps) => {
             </div>
             <div className="humburger__socials">
                 <a href="#">
-                    <FacebookIcon type='filled' />
+                    <FacebookIcon type='filled'/>
                 </a>
                 <a href="#">
-                    <InstagramIcon type='filled' />
+                    <InstagramIcon type='filled'/>
                 </a>
             </div>
         </div>

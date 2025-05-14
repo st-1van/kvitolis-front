@@ -57,6 +57,9 @@
     @media screen and (max-width: 426px) {
 
             margin-bottom: 5.75rem;
+            &__title{
+                line-height: 4rem;
+            }
 
             &__number{
                 font-size: 4rem;

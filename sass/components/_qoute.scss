@@ -68,7 +68,7 @@
   }
 
   @media screen and (max-width: 426px) {
-    min-height: calc(100vh - 11rem);
+    min-height: 100%;
 
     .content {
       flex-direction: column;
