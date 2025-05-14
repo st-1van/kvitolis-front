@@ -23,61 +23,64 @@ export default function Carousel() {
   }, [nextSlide]);
 
   return (
-    <section className="container">
+    <section className="carousel">
         {/* Images */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentIndex}
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 1 }}
-          >
-            <div 
-              className={`headBanner carousel headBanner--${CarouselData[currentIndex].gradient}`} 
-              style={{ backgroundImage: `url(${CarouselData[currentIndex].src})` }}
-            >
-              <div className="headBanner__overlay"></div>
-              <div className="headBanner__content">
-                <h1>{CarouselData[currentIndex].title}</h1>
-                <p className="headBanner__description">{CarouselData[currentIndex].desc}</p>
-                {CarouselData[currentIndex].src && (
-                  <Link href={CarouselData[currentIndex].slug || '#'}>
-                    <button className="btn btn--medium btn--green">Дізнатися більше</button>
-                  </Link>
-                )}
+        <div className="container">
+          <div className="relative-wrapper">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 1 }}
+              >
+                <div 
+                  className={`headBanner carousel-body headBanner--${CarouselData[currentIndex].gradient}`} 
+                  style={{ backgroundImage: `url(${CarouselData[currentIndex].src})` }}
+                >
+                  <div className="headBanner__overlay"></div>
+                  <div className="headBanner__content">
+                    <h1>{CarouselData[currentIndex].title}</h1>
+                    <p className="headBanner__description">{CarouselData[currentIndex].desc}</p>
+                      {CarouselData[currentIndex].src && (
+                        <Link href={CarouselData[currentIndex].slug || '#'}>
+                          <button className="btn btn--medium btn--green">Дізнатися більше</button>
+                        </Link>
+                      )}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+            <div className="headBanner__navigation">
+              <div className="arrows">
+                <div className="fade">
+                  <button onClick={prevSlide}
+                    className="arrow left"
+                  >
+                    <Image src="/assets/LeftArrow.svg" alt="arrowLeft" width={35} height={35} />
+                  </button>
+                </div>
+                <div className="fade">
+                  <button onClick={nextSlide}
+                    className="arrow right"
+                  >
+                    <Image src="/assets/RightArrow.svg" alt="arrowRight" width={35} height={35} />
+                  </button>
+                </div>
+              </div>
+              <div className='headBanner__pagination'>
+                {CarouselData.map((_, idx) => (
+                  <div
+                    key={idx}
+                    onClick={() => setCurrentIndex(idx)}
+                    className={`dot ${idx === currentIndex ? '--active' : ""}`}
+                  ></div>
+                ))}
               </div>
             </div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Navigation Buttons */}
-        <div className="headBanner__arrows">
-          <button onClick={prevSlide}
-            className="headBanner__arrow left"
-          >
-            <Image src="/assets/LeftArrow.svg" alt="arrowLeft" width={35} height={35} />
-          </button>
-          <button onClick={nextSlide}
-            className="headBanner__arrow right"
-          >
-            <Image src="/assets/RightArrow.svg" alt="arrowRight" width={35} height={35} />
-          </button>
+          </div>
         </div>
-
-        {/* Pagination Dots */}
-        <div 
-        // className={styles.pagination}
-        >
-          {CarouselData.map((_, idx) => (
-            <div
-              key={idx}
-              onClick={() => setCurrentIndex(idx)}
-              // className={`${styles.dot} ${idx === currentIndex ? styles.activeDot : ""}`}
-            ></div>
-          ))}
-        </div>
-
     </section>
   );
 }

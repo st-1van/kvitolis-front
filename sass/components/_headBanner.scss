@@ -1,3 +1,4 @@
+@use "../base/variables";
 .headBanner {
 
     position: relative;
@@ -6,7 +7,6 @@
     justify-content: space-between;
     align-items: center;
     height: 40rem;
-    margin-bottom: 9.8rem;
     padding-top: 3rem;
     padding-bottom: 3rem;
     overflow: hidden;
@@ -15,10 +15,10 @@
     background-position: 100% 40%;
 
 
-    &.carousel{
+    &.carousel-body{
       border-radius: 6.25rem 0rem;
     }
-    &.bannerSlider{
+    &.bannerSlider-body{
       border-radius: 2.75rem;
     }
 
@@ -42,14 +42,99 @@
       width: 100%;
       height: 100%;
       z-index: 1;
+      max-width: 55%;
     }
 
     .headBanner, &__overlay {
       box-sizing: border-box;
     }
-    
-    &__arrows {
+
+    &__navigation{
       position: absolute;
+      top: 0;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+
+      .arrows {
+            position: relative;
+            z-index: 10;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          
+
+        .fade{
+          height: 100%;
+          width: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      
+        .arrow {
+          margin: auto 0;
+          width: 50px;
+          height: 50px; 
+          opacity: 0.7;        
+          
+          &:hover {
+            transition: 0.3s ease;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            opacity: 1; 
+          }
+    
+          img {
+            width: 35px;
+            height: 35px;
+          }
+        }
+    
+        .left {
+          position: relative;
+          left: 0;
+        }
+    
+        .right {
+          position: relative;
+          right: 0;
+        }
+      }
+    }
+    
+    &__pagination{
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 100px;
+      gap:5px;
+      padding: 5px;
+      .dot{
+        width: 10px;
+        height: 10px;
+        border-radius: 100px;
+        background-color: variables.$green;
+        cursor: pointer;
+      }
+      .dot:hover,
+      .--active{
+        background-color: variables.$white;
+        border: 1px solid variables.$green;
+        transition: 0.3 ease-in-out;
+      }
+    }
+
+    // old
+    &__arrows {
+      position: relative;
       z-index: 10;
       top: 50%;
       left: 0;
@@ -93,7 +178,7 @@
       color: white;
   
       .headBanner__overlay {
-        background: linear-gradient(90deg, #101916 0%, rgba(16, 25, 22, 0) 100%);
+        background: linear-gradient(90deg, #101916 30%, rgba(16, 25, 22, 0) 100%);
         background-size:80%;
         background-position:left;
         background-repeat: no-repeat;
@@ -126,7 +211,6 @@
     @media screen and (max-width: 426px) {
       flex-direction: column-reverse;
       padding-bottom: 1.5rem;
-      margin-bottom: 4.5rem;
       min-height: calc(100vh - 11rem);
       background-size: cover;
       background-position: 66% 0%;
@@ -139,21 +223,53 @@
         max-width: none;
       }
 
+      &__navigation{
+          position: absolute;
+          top: 0;
+          z-index: 10;
+          width: 100%;
+          height: 100%;
+
+          .arrows {
+              justify-content: flex-end;
+              align-items: flex-end;
+              padding: 0 3rem;
+              bottom: 2rem;
+          }
+
+            .fade{
+              height: fit-content !important;
+              width: auto;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+      }
+
       &__arrows {
         top: 85.5%;
         padding-right: 2rem;
         justify-content: flex-end;
       }
-      
+
+      &__pagination{
+        display: none;
+      }
+      .headBanner__overlay{
+        top: unset;
+        bottom: 0;
+        height: 300px !important;
+        max-width: unset;
+      }
       &--dark {
         .headBanner__overlay {
-          background: linear-gradient(0deg, #101916 16%, rgba(16, 25, 22, 0) 100%);
+          background: linear-gradient(0deg, #101916 87%, rgba(16, 25, 22, 0) 100%);
         }
       }
     
       &--light {
         .headBanner__overlay {
-          background: linear-gradient(0deg, #F4F2EF 16%, rgba(244, 242, 239, 0) 100%);
+          background: linear-gradient(0deg, #F4F2EF 87%, rgba(244, 242, 239, 0) 100%);
         }
       }
 

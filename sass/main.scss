@@ -10,8 +10,13 @@
 @use 'components/ui/menuButton';
 @use 'components/ui/_svgIcon';
 @use 'components/ui/modal';
+@use 'components/ui/scrollToTop';
 
-@use "components/page";
+@use "pages/mainPage";
+@use "pages/alleyPage";
+@use "pages/gardenPage";
+
+
 @use "components/interMap";
 @use "components/weHave";
 @use "components/attraction";

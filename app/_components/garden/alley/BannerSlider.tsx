@@ -32,9 +32,10 @@ export default function BannerSlider(props: BannerSliderProps) {
   }
   
   return (
-    <section className="container">
+    <section className="bannerSlider">
+      <div className="container">
         <div 
-          className={`headBanner bannerSlider headBanner--${gradient}`} 
+          className={`headBanner bannerSlider-body headBanner--${gradient}`} 
           style={{ backgroundImage: `url(${src})` }}
         >
 
@@ -75,6 +76,7 @@ export default function BannerSlider(props: BannerSliderProps) {
                   <Image src="/assets/RightArrow.svg" alt="arrowRight" width={35} height={35} />
               </button>
         </div>
+      </div>
     </section>
   );
 }
