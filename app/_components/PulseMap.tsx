@@ -100,22 +100,22 @@ export default function PulseMap() {
       </div>
 
       <div className="map-wrapper">
-        <div className="bg">
+        <div className="pulseMap__bg">
           <Image src='/assets/garden/map.jpg' width={1920} height={1080} alt='garden_map' />
         </div>
 
         <div className={`dark-overlay ${active ? 'active' : ''}`} />
 
-        <div className={`info-box ${active ? 'visible' : ''}`}>
-          <h3>{active?.title}</h3>
+        {/* <div className={`pulseMap__info-box ${active ? 'visible' : ''}`}>
+          <h5>{active?.title}</h5>
           <p>{active?.desc || 'Короткий опис локації'}</p>
-        </div>
+        </div> */}
 
         <div className="pulseMap__boobles">
           {AlleyData.map((alley, index) => (
             <div
               key={alley.title}
-              className={`booble ${active?.title === alley.title ? 'chosen' : ''}`}
+              className={`booble ${active?.title === alley.title ? '--chosen' : ''}`}
               style={getAlleyXY(index)}
             >
               <div className="text">
@@ -135,7 +135,7 @@ export default function PulseMap() {
           ))}
 
           {/* Центр кола */}
-          <div
+          {/* <div
             className="circle-center-marker"
             style={{
               position: 'absolute',
@@ -148,7 +148,7 @@ export default function PulseMap() {
               borderRadius: '50%',
               zIndex: 10,
             }}
-          />
+          /> */}
         </div>
       </div>
     </div>
