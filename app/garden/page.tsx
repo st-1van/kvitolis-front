@@ -1,7 +1,7 @@
 import HeadBanner from "../_components/HeadBanner";
 import { banner, benefitsData, callToActionData, faqData } from '../_components/data/Garden';
 import { AlleyData } from '../_components/data/AlleyData';
-import Alleys from "../_components/garden/Alleys";
+// import Alleys from "../_components/garden/Alleys";
 import Benefits from "../_components/garden/Benefits";
 import CallToAction from "../_components/garden/CallToAction";
 import FAQ from "../_components/garden/FAQ";
@@ -9,7 +9,7 @@ import Trees from "../_components/garden/Tress";
 import SeoQoute from "../_components/SeoQoute"
 import Mission from "../_components/garden/Mission";
 import MissionData from "../_components/data/MissionData";
-import InterMap from "../_components/InterMap";
+import PulseMap from "../_components/PulseMap";
 
 const transformedData = AlleyData.map(({ id, tree, title, alleyImg, slug }) => ({
   id:id,
@@ -23,7 +23,7 @@ const transformedData = AlleyData.map(({ id, tree, title, alleyImg, slug }) => (
 export default function Garden() {
   return (
     <main>
-      <section className="container fade-in-up">
+      <section className="mainBanner container fade-in-up">
         <HeadBanner
                 key={banner.title} 
                 title={banner.title} 
@@ -37,8 +37,8 @@ export default function Garden() {
         />
       </section>
         <Mission title='Місія, цілі та цінності' data={MissionData} />
-        <InterMap src='/assets/garden/map.jpg' />
-        <Alleys alleysData={transformedData}/>
+        <PulseMap />
+        {/* <Alleys alleysData={transformedData}/> */}
         <SeoQoute />
         <Trees treesData={transformedData}/>
         <Benefits {...benefitsData} />
