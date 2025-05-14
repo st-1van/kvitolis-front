@@ -3,7 +3,7 @@
 $map-width: 1600px;
 $map-height: 805px;
 
-.interMap2 {
+.interMap3 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -22,7 +22,7 @@ $map-height: 805px;
     align-self: flex-start; 
     font-size: 2rem;
     color: variables.$green;
-    z-index: 2;
+    z-index: 50;
   }
 
 
@@ -75,9 +75,6 @@ $map-height: 805px;
     color: rgb(151, 151, 151);
     width: 150px;
     cursor: pointer;
-    &.active{
-      background-color: red !important;
-    }
     &:hover{
       color: variables.$fiolet;
     }
@@ -116,7 +113,7 @@ $map-height: 805px;
     top: 0;
     left: 0;
     img{
-      z-index: 99;
+      z-index: 30;
       position: absolute;
       transition: transform 0.3s ease;
       cursor: pointer;
@@ -145,8 +142,6 @@ $map-height: 805px;
     .wrap{
       width: 100%;
       height: 100%;
-
-      background-color: red; 
       touch-action: pan-x pan-y;  
       overflow: auto; 
  
@@ -184,6 +179,18 @@ $map-height: 805px;
 
       &-body {
         display: none;
+      }
+    }
+
+    &__card{
+      width: 60%;
+
+      .sub{
+        font-size: 16px;
+        line-height: 1.75;
+      }
+      :last-child{
+        font-size: 14px;
       }
     }
   }

@@ -31,7 +31,7 @@ export function bindInteractivity(
   mapData.forEach(({ name, color, icon, pin }) => {
     const zone = svg.querySelector(`[data-name="${name}"]`) as SVGElementWithHandlers | null;
     const pinEl = document.querySelector(`.pins [data-name="${name}"]`) as SVGElementWithHandlers | null;
-    const legendItem = document.querySelector(`.interMap2__item[data-name="${name}"]`) as SVGElementWithHandlers | null;
+    const legendItem = document.querySelector(`.interMap3__item[data-name="${name}"]`) as SVGElementWithHandlers | null;
 
     if (!zone) return;
     if (color) zone.style.fill = color;
@@ -117,14 +117,14 @@ export default function InterMap3 () {
   }, [active.name]);
 
   return (
-    <div className="interMap2" id='map'>
-      <div className="interMap2__title container">
+    <div className="interMap3" id='map'>
+      <div className="interMap3__title container">
         <div className="content">
           <h2>Мапа території</h2>
         </div>
       </div>
       <div className="wrap" ref={wrapRef}>
-      <svg className="interMap2__zones" ref={svgRef} width="1600" height="805" viewBox="0 0 1600 805" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="interMap3__zones" ref={svgRef} width="1600" height="805" viewBox="0 0 1600 805" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M347.95 398.231L437.661 559.861L392.085 572.841L356.428 582.067L344.211 579.561L271.119 459.66C271.119 459.66 277.995 450.894 294.099 431.544C309.885 412.576 347.95 398.231 347.95 398.231Z" 
             fill="#A2A09D" 
             stroke="#B2B2B2"
@@ -214,17 +214,17 @@ export default function InterMap3 () {
             </>
           :''}
         </div>
-        <Image src={'/assets/map/map_bg.svg'} width={1600} height={805} alt='map' className="interMap2__bg"/>
+        <Image src={'/assets/map/map_bg.svg'} width={1600} height={805} alt='map' className="interMap3__bg"/>
       </div>
-      <div className="interMap2__legend">
+      <div className="interMap3__legend">
                 {legend ? 
                 <>
                   {/* легенда з іконками */}
-                    <div className="interMap2__legend-body">
+                    <div className="interMap3__legend-body">
                       {legend.map((item) => (
                         <div 
                           key={item.name} 
-                          className={`interMap2__item`}
+                          className={`interMap3__item`}
                           data-name={item.name}
                         >
                           <Image 
@@ -240,7 +240,7 @@ export default function InterMap3 () {
                   {/* інтерактивна картка */}
                     {active.icon?
                     <div
-                      className="interMap2__card" 
+                      className="interMap3__card" 
                       style={{backgroundColor: `${active.color}`}}
                     >
                         <Image
