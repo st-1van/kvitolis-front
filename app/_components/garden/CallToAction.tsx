@@ -1,6 +1,6 @@
 "use client"; 
 import Image from "next/image";
-// import Link from "next/link";
+import Link from "next/link";
 
 type BenefitsProps = {
     title: string;
@@ -10,7 +10,7 @@ type BenefitsProps = {
 
 export default function CallToAction({ title, steps }: BenefitsProps) {
     return (
-        <section className="callToAction">
+        <section className="callToAction fade-in-up">
             <div className="left">
                     <Image
                         className='benefits__img' 
@@ -40,11 +40,11 @@ export default function CallToAction({ title, steps }: BenefitsProps) {
                 </div>
 
 
-                {/* <Link href='#'>
+                <Link href='/garden/plant-tree'>
                     <button className="btn btn--medium btn--green">
-                        {btn}
+                        Долучитися
                     </button>
-                </Link> */}
+                </Link>
             </div>
             <div className="right">
                     <Image 

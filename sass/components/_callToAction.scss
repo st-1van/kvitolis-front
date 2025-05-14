@@ -37,11 +37,16 @@
       background-color: variables.$green;
       border-radius: 50px;
     }
+
   }
   p{
     position: relative;
     top: -10px;
     line-height: 2.5rem;
+  }
+
+  .btn{
+      margin: 1rem 0 0 0 ;
   }
 
   .center {
@@ -93,6 +98,7 @@
   .trees{
     display: none;
   }
+  
   @media screen and (max-width: 769px) {
     &__steps{
       flex-direction: column;

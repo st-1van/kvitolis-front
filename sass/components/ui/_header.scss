@@ -110,7 +110,7 @@
     transition: top .5s ease-in-out;
 
     padding: 2rem;
-    z-index: 30;
+    z-index: 900;
 
     &__mid{
       margin-top: 2rem;
@@ -173,6 +173,7 @@
     }
     &__socials{
       display: flex;
+      margin-top: 4rem;
       & > a {
         margin: 0.65rem;
       }
