@@ -132,48 +132,6 @@
       }
     }
 
-    // old
-    &__arrows {
-      position: relative;
-      z-index: 10;
-      top: 50%;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      
-      .headBanner__arrow {
-        width: 50px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        
-        
-        &:hover {
-          transition: 0.3s ease;
-          background: rgba(0, 0, 0, 0.2);
-          border-radius: 50%;
-        }
-  
-        img {
-          width: 35px;
-          height: 35px;
-        }
-      }
-  
-      .left {
-        position: relative;
-        left: 0;
-      }
-  
-      .right {
-        position: relative;
-        right: 0;
-      }
-    }
-  
     &--dark {
       color: white;
   
@@ -246,11 +204,6 @@
             }
       }
 
-      &__arrows {
-        top: 85.5%;
-        padding-right: 2rem;
-        justify-content: flex-end;
-      }
 
       &__pagination{
         display: none;

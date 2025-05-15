@@ -34,47 +34,56 @@ export default function BannerSlider(props: BannerSliderProps) {
   return (
     <section className="bannerSlider">
       <div className="container">
-        <div 
-          className={`headBanner bannerSlider-body headBanner--${gradient}`} 
-          style={{ backgroundImage: `url(${src})` }}
-        >
+        <div className="relative-wrapper">
+
+          <div 
+            className={`headBanner bannerSlider-body headBanner--${gradient}`} 
+            style={{ backgroundImage: `url(${src})` }}
+          >
+            <div className="headBanner__overlay"></div>
+            <div className="headBanner__content">
+              <h2 className="headBanner__headline">{title}</h2>
+              <p className="headBanner__description">{desc}</p>
+              <div>
+                {src && (
+                  <Link href={slug || '#'}>
+                    <button className="btn btn--medium btn--green">{ button1 || `Більше`}</button>
+                  </Link>
+                )}
+
+              </div>
+            </div>
 
 
-          <div className="headBanner__overlay"></div>
-          <div className="headBanner__content">
-            <h2 className="headBanner__headline">{title}</h2>
-            <p className="headBanner__description">{desc}</p>
-            <div>
-              {src && (
-                <Link href={slug || '#'}>
-                  <button className="btn btn--medium btn--green">{ button1 || `Більше`}</button>
-                </Link>
-              )}
+          </div>
 
+          <div className="headBanner__navigation">
+            <div className="arrows">
+              <div className="fade">
+                <button
+                    onClick={() => {
+                      const newSlug = handleMove("back", id);
+                      if (newSlug) router.push(newSlug);
+                    }}
+                  className="arrow left"
+                >
+                  <Image src="/assets/LeftArrow.svg" alt="arrowLeft" width={35} height={35} />
+                </button>
+              </div>
+              <div className="fade">
+                <button
+                  onClick={() => {
+                    const newSlug = handleMove("forward", id);
+                    if (newSlug) router.push(newSlug);
+                  }}
+                  className="arrow right"
+                >
+                  <Image src="/assets/RightArrow.svg" alt="arrowRight" width={35} height={35} />
+                </button>
+              </div>
             </div>
           </div>
 
-
-        </div>
-        <div className="headBanner__arrows">
-              <button 
-                className="headBanner__arrow left"
-                onClick={() => {
-                  const newSlug = handleMove("back", id);
-                  if (newSlug) router.push(newSlug);
-                }}
-              >
-                  <Image src="/assets/LeftArrow.svg" alt="arrowLeft" width={35} height={35} />
-              </button>
-              <button 
-                className="headBanner__arrow right"
-                onClick={() => {
-                  const newSlug = handleMove("forward", id);
-                  if (newSlug) router.push(newSlug);
-                }}
-              >
-                  <Image src="/assets/RightArrow.svg" alt="arrowRight" width={35} height={35} />
-              </button>
         </div>
       </div>
     </section>
