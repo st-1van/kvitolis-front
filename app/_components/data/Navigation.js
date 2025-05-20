@@ -13,7 +13,7 @@ export const navItems = [
         },
 
         {
-            display:'Сад українства',
+            display:'Сад Українства',
             slug: '/garden'
         },
         {
