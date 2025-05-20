@@ -13,20 +13,27 @@ type DataProps = {
 
 export default function Mission({ title, data }: MissionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  
 
   useEffect(()=>{
     const handleResize = () => {
-      const isMobile= window.innerWidth <= 431;
-      setOpenIndex(isMobile ? null : 0);
+      const mobile = window.innerWidth <= 431;
+      setIsMobile(mobile);
+      setOpenIndex(mobile ? null : 0);
     };
     handleResize(); 
-      window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
   }, [])
 
   const toggleAccordion = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+    if(isMobile === true){
+      setOpenIndex(openIndex === index ? null : index);
+    }else{
+      setOpenIndex(openIndex === index ? 0 : index);
+    }
   };
 
   return (
