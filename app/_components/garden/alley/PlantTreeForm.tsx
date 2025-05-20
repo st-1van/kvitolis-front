@@ -94,12 +94,12 @@ export default function PlantTreeForm({ chosenName, chosenAlley, handleAlleyChan
       <BenefitsItems title='Ви також отримуєте:' benefits={benefitsData.benefits} type='no-padding'/>
       
       <div className="plantTree__trade">
-        <div>
+        {/* <div>
           <p className="plantTree__label">Вартість саджанця</p>
           <p className="plantTree__price">4 500 грн</p>
-        </div>
+        </div> */}
         {/* Кнопка */}
-        <button type="submit" className="btn btn--green btn--medium">Посадити дерево</button>
+        <button type="submit" className="btn btn--green btn--medium">Залишити заявку</button>
       </div>
     </div>
   );
