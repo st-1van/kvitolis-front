@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import AnimatedOnScroll from "../ui/AnimatedScroll";
 
 type MissionProps = {
   title: string;
@@ -38,12 +39,14 @@ export default function Mission({ title, data }: MissionProps) {
 
   return (
     <section className="mission" id='about-garden'>
+      <AnimatedOnScroll animationClass="fade-in-up" once={true}>
         <div className="mission__title fade-in-up">
           <h2>{title}</h2>
         </div>
+      </AnimatedOnScroll>
 
-
-        <div className="accordion container fade-sides">
+        <AnimatedOnScroll animationClass="fade-sides" once={true}>
+        <div className="accordion container">
 
           <div className="accordion__base">
             {data.map((item, index) => (
@@ -82,6 +85,7 @@ export default function Mission({ title, data }: MissionProps) {
           
           </div>
         </div>
+        </AnimatedOnScroll>
     </section>
   );
 }

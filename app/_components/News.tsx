@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import AnimatedOnScroll from "./ui/AnimatedScroll";
 
 type NewsProps = {
   title: string;
@@ -64,23 +65,25 @@ function NewsItem({ item }: { item: NewsItemProps }) {
   const { title, src, desc, date, slug } = item;
 
   return (
-    <div className="news__item">
+    <AnimatedOnScroll animationClass="fade-in-up">
+      <div className="news__item">
 
-      <div className="news__date">{date}</div>
+        <div className="news__date">{date}</div>
 
-      {src && <Image src={src} alt={title || "News Image"}
-              width={371}
-              height={324}
-              className="news__img"
-      />}
+        {src && <Image src={src} alt={title || "News Image"}
+                width={371}
+                height={324}
+                className="news__img"
+        />}
 
-      <div className="news__headline">
-        <h5>{title}</h5>
-        <div>
-          <p className="news__description">{desc}</p>
-          {slug && <Link href={slug}>Більше</Link>}
+        <div className="news__headline">
+          <h5>{title}</h5>
+          <div>
+            <p className="news__description">{desc}</p>
+            {slug && <Link href={slug}>Більше</Link>}
+          </div>
         </div>
       </div>
-    </div>
+    </AnimatedOnScroll>
   );
 }

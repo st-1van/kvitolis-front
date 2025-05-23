@@ -7,11 +7,6 @@ import FAQ from "../../_components/garden/FAQ";
 import { useParams } from "next/navigation";
 import AboutAlley from '@/app/_components/garden/alley/AboutAlley';
 
-// import FamousPeople from '@/app/_components/garden/alley/FamousPeople';
-// import TreeDescription from '@/app/_components/garden/alley/TreeDescription';
-
-
-
 export default function SingleAlley() {
 
   const { alley } = useParams();
@@ -52,8 +47,3 @@ export default function SingleAlley() {
   </main>
   );
 }
-
-
-              {/* <TreeDescription {...transformedData2} />
-              <FamousPeople famousPeople={alleyData.famousPeople} /> */}
-              {/* <Persons famousPeople={alleyData.famousPeople} /> */}

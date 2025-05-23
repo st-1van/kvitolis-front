@@ -5,6 +5,7 @@ import { TreeVertical } from "@/app/_components/garden/alley/TreeDescription";
 import { useSearchParams } from "next/navigation";
 import { AlleyData } from "@/app/_components/data/AlleyData";
 import { useState, useEffect } from "react";
+import AnimatedOnScroll from "../../ui/AnimatedScroll";
 
 export default function PlantTreeWrapper() {
   const searchParams = useSearchParams();
@@ -40,14 +41,16 @@ export default function PlantTreeWrapper() {
     <main>
       <section className="plantTree">
         <div className="container" style={{ display: 'flex' }}>
-          <div className="row">
-            <TreeVertical {...treeData} />
-            <PlantTreeForm
-              handleAlleyChange={handleAlleyChange}
-              chosenName={chosenName}
-              chosenAlley={selectedAlley.tree.name}
-            />
-          </div>
+          <AnimatedOnScroll animationClass="fade-sides">
+            <div className="row">
+              <TreeVertical {...treeData} />
+              <PlantTreeForm
+                handleAlleyChange={handleAlleyChange}
+                chosenName={chosenName}
+                chosenAlley={selectedAlley.tree.name}
+              />
+            </div>
+          </AnimatedOnScroll>
         </div>
       </section>
     </main>

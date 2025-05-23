@@ -10,6 +10,8 @@ import SeoQoute from "../_components/SeoQoute"
 import Mission from "../_components/garden/Mission";
 import MissionData from "../_components/data/MissionData";
 import PulseMap from "../_components/PulseMap";
+// import SimpleQoute from "../_components/SimpleQoute";
+import Visualisation from "../_components/garden/alley/Visualisation";
 
 const transformedData = AlleyData.map(({ id, tree, title, alleyImg, slug }) => ({
   id:id,
@@ -23,26 +25,29 @@ const transformedData = AlleyData.map(({ id, tree, title, alleyImg, slug }) => (
 export default function Garden() {
   return (
     <main>
-      <section className="mainBanner container fade-in-up">
-        <HeadBanner
-                key={banner.title} 
-                title={banner.title} 
-                desc={banner.desc} 
-                src={banner.src}
-                slug={banner.slug}
-                slug2={banner.slug2}
-                button1={banner.button1}
-                button2={banner.button2}
-                gradient={banner.gradient}
-        />
-      </section>
+        <section className="mainBanner container animate fade-in-up">
+          <HeadBanner
+                  key={banner.title} 
+                  title={banner.title} 
+                  desc={banner.desc} 
+                  src={banner.src}
+                  slug={banner.slug}
+                  slug2={banner.slug2}
+                  button1={banner.button1}
+                  button2={banner.button2}
+                  gradient={banner.gradient}
+          />
+        </section>
         <Mission title='Місія, цілі та цінності' data={MissionData} />
-        <PulseMap />
+
+        {/* <SimpleQoute /> */}
+        <PulseMap title='Алеї українства' desc='12 алей'/>
         {/* <Alleys alleysData={transformedData}/> */}
-        <SeoQoute />
         <Trees treesData={transformedData}/>
+        <Visualisation videoId="FTkth_YF6OM" title="Таким ми бачимо наш Сад"/>
         <Benefits {...benefitsData} />
         <CallToAction {...callToActionData} />
+        <SeoQoute />
         <FAQ {...faqData} />
     </main>
   );

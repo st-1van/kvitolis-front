@@ -1,5 +1,6 @@
 "use client"; 
 import Image from "next/image";
+import AnimatedOnScroll from "../ui/AnimatedScroll";
 
 type BenefitsProps = {
     title: string;
@@ -17,6 +18,7 @@ export default function Benefits({ title, benefits, imgSrc }: BenefitsProps) {
     return (
         <section className="benefits">
             <div className="container">
+                <AnimatedOnScroll animationClass="fade-sides">
                 <div className="row light-green">
                     <Image 
                         className='benefits__img' 
@@ -25,8 +27,9 @@ export default function Benefits({ title, benefits, imgSrc }: BenefitsProps) {
                         height={456}
                         width={650}
                     />
-                    <BenefitsItems title={title} benefits={benefits} type=''/>
+                    <BenefitsItems title={title} benefits={benefits} type=''/> 
                 </div>
+                </AnimatedOnScroll>
             </div>
         </section>
     );

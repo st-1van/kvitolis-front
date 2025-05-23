@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import AnimatedOnScroll from "../ui/AnimatedScroll";
 
 type FAQProps = {
   title: string;
@@ -20,6 +21,7 @@ export default function FAQ({ title, qa }: FAQProps) {
 
   return (
     <section className="FAQ">
+      <AnimatedOnScroll animationClass="fade-sides">
       <div className="container">
         <div className="FAQ__title">
           <h2>{title}</h2>
@@ -41,6 +43,7 @@ export default function FAQ({ title, qa }: FAQProps) {
           ))}
         </div>
       </div>
+      </AnimatedOnScroll>
     </section>
   );
 }

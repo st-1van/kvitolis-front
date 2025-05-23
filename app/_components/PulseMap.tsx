@@ -40,7 +40,14 @@ function useResponsiveRadius(): number {
   return radius;
 }
 
-export default function PulseMap() {
+
+interface PulseMapProps {
+    title?:string,
+    desc?:string,
+  }
+
+
+export default function PulseMap({title, desc}:PulseMapProps) {
   const [active, setActive] = useState<Alley | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const radius = useResponsiveRadius();
@@ -92,10 +99,12 @@ export default function PulseMap() {
   }, [active]);
 
   return (
+    <section id='alleysMap'>
     <div className="pulseMap" ref={containerRef}>
       <div className="pulseMap__title container">
         <div className="content">
-          <h2>Мапа території</h2>
+          <p>{desc||''}</p>
+          <h2>{title||''}</h2>
         </div>
       </div>
 
@@ -106,10 +115,10 @@ export default function PulseMap() {
 
         <div className={`dark-overlay ${active ? 'active' : ''}`} />
 
-        {/* <div className={`pulseMap__info-box ${active ? 'visible' : ''}`}>
+        <div className={`pulseMap__info-box ${active ? 'visible' : ''}`}>
           <h5>{active?.title}</h5>
           <p>{active?.desc || 'Короткий опис локації'}</p>
-        </div> */}
+        </div>
 
         <div className="pulseMap__boobles">
           {AlleyData.map((alley, index) => (
@@ -156,5 +165,6 @@ export default function PulseMap() {
         </div>
       </div>
     </div>
+    </section>
   );
 }
