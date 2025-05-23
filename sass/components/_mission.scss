@@ -59,7 +59,7 @@
 
     &__answer.desc{
       width: 50%;
-      background-color: rgb(235, 235, 235);
+      background-color: variables.$light-green;
       border-radius: 2.75rem;
       padding: 2rem 4rem;
       p {
