@@ -4,8 +4,8 @@ import Link from "next/link";
 
 interface HeadBannerProps {
   title: string;
-  src: string;
-  desc: string;
+  src?: string;
+  desc?: string;
   slug?: string;
   button1?:string;
   slug2?: string;
@@ -17,19 +17,19 @@ export default function HeadBanner({ title, src, desc, slug, slug2, button1, but
   return (
     <div 
       className={`headBanner headBanner--${gradient}`} 
-      style={{ backgroundImage: `url(${src})` }}
+      style={{ backgroundImage: `url(${src||'/assets/default-slide.png'})` }}
     >
       <div className="headBanner__overlay"></div>
       <div className="headBanner__content">
         <h1 className="headBanner__headline">{title}</h1>
-        <p className="headBanner__description">{desc}</p>
+        <p className="headBanner__description">{desc||''}</p>
         <div>
-          {src && (
+          {(button1 && slug) && (
             <Link href={slug || '#'}>
               <button className="btn btn--medium btn--green">{ button1 || `Більше`}</button>
             </Link>
           )}
-          {(src && slug2) && (
+          {(button2 && slug2) && (
             <Link href={slug2 || '#'}>
               <button className="btn btn--medium btn--outlined">{ button2 || `Більше`}</button>
             </Link>
