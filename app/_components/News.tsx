@@ -20,7 +20,7 @@ type NewsItemProps = {
 const news: NewsItemProps[] = [
   {
     title: "Сезон лаванди у квітолісі",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. фффффффф ффффффф ффффффффффф ффффффф",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     date: "14.02.2025",
     src: "/assets/news/news-1.jpg",
     slug: "/news/1",
@@ -42,6 +42,7 @@ const news: NewsItemProps[] = [
 ];
 
 export default function News({ title, desc }: NewsProps) {
+  //get request for last 3 news
   return (
     <section className="news">
       <div className="container">
