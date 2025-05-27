@@ -32,10 +32,12 @@ a {
   text-decoration: none;
   -webkit-text-fill-color: inherit !important;
 
-  &:hover,
+  &:hover{
+    text-decoration: none;
+    color: variables.$fiolet !important;
+  }
   &:focus {
     text-decoration: none;
-    color: variables.$purple !important;
   }
 }
 
