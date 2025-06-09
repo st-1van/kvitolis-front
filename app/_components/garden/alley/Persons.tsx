@@ -1,6 +1,6 @@
 "use client"; 
 import { Shovel, TreeDeciduous } from "lucide-react";
-import Image from "next/image";
+// import Image from "next/image";
 import { useModal } from "../../context/modal-context";
 import Link from "next/link";
 
@@ -91,15 +91,16 @@ export type PersonsProps = {
   
   function PersonCard({ item }: { item: DataProps }) {
     const { name, photo, desc, free, mecenat } = item;
+    const imgUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${photo.formats.thumbnail.url}`
   
     return (
       <div className='persons__card' key={name}>
-        <Image
+        <img
           className="persons__img"
-          src={photo}
+          src={imgUrl}
           alt={name}
-          height={202}
-          width={202}
+          height='202'
+          width='202'
         />
         <div className="persons__text">
           <div>

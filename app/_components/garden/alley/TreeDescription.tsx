@@ -47,12 +47,12 @@ export function TreeVertical (props: TreeDescProps) {
 
     return (
                 <div className="treeDescription grey vertical">
-                    <Image 
+                    <img 
                         className='treeDescription__img' 
-                        src={src} 
+                        src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${src}`}
                         alt={`фото-${name}`}
-                        height={517}
-                        width={624}
+                        height='517'
+                        width='624'
                     />
                     <div className="treeDescription__content">
                         <h2>{name}</h2>

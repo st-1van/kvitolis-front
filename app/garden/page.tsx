@@ -1,6 +1,5 @@
 import HeadBanner from "../_components/HeadBanner";
 import { banner, benefitsData, callToActionData, faqData } from '../_components/data/Garden';
-import { AlleyData } from '../_components/data/AlleyData';
 // import Alleys from "../_components/garden/Alleys";
 import Benefits from "../_components/garden/Benefits";
 import CallToAction from "../_components/garden/CallToAction";
@@ -13,14 +12,6 @@ import PulseMap from "../_components/PulseMap";
 // import SimpleQoute from "../_components/SimpleQoute";
 import Visualisation from "../_components/garden/alley/Visualisation";
 
-const transformedData = AlleyData.map(({ id, tree, title, alleyImg, slug }) => ({
-  id:id,
-  title: title,
-  tree: tree.name,
-  alleyImg,
-  treeImg:tree.img,
-  slug,
-}));
 
 export default function Garden() {
   return (
@@ -43,7 +34,7 @@ export default function Garden() {
         {/* <SimpleQoute /> */}
         <PulseMap title='Алеї українства' desc='12 алей'/>
         {/* <Alleys alleysData={transformedData}/> */}
-        <Trees treesData={transformedData}/>
+        <Trees />
         <Visualisation videoId="FTkth_YF6OM" title="Таким ми бачимо наш Сад"/>
         <Benefits {...benefitsData} />
         <CallToAction {...callToActionData} />

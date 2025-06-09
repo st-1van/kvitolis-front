@@ -1,22 +1,68 @@
 "use client";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link"
 import { MasonryBlock } from "./MasonaryBlock";
 import AnimatedOnScroll from "../ui/AnimatedScroll";
 
+import { fetchAPI } from "../../../utils/fetch-api";
+import { useState, useEffect, useCallback } from "react";
+
+import { CircularProgress } from "@mui/material";
+
 type AlleyItemProps = {
   id:string;
-  title: string;
-  tree: string;
+  name: string;
+  treeName: string;
   treeImg: string;
   slug?: string;
 };
 
-type TreesDataProps = {
-  treesData: AlleyItemProps[];
-};
 
-export default function Trees({ treesData }: TreesDataProps) {
+
+export default function Trees() {
+
+  const [meta, setMeta] = useState<Meta | undefined>();
+  const [data, setData] = useState<any>([]);
+  const [isLoading, setLoading] = useState(true);
+
+
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+      const path = `/alleys-col`;
+      //замінити параметр порядку
+      const urlParamsObject = {
+        sort: { id: "desc" },
+        populate: {
+          tree: {
+            populate: ['img']
+          },
+        }
+      };
+      const options = { headers: { Authorization: `Bearer ${token}` } };
+      const responseData = await fetchAPI(path, urlParamsObject, options);
+
+      setData(responseData.data);
+      setMeta(responseData.meta);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  const formatedData = data.map(({ id, name, tree, slug }) => ({
+    id,
+    name,
+    treeImg: tree.img.formats.large.url,
+    treeName: tree.name,
+    slug,
+  }));
 
   return (
     <section className="trees">
@@ -29,22 +75,25 @@ export default function Trees({ treesData }: TreesDataProps) {
               </p>
           </div>
         </AnimatedOnScroll>
-        <MasonryBlock data={treesData} Card={TreeCard} />
+        {isLoading?<CircularProgress/>:<MasonryBlock data={formatedData} Card={TreeCard} />}
+        
       </div>
     </section>
   );
 }
 
-function TreeCard({ title, tree, treeImg, slug }: AlleyItemProps) {
+function TreeCard({ treeName, treeImg, slug }: AlleyItemProps) {
+
   return (
     <AnimatedOnScroll animationClass="fade-in-up">
       <div className="tree">
         <div className="tree__img">
-          {treeImg && <Image  src={treeImg} alt={title} width={394} height={400} />}
+          {/* на проді замінити на Image */}
+          {treeImg && <img  src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${treeImg}`} alt={treeName} width='394' height='400' />}
         </div>
         <div className="tree__text">
-          <p className="tree__name">{tree}</p>
-          <p>{title}</p>
+          <p className="tree__name">{treeName}</p>
+          <p>{treeName}</p>
         </div>
         <Link href={`/garden/${slug}`} >
             <button className="btn btn--medium btn--green">
