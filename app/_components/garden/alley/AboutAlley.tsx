@@ -4,23 +4,38 @@ import { useState, useEffect, useCallback } from "react";
 import { TreeVertical } from '@/app/_components/garden/alley/TreeDescription';
 import Persons from '@/app/_components/garden/alley/Persons';
 import type { TreeDescProps } from '@/app/_components/garden/alley/TreeDescription';
-import type { PersonsProps } from '@/app/_components/garden/alley/Persons';
+import type { DataProps } from '@/app/_components/garden/alley/Persons';
 import AnimatedOnScroll from '../../ui/AnimatedScroll';
 
 import { fetchAPI } from "../../../../utils/fetch-api";
 
+type TreeData = {
+  tree: {
+    name: string;
+    desc: string;
+    img: {
+      formats: {
+        large: {
+          url: string;
+        };
+      };
+    };
+    famousPeople:DataProps;
+  };
+};
+
+
 type AboutAlleyProps = {
     treeData: TreeDescProps;
-    personsData: PersonsProps['famousPeople'];
     alleyName:string;
     alleySlug:string;
   };
 
-export default function AboutAlley ({ treeData, personsData, alleyName, alleySlug}: AboutAlleyProps){
+export default function AboutAlley ({ alleyName, alleySlug }: AboutAlleyProps){
   
 
-    const [meta, setMeta] = useState<Meta | undefined>();
-    const [data, setData] = useState<any>([]);
+    // const [meta, setMeta] = useState<Meta | undefined>();
+    const [data, setData] = useState<TreeData[]>([]);
     const [isLoading, setLoading] = useState(true);
 
     const fetchData = useCallback(async () => {
@@ -47,14 +62,15 @@ export default function AboutAlley ({ treeData, personsData, alleyName, alleySlu
         const responseData = await fetchAPI(path, urlParamsObject, options);
 
         setData(responseData.data);
-        setMeta(responseData.meta);
+        // setMeta(responseData.meta);
+        // console.log(responseData.meta);
         
       } catch (error) {
         console.error(error);
       } finally {
         setLoading(false);
       }
-    }, []);
+    }, [alleySlug]);
 
     useEffect(() => {
       fetchData();
@@ -62,16 +78,24 @@ export default function AboutAlley ({ treeData, personsData, alleyName, alleySlu
 
     if(isLoading) return 'loading'; 
 
-
-    const formatedTreeData = {
-      name: data[0].tree.name,
-      desc: data[0].tree.desc,
-      src: data[0].tree.img.formats.large.url,
-      button1: "Посадити дерево",
-      slug: '/garden/plant-tree',
-    }
-
-    
+      const people = data.length > 0
+        ? Array.isArray(data[0].tree.famousPeople)
+          ? data[0].tree.famousPeople
+          : [data[0].tree.famousPeople]
+        : [];
+      const formatedTreeData = data.length > 0 ? {
+        name: data[0].tree.name,
+        desc: data[0].tree.desc,
+        src: data[0].tree.img.formats.large.url,
+        button1: "Посадити дерево",
+        slug: '/garden/plant-tree',
+      }:{
+        name:'',
+        desc:'',
+        src:'',
+        button1: "Посадити дерево",
+        slug: '/garden/plant-tree',
+      }    
 
     
     return(
@@ -81,7 +105,7 @@ export default function AboutAlley ({ treeData, personsData, alleyName, alleySlu
               <div className="row" 
                 style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '1rem'}}>
                 <TreeVertical {...formatedTreeData} />
-                <Persons famousPeople={data[0].famousPeople} alleyName={alleyName}/>
+                <Persons famousPeople={people} alleyName={alleyName}/>
               </div>
             </AnimatedOnScroll>
            </div>

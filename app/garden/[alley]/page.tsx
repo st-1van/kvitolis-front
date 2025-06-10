@@ -40,7 +40,12 @@ export default function SingleAlley() {
   return (
   <main>
               <BannerSlider  {...transformedData} />
-              <AboutAlley treeData={transformedData2} personsData={alleyData.famousPeople} alleyName={alleyData.title} alleySlug={alley}/>
+              <AboutAlley 
+                treeData={transformedData2} 
+                // personsData={alleyData.famousPeople} 
+                alleyName={alleyData.title} 
+                alleySlug={String(alley)}
+              />
               <CallToAction {...callToActionData} />
               <FAQ {...faqData} />
 

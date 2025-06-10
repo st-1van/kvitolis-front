@@ -91,7 +91,7 @@ export type PersonsProps = {
   
   function PersonCard({ item }: { item: DataProps }) {
     const { name, photo, desc, free, mecenat } = item;
-    const imgUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${photo.formats.thumbnail.url}`
+    const imgUrl = photo.startsWith('http') ? photo : `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${photo}`;
   
     return (
       <div className='persons__card' key={name}>

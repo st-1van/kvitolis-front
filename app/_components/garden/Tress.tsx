@@ -17,12 +17,29 @@ type AlleyItemProps = {
   slug?: string;
 };
 
+type Tree = {
+  id: string;
+  name: string;
+  tree: TreeProps;
+  slug: string;
+};
+
+type TreeProps = {
+  name: string;
+  img: {
+    formats: {
+      large: {
+        url: string;
+      };
+    };
+  };
+};
 
 
 export default function Trees() {
 
-  const [meta, setMeta] = useState<Meta | undefined>();
-  const [data, setData] = useState<any>([]);
+  // const [meta, setMeta] = useState<Meta | undefined>();
+  const [data, setData] = useState<Tree[]>([]);
   const [isLoading, setLoading] = useState(true);
 
 
@@ -44,7 +61,7 @@ export default function Trees() {
       const responseData = await fetchAPI(path, urlParamsObject, options);
 
       setData(responseData.data);
-      setMeta(responseData.meta);
+      // setMeta(responseData.meta);
     } catch (error) {
       console.error(error);
     } finally {
@@ -56,7 +73,7 @@ export default function Trees() {
     fetchData();
   }, [fetchData]);
 
-  const formatedData = data.map(({ id, name, tree, slug }) => ({
+  const formatedData = data.map(({ id, name, tree, slug }:Tree) => ({
     id,
     name,
     treeImg: tree.img.formats.large.url,
