@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { AlleyData } from "./data/AlleyData";
+import actualData from "./data/alleyData/actualData";
+
+const AlleyData = actualData
 
 type Alley = {
   title: string;

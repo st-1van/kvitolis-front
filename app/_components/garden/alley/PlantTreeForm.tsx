@@ -2,7 +2,9 @@
 import { useState, useEffect} from "react";
 import { BenefitsItems } from "../Benefits";
 import { benefitsData } from "../../data/Garden";
-import { AlleyData } from "../../data/AlleyData";
+import actualData from "../../data/alleyData/actualData";
+
+const AlleyData = actualData;
 
 export type FormProps = {
   chosenAlley?:string;

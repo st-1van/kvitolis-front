@@ -1,0 +1,111 @@
+[
+  {
+    "id": "1",
+    "title": "Література",
+    "slug": "literature",
+    "alleyImg": "/assets/alleys/alley1.jpg",
+    "alleyBanner": "/assets/banners/alleyBanner.png",
+    "tree": {},
+    "famousPeople": []
+  },
+  {
+    "id": "2",
+    "title": "Музика",
+    "slug": "music",
+    "alleyImg": "/assets/alleys/alley1.jpg",
+    "alleyBanner": "/assets/banners/alleyBanner.png",
+    "tree": {},
+    "famousPeople": []
+  },
+  {
+    "id": "3",
+    "title": "Кіно",
+    "slug": "cinema",
+    "alleyImg": "/assets/alleys/alley1.jpg",
+    "alleyBanner": "/assets/banners/alleyBanner.png",
+    "tree": {},
+    "famousPeople": []
+  },
+  {
+    "id": "4",
+    "title": "Образотворче Мистецтво",
+    "slug": "art",
+    "alleyImg": "/assets/alleys/alley1.jpg",
+    "alleyBanner": "/assets/banners/alleyBanner.png",
+    "tree": {},
+    "famousPeople": []
+  },
+  {
+    "id": "5",
+    "title": "Театр",
+    "slug": "theatre",
+    "alleyImg": "/assets/alleys/alley1.jpg",
+    "alleyBanner": "/assets/banners/alleyBanner.png",
+    "tree": {},
+    "famousPeople": []
+  },
+  {
+    "id": "6",
+    "title": "Архітектура",
+    "slug": "architecture",
+    "alleyImg": "/assets/alleys/alley1.jpg",
+    "alleyBanner": "/assets/banners/alleyBanner.png",
+    "tree": {},
+    "famousPeople": []
+  },
+  {
+    "id": "7",
+    "title": "Спорт",
+    "slug": "sport",
+    "alleyImg": "/assets/alleys/alley1.jpg",
+    "alleyBanner": "/assets/banners/alleyBanner.png",
+    "tree": {},
+    "famousPeople": []
+  },
+  {
+    "id": "8",
+    "title": "Садівництво",
+    "slug": "garding",
+    "alleyImg": "/assets/alleys/alley1.jpg",
+    "alleyBanner": "/assets/banners/alleyBanner.png",
+    "desc": "Ця алея представлена нашими відомими селекціонерами, засновниками садів і парків, дизайнерами і (т.д.). Ці люди присвятили своє життя вивченню законів краси природи і втіленню її у життя нашої країни.",
+    "tree": {},
+    "famousPeople": []
+  },
+  {
+    "id": "9",
+    "title": "Наука і Техніка",
+    "slug": "science",
+    "alleyImg": "/assets/alleys/alley1.jpg",
+    "alleyBanner": "/assets/banners/alleyBanner.png",
+    "tree": {},
+    "famousPeople": []
+  },
+  {
+    "id": "10",
+    "title": "Меценатство",
+    "slug": "mecenats",
+    "alleyImg": "/assets/alleys/alley1.jpg",
+    "alleyBanner": "/assets/banners/alleyBanner.png",
+    "tree": {},
+    "famousPeople": []
+  },
+  {
+    "id": "11",
+    "title": "Провідники Нації",
+    "slug": "society",
+    "alleyImg": "/assets/alleys/alley1.jpg",
+    "alleyBanner": "/assets/banners/alleyBanner.png",
+    "tree": {},
+    "famousPeople": []
+  },
+  {
+    "id": "12",
+    "title": "Релігія і Філософія",
+    "slug": "religion",
+    "alleyImg": "/assets/alleys/alley1.jpg",
+    "alleyBanner": "/assets/banners/alleyBanner.png",
+    "tree": {},
+    "famousPeople": []
+  }
+]

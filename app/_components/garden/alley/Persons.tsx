@@ -7,9 +7,10 @@ import Link from "next/link";
 export type DataProps = {
   id: string;
   name: string;
-  photo: string;
+  photo?: string;
   desc?: string;
-  free: boolean;
+  years?:string;
+  free?: boolean;
   date?: string;
   mecenat?: string;
 };
@@ -34,15 +35,19 @@ export type PersonsProps = {
                 <div key={item.id} className="item">
                   <div>
                     <p className="sub">{item.name}</p>
-                    <p className="persons__info">{item.desc}</p>
-                    <button
+                    <p className="persons__info">{item.years||item.desc}</p>
+                   
+                    {/* приховую кнопку, доки не додадуть нормально фоток */}
+
+                    {/* <button
                       className="btn btn--minimal"
                       onClick={() => showModal(<PersonCard item={item} />)}
                     >
                       дізнатися більше
-                    </button>
+                    </button> */}
                   </div>
-                  {item.free ? 
+                  {/* коли підключиться адмінка  змінити стан item.free */}
+                  {!item.free ? 
                   <Link href={`/garden/plant-tree?name=${item.name}&alleyName=${alleyName}`} >
                     <button className={`status --free`}>
                         посадити 
@@ -96,7 +101,7 @@ export type PersonsProps = {
       <div className='persons__card' key={name}>
         <Image
           className="persons__img"
-          src={photo}
+          src={photo ?? '/assets/people/people1.png'}
           alt={name}
           height={202}
           width={202}

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { AlleyData } from '../../../_components/data/AlleyData'
+import actualData from "../../../_components/data/alleyData/actualData";
 import { useRouter } from "next/navigation";
 
 interface BannerSliderProps {
@@ -12,6 +12,7 @@ interface BannerSliderProps {
   button1?:string;
   gradient: string; 
 }
+const AlleyData = actualData;
 
 export default function BannerSlider(props: BannerSliderProps) {
   const { id, title, src, desc, slug, button1, gradient } = props;

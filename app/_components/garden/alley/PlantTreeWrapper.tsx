@@ -3,9 +3,12 @@
 import PlantTreeForm from "@/app/_components/garden/alley/PlantTreeForm";
 import { TreeVertical } from "@/app/_components/garden/alley/TreeDescription";
 import { useSearchParams } from "next/navigation";
-import { AlleyData } from "@/app/_components/data/AlleyData";
 import { useState, useEffect } from "react";
 import AnimatedOnScroll from "../../ui/AnimatedScroll";
+
+import actualData from "../../data/alleyData/actualData";
+
+const AlleyData = actualData;
 
 export default function PlantTreeWrapper() {
   const searchParams = useSearchParams();

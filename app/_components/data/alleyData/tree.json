@@ -1,0 +1,86 @@
+[
+  {
+    "Назва алеї": "Література",
+    "id": "1",
+    "name": "Ясен звичайний",
+    "desc": "Fraxinus excelsior 'Atlas'",
+    "img": "/assets/trees/Ясен-звичайний-‘Atlas’-—-Fraxinus-excelsior-‘Atlas’.png"
+  },
+  {
+    "Назва алеї": "Музика",
+    "id": "2",
+    "name": "Ліквідамбр смолоносний",
+    "desc": "Liquidambar styraciflua 'Worplesdon'",
+    "img": "/assets/trees/Ліквідамбр-смолоносний-‘Worplesdon’-—-Liquidambar-styraciflua-‘Worplesdon’.png"
+  },
+  {
+    "Назва алеї": "Кіно",
+    "id": "3",
+    "name": "Дуб червоний",
+    "desc": "Quercus rubra",
+    "img": "/assets/trees/Дуб-червоний-—-Quercus-rubra.png"
+  },
+  {
+    "Назва алеї": "Образотворче Мистецтво",
+    "id": "4",
+    "name": "Платан",
+    "desc": "Platanus × acerifolia",
+    "img": "/assets/trees/meye_acer-platanoides_S8757.png"
+  },
+  {
+    "Назва алеї": "Театр",
+    "id": "5",
+    "name": "Клен гостролистий",
+    "desc": "Acer platanoides 'Royal Red'",
+    "img": "/assets/trees/Клен гостролистий ‘Royal Red’ — Acer platanoides ‘Royal Red’.png"
+  },
+  {
+    "Назва алеї": "Архітектура",
+    "id": "6",
+    "name": "Клен червоний",
+    "desc": "Acer rubrum 'October Glory'",
+    "img": "/assets/trees/Клен-червоний-‘October-Glory’-—-Acer-rubrum-‘October-Glory’.png"
+  },
+  {
+    "Назва алеї": "Спорт",
+    "id": "7",
+    "name": "Гінкго білоба",
+    "desc": "Ginkgo biloba",
+    "img": "/assets/trees/Гінкго-білоба-—-Ginkgo-biloba.png"
+  },
+  {
+    "Назва алеї": "Садівництво",
+    "id": "8",
+    "name": "Клен гостролистий",
+    "desc": "Acer platanoides 'Drummondii'",
+    "img": "/assets/trees/Клен-гостролистий-‘Drummondii’-—-Acer-platanoides-‘Drummondii’-02.png"
+  },
+  {
+    "Назва алеї": "Наука і Техніка",
+    "id": "9",
+    "name": "Клен фрімана",
+    "desc": "Sorbus commixta 'Dodong'",
+    "img": "/assets/trees/Горобина.png"
+  },
+  {
+    "Назва алеї": "Меценатство",
+    "id": "10",
+    "name": "Бук лісовий",
+    "desc": "Fagus sylvatica 'Tricolor'",
+    "img": "/assets/trees/Бук-лісовий--Fagus-sylvatica-‘Tricolor’.png"
+  },
+  {
+    "Назва алеї": "Провідники Нації",
+    "id": "11",
+    "name": "Граб звичайний",
+    "desc": "Carpinus betulus 'Fastigiata'",
+    "img": "/assets/trees/Граб-звичайний-‘Fastigiata’-—-Carpinus-betulus-‘Fastigiata’.png"
+  },
+  {
+    "Назва алеї": "Релігія і Філософія",
+    "id": "12",
+    "name": "Липа європейська",
+    "desc": "Tilia × europaea 'Pallida'",
+    "img": "/assets/trees/Липа європейська ‘Pallida’ — Tilia europaea ‘Pallida.png"
+  }
+]

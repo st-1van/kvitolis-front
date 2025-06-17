@@ -1,7 +1,5 @@
 import HeadBanner from "../_components/HeadBanner";
 import { banner, benefitsData, callToActionData, faqData } from '../_components/data/Garden';
-import { AlleyData } from '../_components/data/AlleyData';
-// import Alleys from "../_components/garden/Alleys";
 import Benefits from "../_components/garden/Benefits";
 import CallToAction from "../_components/garden/CallToAction";
 import FAQ from "../_components/garden/FAQ";
@@ -10,10 +8,12 @@ import SeoQoute from "../_components/SeoQoute"
 import Mission from "../_components/garden/Mission";
 import MissionData from "../_components/data/MissionData";
 import PulseMap from "../_components/PulseMap";
-// import SimpleQoute from "../_components/SimpleQoute";
 import Visualisation from "../_components/garden/alley/Visualisation";
+import actualData from "../_components/data/alleyData/actualData";
 
-const transformedData = AlleyData.map(({ id, tree, title, alleyImg, slug }) => ({
+const alleyData = actualData;
+
+const transformedData = alleyData.map(({ id, tree, title, alleyImg, slug }) => ({
   id:id,
   title: title,
   tree: tree.name,
