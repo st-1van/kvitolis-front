@@ -117,10 +117,10 @@ export default function PulseMap({title, desc}:PulseMapProps) {
 
         <div className={`dark-overlay ${active ? 'active' : ''}`} />
 
-        <div className={`pulseMap__info-box ${active ? 'visible' : ''}`}>
+        {/* <div className={`pulseMap__info-box ${active ? 'visible' : ''}`}>
           <h5>{active?.title}</h5>
           <p>{active?.desc || 'Короткий опис локації'}</p>
-        </div>
+        </div> */}
 
         <div className="pulseMap__boobles">
           {AlleyData.map((alley, index) => (

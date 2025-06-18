@@ -13,13 +13,13 @@ import actualData from "../_components/data/alleyData/actualData";
 
 const alleyData = actualData;
 
-const transformedData = alleyData.map(({ id, tree, title, alleyImg, slug }) => ({
+const transformedData = alleyData.map(({ id, tree, title, slug, priority }) => ({
   id:id,
   title: title,
   tree: tree.name,
-  alleyImg,
   treeImg:tree.img,
   slug,
+  priority
 }));
 
 export default function Garden() {
@@ -39,10 +39,7 @@ export default function Garden() {
           />
         </section>
         <Mission title='Місія, цілі та цінності' data={MissionData} />
-
-        {/* <SimpleQoute /> */}
         <PulseMap title='Алеї українства' desc='12 алей'/>
-        {/* <Alleys alleysData={transformedData}/> */}
         <Trees treesData={transformedData}/>
         <Visualisation videoId="FTkth_YF6OM" title="Таким ми бачимо наш Сад"/>
         <Benefits {...benefitsData} />

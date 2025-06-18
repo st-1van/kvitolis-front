@@ -8,7 +8,7 @@ type MasonryBlockProps<T> = {
     Card: React.ComponentType<T & { index: number }>;
   };
   
-export function MasonryBlock<T extends { id: string }>({ data, Card }: MasonryBlockProps<T>) {
+export function MasonryBlock<T extends { id: string, priority:string }>({ data, Card }: MasonryBlockProps<T>) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const scrollbarThumbRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -99,9 +99,11 @@ export function MasonryBlock<T extends { id: string }>({ data, Card }: MasonryBl
         <div className="masonary">
             <div className="masonary__wrapper">
             <div className={`masonary__items row ${isShowed ? '--showed' : ''} `} ref={scrollContainerRef}>
-                {data.map((card, index) => (
-                    <Card key={card.id} {...card} index={index} />
-                ))}
+                  {data
+                    .sort((a, b) => Number(a.priority) - Number(b.priority))
+                    .map((card, index) => (
+                      <Card key={card.id} {...card} index={index} />
+                  ))}
             </div>
             </div>
 
@@ -110,13 +112,13 @@ export function MasonryBlock<T extends { id: string }>({ data, Card }: MasonryBl
 
             <div className={`masonary__scrollbar ${isShowed ? '--hide' : ''}`}>
                 <div
-                ref={scrollbarThumbRef}
-                className={`masonary__scrollbar-thumb ${isDragging ? "active" : ""}`}
-                onMouseDown={handleMouseDown}
-                style={{
-                    width: `${scrollbarWidth}%`,
-                    left: `${scrollThumbLeft}%`,
-                }}
+                  ref={scrollbarThumbRef}
+                  className={`masonary__scrollbar-thumb ${isDragging ? "active" : ""}`}
+                  onMouseDown={handleMouseDown}
+                  style={{
+                      width: `${scrollbarWidth}%`,
+                      left: `${scrollThumbLeft}%`,
+                  }}
                 ></div>
             </div>
 

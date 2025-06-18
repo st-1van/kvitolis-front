@@ -5,11 +5,12 @@ import { MasonryBlock } from "./MasonaryBlock";
 import AnimatedOnScroll from "../ui/AnimatedScroll";
 
 type AlleyItemProps = {
-  id:string;
+  id: string;
   title: string;
   tree: string;
   treeImg: string;
   slug?: string;
+  priority: string;
 };
 
 type TreesDataProps = {

@@ -11,6 +11,7 @@ type FamousPerson = {
     free: boolean;
     date?: string;
     mecenat?: string;
+    priority:string;
   };
   
   type FamousPeopleProps = {

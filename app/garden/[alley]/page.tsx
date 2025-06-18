@@ -23,7 +23,7 @@ export default function SingleAlley() {
     desc: alleyData.desc ?? '',
     gradient: 'light',
     tree: alleyData.tree.name,
-    src: alleyData.alleyBanner ?? "/assets/banners/alleyBanner.png",
+    src: "/assets/banners/visual/Клумба-Люпин-01.jpg",
     slug: '/garden/plant-tree',
     button1: "Посадити дерево",
   };
