@@ -28,10 +28,10 @@ export default function SeoQoute (){
                     </div>
                     <div className="qoute__ceo">
                         <Image
-                            src='/assets/ceo.png' 
+                            src='/assets/ceo2.png' 
                             alt='seo'
-                            width={722} 
-                            height={629} 
+                            width={598} 
+                            height={639} 
                         />
                     </div>
                     <div className="qoute__background  green"></div>

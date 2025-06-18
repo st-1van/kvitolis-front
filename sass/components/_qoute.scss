@@ -10,12 +10,13 @@
 
   .content {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     position: relative;
     padding-right: 0;
     .col{
       position: relative;
       z-index: 2;
+      padding: 2.75rem 1rem;
     }
   }
 
@@ -62,8 +63,14 @@
       position: relative;
       z-index: 2;
       margin-top: -50px;
-      width: 45.125rem;
-      height: 39.3125rem;
+      width: 37.375rem;
+      height: 39.9rem;
+    }
+  }
+
+  @media screen and (max-width: 1025px){
+    img{
+        margin-top: 0;
     }
   }
 
