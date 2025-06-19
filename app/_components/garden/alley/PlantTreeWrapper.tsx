@@ -32,6 +32,7 @@ export default function PlantTreeWrapper() {
     name: selectedAlley.tree.name,
     desc: selectedAlley.tree.desc,
     src: selectedAlley.tree.img,
+    latin: selectedAlley.tree.latin,
     button1: "Посадити дерево",
   };
 

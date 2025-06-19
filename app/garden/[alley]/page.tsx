@@ -32,6 +32,7 @@ export default function SingleAlley() {
     name:alleyData.tree.name,
     desc:alleyData.tree.desc,
     src: alleyData.tree.img,
+    latin:alleyData.tree.latin,
     button1: "Посадити дерево",
     slug: '/garden/plant-tree',
   }
