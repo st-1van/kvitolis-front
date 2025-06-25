@@ -15,6 +15,7 @@
     border-radius: 20px;
     max-width: 368px;
     gap: 30px;
+    width: 100%;
     p{
         max-width: 156px;
     }
@@ -23,9 +24,6 @@
       @media screen and (max-width: 481px) {
         .content{
             flex-direction: column;
-        }
-        .data-card{
-            width: 100%;
         }
     }
 
@@ -50,6 +48,7 @@
         max-width: 400px;
         min-height: 270px;
         gap: 60px;
+        width: 100%;
 
         div{
             display: flex;
@@ -63,9 +62,6 @@
     @media screen and (max-width: 481px) {
         .content{
             flex-direction: column;
-        }
-        .cost-card{
-            width: 100%;
         }
     }
 }
