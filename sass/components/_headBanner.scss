@@ -24,10 +24,13 @@
 
     
     &__content {
+      position: relative;
       align-self: flex-start;
-      z-index: 2;
+      z-index: 5;
       font-size: 2rem;
-      padding: 0 9rem;
+      left: 8rem;
+      padding-right: 9rem;
+      padding-left: 1rem;
       max-width: 45%;
     }
     &__description{
@@ -52,12 +55,12 @@
     &__navigation{
       position: absolute;
       top: 0;
-      z-index: 10;
+      z-index:3;
       width: 100%;
       height: 100%;
 
       .arrows {
-            position: relative;
+            position: absolute;
             z-index: 10;
             left: 0;
             width: 100%;
@@ -136,7 +139,7 @@
       color: white;
   
       .headBanner__overlay {
-        background: linear-gradient(90deg, #101916 55%, rgba(16, 25, 22, 0) 100%);
+        background: linear-gradient(90deg, #101916 70%, rgba(16, 25, 22, 0) 100%);
         background-size:80%;
         background-position:left;
         background-repeat: no-repeat;
@@ -147,7 +150,7 @@
       color: black;
   
       .headBanner__overlay {
-        background: linear-gradient(90deg, #ffffff 55%, rgba(244, 242, 239, 0) 100%);
+        background: linear-gradient(90deg, #ffffff 70%, rgba(244, 242, 239, 0) 100%);
         background-size:93%;
         background-position:left;
         background-repeat: no-repeat;
@@ -174,8 +177,7 @@
       background-position: 66% 0%;
 
       &__content {
-        align-self: flex-start;
-        z-index: 2;
+        left:0;
         font-size: 2rem;
         padding: 0 3rem;
         max-width: none;

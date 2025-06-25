@@ -44,7 +44,7 @@ export default function Carousel() {
                     <h1>{CarouselData[currentIndex].title}</h1>
                     <p className="headBanner__description">{CarouselData[currentIndex].desc}</p>
                       {CarouselData[currentIndex].src && (
-                        <Link href={CarouselData[currentIndex].slug || '#'}>
+                        <Link href={CarouselData[currentIndex].slug || '#'} onClick={()=>console.log('click')}>
                           <button className="btn btn--medium btn--green">Дізнатися більше</button>
                         </Link>
                       )}

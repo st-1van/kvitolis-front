@@ -1,4 +1,6 @@
 @use "sass:string";
+@use "variables";
+
 @mixin font-face($name, $path, $weight: normal, $style: normal) {
   @font-face {
     font-family: string.quote($name);
@@ -52,7 +54,14 @@ h5 {
 .sub {
   font-size: 1.5rem;
   line-height: 2rem;
-  font-weight: bold;
+  font-weight: bold !important;
+  &--green{
+    color: variables.$green
+  }
+  @media screen and (max-width: 481px) {
+    font-size: 1.75rem;
+    line-height: 2.5rem;
+  }
 }
 
 p{

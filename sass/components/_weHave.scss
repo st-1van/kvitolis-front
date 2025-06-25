@@ -1,6 +1,11 @@
 .weHave{
     &__title{
-        margin-bottom: 3rem;
+        margin: 0 auto 1.5rem; 
+
+        &.center{
+            text-align: center;
+            max-width: 40%;
+        }
     }
     &__cards{
         display: grid;
@@ -15,6 +20,7 @@
     @media screen and (max-width: 481px) {
         &__title{
             margin-bottom: 5.75rem;
+            max-width: none !important;
         }
 
         &__cards{
@@ -38,8 +44,11 @@
         height: auto;
         max-width: 100%;
         display: block;
-        border-radius: 100px 0rem;
+        border-radius: 6.25rem 0rem;
         object-fit: cover;
+        &.rounded{
+           border-radius: 2.75rem !important; 
+        }
     }
     &__title{
         font-size: 2.27rem;
@@ -49,7 +58,7 @@
                    
             &__img{
                 min-width: 150px;
-                border-radius: 70px 0rem;    
+                border-radius: 4.375rem 0rem;    
 
             }
     }

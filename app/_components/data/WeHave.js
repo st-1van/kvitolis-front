@@ -3,17 +3,17 @@ export const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, se
 export const cards = [
     {
         title:'Фудкорт',
-        desc:'Смачна їжа від учасників подій ',
+        desc:'Cтрави з мангалу, бургери, картопля фрі, прохолодні напої, морозиво, кава та солодощі.',
         src:'/assets/cards/card-1.jpg',
     },
     {
         title:'Розваги',
-        desc:'Описати, що і коли Для дорослих (музичний супровід, баггі) для дітей (батути чи шо там)',
+        desc:'Атракціони для діток та безліч чудових фотозон',
         src:'/assets/cards/card-2.jpg',
     },
     {
         title:'Ярмарок',
-        desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        desc:'Де можна придбати лаванду в горщиках, букетики, лілії і різний крафт',
         src:'/assets/cards/card-3.jpg',
     },
 ]

@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-type CardProps = {
+export type CardProps = {
   title?: string;
   src?: string;
   desc?: string;
@@ -9,16 +9,17 @@ type CardProps = {
 type CardItemProps = {
   card: CardProps;
   index: number;
+  style?: string;
 };
 
-export default function CardItem({ card }: CardItemProps) {
-  const { title, desc, src } = card;
+export default function CardItem({ card, style }: CardItemProps) {
+  const { title, desc, src} = card;
 
   return (
     <div className="card col">
       {src && (
         <Image
-          className="card__img"
+          className={`card__img ${style}`}
           src={src}
           alt={title || "Image"}
           width={394}

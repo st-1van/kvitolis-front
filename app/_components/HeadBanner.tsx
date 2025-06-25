@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { ReactNode } from "react";
 
 interface HeadBannerProps {
   title: string;
   src?: string;
-  desc?: string;
+  desc?: ReactNode;
   slug?: string;
   button1?:string;
   slug2?: string;
