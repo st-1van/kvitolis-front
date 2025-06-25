@@ -41,7 +41,7 @@ export default function Garden() {
         <Mission title='Місія, цілі та цінності' data={MissionData} />
         <PulseMap title='Алеї українства' desc='12 алей'/>
         <Trees treesData={transformedData}/>
-        <Visualisation videoId="FTkth_YF6OM" title="Таким ми бачимо наш Сад"/>
+        <Visualisation videoId="6HhLWZ-VV3w" title="Таким ми бачимо наш Сад"/>
         <Benefits {...benefitsData} />
         <CallToAction {...callToActionData} />
         <SeoQoute />
