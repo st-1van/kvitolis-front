@@ -1,5 +1,5 @@
 export const phones = [
-    '+38 050 000 00 00', '+38 050 000 00 00'
+    '+38 066 470 28 62'
 ]
 export const email = 'kvitolis@gmail.com'
 

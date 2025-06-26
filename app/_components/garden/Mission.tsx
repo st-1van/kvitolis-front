@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import AnimatedOnScroll from "../ui/AnimatedScroll";
+import { ReactNode } from "react";
 
 type MissionProps = {
   title: string;
@@ -9,7 +10,7 @@ type MissionProps = {
 
 type DataProps = {
   name: string;
-  desc: string;
+  desc: ReactNode;
 };
 
 export default function Mission({ title, data }: MissionProps) {
