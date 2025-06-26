@@ -103,16 +103,28 @@ export default function PlantTreeForm({ chosenName, chosenAlley, handleAlleyChan
     setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setSubmitted(true);
-  const validationErrors = validate();
-  setErrors(validationErrors);
+  const [lastSentForm, setLastSentForm] = useState<typeof formData | null>(null);
 
-  if (Object.keys(validationErrors).length === 0) {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+    const validationErrors = validate();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) return;
+
+    // Перевірка на дублікати
+    if (
+      lastSentForm &&
+      JSON.stringify(lastSentForm) === JSON.stringify(formData)
+    ) {
+      console.warn("⛔️ Повторна відправка однакових даних");
+      alert("Ці дані вже були надіслані.");
+      return;
+    }
+
     const { tree, name, email, phone, treeNumber } = formData;
 
-    // Формуємо повідомлення
     const message = `
       <p><strong>Обрана алея:</strong> ${tree}</p>
       <p><strong>Кількість дерев або імена діячів:</strong> ${treeNumber}</p>
@@ -128,7 +140,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         body: JSON.stringify({
           name,
           email,
-          message
+          message,
         }),
       });
 
@@ -136,15 +148,27 @@ const handleSubmit = async (e: React.FormEvent) => {
 
       if (data.success) {
         console.log("✅ Успішно надіслано");
+        alert("✅ Успішно надіслано");
+
+        // Очищаємо форму
+        setFormData({
+          tree: "",
+          name: "",
+          email: "",
+          phone: "",
+          treeNumber: "",
+        });
+
+        // Скидаємо submitted, зберігаємо останню форму
+        setSubmitted(false);
+        setLastSentForm(formData);
       } else {
         console.error("❌ Помилка при відправці", data.error);
       }
     } catch (err) {
       console.error("❌ Сервер не відповідає:", err);
     }
-  }
-};
-
+  };
 
   useEffect(() => {
     if (chosenAlley) {
