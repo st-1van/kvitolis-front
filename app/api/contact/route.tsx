@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   try {
     const data = await resend.emails.send({
       from: 'Хочу бути меценатом Квітолісу <onboarding@resend.dev>', // або власний домен
-      to: ['kvitolis.com.ua@gmail.com'], // куди надсилати
+      to: ['st.ivan.k.k@gmail.com'], // куди надсилати
       subject: `Повідомлення від ${name}`,
       html: `<p><strong>Ім’я:</strong> ${name}</p>
              <p><strong>Email:</strong> ${email}</p>
