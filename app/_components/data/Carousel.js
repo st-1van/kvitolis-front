@@ -20,7 +20,7 @@ export const CarouselData = [
             <p>Запрошуємо відвідати довгоочікуваний фестиваль «Волинська Лавандія»</p>
             <p className="subp sub--green">З 27.06 по 20.07</p>
           </div>,
-        src:'/assets/banners/lavanda-banner.jpg',
+        src:'/assets/banners/lavanda-banner10.jpg',
         slug:'/lavanda',
         gradient:'light'
     },

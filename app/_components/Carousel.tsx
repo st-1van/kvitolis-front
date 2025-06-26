@@ -39,36 +39,24 @@ export default function Carousel() {
                   className={`headBanner carousel-body headBanner--${CarouselData[currentIndex].gradient}`} 
                   style={{ backgroundImage: `url(${CarouselData[currentIndex].src})` }}
                 >
-                  <div className="headBanner__overlay"></div>
-                  <div className="headBanner__content">
+                  <div className={`headBanner__content headBanner__content--${CarouselData[currentIndex].gradient}`}>
                     <h1>{CarouselData[currentIndex].title}</h1>
                     <p className="headBanner__description">{CarouselData[currentIndex].desc}</p>
-                      {CarouselData[currentIndex].src && (
-                        <Link href={CarouselData[currentIndex].slug || '#'} onClick={()=>console.log('click')}>
-                          <button className="btn btn--medium btn--green">Дізнатися більше</button>
-                        </Link>
-                      )}
+                      <div className="headBanner__buttons">
+                        {CarouselData[currentIndex].src && (
+                          <Link href={CarouselData[currentIndex].slug || '#'} onClick={()=>console.log('click')}>
+                            <button className="btn btn--medium btn--green">Дізнатися більше</button>
+                          </Link>
+                        )}
+                        <Arrows prevSlide={prevSlide} nextSlide={nextSlide} />
+                      </div>
+
                   </div>
                 </div>
               </motion.div>
             </AnimatePresence>
             <div className="headBanner__navigation">
-              <div className="arrows">
-                <div className="fade">
-                  <button onClick={prevSlide}
-                    className="arrow left"
-                  >
-                    <Image src="/assets/LeftArrow.svg" alt="arrowLeft" width={35} height={35} />
-                  </button>
-                </div>
-                <div className="fade">
-                  <button onClick={nextSlide}
-                    className="arrow right"
-                  >
-                    <Image src="/assets/RightArrow.svg" alt="arrowRight" width={35} height={35} />
-                  </button>
-                </div>
-              </div>
+              <Arrows prevSlide={prevSlide} nextSlide={nextSlide} />
               <div className='headBanner__pagination'>
                 {CarouselData.map((_, idx) => (
                   <div
@@ -83,4 +71,30 @@ export default function Carousel() {
         </div>
     </section>
   );
+}
+
+type ArrowsProps = {
+  prevSlide: () => void;
+  nextSlide: () => void;
+};
+
+function Arrows({ prevSlide, nextSlide }: ArrowsProps){
+  return(
+        <div className="arrows">
+        <div className="fade">
+          <button onClick={prevSlide}
+            className="arrow left"
+          >
+            <Image src="/assets/LeftArrow.svg" alt="arrowLeft" width={35} height={35} />
+          </button>
+        </div>
+        <div className="fade">
+          <button onClick={nextSlide}
+            className="arrow right"
+          >
+            <Image src="/assets/RightArrow.svg" alt="arrowRight" width={35} height={35} />
+          </button>
+        </div>
+      </div>
+  )
 }

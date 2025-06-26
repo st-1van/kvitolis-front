@@ -20,8 +20,7 @@ export default function HeadBanner({ title, src, desc, slug, slug2, button1, but
       className={`headBanner headBanner--${gradient}`} 
       style={{ backgroundImage: `url(${src||'/assets/default-slide.png'})` }}
     >
-      <div className="headBanner__overlay"></div>
-      <div className="headBanner__content">
+      <div className={`headBanner__content headBanner__content--${gradient}`}>
         <h1 className="headBanner__headline">{title}</h1>
         <p className="headBanner__description">{desc||''}</p>
         <div>

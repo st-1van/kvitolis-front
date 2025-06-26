@@ -41,8 +41,7 @@ export default function BannerSlider(props: BannerSliderProps) {
             className={`headBanner bannerSlider-body headBanner--${gradient}`} 
             style={{ backgroundImage: `url(${src})` }}
           >
-            <div className="headBanner__overlay"></div>
-            <div className="headBanner__content">
+            <div className={`headBanner__content headBanner__content--${gradient}`}>
               <h2 className="headBanner__headline">{title}</h2>
               <p className="headBanner__description">{desc}</p>
               <div>
