@@ -7,7 +7,7 @@ import AnimatedOnScroll from "../ui/AnimatedScroll";
 import { fetchAPI } from "../../../utils/fetch-api";
 import { useState, useEffect, useCallback } from "react";
 
-import { CircularProgress } from "@mui/material";
+import { CircularProgress } from "mui/material";
 
 type AlleyItemProps = {
   id:string;
