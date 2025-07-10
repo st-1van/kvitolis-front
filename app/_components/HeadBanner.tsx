@@ -11,16 +11,17 @@ interface HeadBannerProps {
   button1?:string;
   slug2?: string;
   button2?:string;
-  gradient?: string; 
+  gradient?: string;
+  color: 'green' | 'fiolet';
 }
 
-export default function HeadBanner({ title, src, desc, slug, slug2, button1, button2, gradient }: HeadBannerProps) {
+export default function HeadBanner({ title, src, desc, slug, slug2, button1, button2, gradient, color }: HeadBannerProps) {
   return (
     <div 
       className={`headBanner headBanner--${gradient}`} 
       style={{ backgroundImage: `url(${src||'/assets/default-slide.png'})` }}
     >
-      <div className={`headBanner__content headBanner__content--${gradient}`}>
+      <div className={`headBanner__content headBanner__content--${gradient} color--${color}`}>
         <h1 className="headBanner__headline">{title}</h1>
         <p className="headBanner__description">{desc||''}</p>
         <div>

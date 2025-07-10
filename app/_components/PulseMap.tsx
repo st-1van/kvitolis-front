@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import actualData from "./data/alleyData/actualData";
+import Link from "next/link";
 
 const AlleyData = actualData
 
@@ -11,6 +12,7 @@ type Alley = {
   left: string;
   bottom: string;
   desc?: string;
+  slug?:string,
 };
 
 // Визначення радіуса за шириною вікна
@@ -117,10 +119,15 @@ export default function PulseMap({title, desc}:PulseMapProps) {
 
         <div className={`dark-overlay ${active ? 'active' : ''}`} />
 
-        {/* <div className={`pulseMap__info-box ${active ? 'visible' : ''}`}>
+        <div className={`pulseMap__info-box ${active ? 'visible' : ''}`}>
           <h5>{active?.title}</h5>
           <p>{active?.desc || 'Короткий опис локації'}</p>
-        </div> */}
+          <Link href={`/garden/${active?.slug}`} >
+            <button
+              className="btn btn--medium btn--green"
+            >Дізнатися більше</button>
+          </Link>
+        </div>
 
         <div className="pulseMap__boobles">
           {AlleyData.map((alley, index) => (
@@ -138,6 +145,7 @@ export default function PulseMap({title, desc}:PulseMapProps) {
                   setActive({
                     title: alley.title,
                     desc: alley.desc,
+                    slug: alley.slug,
                     ...getAlleyXY(index),
                   });
                 }}

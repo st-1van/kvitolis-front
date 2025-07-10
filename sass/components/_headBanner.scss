@@ -35,6 +35,7 @@
       padding-bottom: 3rem;
       text-wrap-mode: wrap;
 
+
       &--dark {
         background: linear-gradient(90deg, #101916 50%, rgba(16, 25, 22, 0) 100%);
         background-size:100%;
@@ -51,6 +52,21 @@
     &__description{
         margin-bottom: 3rem;
     }
+
+    .color{
+      &--green{
+        h1{
+          color: variables.$green !important;
+        }
+        
+      }
+      &--fiolet{
+        h1{
+          color: variables.$fiolet !important;
+        }
+        
+      }
+      }
 
     &__buttons{
       .arrows{
@@ -149,10 +165,6 @@
           align-self: flex-start;
           font-size: 2rem;
           padding: 3rem 0;
-          // padding-right: 0px;
-          // padding-left: 0px;
-          // padding-top: 3rem;
-          // padding-bottom: 3rem;
           max-width: 39%;
         }  
 

@@ -26,6 +26,8 @@ export default function PlantTreeWrapper() {
     }
 
     if (name) setChosenName(name);
+    console.log("Selected Alley:", name);
+
   }, [searchParams]);
 
   const treeData = {

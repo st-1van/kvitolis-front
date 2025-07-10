@@ -36,6 +36,7 @@ export default function PlantTreeForm({ chosenName, chosenAlley, handleAlleyChan
 
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
+  console.log("Chosen Alley:", chosenName);
 
   const validate = () => {
     const newErrors: Errors = {};
@@ -210,7 +211,7 @@ export default function PlantTreeForm({ chosenName, chosenAlley, handleAlleyChan
           <input
             type="text"
             name="treeNumber"
-            value={formData.treeNumber || chosenName || ""}
+            value={formData.treeNumber || ""}
             onChange={handleChange}
             placeholder="Кількість дерев або імена діячів"
             required

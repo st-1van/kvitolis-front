@@ -10,7 +10,7 @@ interface BannerSliderProps {
   desc: string;
   slug?: string;
   button1?:string;
-  gradient: string; 
+  gradient: string;
 }
 const AlleyData = actualData;
 

@@ -20,6 +20,7 @@ export type PersonsProps = {
   alleyName:string;
 };
   
+
   export default function Persons({ famousPeople, alleyName }: PersonsProps) {
     
     const { showModal } = useModal();
@@ -47,7 +48,7 @@ export type PersonsProps = {
                     </button> */}
                   </div>
                   {/* коли підключиться адмінка  змінити стан item.free */}
-                  {!item.free ? 
+                  {item.free!==false ? 
                   <Link href={`/garden/plant-tree?name=${item.name}&alleyName=${alleyName}`} >
                     <button className={`status --free`}>
                         посадити 

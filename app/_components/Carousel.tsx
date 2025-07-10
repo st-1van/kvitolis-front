@@ -39,18 +39,17 @@ export default function Carousel() {
                   className={`headBanner carousel-body headBanner--${CarouselData[currentIndex].gradient}`} 
                   style={{ backgroundImage: `url(${CarouselData[currentIndex].src})` }}
                 >
-                  <div className={`headBanner__content headBanner__content--${CarouselData[currentIndex].gradient}`}>
+                  <div className={`headBanner__content headBanner__content--${CarouselData[currentIndex].gradient} color--${CarouselData[currentIndex].color}`}>
                     <h1>{CarouselData[currentIndex].title}</h1>
                     <p className="headBanner__description">{CarouselData[currentIndex].desc}</p>
                       <div className="headBanner__buttons">
                         {CarouselData[currentIndex].src && (
                           <Link href={CarouselData[currentIndex].slug || '#'} onClick={()=>console.log('click')}>
-                            <button className="btn btn--medium btn--green">Дізнатися більше</button>
+                            <button className={`btn btn--medium btn--${CarouselData[currentIndex].color}`}>Дізнатися більше</button>
                           </Link>
                         )}
                         <Arrows prevSlide={prevSlide} nextSlide={nextSlide} />
                       </div>
-
                   </div>
                 </div>
               </motion.div>

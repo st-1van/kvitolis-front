@@ -8,13 +8,12 @@ export const navItems = [
             slug: '/#about'
         },
         {
-            display:'Карта парку',
-            slug: '/#map'
-        },
-
-        {
             display:'Сад Українства',
             slug: '/garden'
+        },
+        {
+            display:'Карта парку',
+            slug: '/#map'
         },
         {
             display:'Контакти',

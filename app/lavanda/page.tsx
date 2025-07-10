@@ -9,11 +9,11 @@ const itemData = {
     title: "Сезон лаванди у Квітолісі відкрито!",
     desc: <div>
             <p>Запрошуємо відвідати довгоочікуваний фестиваль «Волинська Лавандія»</p>
-            <p className="subp sub--green">З 27.06 по 20.07</p>
+            <p className="subp sub--fiolet">З 27.06 по 20.07</p>
           </div>,
     src:'/assets/banners/lavanda-banner1.jpg',
     slug:'/lavanda',
-    gradient:'light'
+    gradient:'light',
   }
  
 export default function SeasonPage() {
@@ -21,7 +21,7 @@ export default function SeasonPage() {
   //get request
   return <main>
         <section className="mainBanner container animate fade-in-up">
-          <HeadBanner {...itemData} />
+          <HeadBanner {...itemData} color="fiolet"/>
         </section>
         <section className="season">
           

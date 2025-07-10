@@ -1,5 +1,5 @@
 import HeadBanner from "../_components/HeadBanner";
-import { banner, benefitsData, callToActionData, faqData } from '../_components/data/Garden';
+import { banner, benefitsData, callToActionData, faqData, qouteData } from '../_components/data/Garden';
 import Benefits from "../_components/garden/Benefits";
 import CallToAction from "../_components/garden/CallToAction";
 import FAQ from "../_components/garden/FAQ";
@@ -36,16 +36,18 @@ export default function Garden() {
                   button1={banner.button1}
                   button2={banner.button2}
                   gradient={banner.gradient}
+                  color='green'
           />
         </section>
-        <Mission title='Місія, цілі та цінності' data={MissionData} />
+        <SeoQoute {...qouteData[1]}/>
+        <Visualisation videoId="EM3RXfKOSoY" title="Місія, цілі та цінності"/>
+        <Mission title='' data={MissionData} />
         <PulseMap title='Алеї українства' desc='12 алей'/>
         <Trees treesData={transformedData}/>
-        <Visualisation videoId="6HhLWZ-VV3w" title="Таким ми бачимо наш Сад"/>
         <Benefits {...benefitsData} />
         <CallToAction {...callToActionData} />
-        <SeoQoute />
+        <SeoQoute {...qouteData[0]}/>
         <FAQ {...faqData} />
     </main>
   );
-} 
+}

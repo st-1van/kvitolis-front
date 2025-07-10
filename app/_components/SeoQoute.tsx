@@ -1,8 +1,15 @@
 import Image from "next/image";
+import { ReactNode } from "react";
 
-const text ='Чому саме сад? Бо дерева надихають. Бо квіти говорять мовою, яку розуміють і старі, й малі. Бо сад — це образ дому, у якому є місце всім: і тендітній лілії, і потужному дубу, що проживе століття, і незламній калині, і траві, що як килим під ногами. Тут кожен знайде своє місце, свій прихисток. І цього ж хочу побажати нашій Україні.'
 
-export default function SeoQoute (){
+interface SeoQouteProps {
+    text: ReactNode;
+    name: string;
+    role: string;
+    img?: string;
+}
+
+export default function SeoQoute ({text, name, role, img}: SeoQouteProps){
     return(
         <section className="qoute">
             <div className="container">
@@ -20,15 +27,15 @@ export default function SeoQoute (){
                             {text}
                         </p>
                         <p className="sub">
-                            Олександр Подзізей
+                            {name}
                         </p>
                         <i>
-                            Засновник парку
+                            {role}
                         </i>
                     </div>
                     <div className="qoute__ceo">
                         <Image
-                            src='/assets/ceo2.png' 
+                            src={img ?? '/assets/ceo2.png'} 
                             alt='seo'
                             width={598} 
                             height={639} 
