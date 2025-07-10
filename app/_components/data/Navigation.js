@@ -21,4 +21,9 @@ export const navItems = [
         },
     ]
 
+export const socilalLinks = {
+        facebook: 'https://www.facebook.com/volynska.holandia/',
+        instagram: 'https://www.instagram.com/volynska.holandia/'
+}
+
 

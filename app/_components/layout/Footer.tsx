@@ -3,6 +3,7 @@ import Image from "next/image";
 import { phones, email, adresse } from "../data/Contacts";
 import GoogleMap from "../data/GoogleMap";
 import Link from "next/link";
+import { socilalLinks } from "../data/Navigation";
 
 export const Footer = ()=>{
     const year = new Date().getFullYear();
@@ -73,12 +74,12 @@ export const Footer = ()=>{
                         <Link href='/'>kvitolis.com.ua ⓒ {year}</Link>
                         <ul>
                             <li>
-                                <a href='#'>
+                                <a href={socilalLinks.facebook}>
                                     facebook
                                 </a>
                             </li>
                             <li>
-                                <a href='#'>
+                                <a href={socilalLinks.instagram}>
                                     instagram
                                 </a>
                             </li>
