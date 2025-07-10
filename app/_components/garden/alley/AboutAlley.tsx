@@ -1,16 +1,21 @@
-import { TreeVertical } from '@/app/_components/garden/alley/TreeDescription';
-import Persons from '@/app/_components/garden/alley/Persons';
+import { TreeVertical, TreeSmallVertical } from '@/app/_components/garden/alley/TreeDescription';
+// import Persons from '@/app/_components/garden/alley/Persons';
 import type { TreeDescProps } from '@/app/_components/garden/alley/TreeDescription';
 import type { PersonsProps } from '@/app/_components/garden/alley/Persons';
 import AnimatedOnScroll from '../../ui/AnimatedScroll';
 
 type AboutAlleyProps = {
     treeData: TreeDescProps;
-    personsData: PersonsProps['famousPeople'];
-    alleyName:string;
+    personsData?: PersonsProps['famousPeople'];
+    alleyName: string;
+    alleyDesc?: string;
   };
 
-export default function AboutAlley ({ treeData, personsData, alleyName }: AboutAlleyProps){
+export default function AboutAlley ({ 
+  treeData, 
+  // personsData, 
+  // alleyName 
+}: AboutAlleyProps){
     
     return(
         <section className='aboutAlley'>
@@ -19,10 +24,30 @@ export default function AboutAlley ({ treeData, personsData, alleyName }: AboutA
               <div className="row" 
                 style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '1rem'}}>
                 <TreeVertical {...treeData} />
-                <Persons famousPeople={personsData} alleyName={alleyName}/>
+                {/* <Persons famousPeople={personsData} alleyName={alleyName}/> */}
               </div>
             </AnimatedOnScroll>
            </div>
       </section>
     )
 }
+
+export function AlleyDescriptionVertical ({ treeData, alleyName, alleyDesc }: AboutAlleyProps) {
+
+
+  return (
+
+        <div className="alleyDescVertical container grey">
+            <div className="column">
+              <div className='alleyDescVertical__content'>
+                <h2>{alleyName}</h2>
+                <p className="desc">
+                  {alleyDesc}
+                </p>
+              </div>
+              <TreeSmallVertical {...treeData} />
+              {/* <Persons famousPeople={personsData} alleyName={alleyName}/> */}
+            </div>
+        </div>
+    )
+  }

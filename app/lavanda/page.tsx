@@ -4,6 +4,9 @@ import HeadBanner from "../_components/HeadBanner"
 import { FoodAndFun } from "../_components/WeHave"
 import Image from "next/image"
 import AnimatedOnScroll from "../_components/ui/AnimatedScroll"
+// import ImageList from '@mui/material/ImageList';
+// import ImageListItem from '@mui/material/ImageListItem';
+
 
 const itemData = {
     title: "Сезон лаванди у Квітолісі відкрито!",
@@ -82,6 +85,9 @@ export default function SeasonPage() {
           </div>
         </section>
         <section className="tickets">
+                    {/* <AnimatedOnScroll animationClass="fade-in-up">
+              <StandardImageList images={photos} />
+            </AnimatedOnScroll> */}
           <div className="container">
             <AnimatedOnScroll animationClass="fade-in-up">
               <div className="text-block center">
@@ -115,17 +121,17 @@ export default function SeasonPage() {
 const data1 = [
     {
         title:'Відпочинок',
-        desc:'Облаштовані зони відпочинку у затінку',
+        desc:'На вас чекають облаштовані зони відпочинку у затінку, затишні лаунж-зони, літнє кафе, бесідки з мангалами на фоні лаванди.',
         src:'/assets/season/lavanda/image.png',
     },
     {
         title:'Класні фото',
-        desc:'Безліч нових тематичних фотозон для ваших неймовірних світлин;',
+        desc:'Ми підготували атмосферні фотозони, де кожен кадр виглядає, як з обкладинки. Лавандове поле це ідеальне місце для love story, сімейного альбому, портретів і просто — магічних спогадів про літо.',
         src:'/assets/season/lavanda/photozone.png',
     },
     {
         title:'Квіти додому',
-        desc:'Зона торгівлі, де можна придбати лаванду в горщиках, букетики, лілії.',
+        desc:'На фестивалі працюють спеціальна локація, де можна придбати різноманітні рослини. Лаванду, букетики, лілії, цибулини та інше.',
         src:'/assets/season/lavanda/image-2.png',
     },
 ]
@@ -147,3 +153,57 @@ const data2 = [
         src:'/assets/season/lavanda/image-4.png',
     },
 ]
+
+// const photos = [
+//     {
+//       src:'/assets/season/lavanda/gallery/img1.jpg',
+//       title: 'Lavender Field',
+//     },
+//     {
+//       src:'/assets/season/lavanda/gallery/img2.jpg',
+//       title: 'Lavender Field1',
+//     },
+//     {
+//       src:'/assets/season/lavanda/gallery/img3.jpg',
+//       title: 'Lavender Field3',
+//     },
+//     {
+//       src:'/assets/season/lavanda/gallery/img4.jpg',
+//       title: 'Lavender Field4',
+//     },
+//     {
+//       src:'/assets/season/lavanda/gallery/img5.jpg',
+//       title: 'Lavender Field5',
+//     },
+
+// ]
+
+
+// type ImageItem = {
+//   src: string;
+//   title: string;
+// };
+
+// function StandardImageList({images}: { images: ImageItem }) {
+//   return (
+//     <ImageList 
+//         // sx={{ width: 500, height: 450 }} 
+//         cols={5} 
+//         rowHeight={500}
+//       >
+//       {images.map((item) => (
+//         <ImageListItem key={item.src} sx={{ position: 'relative', width: '100%', height: '100%' }}>
+//           <Image
+//             src={item.src}
+//             alt={item.title}
+//             // width={164}
+//             // height={164}
+//             fill={true}
+//             style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+//             loading="lazy"
+//             />
+//         </ImageListItem>
+//       ))}
+//     </ImageList>
+//   );
+// }

@@ -42,3 +42,36 @@
         }   
     }
 }
+
+.alleyDescVertical{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 4.2rem 2rem;
+    border-radius: 2.75rem;
+
+    .alleyDescVertical__content{
+        padding: 4.2rem 2rem;
+    }
+
+
+    .treeDescription.vertical{
+        display: flex;
+        flex-direction: row;
+        img{
+            width: 170px !important;
+        }
+    }
+
+    @media screen and (max-width: 769px) {
+        .treeDescription.vertical{
+            display: flex;
+            flex-direction: column;
+            flex-direction: column-reverse;
+            img{
+                width: 120px !important;
+            }
+        }
+    }
+}

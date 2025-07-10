@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
-import PlantTreeWrapper from '@/app/_components/garden/alley/PlantTreeWrapper';
+import ChoseTreeWrapper from '../../_components/garden/choseForm/ChoseTreeWrapper';
 
-export default function Page() {
+export default function chooseTree() {
   return (
     <Suspense fallback={<div>Завантаження...</div>}>
-      <PlantTreeWrapper />
+      <ChoseTreeWrapper />
     </Suspense>
   );
 }

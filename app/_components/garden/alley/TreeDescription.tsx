@@ -47,8 +47,6 @@ export default function TreeDescription(props: TreeDescProps) {
 export function TreeVertical (props: TreeDescProps) {
     const { name, desc, src, latin } = props;
 
-    console.log(latin);
-
     return (
                 <div className="treeDescription grey vertical">
                     <Image 
@@ -66,6 +64,33 @@ export function TreeVertical (props: TreeDescProps) {
                             Ми даємо 100% гарантію, що ваш саджанець роками ростиме на нашій алеї з належним доглядом та турботою
                         </p>
                     </div>
+                </div>
+    );
+    
+}
+
+
+export function TreeSmallVertical (props: TreeDescProps) {
+    const { name, desc, src, latin } = props;
+
+    return (
+                <div className="treeDescription small vertical">
+
+                    <div className="">
+                        <h2>{name}</h2>
+                        <p className="treeDescription__description">{latin}</p>
+                        <p className="treeDescription__description">{desc}</p>
+                        <p className="guarenties">
+                            Ми даємо 100% гарантію, що ваш саджанець роками ростиме на нашій алеї з належним доглядом та турботою
+                        </p>
+                    </div>
+                    <Image 
+                        className='treeDescription__img' 
+                        src={src} 
+                        alt={`фото-${name}`}
+                        height={517}
+                        width={624}
+                    />
                 </div>
     );
     
