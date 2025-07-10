@@ -34,7 +34,7 @@ export const attractions = [
         gradient:'light'
     },
     {
-        title:'Також ви можете провести на Заходи та події',
+        title:'Заходи та події',
         desc:'Семінари, конференції, фотосесії, модні покази, тренінги, майстер-класи',
         src:'/assets/banners/banner-3.jpg',
         // slug:'/#',

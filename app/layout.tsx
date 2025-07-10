@@ -16,7 +16,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "Квітоліс",
-  description: "рекреаційний парк",
+  description: "Простір для сімейного відпочинку, активного дозвілля, фотосесій та гастрономічного релаксу.",
 };
 
 export default function RootLayout({
