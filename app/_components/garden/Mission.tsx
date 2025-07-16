@@ -64,9 +64,7 @@ export default function Mission({ title, data }: MissionProps) {
                   style={{ maxHeight: openIndex === index ? "500px" : "0" }}
                   className="accordion__answer mobile"
                 >
-                  <p>
                     {item.desc}
-                  </p>
                 </div>
               </div>
             ))}
@@ -78,9 +76,7 @@ export default function Mission({ title, data }: MissionProps) {
                 key={index} 
                 className={`${openIndex === index ? "block" : "hidden"}`}
               >
-                <p>
                   {item.desc}
-                </p>
               </div>
             ))}
           
