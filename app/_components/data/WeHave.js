@@ -29,7 +29,7 @@ export const attractions = [
     {
         title:'Сад Українства',
         desc:'Це простір пам’яті й гордості за тих, хто зробив Україну такою, якою ми її знаємо. ',
-        src:'/assets/banners/banner-2.jpg',
+        src:'/assets/banners/gardenBanner.jpg',
         slug:'/garden',
         gradient:'light'
     },

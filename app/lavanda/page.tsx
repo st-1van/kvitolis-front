@@ -12,7 +12,7 @@ const itemData = {
     title: "Сезон лаванди у Квітолісі відкрито!",
     desc: <div>
             <p>Запрошуємо відвідати довгоочікуваний фестиваль «Волинська Лавандія»</p>
-            <p className="subp sub--fiolet">З 27.06 по 20.07</p>
+            <p className="subp sub--fiolet">З 27.06 по 27.07</p>
           </div>,
     src:'/assets/banners/lavanda-banner1.jpg',
     slug:'/lavanda',
@@ -64,7 +64,7 @@ export default function SeasonPage() {
             <AnimatedOnScroll animationClass="fade-in-up">
               <div className="text-block center">
                 <p>чекаємо на вас</p>
-                <h2> з 27 червня по 20 липня</h2>
+                <h2> з 27 червня по 27 липня</h2>
                 <p>
                   Окрім лавандової краси ми здивуємо вас цвітінням 6 тисяч прекрасних лілій та інших літніх квітів, які створять неймовірний тандем на квітковій локації.
                 </p>
@@ -72,13 +72,17 @@ export default function SeasonPage() {
             </AnimatedOnScroll>
             <AnimatedOnScroll animationClass="fade-sides">
               <div className="content">
-                <div className="col col-sm green data-card">
+                {/* <div className="col col-sm green data-card">
                   <Image src='/assets/icons/calendar.svg' width={70} height={61} alt='icon-calendar' />
-                  <p className="subp">з вівторка по неділю</p>
+                  <p className="subp">щодня</p>
+                </div> */}
+                <div className="col col-sm green data-card">
+                  <Image src='/assets/icons/clock.svg' width={65} height={65} alt='icon-clock' />
+                  <p className="subp">Будні:<br/> 10:00 до 20:00</p>
                 </div>
                 <div className="col col-sm green data-card">
                   <Image src='/assets/icons/clock.svg' width={65} height={65} alt='icon-clock' />
-                  <p className="subp">з 10:00 <br/>до 22:00</p>
+                  <p className="subp">Вихідні:<br/> 10:00 до 22:00</p>
                 </div>
               </div>
             </AnimatedOnScroll>
@@ -131,8 +135,8 @@ const data1 = [
     },
     {
         title:'Квіти додому',
-        desc:'На фестивалі працюють спеціальна локація, де можна придбати різноманітні рослини. Лаванду, букетики, лілії, цибулини та інше.',
-        src:'/assets/season/lavanda/image-2.png',
+        desc:'На фестивалі працює спеціальна локація, де можна придбати різноманітні рослини. Лаванду, букетики, лілії, цибулини та інше.',
+        src:'/assets/cards/card-3.jpg',
     },
 ]
 
@@ -144,7 +148,7 @@ const data2 = [
     },
     {
         title:'Розваги',
-        desc:'Для діток — море радості, сміху та безпечних розваг.',
+        desc:'Розваги для дітей і дорослих, гойдалки серед квітів, прогулянки на гольфкарах які подарують яскраві миті. Для малечі — дитячі атракціони, майстер класи, аквагрим та ласощі.',
         src:'/assets/season/lavanda/image-3.png',
     },
     {
