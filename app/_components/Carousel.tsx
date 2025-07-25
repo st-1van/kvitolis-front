@@ -1,11 +1,26 @@
 'use client'
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, ReactNode } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { CarouselData } from './data/Carousel';
 import Image from "next/image";
 
-export default function Carousel() {
+interface SlideDataProps {
+    title:string;
+    desc?: ReactNode;
+    src: string;
+    slug?:string;
+    gradient?:string;
+    color:string;
+    button1?:string;
+  };
+
+interface CarouselDataProps {
+  CarouselData:SlideDataProps[];
+}
+
+
+
+export default function Carousel({CarouselData}:CarouselDataProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const length = CarouselData.length;
 

@@ -4,34 +4,24 @@ import HeadBanner from "../_components/HeadBanner"
 import { FoodAndFun } from "../_components/WeHave"
 import Image from "next/image"
 import AnimatedOnScroll from "../_components/ui/AnimatedScroll"
-// import ImageList from '@mui/material/ImageList';
-// import ImageListItem from '@mui/material/ImageListItem';
+import { banner, data1, data2, photos } from '../_components/data/Lavanda'
+import StandartGallery from "../_components/StandartGallery"
 
 
-const itemData = {
-    title: "Сезон лаванди у Квітолісі відкрито!",
-    desc: <div>
-            <p>Запрошуємо відвідати довгоочікуваний фестиваль «Волинська Лавандія»</p>
-            <p className="subp sub--fiolet">З 27.06 по 27.07</p>
-          </div>,
-    src:'/assets/banners/lavanda-banner1.jpg',
-    slug:'/lavanda',
-    gradient:'light',
-  }
  
 export default function SeasonPage() {
     
   //get request
   return <main>
         <section className="mainBanner container animate fade-in-up">
-          <HeadBanner {...itemData} color="fiolet"/>
+          <HeadBanner {...banner} color="fiolet"/>
         </section>
         <section className="season">
           
           <div className="container">
             <AnimatedOnScroll animationClass="fade-in-up">
               <div className="text-block center">
-                <h2>Волинська лавандія</h2>
+                <h2>Волиньська лавандія</h2>
                 <p>
                   Тут понад 4 га квітучого поля в оточенні прадавнього волинського лісу створюють особливу атмосферу — місце, де хочеться усміхатись, мовчати і просто бути.
                 </p>
@@ -58,6 +48,11 @@ export default function SeasonPage() {
                 />
             </div>
           </div>
+        </section>
+        <section className="gallery">
+            <AnimatedOnScroll animationClass="fade-in-up">
+              <StandartGallery images={photos} />
+            </AnimatedOnScroll>
         </section>
         <section className="date">
           <div className="container">
@@ -89,9 +84,6 @@ export default function SeasonPage() {
           </div>
         </section>
         <section className="tickets">
-                    {/* <AnimatedOnScroll animationClass="fade-in-up">
-              <StandardImageList images={photos} />
-            </AnimatedOnScroll> */}
           <div className="container">
             <AnimatedOnScroll animationClass="fade-in-up">
               <div className="text-block center">
@@ -122,92 +114,4 @@ export default function SeasonPage() {
 }
 
 
-const data1 = [
-    {
-        title:'Відпочинок',
-        desc:'На вас чекають облаштовані зони відпочинку у затінку, затишні лаунж-зони, літнє кафе, бесідки з мангалами на фоні лаванди.',
-        src:'/assets/season/lavanda/image.png',
-    },
-    {
-        title:'Класні фото',
-        desc:'Ми підготували атмосферні фотозони, де кожен кадр виглядає, як з обкладинки. Лавандове поле це ідеальне місце для love story, сімейного альбому, портретів і просто — магічних спогадів про літо.',
-        src:'/assets/season/lavanda/photozone.png',
-    },
-    {
-        title:'Квіти додому',
-        desc:'На фестивалі працює спеціальна локація, де можна придбати різноманітні рослини. Лаванду, букетики, лілії, цибулини та інше.',
-        src:'/assets/cards/card-3.jpg',
-    },
-]
 
-const data2 = [
-    {
-        title:'Фудкорт',
-        desc:'Cтрави з мангалу, бургери, картопля фрі, прохолодні напої, морозиво, кава та солодощі.',
-        src:'/assets/season/lavanda/image-5.png',
-    },
-    {
-        title:'Розваги',
-        desc:'Розваги для дітей і дорослих, гойдалки серед квітів, прогулянки на гольфкарах які подарують яскраві миті. Для малечі — дитячі атракціони, майстер класи, аквагрим та ласощі.',
-        src:'/assets/season/lavanda/image-3.png',
-    },
-    {
-        title:'Жива музика',
-        desc:'Створить затишну атмосферу для відпочинку всією родиною.',
-        src:'/assets/season/lavanda/image-4.png',
-    },
-]
-
-// const photos = [
-//     {
-//       src:'/assets/season/lavanda/gallery/img1.jpg',
-//       title: 'Lavender Field',
-//     },
-//     {
-//       src:'/assets/season/lavanda/gallery/img2.jpg',
-//       title: 'Lavender Field1',
-//     },
-//     {
-//       src:'/assets/season/lavanda/gallery/img3.jpg',
-//       title: 'Lavender Field3',
-//     },
-//     {
-//       src:'/assets/season/lavanda/gallery/img4.jpg',
-//       title: 'Lavender Field4',
-//     },
-//     {
-//       src:'/assets/season/lavanda/gallery/img5.jpg',
-//       title: 'Lavender Field5',
-//     },
-
-// ]
-
-
-// type ImageItem = {
-//   src: string;
-//   title: string;
-// };
-
-// function StandardImageList({images}: { images: ImageItem }) {
-//   return (
-//     <ImageList 
-//         // sx={{ width: 500, height: 450 }} 
-//         cols={5} 
-//         rowHeight={500}
-//       >
-//       {images.map((item) => (
-//         <ImageListItem key={item.src} sx={{ position: 'relative', width: '100%', height: '100%' }}>
-//           <Image
-//             src={item.src}
-//             alt={item.title}
-//             // width={164}
-//             // height={164}
-//             fill={true}
-//             style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-//             loading="lazy"
-//             />
-//         </ImageListItem>
-//       ))}
-//     </ImageList>
-//   );
-// }

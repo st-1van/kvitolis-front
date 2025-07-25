@@ -52,7 +52,8 @@ export const callToActionData = {
         'Ми звʼяжемося з вами і уточнимо деталі',
         'Внесіть свій донат та слідкуйте за новинами Саду',
     ],
-    btn: 'Внести донат'
+    btn: 'Долучитися',
+    slug:'/garden/plant-tree'
 }
 
 export const faqData = {

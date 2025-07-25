@@ -3,12 +3,13 @@ import About from "./_components/About";
 import WeHave from "./_components/WeHave";
 import Carousel from "./_components/Carousel";
 import InterMap3 from "./_components/InterMap3";
+import { CarouselData } from './_components/data/Carousel';
 
 
 export default function Home() {
   return (
   <main>
-        <Carousel />
+        <Carousel CarouselData={CarouselData}/>
         <About />
         <InterMap3 />
         <WeHave />

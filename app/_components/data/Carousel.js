@@ -17,7 +17,7 @@ export const CarouselData = [
     {
         title:'Сезон лаванди у Квітолісі',
         desc:<div>
-            <p>Запрошуємо відвідати довгоочікуваний фестиваль «Волинська Лавандія»</p>
+            <p>Запрошуємо відвідати довгоочікуваний фестиваль «Волиньська Лавандія»</p>
             <p className="subp sub--fiolet">З 27.06 по 27.07</p>
           </div>,
         src:'/assets/banners/lavanda-banner1.jpg',

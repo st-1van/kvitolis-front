@@ -7,9 +7,10 @@ type BenefitsProps = {
     title: string;
     steps: string[];
     btn: string;
+    slug: string;
 };
 
-export default function CallToAction({ title, steps }: BenefitsProps) {
+export default function CallToAction({ title, steps, btn, slug}: BenefitsProps) {
     return (
         <section className="callToAction">
             <AnimatedOnScroll animationClass="fade-left">
@@ -44,9 +45,9 @@ export default function CallToAction({ title, steps }: BenefitsProps) {
                     </div>
 
 
-                    <Link href='/garden/plant-tree'>
+                    <Link href={slug}>
                         <button className="btn btn--medium btn--green">
-                            Долучитися
+                            {btn}
                         </button>
                     </Link>
                 </div>
