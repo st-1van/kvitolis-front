@@ -5,6 +5,7 @@ import { Footer } from "./_components/layout/Footer";
 import { Montserrat } from 'next/font/google'
 import { ScrollLockProvider } from './_components/context/scroll-lock-context';
 import { ModalProvider } from './_components/context/modal-context';
+import { Analytics } from '@vercel/analytics/next';
 
 
 
@@ -39,6 +40,7 @@ export default function RootLayout({
             <Footer/>
           </ModalProvider>
         </ScrollLockProvider>
+        <Analytics />
       </body>
     </html>
   );
