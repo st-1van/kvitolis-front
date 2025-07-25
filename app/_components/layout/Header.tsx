@@ -116,12 +116,12 @@ const Humburger = ({ open, onClose }: BurgerProps) => {
                 ))}
             </div>
             <div className="humburger__socials">
-                <a href="#">
-                    <FacebookIcon type='filled'/>
-                </a>
-                <a href="#">
-                    <InstagramIcon type='filled'/>
-                </a>
+                    <a href={socilalLinks.facebook} target="_blank" rel="noopener noreferrer">
+                        <FacebookIcon type='filled' />
+                    </a>
+                    <a href={socilalLinks.instagram} target="_blank" rel="noopener noreferrer">
+                        <InstagramIcon type='filled' />
+                    </a>
             </div>
         </div>
     );
