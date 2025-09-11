@@ -1,5 +1,6 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useSearchParams } from "next/navigation";
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
@@ -8,6 +9,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 
 import type { FormData, Errors } from './types';
+import { X } from 'lucide-react';
 
 type Person = {
   name: string;
@@ -34,53 +36,86 @@ export default function MultipleSelectChip({
   personsList,
   formData,
   setFormData,
-  // submitted,
-  // errors,
+  submitted,
+  errors,
 }: Props) {
-  const [personName, setPersonName] = useState<string[]>(formData.personList || []);
+  const searchParams = useSearchParams();
+  const queriedNames = searchParams.get('names')?.split(',') || [];
 
   useEffect(() => {
-    setPersonName(formData.personList || []);
-  }, [formData.personList]);
+    if ((!formData.chosenPersons || formData.chosenPersons.length === 0) && queriedNames.length) {
+      setFormData((prev) => ({ ...prev, chosenPersons: queriedNames }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
+  // Всі доступні до вибору (ще не обрані)
+  const availableToAdd = personsList
+    .map(person => person.name)
+    .filter(name => !(formData.chosenPersons || []).includes(name));
+
+  // Зміна обраних (додає тільки нові)
   const handleChange = (event: SelectChangeEvent<string[]>) => {
-    const {
-      target: { value },
-    } = event;
+    const { value } = event.target;
+    const selected = typeof value === 'string' ? value.split(',') : value;
+    // Додаємо тільки ті, котрих ще не було
+    setFormData((prev) => ({
+      ...prev,
+      chosenPersons: [
+        ...(prev.chosenPersons || []),
+        ...selected.filter(name => !(prev.chosenPersons || []).includes(name))
+      ]
+    }));
+  };
 
-    const newValue = typeof value === 'string' ? value.split(',') : value;
-    setPersonName(newValue);
-    setFormData((prev) => ({ ...prev, personList: newValue }));
+  // Видалення одного чіпа
+  const handleDelete = (name: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      chosenPersons: (prev.chosenPersons || []).filter(n => n !== name),
+    }));
   };
 
   return (
     <FormControl sx={{ m: 1, width: '100%', position: 'relative' }}>
+      {(formData.chosenPersons?.length ?? 0) > 0 && (
+        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5, mt: 1, mb: 2 }}>
+          {formData.chosenPersons.map((value) => (
+            <Chip
+              key={value}
+              label={value}
+              onDelete={() => handleDelete(value)}
+              deleteIcon={
+                <X
+                  size={16}
+                  style={{ color: "#888" }}
+                  aria-label={`Видалити ${value}`}
+                />
+              }
+              sx={{ marginRight: "4px" }}
+            />
+          ))}
+        </Box>
+      )}
       <Select
-        id="demo-multiple-chip"
+        id="multiple-chip"
         multiple
         displayEmpty
-        value={personName}
+        value={[]}
         onChange={handleChange}
+        disabled={availableToAdd.length === 0}
         input={<OutlinedInput sx={{ padding: '.625rem 1.25rem' }} />}
-        renderValue={(selected) => {
-          if (selected.length === 0) {
-            return <span style={{ color: '#999' }}>Оберіть діячів</span>;
-          }
-
-          return (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
-            </Box>
-          );
-        }}
+        renderValue={() =>
+          (formData.chosenPersons?.length ?? 0) === 0
+            ? <span style={{ color: "#999" }}>Оберіть діячів</span>
+            : <span style={{ color: "#999" }}>Додати ще діячів</span>
+        }
         MenuProps={MenuProps}
       >
-        {personsList.map((person) => (
+        {availableToAdd.map((name) => (
           <MenuItem
-            key={person.name}
-            value={person.name}
+            key={name}
+            value={name}
             sx={{
               padding: '0.625rem 1.25rem',
               fontFamily: 'Montserrat',
@@ -89,33 +124,15 @@ export default function MultipleSelectChip({
               minHeight: '0px',
             }}
           >
-            {person.name}
+            {name}
           </MenuItem>
         ))}
       </Select>
 
-      {personName.length > 0 && (
-        <button
-          type="button"
-          onClick={() => {
-            setPersonName([]);
-            setFormData((prev) => ({ ...prev, personList: [] }));
-          }}
-          style={{
-            position: 'absolute',
-            right: '25px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            background: 'none',
-            border: 'none',
-            fontSize: '1.2rem',
-            cursor: 'pointer',
-            color: '#999',
-          }}
-          aria-label="Очистити вибране"
-        >
-          очистити
-        </button>
+      {errors.alley && submitted && (
+        <Box sx={{ color: '#e53935', fontSize: '0.875rem', mt: '0.25rem' }}>
+          {errors.alley}
+        </Box>
       )}
     </FormControl>
   );

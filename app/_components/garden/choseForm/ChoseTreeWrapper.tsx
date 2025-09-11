@@ -28,11 +28,10 @@ export default function ChoseTreeWrapper() {
   const searchParams = useSearchParams();
   const [selectedAlley, setSelectedAlley] = useState(AlleyData[0]);
   const [personsList, setPersonsList] = useState<Person[]>(defaultPeople);
-  
+  //додати лоадінг
+  const alleyTitle = searchParams.get("alleyName");
 
   useEffect(() => {
-    const alleyTitle = searchParams.get("alleyName");
-    console.log("Alley Title:", alleyTitle);
 
     if (alleyTitle) {
       const matched = AlleyData.find((a) => a.title === alleyTitle);
@@ -47,10 +46,9 @@ export default function ChoseTreeWrapper() {
         setSelectedAlley(matched);
         setPersonsList(filteredPeople)
       }
-    } 
+    }
 
-
-  }, [searchParams, selectedAlley]);
+  }, [selectedAlley]);
 
   const treeData = {
     name: selectedAlley.tree.name,
@@ -75,9 +73,6 @@ export default function ChoseTreeWrapper() {
     }
   };
 
-
-
-
   return (
     <main>
       <section className="plantTree">
@@ -93,6 +88,7 @@ export default function ChoseTreeWrapper() {
                 handleAlleyChange={handleAlleyChange}
                 chosenAlley={selectedAlley.title}
                 personsList={personsList}
+                queried={alleyTitle !== null}
               />
             </div>
           </AnimatedOnScroll>

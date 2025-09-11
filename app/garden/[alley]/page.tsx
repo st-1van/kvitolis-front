@@ -44,8 +44,8 @@ export default function SingleAlley() {
                 <BannerSlider  {...transformedData} />
                 <TreeDescription {...transformedData2} />
                 <AboutAlley treeData={transformedData2} personsData={alleyData.famousPeople} alleyName={alleyData.title}/>
-                <CallToAction {...callToActionData} />
                 <FAQ {...faqData} />
+                <CallToAction {...callToActionData} />
           </main>
   );
 }

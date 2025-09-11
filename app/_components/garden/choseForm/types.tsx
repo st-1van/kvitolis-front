@@ -5,20 +5,18 @@ export type Alley = {
 
 export type FormData = {
   alley: string;
-  personList: string[];
+  chosenPersons: string[];
   name: string;
   email: string;
   phone: string;
-  treeNumber: string;
 };
 
 export type Errors = {
   alley?: string;
-  treeNumber?: string;
   name?: string;
   email?: string;
   phone?: string;
-  personList?: string;
+  chosenPersons?: string;
 };
 
 export type AlleySelectProps = {
@@ -28,5 +26,6 @@ export type AlleySelectProps = {
   submitted: boolean;
   errors: Errors;
   handleAlleyChange: (newName: string) => void;
+  disabled: boolean;
 };
 

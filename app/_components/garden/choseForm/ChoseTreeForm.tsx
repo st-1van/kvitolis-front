@@ -14,37 +14,34 @@ export type FormProps = {
   chosenAlley?: string;
   personsList?: DataProps[];
   handleAlleyChange: (newName: string) => void;
+  queried: boolean;
 };
 
 type Errors = {
   alley?: string;
-  // treeNumber?: string;
   name?: string;
   email?: string;
   phone?: string;
-  personList?: string;
+  chosenPersons?: string;
 };
 
 const nameRegex = /^[a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ'’\-\s]{1,80}$/u;
 const phoneRegex = /^\+?\d{10,13}$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-// const treeNumberRegex = /^[\d\s,а-яА-ЯёЁіІїЇєЄґҐa-zA-Z'’\-]{1,80}$/u;
 
-export default function ChoseTreeForm({ chosenAlley, personsList, handleAlleyChange }: FormProps) {
+export default function ChoseTreeForm({ chosenAlley, personsList, handleAlleyChange, queried }: FormProps) {
   const [formData, setFormData] = useState<{
     alley: string;
-    personList: string[];
+    chosenPersons: string[];
     name: string;
     email: string;
     phone: string;
-    treeNumber: string;
   }>({
     alley: "",
-    personList: [],
+    chosenPersons: [],
     name: "",
     email: "",
     phone: "",
-    treeNumber: ""
   });
 
   const [errors, setErrors] = useState<Errors>({});
@@ -59,13 +56,9 @@ export default function ChoseTreeForm({ chosenAlley, personsList, handleAlleyCha
       newErrors.alley = "Оберіть алею";
     }
 
-
-    // Tree number validation
-    // if (!formData.treeNumber) {
-    //   newErrors.treeNumber = "Вкажіть кількість дерев або імена діячів";
-    // } else if (!treeNumberRegex.test(formData.treeNumber)) {
-    //   newErrors.treeNumber = "Некоректний формат. Лише букви, цифри, коми, пробіли";
-    // }
+    if(!formData.chosenPersons || formData.chosenPersons.length <= 0){
+      newErrors.chosenPersons = 'Оберіть діячів'
+    }
 
     // Name validation
     if (!formData.name) {
@@ -127,7 +120,6 @@ export default function ChoseTreeForm({ chosenAlley, personsList, handleAlleyCha
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length > 0) return;
-
     // Перевірка на дублікати
     if (
       lastSentForm &&
@@ -138,17 +130,17 @@ export default function ChoseTreeForm({ chosenAlley, personsList, handleAlleyCha
       return;
     }
 
-    const { alley, name, email, phone, personList} = formData;
+    const { alley, name, email, phone, chosenPersons } = formData;
 
     const message = `
       <p><strong>Обрана алея:</strong> ${alley}</p>
-      <p><strong>Кількість дерев або імена діячів:</strong> ${personList}</p>
+      <p><strong>Імена діячів:</strong> ${chosenPersons}</p>
       <p><strong>Ім’я:</strong> ${name}</p>
       <p><strong>Телефон:</strong> ${phone}</p>
       <p><strong>Email:</strong> ${email}</p>
     `;
 
-    console.log("message:", message);
+    // return console.log("message:", message);
 
     try {
       const res = await fetch("/api/contact", {
@@ -171,10 +163,10 @@ export default function ChoseTreeForm({ chosenAlley, personsList, handleAlleyCha
         setFormData({
           alley: "",
           name: "",
-          personList: [],
+          chosenPersons: [],
           email: "",
           phone: "",
-          treeNumber: "",
+          // treeNumber: "",
         });
 
         // Скидаємо submitted, зберігаємо останню форму
@@ -192,7 +184,7 @@ export default function ChoseTreeForm({ chosenAlley, personsList, handleAlleyCha
     if (chosenAlley) {
       setFormData(prev => ({ ...prev, alley: chosenAlley }));
     }
-  }, [chosenAlley, formData.personList]);
+  }, [chosenAlley, formData.chosenPersons]);
 
 
   return (
@@ -201,10 +193,24 @@ export default function ChoseTreeForm({ chosenAlley, personsList, handleAlleyCha
       <form onSubmit={handleSubmit} noValidate>
 
         {/* Dropdown для вибору алеї */}
-        <AlleySelect AlleyData={AlleyData} formData={formData} setFormData={setFormData} submitted={submitted} errors={errors} handleAlleyChange={handleAlleyChange} />
+        <AlleySelect 
+          AlleyData={AlleyData} 
+          formData={formData} 
+          setFormData={setFormData} 
+          submitted={submitted} 
+          errors={errors} 
+          handleAlleyChange={handleAlleyChange}
+          disabled={queried?true:false}
+        />
 
         {/* Дропдаун для вибору людей */}
-        <MultiSelectChip personsList={personsList ?? []} formData={formData} setFormData={setFormData} errors={errors} submitted={submitted} />
+        <MultiSelectChip 
+          personsList={personsList ?? []} 
+          formData={formData} 
+          setFormData={setFormData} 
+          errors={errors}
+          submitted={submitted}
+        />
 
         {/* Ім'я */}
         <label>

@@ -24,6 +24,7 @@ export default function AlleySelect({
     submitted,
     errors,
     handleAlleyChange,
+    disabled
   }: AlleySelectProps) {
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -36,6 +37,7 @@ export default function AlleySelect({
     <FormControl
       sx={{ width: '100%', marginBottom: '1rem' }}
       error={Boolean(errors.alley && submitted)}
+      disabled={disabled}
     >
       <Select
         value={formData.alley || ''}
