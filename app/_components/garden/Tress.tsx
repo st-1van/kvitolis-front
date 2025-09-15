@@ -36,24 +36,26 @@ export default function Trees({ treesData }: TreesDataProps) {
   );
 }
 
-function TreeCard({ title, tree, treeImg }: AlleyItemProps) {
+function TreeCard({ title, tree, treeImg, slug }: AlleyItemProps) {
   return (
     <AnimatedOnScroll animationClass="fade-in-up">
       <div className="tree">
         <div className="tree__img">
           <div className="tree__overlay">
             <p>{tree}</p>
-            <Link href={`/garden/plant-tree?alleyName=${title}`}>
+            <Link href={`/garden/${slug}`}>
               <button className="btn btn--medium btn--outlined">
-                Посадити дерево
+                Детальніше
               </button>
             </Link>
           </div>
           {treeImg && <Image src={treeImg} alt={title} width={394} height={400} />}
         </div>
-        <div className="tree__text">
-          <p className="tree__name">{title}</p>
-        </div>
+        <Link href={`/garden/${slug}`}>
+          <div className="tree__text">
+            <p className="tree__name">{title}</p>
+          </div>
+        </Link>
       </div>
     </AnimatedOnScroll>
   );

@@ -48,7 +48,7 @@ export default function AlleySelect({
         MenuProps={MenuProps}
       >
         <MenuItem value="" disabled>
-          Оберіть алею
+          {/* Оберіть алею */}
         </MenuItem>
 
         {AlleyData.map((alley) => (

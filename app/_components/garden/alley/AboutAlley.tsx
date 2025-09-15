@@ -22,11 +22,8 @@ export default function AboutAlley ({
     return(
         <section className='aboutAlley'>
           <div className="container">
-            
              <AnimatedOnScroll animationClass="fade-sides">
-               <div className="row" 
-                 style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '1rem'}}>
-                 {/* <TreeVertical {...treeData} /> */}
+               <div className="row">
                  <Persons famousPeople={personsData ?? []} alleyName={alleyName}/>
                </div>
              </AnimatedOnScroll>
@@ -93,12 +90,3 @@ export function Accordion({ title, steps }: AccordionProps) {
     </section>
   );
 }
-
-
-            // <AnimatedOnScroll animationClass="fade-sides">
-            //   <div className="row" 
-            //     style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '1rem'}}>
-            //     {/* <TreeVertical {...treeData} /> */}
-            //     <Persons famousPeople={personsData ?? []} alleyName={alleyName}/>
-            //   </div>
-            // </AnimatedOnScroll>

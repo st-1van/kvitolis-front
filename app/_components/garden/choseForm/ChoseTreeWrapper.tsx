@@ -4,7 +4,6 @@ import ChoseTreeForm from "./ChoseTreeForm";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import AnimatedOnScroll from "../../ui/AnimatedScroll";
-
 import actualData from "../../data/alleyData/actualData";
 import { AlleyDescriptionVertical } from "../alley/AboutAlley";
 
@@ -56,6 +55,7 @@ export default function ChoseTreeWrapper() {
     src: selectedAlley.tree.img,
     latin: selectedAlley.tree.latin,
     button1: "Посадити дерево",
+    price: selectedAlley.tree.price
   };
 
   const handleAlleyChange = (newAlleyTitle: string) => {

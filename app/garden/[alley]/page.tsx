@@ -14,6 +14,7 @@ export default function SingleAlley() {
   const alleyData = actualData.find((item) => item.slug === alley);
 
 
+
   if (!alleyData) {
     return  <main><p>Сторінка не знайдена</p>;</main>
   }

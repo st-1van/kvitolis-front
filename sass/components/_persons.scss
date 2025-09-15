@@ -1,8 +1,8 @@
 @use "../base/variables";
 
 .persons {
-    padding: 0 20px;
     height: 100%;
+    min-width: 600px;
 
     &__headline{
         text-align: left;
@@ -19,6 +19,14 @@
             align-items: center;
             min-height: 70px;
             padding: 10px;
+
+            &__img-wrapper{
+                display: flex;
+                align-items: flex-end;
+            }
+            &__img{
+                border-radius: 50%;
+            }
             .btn{
                 margin-top:15px;
             }
@@ -35,33 +43,29 @@
                 animation:disappear 0.3s forwards;
             }
             
+
         }
+
         >div:first-child{
-            margin-top: 35px;
+            margin-top: 10px;
         }
         >div:last-child{
             margin-bottom: 200px;
         }
-    }
 
-    .status-button {
-        border-radius: 50%;
-        width: 45px !important;
-        height: 45px !important;
-        position: relative;
-        left: -40px;
-        bottom: -30px;
-        z-index: 5;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        transition: all 0.3s ease;
-
-        img {
-            width: 100%;
-            height: 100%;
-        }
+        .status-button {
+            border-radius: 50%;
+            width: 45px !important;
+            height: 45px !important;
+            position: relative;
+            left: -40px;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
 
         &.--taken {
             color: variables.$green;
@@ -98,12 +102,15 @@
             opacity: 0;
             transform: scale(0.9);
         }
+        }
     }
+
+
 
     &__selected{
         margin-top: 20px;
-        margin-bottom: 20px;
-        min-height: 60px;
+        padding: 10px 0;        
+        min-height: 30px;
         display: flex;
         flex-direction: column;
 
@@ -117,21 +124,25 @@
         &-list:not(:first-child){
             position:relative;
         }
-        .selected-person{
+        &-item{
             position:relative;
             margin-right: -60px;
             display: flex;
             align-items: flex-end;
             justify-content: flex-start;
+            img{
+                border: 3px solid white;
+                border-radius: 50%;
+                z-index: 3;
+                position: relative;
+                right: 35px;
+            }
         }
-        img{
-            border: 3px solid white;
-            border-radius: 50%;
-            z-index: 3;
-            position: relative;
-            right: 35px;
-        }
+
         button.remove-btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: relative;
             z-index: 5; 
             border-radius: 50%;
@@ -142,6 +153,7 @@
             border: 2px variables.$green solid;
             overflow: hidden;
             transition: all 0.3s ease;
+
         }
         button.remove-btn:hover {
             cursor: pointer;
@@ -158,51 +170,67 @@
 
     .btn-filters>button{
         border-radius: 4.75rem;
+        margin-bottom: 0px;
     }
 
     &__card {
-        margin-top: 10rem;
         margin-bottom: 1rem;
         position: relative; 
         display: flex;
         flex-direction: row;
         align-items: center;
         width: 100%;
-        max-height:280px;
-        background-color: #d4edda; 
+        background-color: variables.$light-green;
         padding:  1.75rem 1.75rem 1.75rem  1.75rem;
         border-radius: 2.75rem;
         gap:20px;
 
-    }
-    &__img {
-        border-radius: 50%;
-    }
 
-    &__text {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    justify-content: space-between;
-    div:first-child{
-        margin-bottom: 1.75rem;
-    }
-    div:last-child{
-        color: variables.$green;
-        p{
-        display: flex;
-        align-items: center;
+        
+        &-img{
+            border-radius: 50%;
+            margin-bottom: 1rem;
         }
-        button{
-            color:white;
-            background-color: variables.$green;
-            border-radius: 50px;
-            border: 2px white solid;
-            width: 3.54844rem;
-            height: 3.54844rem;
+
+
+        &-text {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
         }
-    }
+        
+
+        &-title {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color:variables.$green;
+            font-size: 2.6rem;
+            line-height: 2.6rem;
+        }
+
+        &-years {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        &-info {
+            flex: 1 1 auto;
+            min-width: 280px;
+            font-size: 1.8rem;
+            line-height: 2.6rem;
+            color: variables.$black;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+            white-space: pre-line;
+            margin-bottom: 1.5rem;
+        }
+        &-mecenat-btn{
+            max-width: 200px;
+        }
     }
 
     &__free{
@@ -212,14 +240,7 @@
     }
 
     
-    &__info,p{
-        max-width: 450px;
-        min-width: 280px;
-        font-size: 1.8rem;
-        line-height: 2.6rem;
-        margin:0;
-        text-wrap-mode: wrap;
-    }
+
 
     @media screen and (max-width: 1026px) {
     &__img {
@@ -231,65 +252,105 @@
     }
     }
     @media screen and (max-width: 769px) {
-    &__img {
-        height:130px;
-        width:130px;
-    }
+        min-width: 100%;
 
-    &__card{
-        width: 32%;
-    }
+        .btn-filters{
+            justify-content: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            // margin-bottom: 20px;
+        }
+        &__selected{
+            text-align: center;
+            &-list{
+                justify-content: center;
+            }
+        }
 
-    &__text {
-        padding-top: 11rem;
-        min-width:200px;
-    }
-
+        &__card-wrapper{
+            display: none;
+        }
+        .col-lg,
+        .col-md{
+            width: 100%;
+        }
+        &__list{
+            width: 100%;
+        }
     }
     @media screen and (max-width: 481px) {
     
-    &__headline{
-        padding: 1rem;
-    }
-
-    .item{
-        padding-left: 1rem;
-    }
-
-    &__card{
-        width: 45%;
-        height: 215px
-    }
-
-    &__img {
-        height:120px;
-        width:120px;
-    }
-
-    &__person {
-        position:relative;
-        margin-bottom: 35px;
-        width: 75%;
-    }
-
-    &__text {
-        padding-top:  10rem;
-        min-width: 160px;
-    }
-
-    &__info,p{
-        font-size: 1.5rem;
-        line-height: 2.2rem;
-    }
-
-    .status{
-        padding: 0.5rem 1rem;
-        font-size: 1.5rem;
-        &.icon{
-            width: 15px !important;
-            height: 15px !important;
+        &__headline{
+            padding: 1rem;
         }
-    }
+
+        .item{
+            // padding-left: 1rem;
+
+            &__img{
+                width: 75px;
+                height: 75px;
+            }
+            .status-button {
+                width: 35px !important;
+                height: 35px !important;
+                left: -30px;
+                .svg-icon{
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+
+        &__selected-list span{
+            font-size: 1.3rem;
+        }
+
+        &__selected-item {
+            margin-right: -50px;
+            img{
+                width: 70px;
+                height: 70px;
+                right: 25px;
+            }
+            button.remove-btn{
+                width: 30px;
+                height: 30px;
+
+                .icon{
+                    width: 15px;
+                    height: 15px;
+                }
+            }
+        }
+
+        &__person {
+            position:relative;
+            margin-bottom: 35px;
+            width: 75%;
+        }
+
+        &__text {
+            padding-top:  10rem;
+            min-width: 160px;
+        }
+
+        &__info,p{
+            font-size: 1.5rem;
+            line-height: 2.2rem;
+        }
+
+        .status{
+            padding: 0.5rem 1rem;
+            font-size: 1.5rem;
+            &.icon{
+                width: 15px !important;
+                height: 15px !important;
+            }
+        }
+
+
 
     }
   }
@@ -314,19 +375,13 @@
     }
 }
 
-.persons__search {
-    width: 100%;
-    margin-bottom: 20px;
-    padding: 8px 12px;
-    font-size: 16px;
-}
-
 .container1{
     flex: 1;
     position: relative;
     height: 800px;
     background: white;  
 }
+
 .scrollable{
     height: 100%;
     overflow-y: auto;
@@ -373,3 +428,23 @@
     display: none;
   }
 }
+
+.modal-content .persons__card {
+    flex-direction: column;
+    background-color: white !important;
+
+}
+
+// .modal-content .persons__card,
+// .modal-content .mecenat{
+//     max-width: 500px;
+// }
+
+.modal-content{
+    flex-direction: column;
+    width: 100%;
+}
+
+// .modal-content > .mecenat > p.mecenat__note {
+//     color: red !important;
+// }

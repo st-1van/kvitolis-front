@@ -58,20 +58,18 @@
 
     .treeDescription.vertical{
         display: flex;
+        flex-direction: column;
+    }
+    .treeDescription__textDesc{
+        display: flex;
         flex-direction: row;
-        img{
-            width: 170px !important;
-        }
     }
 
     @media screen and (max-width: 769px) {
-        .treeDescription.vertical{
+        .treeDescription__textDesc{
             display: flex;
             flex-direction: column;
             flex-direction: column-reverse;
-            img{
-                width: 120px !important;
-            }
         }
     }
 }

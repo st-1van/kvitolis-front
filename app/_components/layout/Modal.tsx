@@ -1,6 +1,7 @@
 'use client'
 import { useEffect } from "react";
 import { useScrollLock } from "../context/scroll-lock-context";
+import { X } from "lucide-react";
 
 type ModalProps = {
     open: boolean;
@@ -24,10 +25,10 @@ type ModalProps = {
         <div className="modal">
           <div className="overlay" onClick={onClose}></div>
           <div className="modal-content">
-            {children}
             <button className="close-modal" onClick={onClose}>
-              Close
+              <X className="icon" size={24} />
             </button>
+            {children}
           </div>
         </div>
       );
