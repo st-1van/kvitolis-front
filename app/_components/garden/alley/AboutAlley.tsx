@@ -1,6 +1,6 @@
 'use client'
 import { useState } from "react";
-import { TreeVertical, TreeSmallVertical } from '@/app/_components/garden/alley/TreeDescription';
+import { TreeSmallVertical } from '@/app/_components/garden/alley/TreeDescription';
 import Persons from '@/app/_components/garden/alley/Persons';
 import type { TreeDescProps } from '@/app/_components/garden/alley/TreeDescription';
 import type { PersonsProps } from '@/app/_components/garden/alley/Persons';
@@ -14,7 +14,7 @@ type AboutAlleyProps = {
   };
 
 export default function AboutAlley ({ 
-  treeData, 
+  // treeData, 
   personsData, 
   alleyName 
 }: AboutAlleyProps){

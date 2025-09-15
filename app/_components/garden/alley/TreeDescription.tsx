@@ -1,7 +1,7 @@
 
 "use client"; 
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 
 export interface TreeDescProps {
     name:string,
@@ -14,7 +14,14 @@ export interface TreeDescProps {
   }
 
 export default function TreeDescription(props: TreeDescProps) {
-    const { name, desc, src, button1, slug, latin } = props;
+    const { 
+        name, 
+        desc, 
+        src, 
+        // button1, 
+        // slug, 
+        latin 
+    } = props;
 
     return (
         <section className="treeDescription">

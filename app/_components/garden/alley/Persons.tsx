@@ -60,9 +60,7 @@ export default function Persons({ famousPeople, alleyName }: PersonsProps) {
       })),
     [famousPeople]
   );
-  const { showModal } = useModal();
 
-  // onClick={() => showModal(<PersonCard item={item} />)}
   const [filter, setFilter] = useState<'all' | 'free' | 'taken'>('all');
   const [displayedPeople, setDisplayedPeople] = useState<DataProps[]>(indexedList);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
