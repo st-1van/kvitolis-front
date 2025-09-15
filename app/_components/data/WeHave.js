@@ -37,7 +37,7 @@ export const attractions = [
         title:'Також ви можете провести',
         desc:'Семінари, конференції, фотосесії, модні покази, тренінги, майстер-класи',
         src:'/assets/banners/banner-3.jpg',
-        // slug:'/#',
+        slug:'/events',
         gradient:'light'
     },
 ]
