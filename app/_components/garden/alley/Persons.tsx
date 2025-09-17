@@ -10,7 +10,7 @@ export type DataProps = {
   id: string;
   name: string;
   photo?: string | null;
-  desc?: string;
+  desc?: string | null;
   years?: string;
   free?: boolean;
   date?: string;

@@ -12,7 +12,8 @@ const defaultPeople = AlleyData[0].famousPeople
         .filter(person => person.free !== false)
         .map(person => ({
           ...person,
-          free: typeof person.free === "string" ? person.free === "true" : !!person.free
+          free: typeof person.free === "string" ? person.free === "true" : !!person.free,
+          desc: person.desc ?? ""
         }))
 
 export type Person = {
@@ -20,7 +21,7 @@ export type Person = {
   name: string;
   years?: string;
   free: boolean;
-  desc?: string;
+  desc?: string | null;
 };
 
 export default function ChoseTreeWrapper() {
