@@ -3,12 +3,19 @@
 .callToAction {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
+  justify-content: center;
   width: 100vw;
   max-width: 100%;
   padding: 50px 5vw;
   position: relative;
   overflow: hidden;
+  margin-bottom: 0;
+
+  &.donate{
+    margin-bottom: 8rem;
+    padding: 10px 5vw;
+  }
 
   &__steps{
     display: flex;
