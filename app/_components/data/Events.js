@@ -18,12 +18,12 @@ export const data1 = [
     {
         title:'Квіткова локація',
         desc:'Місце, де природа розквітає яскравими барвами та дарує простір для відпочинку й натхнення.',
-        src:'/assets/season/lavanda/image.png',
+        src:'/assets/season/lavanda/photozone.png',
     },
     {
         title:'Облаштовані зони',
         desc:'Для вашого комфорту — затишне кафе, стильна лаунж-зона, м’які пуфи та гойдалки для відпочинку й атмосферних фото.',
-        src:'/assets/season/lavanda/photozone.png',
+        src:'/assets/cards/card-4.jpg',
     },
     // {
     //     title:'Вільний простір',
@@ -33,7 +33,7 @@ export const data1 = [
     {
         title:'Наші послуги',
         desc:'Для вашої події ми допоможемо з організацією: надамо контакти перевірених фотографів, кейтерингу, декораторів та музичного супроводу.',
-        src:'/assets/cards/card-4.jpg',
+        src:'/assets/cards/card-6.jpg',
     },
 ]
 

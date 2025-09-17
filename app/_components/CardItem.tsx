@@ -15,6 +15,8 @@ type CardItemProps = {
 export default function CardItem({ card, style }: CardItemProps) {
   const { title, desc, src} = card;
 
+  console.log('CardItem render:', src);
+
   return (
     <div className="card col">
       {src && (
