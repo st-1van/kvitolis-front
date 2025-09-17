@@ -44,7 +44,14 @@ export default function SingleAlley() {
           <main>
                 <BannerSlider  {...transformedData} />
                 <TreeDescription {...transformedData2} />
-                <AboutAlley treeData={transformedData2} personsData={alleyData.famousPeople} alleyName={alleyData.title}/>
+                <AboutAlley
+                  treeData={transformedData2}
+                  personsData={alleyData.famousPeople?.map(person => ({
+                    ...person,
+                    desc: person.desc === null ? undefined : person.desc
+                  }))}
+                  alleyName={alleyData.title}
+                />
                 <FAQ {...faqData} />
                 <CallToAction {...callToActionData} />
           </main>

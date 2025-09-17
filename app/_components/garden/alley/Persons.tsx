@@ -9,7 +9,7 @@ import { useModal } from "../../context/modal-context";
 export type DataProps = {
   id: string;
   name: string;
-  photo?: string;
+  photo?: string | null;
   desc?: string;
   years?: string;
   free?: boolean;
@@ -189,6 +189,8 @@ export default function Persons({ famousPeople, alleyName }: PersonsProps) {
 function PersonCardNew({ item, isSelected, selectionHandler }: { item: DataProps; isSelected?: () => boolean; selectionHandler?: (person: DataProps) => void; }) {
   const { name, photo, desc, free, mecenat, years, mecenat_note } = item;
 
+  console.log(photo)
+
   return (
     <>
       <div className='persons__card' key={item.id}>
@@ -260,6 +262,7 @@ function PersonsList({
       );
     }
   };
+
 
   return (
     <div className="container1">
