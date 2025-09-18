@@ -23,28 +23,17 @@ export const CarouselData = [
         gradient:'light',
         color:'green',
     },
-    // {
-    //     title:'Сезон лаванди у Квітолісі',
-    //     desc:<div>
-    //         <p>Запрошуємо відвідати довгоочікуваний фестиваль «Волиньська Лавандія»</p>
-    //         <p className="subp sub--fiolet">З 27.06 по 27.07</p>
-    //       </div>,
-    //     src:'/assets/banners/lavanda-banner1.jpg',
-    //     slug:'/lavanda',
-    //     gradient:'light',
-    //     color:'fiolet',
-    // },
+    {
+        title:'Сезон лаванди у Квітолісі',
+        desc:<div>
+            <p>Фестиваль «Волиньська Лавандія» вже закінчився</p>
+            {/* <p className="subp sub--fiolet">З 27.06 по 27.07</p> */}
+          </div>,
+        src:'/assets/banners/lavanda-banner1.jpg',
+        slug:'/lavanda',
+        gradient:'light',
+        color:'fiolet',
+    },
 
     
   ];
-
-//   Заголовок на сайт:
-
-// Наш унікальний проєкт - Сад Українства 
-
-// Опис:
-
-// Тут, серед природи, оживуть імена тих, хто творив і творить нашу історію, культуру, науку та мистецтво.
-// Запрошуємо вас долучитись до створення Саду Українства, придбавши дерево. 
-
-// Кнопка: ДОЛУЧИТИСЬ
