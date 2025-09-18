@@ -26,8 +26,8 @@ export default function SingleAlley() {
     gradient: 'light',
     tree: alleyData.tree.name,
     src: "/assets/banners/visual/Клумба-Люпин-01.jpg",
-    slug: '/garden/plant-tree',
-    button1: "Посадити дерево",
+    slug: `/garden/${alley}#about-alley`,
+    button1: "Детальніше",
   };
 
   const transformedData2 = {
@@ -35,14 +35,16 @@ export default function SingleAlley() {
     desc:alleyData.tree.desc,
     src: alleyData.tree.img,
     latin:alleyData.tree.latin,
+    price: alleyData.tree.price,
     button1: "Посадити дерево",
-    slug: '/garden/plant-tree',
+    slug: `/garden/plant-tree${alley ? `?alleyName=${alleyData.title}` : ''}`,
   }
 
 
   return (
           <main>
                 <BannerSlider  {...transformedData} />
+                <CallToAction {...callToActionData} slug={transformedData2.slug} />
                 <TreeDescription {...transformedData2} />
                 <AboutAlley
                   treeData={transformedData2}
@@ -53,7 +55,6 @@ export default function SingleAlley() {
                   alleyName={alleyData.title}
                 />
                 <FAQ {...faqData} />
-                <CallToAction {...callToActionData} />
           </main>
   );
 }

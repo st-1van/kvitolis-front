@@ -20,7 +20,7 @@ type TreesDataProps = {
 export default function Trees({ treesData }: TreesDataProps) {
 
   return (
-    <section className="trees">
+    <section className="trees" id="alleys">
       <div className="container">
         <AnimatedOnScroll animationClass="fade-in-up">
           <div className="trees__headline">

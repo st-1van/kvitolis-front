@@ -19,11 +19,14 @@ export default function TreeDescription(props: TreeDescProps) {
         src, 
         // button1, 
         // slug, 
-        latin 
+        latin,
+        price
     } = props;
+    
+    const transformedPrice = price ? price.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : '';
 
     return (
-        <section className="treeDescription">
+        <section className="treeDescription" id='about-alley'>
             <div className="container">
                 <div className="row" style={{alignItems: 'center'}}>
                     <div className="treeDescription__img col col-md">
@@ -44,6 +47,11 @@ export default function TreeDescription(props: TreeDescProps) {
                                 {button1}
                             </button>
                         </Link> */}
+
+                    <div className="treeDescription__price">
+                            <p className="treeDescription__price--title">Вартість саджанця з ПДВ</p>
+                            <p className="treeDescription__price--value">{transformedPrice} грн</p>
+                    </div>
                     </div>
                 </div>
             </div>

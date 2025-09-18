@@ -48,7 +48,7 @@ export default function ChoseTreeWrapper() {
       }
     }
 
-  }, [selectedAlley]);
+  }, [selectedAlley, alleyTitle]);
 
   const treeData = {
     name: selectedAlley.tree.name,

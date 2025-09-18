@@ -3,9 +3,9 @@ export const banner = {
         desc:'Сад Українства — це простір краси, натхнення та релаксу для всієї родини. Саме тут в образі дерев оживає історія нашого народу. Це місце гордості за тих хто зробив Україну такою, якою ми іі знаємо.',
         // src:'/assets/banners/alleyBanner2.png',
         src:'/assets/banners/gardenBanner.jpg',
-        slug:'/garden/plant-tree',
+        slug:'/garden#alleys',
         slug2:'/garden#about-garden',
-        button1:'Посадити дерево',
+        button1:'Стати меценатом',
         button2:'Про проєкт',
         gradient:'light',
         color:'green',
@@ -48,7 +48,7 @@ export const benefitsData = {
 export const callToActionData = {
     title: 'Як стати меценатом?',
     steps:[
-        'Залишіть заявку на сайті або звʼяжіться з нами через email чи номер телефону',
+        'Виберіть діячів та заповніть форму',
         'Ми звʼяжемося з вами і уточнимо деталі',
         'Внесіть свій донат та слідкуйте за новинами Саду',
     ],
