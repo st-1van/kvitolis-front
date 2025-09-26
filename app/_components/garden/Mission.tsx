@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import AnimatedOnScroll from "../ui/AnimatedScroll";
+import { ReactNode } from "react";
 
 type MissionProps = {
   title: string;
@@ -9,7 +10,7 @@ type MissionProps = {
 
 type DataProps = {
   name: string;
-  desc: string;
+  desc: ReactNode;
 };
 
 export default function Mission({ title, data }: MissionProps) {
@@ -63,9 +64,7 @@ export default function Mission({ title, data }: MissionProps) {
                   style={{ maxHeight: openIndex === index ? "500px" : "0" }}
                   className="accordion__answer mobile"
                 >
-                  <p>
                     {item.desc}
-                  </p>
                 </div>
               </div>
             ))}
@@ -77,9 +76,7 @@ export default function Mission({ title, data }: MissionProps) {
                 key={index} 
                 className={`${openIndex === index ? "block" : "hidden"}`}
               >
-                <p>
                   {item.desc}
-                </p>
               </div>
             ))}
           

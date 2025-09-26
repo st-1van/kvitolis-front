@@ -10,6 +10,7 @@ type AlleyItemProps = {
   tree: string;
   alleyImg: string;
   slug?: string;
+  priority:string;
 };
 
 type AlleysDataProps = {

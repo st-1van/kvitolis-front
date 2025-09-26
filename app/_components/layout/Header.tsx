@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link"
-import { navItems } from "../data/Navigation";
+import { navItems, socilalLinks } from "../data/Navigation";
 import { phones } from "../data/Contacts";
 import MenuButton from "./MenuButton";
 import { useState, useEffect } from "react";
@@ -23,10 +23,10 @@ export const Header = () => {
         <header className="header">
             <div className="header__top container">
                 <div className="header__socials">
-                    <a href="#">
+                    <a href={socilalLinks.facebook} target="_blank" rel="noopener noreferrer">
                         <FacebookIcon type='filled' />
                     </a>
-                    <a href="#">
+                    <a href={socilalLinks.instagram} target="_blank" rel="noopener noreferrer">
                         <InstagramIcon type='filled' />
                     </a>
                 </div>
@@ -116,12 +116,12 @@ const Humburger = ({ open, onClose }: BurgerProps) => {
                 ))}
             </div>
             <div className="humburger__socials">
-                <a href="#">
-                    <FacebookIcon type='filled'/>
-                </a>
-                <a href="#">
-                    <InstagramIcon type='filled'/>
-                </a>
+                    <a href={socilalLinks.facebook} target="_blank" rel="noopener noreferrer">
+                        <FacebookIcon type='filled' />
+                    </a>
+                    <a href={socilalLinks.instagram} target="_blank" rel="noopener noreferrer">
+                        <InstagramIcon type='filled' />
+                    </a>
             </div>
         </div>
     );

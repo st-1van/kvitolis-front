@@ -1,8 +1,8 @@
 @use "../base/variables";
 
 .persons {
-    padding: 0 20px;
     height: 100%;
+    min-width: 600px;
 
     &__headline{
         text-align: left;
@@ -11,76 +11,226 @@
     &__list{
         display: flex;
         flex-direction: column;
-        gap:20px;
         padding-right: 1rem;
+
         .item{
-            border-bottom: 1px solid;
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
             align-items: center;
+            min-height: 70px;
+            padding: 10px;
+
+            &__img-wrapper{
+                display: flex;
+                align-items: flex-end;
+            }
+            &__img{
+                border-radius: 50%;
+            }
             .btn{
                 margin-top:15px;
-            }        
+            }
+            &:hover{
+                background-color: variables.$light-green;
+                cursor: pointer;
+                animation-duration: 0.2s;
+                transition: 0.3s;
+            }
+            &.--selected {
+                background-color: variables.$light-green;
+                animation-duration: 0.2s;
+                transition: 0.3s;
+                animation:disappear 0.3s forwards;
+            }
+            
+
         }
+
         >div:first-child{
-            margin-top: 35px;
+            margin-top: 10px;
         }
         >div:last-child{
             margin-bottom: 200px;
         }
+
+        .status-button {
+            border-radius: 50%;
+            width: 45px !important;
+            height: 45px !important;
+            position: relative;
+            left: -40px;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+
+        &.--taken {
+            color: variables.$green;
+            background-color: white;
+            border: 2px variables.$green solid;
+            transition: all 0.3s ease;
+        }
+
+        &.--free {
+            background-color: variables.$green;
+            color: white;
+            border: 2px white solid;
+
+            &:hover {
+                cursor: pointer;
+                background-color: white;
+                // color: variables.$green;
+                border: 2px variables.$green solid;
+                transform: scale(1.05); // легке збільшення
+            }
+        }
+
+
+        svg {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .opacity-100 {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .opacity-0 {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        }
     }
-    &__card {
-        margin-top: 10rem;
-        position: relative; 
+
+
+
+    &__selected{
+        margin-top: 20px;
+        padding: 10px 0;        
+        min-height: 30px;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        // width:25%;
-        max-width: 280px;
-        height:auto
-    }
-    &__img {
-    position: absolute;
-    top: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    z-index: 6;
-    }
 
-    &__text {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    justify-content: space-between;
-    background-color: #d4edda; 
-    border-radius: 2.75rem;
-
-    min-width:280px;
-    height: 100%;
-    padding:  17rem 1.75rem 1.75rem  1.75rem;
-
-    z-index: 1;
-    div:first-child{
-        margin-bottom: 1.75rem;
-    }
-    div:last-child{
-        color: variables.$green;
-        p{
-        display: flex;
-        align-items: center;
+        &-list{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
         }
-        button{
-            color:white;
+        &-list:not(:first-child){
+            position:relative;
+        }
+        &-item{
+            position:relative;
+            margin-right: -60px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            img{
+                border: 3px solid white;
+                border-radius: 50%;
+                z-index: 3;
+                position: relative;
+                right: 35px;
+            }
+        }
+
+        button.remove-btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 5; 
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            background-color: white;
+            color: variables.$green;
+            border: 2px variables.$green solid;
+            overflow: hidden;
+            transition: all 0.3s ease;
+
+        }
+        button.remove-btn:hover {
+            cursor: pointer;
             background-color: variables.$green;
-            border-radius: 50px;
+            color: white;
             border: 2px white solid;
-            width: 3.54844rem;
-            height: 3.54844rem;
+            transform: scale(1.05); // легке збільшення
         }
+        .btn{
+            max-width: 250px;
+        }
+
     }
+
+    .btn-filters>button{
+        border-radius: 4.75rem;
+        margin-bottom: 0px;
+    }
+
+    &__card {
+        margin-bottom: 1rem;
+        position: relative; 
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        background-color: variables.$light-green;
+        padding:  1.75rem 1.75rem 1.75rem  1.75rem;
+        border-radius: 2.75rem;
+        gap:20px;
+
+
+        
+        &-img{
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+
+        &-text {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+        }
+        
+
+        &-title {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color:variables.$green;
+            font-size: 2.6rem;
+            line-height: 2.6rem;
+        }
+
+        &-years {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        &-info {
+            flex: 1 1 auto;
+            min-width: 280px;
+            font-size: 1.6rem;
+            line-height: 2.4rem;
+            color: variables.$black;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+            white-space: pre-line;
+            margin-bottom: 1.5rem;
+        }
+        &-mecenat-btn{
+            max-width: 200px;
+        }
     }
 
     &__free{
@@ -89,38 +239,7 @@
         align-items:center;
     }
 
-    .status{
-        border-radius: 20px;
-        padding: 1rem 1.5rem;
-        display: flex;
-        align-items: center;
-        gap:5px;
-        &.--free{
-            color:variables.$green;
-            background-color: variables.$light-green;
-            border: 2px variables.$light-green solid;
-            &:hover,
-            &:focus {
-              background-color: white ;
-              border: 2px variables.$green solid;
-              color: variables.$green;
-              animation-duration: 0.2s;
-              transition: 0.3s;
-              
-            }
-        }
-        
-        &.--taken{
-            background-color: variables.$green;
-            color: white;
-            &:focus{
-                cursor: none;
-            }
-        }
-    }
     
-
-
 
 
     @media screen and (max-width: 1026px) {
@@ -133,75 +252,127 @@
     }
     }
     @media screen and (max-width: 769px) {
-    &__img {
-        height:130px;
-        width:130px;
-    }
+        min-width: 100%;
 
-    &__card{
-        width: 32%;
-    }
+        .btn-filters{
+            justify-content: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            // margin-bottom: 20px;
+        }
+        &__selected{
+            text-align: center;
+            &-list{
+                justify-content: center;
+            }
+        }
 
-    &__text {
-        padding-top: 11rem;
-        min-width:200px;
-    }
-
+        &__card-wrapper{
+            display: none;
+        }
+        .col-lg,
+        .col-md{
+            width: 100%;
+        }
+        &__list{
+            width: 100%;
+        }
     }
     @media screen and (max-width: 481px) {
     
-    &__headline{
-        padding: 1rem;
-    }
-
-    .item{
-        padding-left: 1rem;
-    }
-
-    &__card{
-        width: 45%;
-        height: 215px
-    }
-
-    &__img {
-        height:120px;
-        width:120px;
-    }
-
-    &__person {
-        position:relative;
-        margin-bottom: 35px;
-        width: 75%;
-    }
-
-    &__text {
-        padding-top:  10rem;
-        min-width: 160px;
-    }
-
-    &__info,p{
-        font-size: 1.5rem;
-        line-height: 2.2rem;
-    }
-
-    .status{
-        padding: 0.5rem 1rem;
-        font-size: 1.5rem;
-        &.icon{
-            width: 15px !important;
-            height: 15px !important;
+        &__headline{
+            padding: 1rem;
         }
-    }
+
+        .item{
+            // padding-left: 1rem;
+
+            &__img{
+                width: 75px;
+                height: 75px;
+            }
+            .status-button {
+                width: 35px !important;
+                height: 35px !important;
+                left: -30px;
+                .svg-icon{
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+
+        &__selected-list span{
+            font-size: 1.3rem;
+        }
+
+        &__selected-item {
+            margin-right: -50px;
+            img{
+                width: 70px;
+                height: 70px;
+                right: 25px;
+            }
+            button.remove-btn{
+                width: 30px;
+                height: 30px;
+
+                .icon{
+                    width: 15px;
+                    height: 15px;
+                }
+            }
+        }
+
+        &__person {
+            position:relative;
+            margin-bottom: 35px;
+            width: 75%;
+        }
+
+        &__text {
+            padding-top:  10rem;
+            min-width: 160px;
+        }
+
+        &__info,p{
+            font-size: 1.5rem;
+            line-height: 2.2rem;
+        }
+
+        .status{
+            padding: 0.5rem 1rem;
+            font-size: 1.5rem;
+            &.icon{
+                width: 15px !important;
+                height: 15px !important;
+            }
+        }
+
+
 
     }
   }
 
+.mecenat{
+    border-radius: 1.75rem 0 1.75rem 0;
+    padding: 2.75rem;
+    margin-top: 1rem;
 
-.persons__search {
-    width: 100%;
-    margin-bottom: 20px;
-    padding: 8px 12px;
-    font-size: 16px;
+    &__info{
+
+        font-size: 2rem;
+        line-height: 2.2rem;
+        border-bottom: white 1px solid;
+        padding-bottom: 0.75rem;
+    }
+    &__note{
+        font-size: 1.5rem;
+        line-height: 2.2rem;
+        padding-top: 0.75rem;
+        font-style: italic;
+    }
 }
 
 .container1{
@@ -210,6 +381,7 @@
     height: 800px;
     background: white;  
 }
+
 .scrollable{
     height: 100%;
     overflow-y: auto;
@@ -244,3 +416,35 @@
     background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
 }
 
+
+@keyframes disappear {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0;
+    display: none;
+  }
+}
+
+.modal-content .persons__card {
+    flex-direction: column;
+    background-color: white !important;
+
+}
+
+// .modal-content .persons__card,
+// .modal-content .mecenat{
+//     max-width: 500px;
+// }
+
+.modal-content{
+    flex-direction: column;
+    width: 100%;
+}
+
+// .modal-content > .mecenat > p.mecenat__note {
+//     color: red !important;
+// }

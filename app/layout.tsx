@@ -5,6 +5,7 @@ import { Footer } from "./_components/layout/Footer";
 import { Montserrat } from 'next/font/google'
 import { ScrollLockProvider } from './_components/context/scroll-lock-context';
 import { ModalProvider } from './_components/context/modal-context';
+import { Analytics } from '@vercel/analytics/next';
 
 
 
@@ -16,7 +17,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "Квітоліс",
-  description: "рекреаційний парк",
+  description: "Простір для сімейного відпочинку, активного дозвілля, фотосесій та гастрономічного релаксу.",
 };
 
 export default function RootLayout({
@@ -39,6 +40,7 @@ export default function RootLayout({
             <Footer/>
           </ModalProvider>
         </ScrollLockProvider>
+        <Analytics />
       </body>
     </html>
   );

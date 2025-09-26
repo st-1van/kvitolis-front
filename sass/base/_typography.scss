@@ -1,4 +1,6 @@
 @use "sass:string";
+@use "variables";
+
 @mixin font-face($name, $path, $weight: normal, $style: normal) {
   @font-face {
     font-family: string.quote($name);
@@ -23,11 +25,13 @@ h1 {
   font-size: 3.75rem;
   line-height: 4.375rem; 
   margin-bottom: 1.8rem;
+  color:variables.$green;
 }
 
 h2 {
   font-size: 3.75rem;
   margin-bottom: 1.75rem;
+  color:variables.$green;
   @media screen and (max-width: 481px) {
     font-size: 3rem;
   }
@@ -36,6 +40,7 @@ h2 {
 h3 {
   font-size: 6rem;
   line-height: 7rem;
+  color:variables.$green;
 }
 
 h4 {
@@ -52,7 +57,17 @@ h5 {
 .sub {
   font-size: 1.5rem;
   line-height: 2rem;
-  font-weight: bold;
+  font-weight: bold !important;
+  &--green{
+    color: variables.$green
+  }
+  &--fiolet{
+    color: variables.$fiolet
+  }
+  @media screen and (max-width: 481px) {
+    font-size: 1.75rem;
+    line-height: 2.5rem;
+  }
 }
 
 p{

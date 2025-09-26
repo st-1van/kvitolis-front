@@ -3,9 +3,12 @@
 import PlantTreeForm from "@/app/_components/garden/alley/PlantTreeForm";
 import { TreeVertical } from "@/app/_components/garden/alley/TreeDescription";
 import { useSearchParams } from "next/navigation";
-import { AlleyData } from "@/app/_components/data/AlleyData";
 import { useState, useEffect } from "react";
 import AnimatedOnScroll from "../../ui/AnimatedScroll";
+
+import actualData from "../../data/alleyData/actualData";
+
+const AlleyData = actualData;
 
 export default function PlantTreeWrapper() {
   const searchParams = useSearchParams();
@@ -23,12 +26,15 @@ export default function PlantTreeWrapper() {
     }
 
     if (name) setChosenName(name);
+    console.log("Selected Alley:", name);
+
   }, [searchParams]);
 
   const treeData = {
     name: selectedAlley.tree.name,
     desc: selectedAlley.tree.desc,
     src: selectedAlley.tree.img,
+    latin: selectedAlley.tree.latin,
     button1: "Посадити дерево",
   };
 

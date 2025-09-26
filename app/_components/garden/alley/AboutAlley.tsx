@@ -1,7 +1,6 @@
 'use client'
-import { useState, useEffect, useCallback } from "react";
-
-import { TreeVertical } from '@/app/_components/garden/alley/TreeDescription';
+import { useState } from "react";
+import { TreeSmallVertical } from '@/app/_components/garden/alley/TreeDescription';
 import Persons from '@/app/_components/garden/alley/Persons';
 import type { TreeDescProps } from '@/app/_components/garden/alley/TreeDescription';
 import type { DataProps } from '@/app/_components/garden/alley/Persons';
@@ -27,88 +26,85 @@ type TreeData = {
 
 type AboutAlleyProps = {
     treeData: TreeDescProps;
-    alleyName:string;
-    alleySlug:string;
+    personsData?: PersonsProps['famousPeople'];
+    alleyName: string;
+    alleyDesc?: string;
   };
 
-export default function AboutAlley ({ alleyName, alleySlug }: AboutAlleyProps){
-  
-
-    // const [meta, setMeta] = useState<Meta | undefined>();
-    const [data, setData] = useState<TreeData[]>([]);
-    const [isLoading, setLoading] = useState(true);
-
-    const fetchData = useCallback(async () => {
-      setLoading(true);
-      try {
-        const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-        const path = `/alleys-col/`;
-        const urlParamsObject = {
-          filters: {
-            slug: {
-              $eq: alleySlug,
-            },
-          },
-          populate: {
-            tree: {
-              populate: ['img']
-            },
-            famousPeople: {
-              populate:['photo']
-            },
-          },
-        };
-        const options = { headers: { Authorization: `Bearer ${token}` } };
-        const responseData = await fetchAPI(path, urlParamsObject, options);
-
-        setData(responseData.data);
-        // setMeta(responseData.meta);
-        // console.log(responseData.meta);
-        
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    }, [alleySlug]);
-
-    useEffect(() => {
-      fetchData();
-    }, [fetchData]);
-
-    if(isLoading) return 'loading'; 
-
-      const people = data.length > 0
-        ? Array.isArray(data[0].tree.famousPeople)
-          ? data[0].tree.famousPeople
-          : [data[0].tree.famousPeople]
-        : [];
-      const formatedTreeData = data.length > 0 ? {
-        name: data[0].tree.name,
-        desc: data[0].tree.desc,
-        src: data[0].tree.img.formats.large.url,
-        button1: "Посадити дерево",
-        slug: '/garden/plant-tree',
-      }:{
-        name:'',
-        desc:'',
-        src:'',
-        button1: "Посадити дерево",
-        slug: '/garden/plant-tree',
-      }    
-
+export default function AboutAlley ({ 
+  // treeData, 
+  personsData, 
+  alleyName 
+}: AboutAlleyProps){
     
     return(
         <section className='aboutAlley'>
           <div className="container">
-            <AnimatedOnScroll animationClass="fade-sides">
-              <div className="row" 
-                style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '1rem'}}>
-                <TreeVertical {...formatedTreeData} />
-                <Persons famousPeople={people} alleyName={alleyName}/>
-              </div>
-            </AnimatedOnScroll>
+             <AnimatedOnScroll animationClass="fade-sides">
+               <div className="row">
+                 <Persons famousPeople={personsData ?? []} alleyName={alleyName}/>
+               </div>
+             </AnimatedOnScroll>
            </div>
       </section>
     )
+}
+
+export function AlleyDescriptionVertical ({ treeData, alleyName, alleyDesc }: AboutAlleyProps) {
+  return (
+        <div className="alleyDescVertical container grey">
+            <div className="column">
+              <div className='alleyDescVertical__content'>
+                <h2>{alleyName}</h2>
+                <p className="desc">
+                  {alleyDesc}
+                </p>
+              </div>
+              <TreeSmallVertical {...treeData} />
+            </div>
+        </div>
+    )
+  }
+
+
+type AccordionProps = {
+  title: string;
+  steps: { title: string; content: React.ReactNode }[];
+};
+
+export function Accordion({ title, steps }: AccordionProps) {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggleAccordion = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <section className="Accordion">
+      <AnimatedOnScroll animationClass="fade-sides">
+      <div className="container">
+        <div className="Accordion__title">
+          <h2>{title}</h2>
+        </div>
+        <div className="Accordion__content">
+
+          {steps.map((item, index) => (
+            <div
+              key={index}
+              className={`Accordion__item ${openIndex === index ? "open" : ""}`}
+            >
+              <button className="Accordion__title" onClick={() => toggleAccordion(index)}>
+                {item.title}
+                <span className="Accordion__icon">{openIndex === index ? "−" : "+"}</span>
+              </button>
+              <div className="Accordion__copntent" style={{ maxHeight: openIndex === index ? "200px" : "0" }}>
+                {item.content}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      </AnimatedOnScroll>
+    </section>
+  );
 }

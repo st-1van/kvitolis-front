@@ -1,6 +1,5 @@
 import HeadBanner from "../_components/HeadBanner";
-import { banner, benefitsData, callToActionData, faqData } from '../_components/data/Garden';
-// import Alleys from "../_components/garden/Alleys";
+import { banner, benefitsData, callToActionData, faqData, qouteData } from '../_components/data/Garden';
 import Benefits from "../_components/garden/Benefits";
 import CallToAction from "../_components/garden/CallToAction";
 import FAQ from "../_components/garden/FAQ";
@@ -9,9 +8,19 @@ import SeoQoute from "../_components/SeoQoute"
 import Mission from "../_components/garden/Mission";
 import MissionData from "../_components/data/MissionData";
 import PulseMap from "../_components/PulseMap";
-// import SimpleQoute from "../_components/SimpleQoute";
 import Visualisation from "../_components/garden/alley/Visualisation";
+import actualData from "../_components/data/alleyData/actualData";
 
+const alleyData = actualData;
+
+const transformedData = alleyData.map(({ id, tree, title, slug, priority }) => ({
+  id:id,
+  title: title,
+  tree: tree.name,
+  treeImg:tree.img,
+  slug,
+  priority
+}));
 
 export default function Garden() {
   return (
@@ -27,19 +36,18 @@ export default function Garden() {
                   button1={banner.button1}
                   button2={banner.button2}
                   gradient={banner.gradient}
+                  color='green'
           />
         </section>
-        <Mission title='Місія, цілі та цінності' data={MissionData} />
-
-        {/* <SimpleQoute /> */}
+        <SeoQoute {...qouteData[1]}/>
+        <Visualisation videoId="EM3RXfKOSoY" title="Місія, цілі та цінності"/>
+        <Mission title='' data={MissionData} />
         <PulseMap title='Алеї українства' desc='12 алей'/>
-        {/* <Alleys alleysData={transformedData}/> */}
-        <Trees />
-        <Visualisation videoId="FTkth_YF6OM" title="Таким ми бачимо наш Сад"/>
+        {/* <Trees treesData={transformedData}/> */}
         <Benefits {...benefitsData} />
         <CallToAction {...callToActionData} />
-        <SeoQoute />
+        <SeoQoute {...qouteData[0]}/>
         <FAQ {...faqData} />
     </main>
   );
-} 
+}

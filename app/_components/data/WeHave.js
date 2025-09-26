@@ -3,17 +3,17 @@ export const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, se
 export const cards = [
     {
         title:'Фудкорт',
-        desc:'Смачна їжа від учасників подій ',
+        desc:'Смачне доповнення до краси — це про наші фуд-корти! На території парку ви зможете відпочити, насолоджуючись не лише краєвидами, а й смаколиками від наших учасників фестивалю та локальних брендів.',
         src:'/assets/cards/card-1.jpg',
     },
     {
         title:'Розваги',
-        desc:'Описати, що і коли Для дорослих (музичний супровід, баггі) для дітей (батути чи шо там)',
+        desc:'Розваги для дітей і дорослих, гойдалки серед квітів, прогулянки на гольфкарах які подарують яскраві миті. Для малечі — дитячі атракціони, майстер класи, аквагрим та ласощі.',
         src:'/assets/cards/card-2.jpg',
     },
     {
         title:'Ярмарок',
-        desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        desc:'Зона торгівлі де можна придбати широкий асортимент рослин за цінами від виробника, а також різні смаколики та сувеніри від місцевих крафтових виробників',
         src:'/assets/cards/card-3.jpg',
     },
 ]
@@ -29,7 +29,7 @@ export const attractions = [
     {
         title:'Сад Українства',
         desc:'Це простір пам’яті й гордості за тих, хто зробив Україну такою, якою ми її знаємо. ',
-        src:'/assets/banners/banner-2.jpg',
+        src:'/assets/banners/gardenBanner.jpg',
         slug:'/garden',
         gradient:'light'
     },
@@ -37,7 +37,7 @@ export const attractions = [
         title:'Також ви можете провести',
         desc:'Семінари, конференції, фотосесії, модні покази, тренінги, майстер-класи',
         src:'/assets/banners/banner-3.jpg',
-        // slug:'/#',
+        slug:'/events',
         gradient:'light'
     },
 ]

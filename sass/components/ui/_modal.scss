@@ -1,3 +1,5 @@
+@use '../../base/variables';
+
 .modal, .overlay {
     position: fixed;
     z-index: 100;
@@ -11,25 +13,35 @@
     background: rgba(0,0,0,0.5);
 }
 .modal-content {
-    position: absolute;
+    // position: absolute;
+    position: relative;
     z-index: 100;
     top: 50%;
     left: 50%;
     display: flex;
     justify-content: center;
-
+    padding: 0 1rem 0 1rem;
     transform: translate(-50%, -50%);
-    // line-height: 1.4;
-    // background: #fefefe;
-    // border-radius: 3px;
-    // width: 100%;
-    // max-width: 600px;
-    // min-width: 300px;
+    max-width: 500px;
 }
 
 .close-modal {
-    top: 10px;
+    z-index: 101;
+    position: absolute;
+    top: 5px; 
     right: 10px;
-    padding: 5px 7px;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    color: variables.$green;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    cursor: pointer;
+    background-color: variables.$green;
+    color: white;
+    transform: scale(1.05); 
 }
 

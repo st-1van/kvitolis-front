@@ -7,12 +7,10 @@
     justify-content: space-between;
     align-items: center;
     height: 40rem;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
     overflow: hidden;
     background-repeat: no-repeat;
-    background-size: cover;
     background-position: 100% 40%;
+    background-size: 80%;
 
 
     &.carousel-body{
@@ -24,40 +22,68 @@
 
     
     &__content {
+      position: relative;
       align-self: flex-start;
-      z-index: 2;
+      z-index: 5;
       font-size: 2rem;
-      padding: 0 9rem;
-      max-width: 45%;
+      left: 8rem;
+      max-width: 38%;
+      height: 100%;
+      padding-right: 9.5rem;
+      padding-left: 1rem;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      text-wrap-mode: wrap;
+
+
+      &--dark {
+        background: linear-gradient(90deg, #101916 50%, rgba(16, 25, 22, 0) 100%);
+        background-size:100%;
+        background-position:left;
+        background-repeat: no-repeat;
+      }
+      &--light{
+        background: linear-gradient(90deg, #ffffff 50%, rgba(244, 242, 239, 0) 100%);
+        background-size:100%;
+        background-position:left;
+        background-repeat: no-repeat;
+      }
     }
     &__description{
         margin-bottom: 3rem;
     }
-  
-    &__overlay {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      max-width: 55%;
-    }
 
-    .headBanner, &__overlay {
-      box-sizing: border-box;
+    .color{
+      &--green{
+        h1{
+          color: variables.$green !important;
+        }
+        
+      }
+      &--fiolet{
+        h1{
+          color: variables.$fiolet !important;
+        }
+        
+      }
+      }
+
+    &__buttons{
+      .arrows{
+        display: none;
+      }
     }
+  
 
     &__navigation{
       position: absolute;
       top: 0;
-      z-index: 10;
+      z-index:3;
       width: 100%;
       height: 100%;
 
       .arrows {
-            position: relative;
+            position: absolute;
             z-index: 10;
             left: 0;
             width: 100%;
@@ -132,56 +158,62 @@
       }
     }
 
-    &--dark {
-      color: white;
-  
-      .headBanner__overlay {
-        background: linear-gradient(90deg, #101916 55%, rgba(16, 25, 22, 0) 100%);
-        background-size:80%;
-        background-position:left;
-        background-repeat: no-repeat;
-      }
-    }
-  
-    &--light {
-      color: black;
-  
-      .headBanner__overlay {
-        background: linear-gradient(90deg, #ffffff 55%, rgba(244, 242, 239, 0) 100%);
-        background-size:93%;
-        background-position:left;
-        background-repeat: no-repeat;
-      }
-    }
-
     @media screen and (max-width: 769px) {
       height: 40rem;
       background-position: 70% 0%;
         &__content {
           align-self: flex-start;
-          z-index: 2;
           font-size: 2rem;
-          padding: 2rem 9rem;
-          max-width: 60%;
+          padding: 3rem 0;
+          max-width: 39%;
         }  
 
     }
     @media screen and (max-width: 481px) {
       flex-direction: column-reverse;
-      padding-bottom: 1.5rem;
+      height: fit-content;
+      padding-top: 2rem;
+      padding-bottom: 0px;
       min-height: calc(100vh - 11rem);
       background-size: cover;
-      background-position: 66% 0%;
+      background-position: 50% 0%;
 
       &__content {
-        align-self: flex-start;
-        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        left:0;
         font-size: 2rem;
-        padding: 0 3rem;
+        padding: 6rem 3rem 0;
         max-width: none;
+        height: fit-content;
+        min-height: 270px;
+        max-height: 330px;
+
+        
+        &--dark {
+          background: linear-gradient(0deg, #101916 50%, rgba(16, 25, 22, 0) 100%);
+        }
+        &--light{
+          background: linear-gradient(0deg, #ffffff 50%, rgba(244, 242, 239, 0) 100%);
+        }
       }
 
+    &__buttons{
+      display: flex;
+      justify-content: space-between;
+      
+      & >.arrows{
+          display: flex;
+          gap:10px;
+          padding: 0 3rem;
+          bottom: 2rem;
+      }
+    }
+
       &__navigation{
+          display: none;
           position: absolute;
           top: 0;
           z-index: 10;
@@ -189,10 +221,7 @@
           height: 100%;
 
           .arrows {
-              justify-content: flex-end;
-              align-items: flex-end;
-              padding: 0 3rem;
-              bottom: 2rem;
+            display: none;
           }
 
             .fade{
@@ -208,24 +237,6 @@
       &__pagination{
         display: none;
       }
-      .headBanner__overlay{
-        top: unset;
-        bottom: 0;
-        height: 330px !important;
-        max-width: unset;
-      }
-      &--dark {
-        .headBanner__overlay {
-          background: linear-gradient(0deg, #101916 87%, rgba(16, 25, 22, 0) 100%);
-        }
-      }
-    
-      &--light {
-        .headBanner__overlay {
-          background: linear-gradient(0deg, #F4F2EF 87%, rgba(244, 242, 239, 0) 100%);
-        }
-      }
-
 
     }
 

@@ -1,0 +1,76 @@
+/* Стилі для кастомного MUI select із чіпами */
+.MuiFormControl-root {
+  width: 100%;
+  margin: 0!important;
+  margin-bottom: 1.2rem !important;
+
+  .MuiInputLabel-root {
+    font-size: 1.375rem;
+    font-family: Montserrat;
+    transform: translate(14px, 18px) scale(1);
+  }
+
+  .MuiOutlinedInput-root {
+    border-radius: 1.25rem;
+    font-family: Montserrat;
+    font-size: 1.375rem;
+    padding: 0!important;
+    min-height: 3rem;
+    background: #ffff;
+
+    .MuiOutlinedInput-notchedOutline {
+      border-color: #ccc;
+    }
+
+    &.Mui-error .MuiOutlinedInput-notchedOutline {
+      border-color: #e53935;
+    }
+
+    &:hover .MuiOutlinedInput-notchedOutline {
+      border-color: #999;
+    }
+
+    .MuiSelect-multiple {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  }
+
+  .MuiChip-root {
+    background-color: #e0e0e0;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.3rem 1rem !important;
+    height: 32px;
+    font-family: Montserrat;
+    border-radius: 1rem;
+
+    .MuiChip-label {
+      padding: 0 4px;
+    }
+
+    .MuiChip-deleteIcon {
+      font-size: 1.2rem;
+    }
+  }
+
+  .MuiSelect-select {
+    padding: 0.625rem 1.25rem !important;
+    line-height: 3rem
+  }
+
+  .MuiFormHelperText-root {
+    color: #e53935;
+    font-size: 0.875rem;
+    margin-top: 4px;
+    margin-left: 1.25rem;
+  }
+  .MuiMenuItem-root {
+    min-height: 30px;
+  }
+  .MuiChip-root{
+    background-color: #006a4e1a;
+    font-size: 1.2rem;
+  }
+}
