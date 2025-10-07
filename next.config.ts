@@ -5,12 +5,12 @@ const nextConfig: NextConfig = {
   // images: {
   //     domains: ['127.0.0.1'],
   // },
-   images: {
+  images: {
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '1337',
+        protocol: 'https',
+        hostname: process.env.NEXT_PUBLIC_STRAPI_API_URL || 'localhost',
+        port: '',
         pathname: '/uploads/**',
       },
     ],
