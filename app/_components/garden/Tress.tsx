@@ -11,28 +11,25 @@ import { CircularProgress } from "@mui/material";
 
 type AlleyItemProps = {
   id: string;
-  title: string;
-  treeName: string;
-  treeImg: string;
+  alleyName: string;
   slug?: string;
   priority: string;
-};
-
-type Tree = {
-  id: string;
-  name: string;
-  tree: TreeProps;
-  slug: string;
+  alleyDesc?: string;
+  tree: TreeProps
 };
 
 type TreeProps = {
   name: string;
+  desc: string;
+  latin: string;
+  price: string;
   img: {
     formats: {
       large: {
         url: string;
       };
     };
+    url: string;
   };
 };
 
@@ -40,7 +37,7 @@ type TreeProps = {
 export default function Trees() {
 
   // const [meta, setMeta] = useState<Meta | undefined>();
-  const [data, setData] = useState<Tree[]>([]);
+  const [data, setData] = useState<AlleyItemProps[]>([]);
   const [isLoading, setLoading] = useState(true);
 
 
@@ -51,7 +48,7 @@ export default function Trees() {
       const path = `/alleys-col`;
       //замінити параметр порядку
       const urlParamsObject = {
-        sort: { id: "desc" },
+        sort: { priority: "desc" },
         populate: {
           tree: {
             populate: ['img']
@@ -62,7 +59,7 @@ export default function Trees() {
       const responseData = await fetchAPI(path, urlParamsObject, options);
 
       setData(responseData.data);
-      // setMeta(responseData.meta);
+      console.log('Fetched alley data:', responseData.data);
     } catch (error) {
       console.error(error);
     } finally {
@@ -74,13 +71,13 @@ export default function Trees() {
     fetchData();
   }, [fetchData]);
 
-  const formatedData = data.map(({ id, name, tree, slug, priority }:Tree) => ({
+
+  const formatedData = data.map(({ alleyName, id, tree, slug, priority }: AlleyItemProps) => ({
     id,
-    name,
-    treeImg: tree.img.formats.large.url,
-    treeName: tree.name,
+    alleyName,
+    tree,
+    priority,
     slug,
-    priority
   }));
 
   return (
@@ -101,7 +98,11 @@ export default function Trees() {
   );
 }
 
-function TreeCard({ treeName, treeImg, slug, title }: AlleyItemProps) {
+function TreeCard({ tree, slug, alleyName }: AlleyItemProps) {
+  const treeName = tree.name;
+  // const treeImg = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${tree.img?.url}`;
+  const treeImg = tree.img?.url;
+  console.log('treeImg:', treeImg);
 
   return (
     <AnimatedOnScroll animationClass="fade-in-up">
@@ -115,11 +116,11 @@ function TreeCard({ treeName, treeImg, slug, title }: AlleyItemProps) {
               </button>
             </Link>
           </div>
-          {treeImg && <Image src={treeImg} alt={title} width={394} height={400} />}
+          {treeImg && <Image src={treeImg} alt={treeName} width={394} height={400} />}
         </div>
         <Link href={`/garden/${slug}`}>
           <div className="tree__text">
-            <p className="tree__name">{title}</p>
+            <p className="tree__name">{alleyName}</p>
           </div>
         </Link>
       </div>

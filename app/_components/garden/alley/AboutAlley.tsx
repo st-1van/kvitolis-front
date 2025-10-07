@@ -3,25 +3,25 @@ import { useState } from "react";
 import { TreeSmallVertical } from '@/app/_components/garden/alley/TreeDescription';
 import Persons from '@/app/_components/garden/alley/Persons';
 import type { TreeDescProps } from '@/app/_components/garden/alley/TreeDescription';
-import type { DataProps } from '@/app/_components/garden/alley/Persons';
+import type { PersonsProps } from '@/app/_components/garden/alley/Persons';
 import AnimatedOnScroll from '../../ui/AnimatedScroll';
 
-import { fetchAPI } from "../../../../utils/fetch-api";
+// import { fetchAPI } from "../../../../utils/fetch-api";
 
-type TreeData = {
-  tree: {
-    name: string;
-    desc: string;
-    img: {
-      formats: {
-        large: {
-          url: string;
-        };
-      };
-    };
-    famousPeople:DataProps;
-  };
-};
+// type TreeData = {
+//   tree: {
+//     name: string;
+//     desc: string;
+//     img: {
+//       formats: {
+//         large: {
+//           url: string;
+//         };
+//       };
+//     };
+//     famousPeople: DataProps;
+//   };
+// };0
 
 
 type AboutAlleyProps = {
@@ -36,7 +36,8 @@ export default function AboutAlley ({
   personsData, 
   alleyName 
 }: AboutAlleyProps){
-    
+
+
     return(
         <section className='aboutAlley'>
           <div className="container">

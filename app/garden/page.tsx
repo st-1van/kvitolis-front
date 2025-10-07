@@ -9,18 +9,7 @@ import Mission from "../_components/garden/Mission";
 import MissionData from "../_components/data/MissionData";
 import PulseMap from "../_components/PulseMap";
 import Visualisation from "../_components/garden/alley/Visualisation";
-import actualData from "../_components/data/alleyData/actualData";
 
-const alleyData = actualData;
-
-const transformedData = alleyData.map(({ id, tree, title, slug, priority }) => ({
-  id:id,
-  title: title,
-  tree: tree.name,
-  treeImg:tree.img,
-  slug,
-  priority
-}));
 
 export default function Garden() {
   return (
@@ -43,7 +32,7 @@ export default function Garden() {
         <Visualisation videoId="EM3RXfKOSoY" title="Місія, цілі та цінності"/>
         <Mission title='' data={MissionData} />
         <PulseMap title='Алеї українства' desc='12 алей'/>
-        {/* <Trees treesData={transformedData}/> */}
+        <Trees />
         <Benefits {...benefitsData} />
         <CallToAction {...callToActionData} />
         <SeoQoute {...qouteData[0]}/>

@@ -1,4 +1,5 @@
 'use client'
+// import { useState, useEffect } from "react";
 import BannerSlider from '@/app/_components/garden/alley/BannerSlider';
 import { callToActionData, faqData } from '../../_components/data/Garden'
 import CallToAction from "../../_components/garden/CallToAction";
@@ -7,12 +8,31 @@ import { useParams } from "next/navigation";
 import AboutAlley from '@/app/_components/garden/alley/AboutAlley';
 import actualData from "../../_components/data/alleyData/actualData";
 import TreeDescription from '@/app/_components/garden/alley/TreeDescription';
+// import { fetchAPI } from "../../../utils/fetch-api";
 
 export default function SingleAlley() {
 
   const { alley } = useParams();
   const alleyData = actualData.find((item) => item.slug === alley);
 
+  // const [treeData, setTreeData] = useState<null>(null);
+
+  // useEffect(() => {
+  //       const fetchData = async () => {
+  //           console.log('data is fetching');
+  //           const data = await fetchAPI(`/alleys-col`);
+  //           if (!data) {
+  //               console.error('No data found');
+  //           } else {
+  //               setTreeData(data.data[0]);
+  //           }
+            
+  //       };
+  //       fetchData();
+
+  // }, []);
+
+  // console.log(treeData)
 
 
   if (!alleyData) {
