@@ -3,15 +3,23 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['prepared-sparkle-329c72da86.media.strapiapp.com'],
     remotePatterns: [
+      // Для Strapi Cloud
       {
         protocol: 'https',
         hostname: 'prepared-sparkle-329c72da86.media.strapiapp.com',
         port: '',
         pathname: '/**',
       },
+      // Для локального Strapi
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+        pathname: '/uploads/**',
+      },
     ],
+    // domains: ['prepared-sparkle-329c72da86.media.strapiapp.com', 'localhost'],
   },
 };
 

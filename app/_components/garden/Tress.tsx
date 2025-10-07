@@ -8,6 +8,7 @@ import { fetchAPI } from "../../../utils/fetch-api";
 import { useState, useEffect, useCallback } from "react";
 
 import { CircularProgress } from "@mui/material";
+import { getImageUrl } from "@/utils/api-helpers";
 
 type AlleyItemProps = {
   id: string;
@@ -116,7 +117,7 @@ function TreeCard({ tree, slug, alleyName }: AlleyItemProps) {
               </button>
             </Link>
           </div>
-          {treeImg && <Image src={treeImg} alt={treeName} width={394} height={400} />}
+          {treeImg && <Image src={getImageUrl(treeImg)} alt={treeName} width={394} height={400} />}
         </div>
         <Link href={`/garden/${slug}`}>
           <div className="tree__text">

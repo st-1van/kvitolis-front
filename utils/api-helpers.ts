@@ -23,3 +23,8 @@
         const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
         return date.toLocaleDateString('en-US', options);
     }
+
+    export const getImageUrl = (relativePath: string) => {
+    if (relativePath.startsWith('http')) return relativePath;
+    return `${process.env.NEXT_PUBLIC_STRAPI_MEDIA_URL}${relativePath}`;
+    };
