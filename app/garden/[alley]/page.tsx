@@ -1,79 +1,114 @@
 'use client'
-// import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import BannerSlider from '@/app/_components/garden/alley/BannerSlider';
 import { callToActionData, faqData } from '../../_components/data/Garden'
 import CallToAction from "../../_components/garden/CallToAction";
 import FAQ from "../../_components/garden/FAQ";
 import { useParams } from "next/navigation";
-import AboutAlley from '@/app/_components/garden/alley/AboutAlley';
-import actualData from "../../_components/data/alleyData/actualData";
 import TreeDescription from '@/app/_components/garden/alley/TreeDescription';
-// import { fetchAPI } from "../../../utils/fetch-api";
+import Persons, { PersonsDataProps } from '@/app/_components/garden/alley/Persons';
+import { fetchAPI } from "../../../utils/fetch-api";
+import { TreeProps } from "@/app/_components/garden/Tress";
+import { CircularProgress } from "@mui/material";
+import { getImageUrl} from "@/utils/api-helpers";
+
+
+export type AlleyItemProps = {
+  id: string;
+  alleyName: string;
+  desc?: string;
+  slug?: string;
+  priority: string;
+  alleyImg?: string;
+  tree: TreeProps;
+  famousPeople: PersonsDataProps[];
+};
+
+
+
 
 export default function SingleAlley() {
 
   const { alley } = useParams();
-  const alleyData = actualData.find((item) => item.slug === alley);
 
-  // const [treeData, setTreeData] = useState<null>(null);
+  const [data, setData] = useState<AlleyItemProps[]>([]);
+  const [isLoading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //       const fetchData = async () => {
-  //           console.log('data is fetching');
-  //           const data = await fetchAPI(`/alleys-col`);
-  //           if (!data) {
-  //               console.error('No data found');
-  //           } else {
-  //               setTreeData(data.data[0]);
-  //           }
-            
-  //       };
-  //       fetchData();
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+      const path = `/alleys-col`;
+      //замінити параметр порядку
 
-  // }, []);
+      const urlParamsObject = {
+        filters: { slug: alley },
+        populate: {
+          tree: {
+            populate: ['img']
+          },
+          famousPeople: { populate: ['photo'] }
+        }
+      };
+      const options = { headers: { Authorization: `Bearer ${token}` } };
+      const responseData = await fetchAPI(path, urlParamsObject, options);
 
-  // console.log(treeData)
+      setData(responseData.data);
+      console.log('Succesfully Fetched alley data:');
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
-  if (!alleyData) {
-    return  <main><p>Сторінка не знайдена</p>;</main>
+  if (isLoading) {
+    return <main><CircularProgress className="loader"/></main>
   }
 
-  const transformedData = {
-    id: alleyData.id,
-    title: alleyData.title,
-    desc: alleyData.desc ?? '',
+  const bannerData = {
+    id: data[0].id,
+    title: data[0].alleyName,
+    desc: data[0].desc ?? '',
     gradient: 'light',
-    tree: alleyData.tree.name,
-    src: "/assets/banners/visual/Клумба-Люпин-01.jpg",
+    src: data[0].alleyImg ??"/assets/banners/visual/Клумба-Люпин-01.jpg",
     slug: `/garden/${alley}#about-alley`,
     button1: "Детальніше",
   };
 
-  const transformedData2 = {
-    name:alleyData.tree.name,
-    desc:alleyData.tree.desc,
-    src: alleyData.tree.img,
-    latin:alleyData.tree.latin,
-    price: alleyData.tree.price,
-    button1: "Посадити дерево",
-    slug: `/garden/plant-tree${alley ? `?alleyName=${alleyData.title}` : ''}`,
+  const dynamicSlug = `/garden/plant-tree${alley ? `?alleyName=${bannerData.title}` : ''}`;
+
+  const treeData = {
+    name:data[0].tree.name,
+    desc:data[0].tree.desc,
+    src: getImageUrl(data[0].tree.img.url),
+    price: data[0].tree.price,
+    latin:data[0].tree.latin,
   }
 
+  const personsData: PersonsDataProps[] =
+    data[0]?.famousPeople.map(person => ({
+      ...person,
+      desc: person.desc === null ? null : person.desc,
+      photo:
+        person.photo === null
+          ? null
+          : typeof person.photo === 'string'
+          ? person.photo
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          : getImageUrl((person.photo as any).url),
+    })) ?? [];
 
   return (
           <main>
-                <BannerSlider  {...transformedData} />
-                <CallToAction {...callToActionData} slug={transformedData2.slug} />
-                <TreeDescription {...transformedData2} />
-                <AboutAlley
-                  treeData={transformedData2}
-                  personsData={alleyData.famousPeople?.map(person => ({
-                    ...person,
-                    desc: person.desc === null ? undefined : person.desc
-                  }))}
-                  alleyName={alleyData.title}
-                />
+                <BannerSlider  {...bannerData} />
+                <CallToAction {...callToActionData} slug={dynamicSlug} />
+                <TreeDescription {...treeData} />
+                <Persons personsData={personsData} alleyName={bannerData.title} />
                 <FAQ {...faqData} />
           </main>
   );

@@ -22,6 +22,7 @@ export default function TreeDescription(props: TreeDescProps) {
         latin,
         price
     } = props;
+    console.log('photo src:', src);
     
     const transformedPrice = price ? price.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : '';
 
@@ -64,9 +65,9 @@ export function TreeVertical (props: TreeDescProps) {
 
     return (
                 <div className="treeDescription grey vertical">
-                    <img 
+                    <Image
                         className='treeDescription__img' 
-                        src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${src}`}
+                        src={src}
                         alt={`фото-${name}`}
                         height={400}
                         width={400}

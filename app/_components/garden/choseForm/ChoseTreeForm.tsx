@@ -5,14 +5,15 @@ import { benefitsData } from "../../data/Garden";
 import actualData from "../../data/alleyData/actualData";
 import MultiSelectChip from "./MultipleSelectChip";
 import AlleySelect from "./AlleySelect";
-import type { DataProps } from '../../garden/alley/Persons';
+import { PersonsDataProps } from "../alley/Persons";
+// import type { DataProps } from '../../garden/alley/Persons';
 
 
 const AlleyData = actualData;
 
 export type FormProps = {
   chosenAlley?: string;
-  personsList?: DataProps[];
+  personsList?: PersonsDataProps[];
   handleAlleyChange: (newName: string) => void;
   queried: boolean;
 };

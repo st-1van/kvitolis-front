@@ -5,11 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import MapleIcon from "../../ui/MapleIcon";
 import { useModal } from "../../context/modal-context";
+import AnimatedOnScroll from "../../ui/AnimatedScroll";
 
-export type DataProps = {
+export type PersonsDataProps = {
   id: string;
   name: string;
-  photo?: string | null;
   desc?: string | null;
   years?: string;
   free?: boolean;
@@ -18,10 +18,11 @@ export type DataProps = {
   mecenat_note?: string;
   isSelected?: boolean;
   order?: number;
+  photo?: string | null;
 };
 
 export type PersonsProps = {
-  famousPeople: DataProps[];
+  personsData: PersonsDataProps[];
   alleyName: string;
 };
 
@@ -50,19 +51,19 @@ const personTextEnding = (count: number) => {
   return 'постатей';
 }
 
-export default function Persons({ famousPeople, alleyName }: PersonsProps) {
+export default function Persons({ personsData, alleyName }: PersonsProps) {
   // always memoize indexedList!
   const indexedList = useMemo(
     () =>
-      famousPeople.map((person, index) => ({
+      personsData.map((person, index) => ({
         ...person,
         order: index + 1,
       })),
-    [famousPeople]
+    [personsData]
   );
 
   const [filter, setFilter] = useState<'all' | 'free' | 'taken'>('all');
-  const [displayedPeople, setDisplayedPeople] = useState<DataProps[]>(indexedList);
+  const [displayedPeople, setDisplayedPeople] = useState<PersonsDataProps[]>(indexedList);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [activePersonId, setActivePersonId] = useState<string | null>(indexedList[0]?.id ?? null);
 
@@ -70,6 +71,7 @@ export default function Persons({ famousPeople, alleyName }: PersonsProps) {
   const freeList = useMemo(() => indexedList.filter(p => p.free === true), [indexedList]);
   const takenList = useMemo(() => indexedList.filter(p => p.free === false), [indexedList]);
   const allList = indexedList;
+  console.log('freeList:', freeList);
 
   useEffect(() => {
     if (filter === 'free') setDisplayedPeople(freeList);
@@ -77,7 +79,7 @@ export default function Persons({ famousPeople, alleyName }: PersonsProps) {
     else setDisplayedPeople(allList);
   }, [filter, freeList, takenList, allList]);
 
-  // Sync activePersonId if famousPeople changes
+  // Sync activePersonId if personsData changes
   useEffect(() => {
     if (!indexedList.find(p => p.id === activePersonId)) {
       setActivePersonId(indexedList[0]?.id ?? null);
@@ -85,13 +87,13 @@ export default function Persons({ famousPeople, alleyName }: PersonsProps) {
   }, [indexedList, activePersonId]);
 
   // Selection logic by id
-  const selectionHandler = (person: DataProps) => {
+  const selectionHandler = (person: PersonsDataProps) => {
     setSelectedIds((prev) =>
       prev.includes(person.id) ? prev.filter(id => id !== person.id) : [...prev, person.id]
     );
   };
 
-  const isSelected = (person: DataProps) => !!selectedIds.includes(person.id);
+  const isSelected = (person: PersonsDataProps) => !!selectedIds.includes(person.id);
 
   const selectedPersons = indexedList.filter(p => selectedIds.includes(p.id));
   const names = selectedPersons.map(p => p.name);
@@ -105,88 +107,94 @@ export default function Persons({ famousPeople, alleyName }: PersonsProps) {
   const activePerson = indexedList.find(p => p.id === activePersonId) ?? null;
 
   return (
-    <>
-      <div className='persons col-md col'>
-        <div className="btn-filters">
-          <button
-            className={`btn btn--green btn--medium${filter === 'free' ? ' --active' : ''}`}
-            onClick={() => setFilter('free')}
-          >
-            {freeList.length} доступних для вибору
-          </button>
-          <button
-            className={`btn btn--outlined btn--medium${filter === 'taken' ? ' --active' : ''}`}
-            onClick={() => setFilter('taken')}
-          >
-            {takenList.length} знайшли мецената
-          </button>
-          <button
-            className={`btn btn--green btn--medium${filter === 'all' ? ' --active' : ''}`}
-            onClick={() => setFilter('all')}
-          >
-            Всі
-          </button>
-        </div>
-        <div>
-          <div className="persons__selected">
-            {selectedPersons.length > 0 ? (
-              <div className="selected-info">
-                <p className="sub">Ви обрали {selectedPersons.length} {personTextEnding(selectedPersons.length)}</p>
-                <p>Завдяки вашому меценатству буде висаджено {selectedPersons.length} {treeTextEnding(selectedPersons.length)} присвячених обраним постатям</p>
-              </div>
-            ) : ''}
-            <div className="persons__selected-list">
-              {selectedPersons.length > 0 ? (
-                selectedPersons.map((person) => (
-                  <div key={person.id} className="persons__selected-item">
-                    <button
-                      className="remove-btn"
-                      onClick={() => selectionHandler(person)}
-                    >
-                      <X className="icon" size={24} />
-                    </button>
-                    <Image
-                      src={person.photo ?? '/assets/people/default-person1.png'} alt={person.name}
-                      height={100}
-                      width={100}
-                      onClick={() => setActivePersonId(person.id)}
-                    />
-                  </div>
-                ))
-              ) : (
-                <span><i>*клікніть на постаті, щоб дізнатися більше</i></span>
-              )}
-            </div>
-            {selectedPersons.length > 0 ? (
-              <Link href={link}>
-                <button className="btn btn--green btn--medium">
-                  Оформити меценатство
+    <section className='aboutAlley'>
+      <div className="container">
+        <AnimatedOnScroll animationClass="fade-sides">
+          <div className="row">
+            <div className='persons col-md col'>
+              <div className="btn-filters">
+                <button
+                  className={`btn btn--green btn--medium${filter === 'free' ? ' --active' : ''}`}
+                  onClick={() => setFilter('free')}
+                >
+                  {freeList.length} доступних для вибору
                 </button>
-              </Link>
-            ) : ''}
+                <button
+                  className={`btn btn--outlined btn--medium${filter === 'taken' ? ' --active' : ''}`}
+                  onClick={() => setFilter('taken')}
+                >
+                  {takenList.length} знайшли мецената
+                </button>
+                <button
+                  className={`btn btn--green btn--medium${filter === 'all' ? ' --active' : ''}`}
+                  onClick={() => setFilter('all')}
+                >
+                  Всі
+                </button>
+              </div>
+              <div>
+                <div className="persons__selected">
+                  {selectedPersons.length > 0 ? (
+                    <div className="selected-info">
+                      <p className="sub">Ви обрали {selectedPersons.length} {personTextEnding(selectedPersons.length)}</p>
+                      <p>Завдяки вашому меценатству буде висаджено {selectedPersons.length} {treeTextEnding(selectedPersons.length)} присвячених обраним постатям</p>
+                    </div>
+                  ) : ''}
+                  <div className="persons__selected-list">
+                    {selectedPersons.length > 0 ? (
+                      selectedPersons.map((person) => (
+                        <div key={person.id} className="persons__selected-item">
+                          <button
+                            className="remove-btn"
+                            onClick={() => selectionHandler(person)}
+                          >
+                            <X className="icon" size={24} />
+                          </button>
+                          <Image
+                            src={person.photo ?? '/assets/people/default-person1.png'} alt={person.name}
+                            height={100}
+                            width={100}
+                            onClick={() => setActivePersonId(person.id)}
+                          />
+                        </div>
+                      ))
+                    ) : (
+                      <span><i>*клікніть на постаті, щоб дізнатися більше</i></span>
+                    )}
+                  </div>
+                  {selectedPersons.length > 0 ? (
+                    <Link href={link}>
+                      <button className="btn btn--green btn--medium">
+                        Оформити меценатство
+                      </button>
+                    </Link>
+                  ) : ''}
+                </div>
+                <PersonsList
+                  personsData={displayedPeople}
+                  setActivePersonId={setActivePersonId}
+                  selectedIds={selectedIds}
+                  selectionHandler={selectionHandler}
+                />
+              </div>
+            </div>
+            {activePerson && (
+            <div className="persons__card-wrapper col col-lg">
+              <PersonCardNew
+                item={activePerson}
+                isSelected={() => isSelected(activePerson)}
+                selectionHandler={selectionHandler}
+              />
+            </div>
+            )}
           </div>
-          <PersonsList
-            famousPeople={displayedPeople}
-            setActivePersonId={setActivePersonId}
-            selectedIds={selectedIds}
-            selectionHandler={selectionHandler}
-          />
+        </AnimatedOnScroll>
         </div>
-      </div>
-      {activePerson && (
-      <div className="persons__card-wrapper col col-lg">
-        <PersonCardNew
-          item={activePerson}
-          isSelected={() => isSelected(activePerson)}
-          selectionHandler={selectionHandler}
-        />
-        </div>
-      )}
-    </>
+  </section>
   );
 }
 
-function PersonCardNew({ item, isSelected, selectionHandler }: { item: DataProps; isSelected?: () => boolean; selectionHandler?: (person: DataProps) => void; }) {
+function PersonCardNew({ item, isSelected, selectionHandler }: { item: PersonsDataProps; isSelected?: () => boolean; selectionHandler?: (person: PersonsDataProps) => void; }) {
   const { name, photo, desc, free, mecenat, years, mecenat_note } = item;
 
   console.log(photo)
@@ -236,22 +244,22 @@ function PersonCardNew({ item, isSelected, selectionHandler }: { item: DataProps
 }
 
 function PersonsList({
-  famousPeople,
+  personsData,
   setActivePersonId,
   selectedIds,
   selectionHandler,
 }: {
-  famousPeople: DataProps[];
+  personsData: PersonsDataProps[];
   setActivePersonId: (id: string) => void;
   selectedIds: string[];
-  selectionHandler?: (person: DataProps) => void;
+  selectionHandler?: (person: PersonsDataProps) => void;
 }) {
 
   const { showModal } = useModal();
 
   const isMobile = () => typeof window !== "undefined" && window.innerWidth < 769;
 
-  const handleItemClick = (item: DataProps) => {
+  const handleItemClick = (item: PersonsDataProps) => {
     setActivePersonId(item.id);
     if (isMobile()) {
       showModal(
@@ -268,7 +276,7 @@ function PersonsList({
     <div className="container1">
       <div className="scrollable">
         <div className='persons__list'>
-          {famousPeople.map((item) => (
+          {personsData.map((item) => (
             <div
               key={item.id}
               className={`item${selectedIds.includes(item.id) ? ' --selected' : ''}`}

@@ -9,17 +9,11 @@ import { useState, useEffect, useCallback } from "react";
 
 import { CircularProgress } from "@mui/material";
 import { getImageUrl } from "@/utils/api-helpers";
+import { AlleyItemProps } from "@/app/garden/[alley]/page";
 
-type AlleyItemProps = {
-  id: string;
-  alleyName: string;
-  slug?: string;
-  priority: string;
-  alleyDesc?: string;
-  tree: TreeProps
-};
 
-type TreeProps = {
+
+export type TreeProps = {
   name: string;
   desc: string;
   latin: string;
@@ -99,11 +93,11 @@ export default function Trees() {
   );
 }
 
-function TreeCard({ tree, slug, alleyName }: AlleyItemProps) {
+type TreeCardProps = Pick<AlleyItemProps, 'id' | 'alleyName' | 'tree' | 'priority' | 'slug'> & { index: number };
+
+function TreeCard({ tree, slug, alleyName }: TreeCardProps) {
   const treeName = tree.name;
-  // const treeImg = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${tree.img?.url}`;
   const treeImg = tree.img?.url;
-  console.log('treeImg:', treeImg);
 
   return (
     <AnimatedOnScroll animationClass="fade-in-up">
