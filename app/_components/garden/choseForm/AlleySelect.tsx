@@ -48,13 +48,13 @@ export default function AlleySelect({
         MenuProps={MenuProps}
       >
         <MenuItem value="" disabled>
-          {/* Оберіть алею */}
+          Оберіть алею
         </MenuItem>
 
         {AlleyData.map((alley) => (
           <MenuItem
             key={alley.slug}
-            value={alley.title}
+            value={alley.alleyName}
             sx={{
               padding: '0.625rem 1.25rem',
               fontFamily: 'Montserrat',
@@ -63,7 +63,7 @@ export default function AlleySelect({
               minHeight: '0px',
             }}
           >
-            {alley.title}
+            {alley.alleyName}
           </MenuItem>
         ))}
       </Select>

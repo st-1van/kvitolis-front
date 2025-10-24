@@ -2,16 +2,13 @@
 import { useState, useEffect } from "react";
 import { BenefitsItems } from "../Benefits";
 import { benefitsData } from "../../data/Garden";
-import actualData from "../../data/alleyData/actualData";
 import MultiSelectChip from "./MultipleSelectChip";
 import AlleySelect from "./AlleySelect";
 import { PersonsDataProps } from "../alley/Persons";
-// import type { DataProps } from '../../garden/alley/Persons';
 
-
-const AlleyData = actualData;
 
 export type FormProps = {
+  AlleyData: { slug: string; alleyName: string }[];
   chosenAlley?: string;
   personsList?: PersonsDataProps[];
   handleAlleyChange: (newName: string) => void;
@@ -30,7 +27,7 @@ const nameRegex = /^[a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ'’\-\s]{1,80}$/u;
 const phoneRegex = /^\+?\d{10,13}$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default function ChoseTreeForm({ chosenAlley, personsList, handleAlleyChange, queried }: FormProps) {
+export default function ChoseTreeForm({ AlleyData, chosenAlley, personsList, handleAlleyChange, queried }: FormProps) {
   const [formData, setFormData] = useState<{
     alley: string;
     chosenPersons: string[];
@@ -186,6 +183,8 @@ export default function ChoseTreeForm({ chosenAlley, personsList, handleAlleyCha
       setFormData(prev => ({ ...prev, alley: chosenAlley }));
     }
   }, [chosenAlley, formData.chosenPersons]);
+
+  console.log('chosenAlley:', chosenAlley);
 
 
   return (
