@@ -108,6 +108,18 @@ export default function Persons({ famousPeople, alleyName }: PersonsProps) {
     <>
       <div className='persons col-md col'>
         <div className="btn-filters">
+        {freeList.length === 0 && (takenList.length === allList.length) ? (
+          <>
+            <p>Ця алея вже має мецентаів.</p>
+            <Link href="/garden#alleys">
+              <button className={`btn btn--green btn--medium`}>
+                Обрати іншу алею
+              </button>
+            </Link>
+          </>
+        )
+        
+        : <>
           <button
             className={`btn btn--green btn--medium${filter === 'free' ? ' --active' : ''}`}
             onClick={() => setFilter('free')}
@@ -126,6 +138,8 @@ export default function Persons({ famousPeople, alleyName }: PersonsProps) {
           >
             Всі
           </button>
+          </>}
+
         </div>
         <div>
           <div className="persons__selected">
