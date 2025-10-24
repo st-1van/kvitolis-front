@@ -9,6 +9,8 @@ import { CircularProgress } from "@mui/material";
 import { AlleyItemProps } from "@/app/garden/[alley]/page";
 import { getImageUrl } from "@/utils/api-helpers";
 import { FormProps } from "./ChoseTreeForm";
+import { callToActionData } from "../../data/Garden";
+import { StepsToBecomeMecenat } from "../../../_components/garden/CallToAction";
 
 export type Person = {
   id: string;
@@ -205,7 +207,7 @@ export default function ChoseTreeWrapper() {
   return (
     <main>
       <section className="plantTree">
-        <div className="container" style={{ display: "flex" }}>
+        <div className="container">
           {isLoading ? (
             <div style={{ width: "100%", textAlign: "center", padding: 40 }}>
               <CircularProgress />
@@ -215,7 +217,11 @@ export default function ChoseTreeWrapper() {
           ) : (
             <div className="row">
               {!selectedAlley ? (
-                <div>How to choose an alley?</div>
+                <div className="steps-container container grey">
+                  <div className="steps-content">
+                    <StepsToBecomeMecenat {...callToActionData} />
+                  </div>
+                </div>
               ) : (
                 <AlleyDescriptionVertical
                   treeData={treeData}

@@ -77,6 +77,38 @@
       font-size: 12px;
     }
 
+    .steps-container{
+      border-radius: 2.75rem; 
+      padding: 2rem 8.4rem 5.7rem;
+
+    }
+    .callToAction__steps{
+      display:flex;
+      flex-direction: column;
+      gap: 3rem;
+      margin-bottom: 2rem;
+      .step{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 1.5rem 1.5rem 1.5rem 0rem;
+      }
+
+      span{
+        margin:0;
+        top: 0;
+        left:-20px;
+      }
+
+      .desc{
+          position: relative;
+          left: -10px;
+          font-size: 1.6rem;
+      }
+      
+    }
+
+
     .btn{
       margin:0;
     }

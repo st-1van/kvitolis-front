@@ -189,7 +189,7 @@ export default function ChoseTreeForm({ AlleyData, chosenAlley, personsList, han
 
   return (
     <div className="plantTree__form light-green">
-      <h1>Станьте меценатом</h1>
+      <h1>Залишити заявку</h1>
       <form onSubmit={handleSubmit} noValidate>
 
         {/* Dropdown для вибору алеї */}
@@ -262,7 +262,7 @@ export default function ChoseTreeForm({ AlleyData, chosenAlley, personsList, han
         </label>
 
         <div className="plantTree__trade">
-          <button type="submit" className="btn btn--green btn--medium">Залишити заявку</button>
+          <button type="submit" className="btn btn--green btn--medium">Відправити</button>
         </div>
       </form>
 

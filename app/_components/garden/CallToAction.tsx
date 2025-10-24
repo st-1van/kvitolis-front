@@ -33,18 +33,7 @@ export default function CallToAction({ title, steps, btn, slug}: BenefitsProps) 
             </AnimatedOnScroll>
             <AnimatedOnScroll animationClass="fade-in-up">
                 <div className="center">
-                    <h2>{title}</h2>
-                    {/* <p className="desc">{}</p> */}
-                    <div className="callToAction__steps">
-                        {steps.map((step, index)=>(
-                            <div className='step' key={index}>
-                                <span>{index+1}</span>
-                                <p className="desc" key={index}>{step}</p>
-                            </div>
-                        ))}
-                    </div>
-
-
+                    <StepsToBecomeMecenat steps={steps} title={title} />
                     <Link href={slug}>
                         <button className="btn btn--medium btn--green">
                             {btn}
@@ -74,4 +63,20 @@ export default function CallToAction({ title, steps, btn, slug}: BenefitsProps) 
                 </div>
         </section>
     );
+}
+
+export function StepsToBecomeMecenat({steps, title}: {steps: string[], title: string}) {
+  return (
+    <>
+      <h2>{title}</h2>
+      <div className="callToAction__steps">
+        {steps.map((step, index) => (
+          <div className='step' key={index}>
+            <span>{index + 1}</span>
+            <p className="desc">{step}</p>
+          </div>
+        ))}
+      </div>
+    </>
+  );
 }

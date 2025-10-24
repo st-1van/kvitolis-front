@@ -106,8 +106,8 @@ export function TreeSmallVertical (props: TreeDescProps) {
                         className='treeDescription__img' 
                         src={src} 
                         alt={`фото-${name}`}
-                        height={300}
-                        width={300}
+                        height={250}
+                        width={250}
                     />
                 </div>
                 <div className="treeDescription__price">
