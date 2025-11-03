@@ -34,6 +34,31 @@ export const Footer = ()=>{
                             />                            
                         </div>
                         <div className="footer__actions col-bg">
+                            <div className="footer__contacts col">
+                                <h5>Плануєте захід?</h5>
+                                <div>
+                                    <p>
+                                        Пишіть нам на пошту або телефонуйте
+                                    </p>
+                                </div>
+                                <Link href='events#about-events'>
+                                    <button className="btn btn--medium btn--white ">
+                                            Дізнатись більше
+                                    </button>
+                                </Link>
+                            </div>
+                            <div className="footer__contacts col">
+                                <h5>Квитки</h5>
+                                <div>
+                                    <p>
+                                    Можна придбати на вході 
+                                    </p>
+
+                                </div>
+                                {/* <button className="btn btn--medium btn--white ">
+                                        Замовити
+                                </button> */}
+                            </div>
                             <div className="col">
                                 <h5>Контакти</h5>
                                 <div className="footer__links">
@@ -53,18 +78,7 @@ export const Footer = ()=>{
                                     </ul>
                                 </div>
                             </div>
-                            <div className="footer__contacts col">
-                                <h5>Квитки</h5>
-                                <div>
-                                    <p>
-                                    Можна придбати на вході 
-                                    </p>
 
-                                </div>
-                                {/* <button className="btn btn--medium btn--white ">
-                                        Замовити
-                                </button> */}
-                            </div>
                         </div>
                     </div>
 

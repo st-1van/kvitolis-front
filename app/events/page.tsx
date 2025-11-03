@@ -1,48 +1,105 @@
 'use client'
+import { useState, useEffect, useCallback } from "react";
+import { fetchAPI } from "../../utils/fetch-api";
+import ReactMarkdown from "react-markdown";
+import rehypeSanitize from "rehype-sanitize";
+import remarkGfm from "remark-gfm";
 
 import HeadBanner from "../_components/HeadBanner"
 import { FoodAndFun } from "../_components/WeHave"
-// import Image from "next/image"
 import AnimatedOnScroll from "../_components/ui/AnimatedScroll"
-import { banner, data1, EventsCallToAction, photos } from '../_components/data/Events'
-import StandartGallery from "../_components/StandartGallery"
+import { EventsCallToAction } from '../_components/data/Events'
+import StandartGallery, { ImageItemProps } from "../_components/StandartGallery"
 import CallToAction from "../_components/garden/CallToAction"
+import { SlideProps } from "../_components/Carousel"
+import { CircularProgress } from "@mui/material";
 
+
+type EventsProps ={
+  id:string;
+  slug:string;
+  aboutTitle?:string;
+  aboutDesc?:string;
+  mainBanner: SlideProps;
+  benefits: {
+    id:string;
+    title:string;
+    desc?:string;
+    photo:{
+      url:string;
+    };
+  }[]
+  gallery: ImageItemProps[];
+}
 
  
 export default function EventsPage() {
+
+  const [ data, setData ] = useState<EventsProps>({} as EventsProps);
+  const [ isLoading, setLoading ] = useState(true);
+
+    const fetchData = useCallback(async () => {
+      setLoading(true);
+      try {
+        const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+        const path = `/organizuvati-podiyu`;
+  
+        const urlParamsObject = {  
+          populate: {
+            mainBanner: {
+              populate: '*'
+            },
+            benefits: { populate: ['photo'] },
+            gallery: { populate: '*' },
+          }
+        };
+        const options = { headers: { Authorization: `Bearer ${token}` } };
+        const responseData = await fetchAPI(path, urlParamsObject, options);
+  
+        setData(responseData.data);
+        console.log('Succesfully Fetched alley data:');
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }, []);
+  
+    useEffect(() => {
+      fetchData();
+    }, [fetchData]);
+  
+    if (isLoading) {
+      return <main><CircularProgress className="loader"/></main>
+    }
     
-  //get request
   return <main>
         <section className="mainBanner container animate fade-in-up">
-          <HeadBanner {...banner} color="green"/>
+          <HeadBanner {...data.mainBanner}/>
         </section>
 
-                <section className="gallery">
+        <section className="gallery">
           <div className="container">
             <AnimatedOnScroll animationClass="fade-in-up">
               <div className="text-block center">
-                <h2>У нас можна провести:</h2>
+                <h2>{data.aboutTitle}</h2>
                 <p>
-            майстер-класи, кулінарні демонстрації та дегустації,
-            йогу на світанку чи медитацію серед квітів,
-            тренінги, 
-            концерти,
-            модні покази,
-            різноманітні конкурси,
-            сімейне свято та дні народження,
-            освідчення та весільні церемонії з фотосесіями!
+                  <ReactMarkdown
+                    rehypePlugins={[rehypeSanitize]}
+                    remarkPlugins={[remarkGfm]}
+                  >
+                    {data.aboutDesc || ''}
+                  </ReactMarkdown>
                 </p>
               </div>
             </AnimatedOnScroll>
           </div>
             <AnimatedOnScroll animationClass="fade-in-up">
-              <StandartGallery images={photos} />
+              <StandartGallery images={data?.gallery} />
             </AnimatedOnScroll>
         </section>
 
         <section id='about-events'>
-          
           <div className="container">
             <AnimatedOnScroll animationClass="fade-in-up">
               <div className="text-block center">
@@ -51,45 +108,13 @@ export default function EventsPage() {
             </AnimatedOnScroll>
             <div className="content">
               <FoodAndFun 
-                // desc="Щодня на вас чекають" 
-                center="center" 
+                center="center"
                 style='rounded'
-                data={data1}
+                data={data?.benefits}
               />
             </div>
           </div>
         </section>
-
-
-
-
-        {/* <section className="tickets">
-          <div className="container">
-            <AnimatedOnScroll animationClass="fade-in-up">
-              <div className="text-block center">
-                <h2>І це лише за стандартну вартість квитків</h2>
-              </div>
-            </AnimatedOnScroll>
-            <AnimatedOnScroll animationClass="fade-sides">
-              <div className="content"> 
-                  <div className="col col-bg grey cost-card">
-                    <div>
-                      <p className="subp">БУДНІ ДНІ:</p>
-                      <Image src='/assets/icons/tickets.svg' width={70} height={61} alt='icon-calendar' />
-                    </div>
-                    <p>Дорослий - 150 грн;<br/>Дитячий - 100 грн (від 7-14 років).<br/>Діти до 7 років - БЕЗКОШТОВНО!</p>
-                  </div>
-                  <div className="col col-bg grey cost-card">
-                    <div>
-                      <p className="subp">ВИХІДНІ ДНІ:</p>
-                      <Image src='/assets/icons/tickets.svg' width={70} height={61} alt='icon-calendar' />
-                    </div>
-                    <p>Дорослий - 200 грн;<br/>Дитячий - 100 грн (від 7-14 років).<br/>Діти до 7 років - БЕЗКОШТОВНО!</p>
-                  </div>
-              </div>
-            </AnimatedOnScroll>
-          </div>
-        </section> */}
         <CallToAction {...EventsCallToAction} />
     </main>
 }

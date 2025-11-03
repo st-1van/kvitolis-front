@@ -1,6 +1,4 @@
-import { title } from './data/About'
 import AnimatedOnScroll from './ui/AnimatedScroll'
-
 
 export default function About(){
     
@@ -11,7 +9,7 @@ export default function About(){
                     <div className='body'>
                         <div className='content'>
                             <h2>
-                                {title}
+                                Про парк &quot;Квітоліс&quot;
                             </h2>
                             <p>
                                 В 2018 році вперше організувавши фестивалі Волиньська Голландія, а потім Волиньська Лавандія, ми отримали настільки сильний позитивний заряд від відвідувачів, що дозволило проводити фестивалі наступні 8-м років та зробити повноцінний парк.

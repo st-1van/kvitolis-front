@@ -51,17 +51,20 @@
     }
     &__description{
         margin-bottom: 3rem;
+        strong{
+          font-size: 1.5rem;
+          line-height: 2rem;
+        }
     }
-
     .color{
       &--green{
-        h1{
+        h1, strong{
           color: variables.$green !important;
         }
         
       }
       &--fiolet{
-        h1{
+        h1, strong{
           color: variables.$fiolet !important;
         }
         
@@ -178,6 +181,13 @@
       background-size: cover;
       background-position: 50% 0%;
 
+      &__description{
+        strong{
+          font-size: 1.75rem;
+          line-height: 2.5rem;
+        }
+      }
+
       &__content {
         display: flex;
         flex-direction: column;
@@ -200,17 +210,17 @@
         }
       }
 
-    &__buttons{
-      display: flex;
-      justify-content: space-between;
-      
-      & >.arrows{
-          display: flex;
-          gap:10px;
-          padding: 0 3rem;
-          bottom: 2rem;
+      &__buttons{
+        display: flex;
+        justify-content: space-between;
+        
+        & >.arrows{
+            display: flex;
+            gap:10px;
+            padding: 0 3rem;
+            bottom: 2rem;
+        }
       }
-    }
 
       &__navigation{
           display: none;

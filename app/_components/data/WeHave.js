@@ -1,5 +1,5 @@
 export const title = 'Що у нас є?';
-export const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor '
+
 export const cards = [
     {
         title:'Фудкорт',
@@ -19,13 +19,6 @@ export const cards = [
 ]
 
 export const attractions = [
-    // {
-    //     title:'Відпочинок серед природи',
-    //     desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco',
-    //     src:'/assets/banners/banner-1.jpg',
-    //     slug:'/#',
-    //     gradient:'dark'
-    // },
     {
         title:'Сад Українства',
         desc:'Це простір пам’яті й гордості за тих, хто зробив Україну такою, якою ми її знаємо. ',

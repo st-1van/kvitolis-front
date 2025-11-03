@@ -1,9 +1,13 @@
+import { getImageUrl } from "@/utils/api-helpers";
 import Image from "next/image";
 
 export type CardProps = {
   title?: string;
-  src?: string;
+  photo?:{
+    url:string;
+  };
   desc?: string;
+  src?:string;
 };
 
 type CardItemProps = {
@@ -13,21 +17,19 @@ type CardItemProps = {
 };
 
 export default function CardItem({ card, style }: CardItemProps) {
-  const { title, desc, src} = card;
-
-  console.log('CardItem render:', src);
+  const { title, desc, photo, src } = card;
+  const imgUrl = src ?? getImageUrl(photo?.url ?? '') ?? '';
+  console.log('CardItem imgUrl:', imgUrl);
 
   return (
     <div className="card col">
-      {src && (
         <Image
           className={`card__img ${style}`}
-          src={src}
+          src={imgUrl}
           alt={title || "Image"}
           width={394}
           height={400}
         />
-      )}
       <h3 className="card__title">{title}</h3>
       <p>{desc}</p>
     </div>

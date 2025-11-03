@@ -25,6 +25,7 @@ type FoodAndFunProps<T extends CardProps> = {
 
 
 export function FoodAndFun<T extends CardProps>({title, desc, center, style, data}: FoodAndFunProps<T>){
+    
     return(
             <AnimatedOnScroll animationClass="fade-in-up">
                 <div className="container">

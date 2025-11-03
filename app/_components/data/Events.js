@@ -1,17 +1,27 @@
 
 export const banner = {
+    id:'events-banner',
     title: "Плануєте захід?",
-    desc: <div>
-            <p>Це не лише місце, де можна зробити гарні фото.
-Це простір для творчості, відпочинку та натхнення!</p>
-            {/* <p className="subp sub--fiolet">З 27.06 по 27.07</p> */}
-          </div>,
+    desc: `Це не лише місце, де можна зробити гарні фото. Це простір для творчості, відпочинку та натхнення!`,
     src:'/assets/banners/banner-3.jpg',
-    slug2:'#contacts',
+    photo:{
+        url:'',
+    },
     gradient:'light',
-    button2:`Зв'язатися з нами`,
-    button1:'Дізнатися більше',
-    slug:'#about-events'
+    color:'green',
+    btn:[
+        {
+            id:'1',
+            text:`Зв'язатися з нами`,
+            slug:'#about-events'
+        },
+        {
+            id:'2',
+            text:'Дізнатися більше',
+            slug:'#contacts',
+        },
+    ],
+
   }
 
 export const data1 = [
@@ -40,23 +50,28 @@ export const data1 = [
 
 export const photos = [
     {
-      src:'/assets/events/5.jpg',
+      id:'events5',
+      url:'/assets/events/5.jpg',
       title: 'events5',
     },
     {
-      src:'/assets/events/4.jpg',
+      id:'events4',
+      url:'/assets/events/4.jpg',
       title: 'events4',
     },
     {
-      src:'/assets/events/1.jpg',
+      id:'events1',
+      url:'/assets/events/1.jpg',
       title: 'events1',
     },
     {
-      src:'/assets/events/3.jpg',
+      id:'events3',
+      url:'/assets/events/3.jpg',
       title: 'events3',
     },
     {
-      src:'/assets/events/2.jpg',
+      id:'events2',
+      url:'/assets/events/2.jpg',
       title: 'events2',
     },
 
@@ -70,5 +85,5 @@ export const EventsCallToAction = {
         'Запускаємо подію!',
     ],
     btn: `зв'язататися`,
-    slug:'#contacts'
+    slug:'tel:+380673330055',
 }

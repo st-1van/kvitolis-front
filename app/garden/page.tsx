@@ -16,16 +16,14 @@ export default function Garden() {
     <main>
         <section className="mainBanner container animate fade-in-up">
           <HeadBanner
-                  key={banner.title} 
+                  id={banner.title} 
                   title={banner.title} 
                   desc={banner.desc} 
                   src={banner.src}
-                  slug={banner.slug}
-                  slug2={banner.slug2}
-                  button1={banner.button1}
-                  button2={banner.button2}
+                  btn={banner.btn}
                   gradient={banner.gradient}
                   color='green'
+                  photo={banner.photo}
           />
         </section>
         <SeoQoute {...qouteData[1]}/>

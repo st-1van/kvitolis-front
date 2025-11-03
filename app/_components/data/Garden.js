@@ -3,12 +3,24 @@ export const banner = {
         desc:'Сад Українства — це простір краси, натхнення та релаксу для всієї родини. Саме тут в образі дерев оживає історія нашого народу. Це місце гордості за тих хто зробив Україну такою, якою ми іі знаємо.',
         // src:'/assets/banners/alleyBanner2.png',
         src:'/assets/banners/gardenBanner.jpg',
-        slug:'/garden#alleys',
-        slug2:'/garden#about-garden',
-        button1:'Стати меценатом',
-        button2:'Про проєкт',
+        photo:{
+            url:'',
+        },
         gradient:'light',
         color:'green',
+        btn:[
+            {
+                id:'1',
+                text:'Стати меценатом',
+                slug:'/garden#alleys',
+            },
+            {
+                id:'2',
+                text:'Про проєкт',
+                slug:'/garden#about-garden',
+            },
+        ],
+
     }
 
 export const numbersData = {

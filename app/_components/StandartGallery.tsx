@@ -1,13 +1,16 @@
+import { getImageUrl } from '@/utils/api-helpers';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Image from "next/image";
 
-type ImageItem = {
-  src: string;
-  title: string;
+export type ImageItemProps = {
+  id: string;
+  url: string;
+  formats?: { large: { url: string } };
+  alternativeText?: string;
 };
 
-export default function StandartGallery({ images }: { images: ImageItem[] }) {
+export default function StandartGallery({ images }: { images: ImageItemProps[] }) {
   return (
     <div
       style={{
@@ -22,14 +25,14 @@ export default function StandartGallery({ images }: { images: ImageItem[] }) {
           minWidth: '1440px',
         }}
       >
-        {images.map((item) => (
+        {images.map((photo) => (
           <ImageListItem
-            key={item.src}
-            sx={{ position: 'relative', width: '100%', height: '100%' }}
+            key={photo.id}
+            sx={{ position: 'relative', width: '650px', height: '100%' }}
           >
             <Image
-              src={item.src}
-              alt={item.title}
+              src={getImageUrl(photo.url)}
+              alt={photo.alternativeText || "Image"}
               fill={true}
               style={{ objectFit: 'cover', width: '100%', height: '100%' }}
               loading="lazy"
