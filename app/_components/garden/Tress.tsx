@@ -9,7 +9,7 @@ import { useState, useEffect, useCallback } from "react";
 
 import { CircularProgress } from "@mui/material";
 import { getImageUrl } from "@/utils/api-helpers";
-import { AlleyItemProps } from "@/app/garden/[alley]/page";
+import { AlleyItemProps } from "@/app/garden/[alley]/SingleAlleyClient";
 
 
 
@@ -74,6 +74,7 @@ export default function Trees() {
     priority,
     slug,
   }));
+  console.log('Formated data for trees:', data);
 
   return (
     <section className="trees" id="alleys">
@@ -97,7 +98,7 @@ type TreeCardProps = Pick<AlleyItemProps, 'id' | 'alleyName' | 'tree' | 'priorit
 
 function TreeCard({ tree, slug, alleyName }: TreeCardProps) {
   const treeName = tree.name;
-  const treeImg = tree.img?.url;
+  const treeImg = getImageUrl(tree.img.url) ?? "/assets/banners/visual/default-tree.jpg";
 
   return (
     <AnimatedOnScroll animationClass="fade-in-up">
@@ -111,7 +112,7 @@ function TreeCard({ tree, slug, alleyName }: TreeCardProps) {
               </button>
             </Link>
           </div>
-          {treeImg && <Image src={getImageUrl(treeImg)} alt={treeName} width={394} height={400} />}
+          {treeImg && <Image src={treeImg} alt={treeName} width={394} height={400} />}
         </div>
         <Link href={`/garden/${slug}`}>
           <div className="tree__text">

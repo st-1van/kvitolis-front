@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { AlleyDescriptionVertical } from "../alley/AboutAlley";
 import { fetchAPI } from "../../../../utils/fetch-api";
 import { CircularProgress } from "@mui/material";
-import { AlleyItemProps } from "@/app/garden/[alley]/page";
+import { AlleyItemProps } from "@/app/garden/[alley]/SingleAlleyClient";
 import { getImageUrl } from "@/utils/api-helpers";
 import { FormProps } from "./ChoseTreeForm";
 import { callToActionData } from "../../data/Garden";

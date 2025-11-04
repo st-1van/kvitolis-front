@@ -6,7 +6,8 @@ import Link from "next/link";
 import { socilalLinks } from "../data/Navigation";
 
 export const Footer = ()=>{
-    const year = new Date().getFullYear();
+    // const year = new Date().getFullYear();
+    const year = '2025';
 
     return(
         <footer id="contacts" className='footer'>
