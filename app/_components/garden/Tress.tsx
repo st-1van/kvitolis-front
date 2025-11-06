@@ -74,6 +74,7 @@ export default function Trees() {
     priority,
     slug,
   }));
+  // console.log('Formated data for trees:', data);
 
   return (
     <section className="trees" id="alleys">

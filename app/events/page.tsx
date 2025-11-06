@@ -94,9 +94,11 @@ export default function EventsPage() {
               </div>
             </AnimatedOnScroll>
           </div>
-            <AnimatedOnScroll animationClass="fade-in-up">
-              <StandartGallery images={data?.gallery} />
-            </AnimatedOnScroll>
+          {data?.gallery ? 
+                <AnimatedOnScroll animationClass="fade-in-up">
+                  <StandartGallery images={data?.gallery} />
+                </AnimatedOnScroll>
+          :null}
         </section>
 
         <section id='about-events'>

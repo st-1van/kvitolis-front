@@ -126,11 +126,13 @@ return <main>
             </div>
           </div>
         </section>
-        <section className="gallery">
-            <AnimatedOnScroll animationClass="fade-in-up">
-              <StandartGallery images={data?.gallery} />
-            </AnimatedOnScroll>
-        </section>
+        {data?.gallery ? 
+          <section className="gallery">
+              <AnimatedOnScroll animationClass="fade-in-up">
+                <StandartGallery images={data?.gallery} />
+              </AnimatedOnScroll>
+          </section>
+        :null}
         <section className="date">
           <div className="container">
             <AnimatedOnScroll animationClass="fade-in-up">
