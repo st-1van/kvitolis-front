@@ -1,11 +1,8 @@
 'use client';
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import ChoseTreeForm from "./ChoseTreeForm";
-import { useSearchParams } from "next/navigation";
 import { AlleyDescriptionVertical } from "../alley/AboutAlley";
-import { fetchAPI } from "../../../../utils/fetch-api";
-import { CircularProgress } from "@mui/material";
 import { AlleyItemProps } from "@/app/garden/[alley]/SingleAlleyClient";
 import { getImageUrl } from "@/utils/api-helpers";
 import { FormProps } from "./ChoseTreeForm";
@@ -20,139 +17,72 @@ export type Person = {
   desc?: string | null;
 };
 
-export default function ChoseTreeWrapper() {
-  const searchParams = useSearchParams();
-  const alleyTitleParam = searchParams.get("alleyName") ?? null;
+export default function ChoseTreeWrapper(props: {
+  // Дані тепер приходять з сервера (page)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any[];
+  alleyTitleParam: string | null;
+  error: string | null;
+  queried: boolean;
+}) {
+  const { data, alleyTitleParam, error, queried } = props;
 
-  const [data, setData] = useState<AlleyItemProps[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  // selected alley from fetched data (or null until available)
+  // selected alley from received data
   const [selectedAlley, setSelectedAlley] = useState<AlleyItemProps | null>(null);
 
-  // mounted ref to avoid setState after unmount
-  const mountedRef = useRef(true);
-  useEffect(() => {
-    mountedRef.current = true;
-    return () => {
-      mountedRef.current = false;
-    };
-  }, []);
-
-  // Fetch data (cancels on unmount / param change)
-  const fetchData = useCallback(
-    async (signal?: AbortSignal) => {
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-        const path = `/alleys-col`;
-
-        const urlParamsObject = {
-          filters: { alleyName: alleyTitleParam || { $notNull: true } },
-          populate: {
-            tree: {
-              populate: ["img"],
-            },
-            famousPeople: true,
-          },
-        };
-
-        const options: RequestInit = {
-          headers: { Authorization: `Bearer ${token}` },
-          signal,
-        };
-
-        const responseData = await fetchAPI(path, urlParamsObject, options);
-        const safeData = Array.isArray(responseData?.data) ? responseData.data : [];
-
-        if (!mountedRef.current) return;
-        setData(safeData);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (err: any) {
-        if (err?.name === "AbortError") {
-          // request was cancelled, ignore
-          return;
-        }
-        console.error(err);
-        if (!mountedRef.current) return;
-        setError(err?.message ?? "Unknown error");
-      } finally {
-        if (!mountedRef.current) return;
-        setIsLoading(false);
-      }
-    },
-    [alleyTitleParam]
-  );
-
-  useEffect(() => {
-    const controller = new AbortController();
-    fetchData(controller.signal);
-    return () => controller.abort();
-  }, [fetchData]);
-
-  // When data or query param changes, pick the selected alley from fetched data.
+  // Коли приходять нові дані або змінюється query param — обрати поточну алею
   useEffect(() => {
     if (!Array.isArray(data) || data.length === 0) {
       setSelectedAlley(null);
       return;
     }
 
-    // prefer matching alleyName or title fields depending on API / legacy
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const aMatches = (item: any) => typeof (item as any).alleyName !== "undefined";
+
     const matchByQuery =
-      alleyTitleParam &&
-      (aMatches(data[0]) ? data.find((a) => a.alleyName === alleyTitleParam) : undefined);
+      alleyTitleParam && (aMatches(data[0]) ? data.find((a) => (a as AlleyItemProps).alleyName === alleyTitleParam) : undefined);
 
-    // fallback: try title (legacy)
-    const matchByTitle =
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      alleyTitleParam && data.find((a) => (a as any).title === alleyTitleParam);
+    // fallback: legacy title
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const matchByTitle = alleyTitleParam && data.find((a: any) => (a as any).title === alleyTitleParam);
 
-    // If there's a specific query, use matched; otherwise use first item
     const chosen = alleyTitleParam ? (matchByQuery ?? matchByTitle ?? null) : null;
 
     setSelectedAlley(chosen as AlleyItemProps | null);
-
-    function aMatches(item: AlleyItemProps) {
-      // helper to check if AlleyItemProps has alleyName property
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return typeof (item as any).alleyName !== "undefined";
-    }
   }, [data, alleyTitleParam]);
 
-  // AlleyData for the form: safe mapping (no undefined alleyName)
+  // AlleyData for the form
   const AlleyData = useMemo<FormProps["AlleyData"]>(() => {
-    return data.map(({ slug, alleyName }) => ({
-      slug: slug ?? "",
-      alleyName: alleyName ?? "",
-    }));
+    return (Array.isArray(data) ? data : []).map((item) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const it: any = item;
+      return {
+        slug: (it.slug as string) ?? "",
+        alleyName: (it.alleyName as string) ?? (it.title as string) ?? "",
+      };
+    });
   }, [data]);
 
-  // Derived list of persons from the selected alley (normalized)
   const personsList = useMemo<Person[]>(() => {
     if (!selectedAlley) return [];
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const rawPeople: any[] = Array.isArray((selectedAlley as any).famousPeople)
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ? (selectedAlley as any).famousPeople
+      ? ((selectedAlley as any).famousPeople as any[])
       : [];
 
     return rawPeople
-      .filter((person) => person?.free !== false) // keep when free not explicitly false
+      .filter((person) => person?.free !== false)
       .map((person) => ({
         id: person?.id != null ? String(person.id) : Math.random().toString(36).slice(2, 9),
         name: person?.name ?? person?.fullName ?? "Unknown",
         years: person?.years ?? person?.life ?? undefined,
-        free:
-          typeof person?.free === "string" ? person.free === "true" : !!person?.free,
+        free: typeof person?.free === "string" ? person.free === "true" : !!person?.free,
         desc: person?.desc ?? person?.description ?? "",
       }));
   }, [selectedAlley]);
 
-  // Tree data mapping for AlleyDescriptionVertical
   const treeData = useMemo(() => {
     if (!selectedAlley) {
       return {
@@ -161,12 +91,11 @@ export default function ChoseTreeWrapper() {
         src: "",
         latin: "",
         button1: "Посадити дерево",
-        price: null,
+        price: null as unknown as string | number | null,
       };
     }
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const tree = (selectedAlley as any).tree ?? {};
+    const tree: any = (selectedAlley as any).tree ?? {};
     return {
       name: tree.name ?? "",
       desc: tree.desc ?? "",
@@ -177,42 +106,32 @@ export default function ChoseTreeWrapper() {
     };
   }, [selectedAlley]);
 
-  // handler to change alley based on selection from form (keeps using fetched data)
   const handleAlleyChange = useCallback(
     (newAlleyTitle: string) => {
       if (!Array.isArray(data)) return;
 
-      // try to find by alleyName or legacy title
-      const matched =
-        data.find((a) => a.alleyName === newAlleyTitle) ??
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        data.find((a: any) => a.title === newAlleyTitle);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const byName = (data as any[]).find((a: any) => a.alleyName === newAlleyTitle);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const byTitle = (data as any[]).find((a: any) => a.title === newAlleyTitle);
 
-      if (matched) {
-        setSelectedAlley(matched);
-      }
+      const matched = (byName as AlleyItemProps) ?? (byTitle as AlleyItemProps) ?? null;
+      if (matched) setSelectedAlley(matched);
     },
     [data]
   );
 
-  // Safe chosenAlley string to avoid accessing selectedAlley when null (prevents render-time exception)
   const chosenAlleySafe: string = selectedAlley
-    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ((selectedAlley as any).title ?? (selectedAlley as any).alleyName ?? "")
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ? (((selectedAlley as any).title as string) ?? ((selectedAlley as any).alleyName as string) ?? "")
     : "";
 
-
-  console.log('selectedAlley:', selectedAlley);
-  console.log('safe chosenAlleySafe:', chosenAlleySafe);
   return (
     <main>
       <section className="plantTree">
         <div className="container">
-          {isLoading ? (
-            <div style={{ width: "100%", textAlign: "center", padding: 40 }}>
-              <CircularProgress />
-            </div>
-          ) : error ? (
+          {/* Лоадера більше немає (дані вже з сервера). Якщо потрібен — можна передати прапор з page */}
+          {error ? (
             <div style={{ color: "red" }}>Error: {error}</div>
           ) : (
             <div className="row">
@@ -226,17 +145,17 @@ export default function ChoseTreeWrapper() {
                 <AlleyDescriptionVertical
                   treeData={treeData}
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  alleyName={(selectedAlley as any).title ?? (selectedAlley as any).alleyName ?? ""}
+                  alleyName={((selectedAlley as any).title as string) ?? ((selectedAlley as any).alleyName as string) ?? ""}
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  alleyDesc={(selectedAlley as any).desc ?? ""}
+                  alleyDesc={((selectedAlley as any).desc as string) ?? ""}
                 />
               )}
               <ChoseTreeForm
                 AlleyData={AlleyData}
+                personsList={personsList}
                 handleAlleyChange={handleAlleyChange}
                 chosenAlley={chosenAlleySafe}
-                personsList={personsList}
-                queried={alleyTitleParam !== null}
+                queried={queried}
               />
             </div>
           )}
