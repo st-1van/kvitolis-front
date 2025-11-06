@@ -6,8 +6,7 @@ import FAQ from "../../_components/garden/FAQ";
 import TreeDescription from '@/app/_components/garden/alley/TreeDescription';
 import Persons, { PersonsDataProps } from '@/app/_components/garden/alley/Persons';
 import { callToActionData, faqData } from '../../_components/data/Garden';
-// import { CircularProgress } from "@mui/material";
-import { getImageUrl } from "@/utils/api-helpers";
+import { getImageUrl } from "@/lib/strapi";
 
 export type AlleyItemProps = {
   id: string;
@@ -48,7 +47,7 @@ export default function SingleAlleyClient({ data, slug }: { data: AlleyItemProps
   const treeData = {
     name: d.tree.name,
     desc: d.tree.desc,
-    src: getImageUrl(d.tree.img.url) ?? "/assets/banners/visual/default-tree.jpg",
+    src: getImageUrl(d.tree.img.url) ?? "/assets/trees/клен.png",
     price: d.tree.price,
     latin: d.tree.latin,
   };

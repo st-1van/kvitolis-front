@@ -10,8 +10,8 @@ type Params = { alley: string };
 export async function generateStaticParams(): Promise<Params[]> {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const res = await fetchAPI('/alleys-col', { fields: ['slug'], pagination: { pageSize: 12 } }, { timeout: 15000, retries: 1 } as any);
-    const items = res?.data ?? [];
+    const res = await fetchAPI('/alleys-col', { fields: ['slug'], pagination: { pageSize: 12 } }, { timeout: 15000, retries: 1 } as any) as StrapiCollection<any>;
+    const items = res.data ?? [];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return items.map((it: any) => ({ alley: it.slug }));
   } catch (err) {
@@ -20,6 +20,9 @@ export async function generateStaticParams(): Promise<Params[]> {
     return [];
   }
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type StrapiCollection<T> = { data: T[]; meta?: any };
 
 export default async function Page(props: {
   params: Promise<Params>;
@@ -31,8 +34,8 @@ export default async function Page(props: {
   try {
     const query = `filters[slug][$eq]=${encodeURIComponent(alley)}&populate[tree][populate]=img&populate[famousPeople][populate]=photo`;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const res = await fetchAPI(`/alleys-col?${query}`, undefined, { timeout: 15000, retries: 1 } as any);
-    const items = res?.data ?? [];
+    const res = await fetchAPI(`/alleys-col?${query}`, undefined, { timeout: 15000, retries: 1 } as any) as StrapiCollection<any>;
+    const items = res.data ?? [];
     if (!items.length) return notFound();
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -53,8 +56,6 @@ export default async function Page(props: {
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         famousPeople: (it.famousPeople ?? []).map((p: any) => ({
-          // id: p.id,
-          // photo: p.photo.url,
           ...p,
         }))
       };
