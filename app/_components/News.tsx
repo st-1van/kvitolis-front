@@ -20,6 +20,9 @@ export type NewsItemProps = {
     url: string;
   };
   gallery?: ImageItemProps[];
+  banner?:{
+    url: string;
+  }
 };
 
 

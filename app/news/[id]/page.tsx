@@ -55,6 +55,7 @@ export default async function Page(props: {
       populate: {
         img: { populate: "*" },
         gallery: { populate: "*" },
+        banner: { populate: "*" },
       },
     };
 

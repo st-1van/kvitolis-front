@@ -6,6 +6,7 @@ import type { NewsItemProps } from "@/app/_components/News";
 import ReactMarkdown from "react-markdown";
 import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
+import { formatDate } from "../NewsClient";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapToNewsItem(item: any): NewsItemProps {
@@ -14,6 +15,7 @@ function mapToNewsItem(item: any): NewsItemProps {
   const desc = item?.desc ?? "";
   const text = item?.text ?? "";
   const publishedAt = item?.publishedAt ?? "";
+  const banner = item?.banner && typeof item.banner?.url === "string" ? { url: item.banner.url } : undefined;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const galleryRaw: any[] =
@@ -33,7 +35,8 @@ function mapToNewsItem(item: any): NewsItemProps {
     desc,
     text,
     publishedAt,
-    gallery
+    gallery,
+    banner
   };
 }
 
@@ -43,6 +46,8 @@ export default function SingleNewsClient(props: {
 }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const news: NewsItemProps = mapToNewsItem(props.data as any);
+  const { title, desc, text, publishedAt, banner } = news;
+  const date = formatDate(publishedAt);
 
   if (!news || !news.title) {
     return (
@@ -54,17 +59,32 @@ export default function SingleNewsClient(props: {
 
   return (
     <main>
-      <h1>{news.title}</h1>
-      <p>{news.desc}</p>
-      
-      <div>
-        <ReactMarkdown
-          rehypePlugins={[rehypeSanitize]}
-          remarkPlugins={[remarkGfm]}
+      <div className="first-screen container animate fade-in-up"
+        style={{
+          backgroundImage: `url('${banner?.url || '/assets/default-slide.png'}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          width: '100%',
+          height: '350px',}}
         >
-          {news.text}
-        </ReactMarkdown>
+      
+      </div>
+
+      <section className="article">
+        <div className="container col col-lg">
+          <div className="news__date">{date}</div>
+          <h1>{title}</h1>
+          <p className="subp">{desc}</p>
+        <div>
+          <ReactMarkdown
+            rehypePlugins={[rehypeSanitize]}
+            remarkPlugins={[remarkGfm]}
+          >
+            {text}
+          </ReactMarkdown>
         </div>
+        </div>
+      </section>
       {Array.isArray(news.gallery) && news.gallery.length > 0 && (
         <StandartGallery images={news.gallery} />
       )}
