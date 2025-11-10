@@ -25,7 +25,7 @@ function mapItem(raw: any) {
   const text = a.text;
   const publishedAt = formatDate(a.publishedAt);
   //перетворюємо id в рядок
-  const id = String(a?.id) ?? "";
+  const documentId = String(a?.documentId) ?? "";
 
   // Зображення
   const imgUrl = getImageUrl(a?.img?.url ?? "");
@@ -35,7 +35,7 @@ function mapItem(raw: any) {
     desc,
     text,
     publishedAt,
-    id,
+    documentId,
     img: imgUrl ? { url: imgUrl } : undefined,
   };
 }

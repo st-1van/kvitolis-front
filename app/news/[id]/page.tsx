@@ -8,14 +8,13 @@ export const revalidate = 60;
 
 type Params = { id: string };
 
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function generateStaticParams(): Promise<Params[]> {
   try {
     // Отримуємо до 12 slug для попередньої генерації
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const res: any = await fetchAPI("/news-col", {
-      fields: ["id"],
+      fields: ["documentId"],
       pagination: { pageSize: 12},
     });
     
@@ -24,8 +23,8 @@ export async function generateStaticParams(): Promise<Params[]> {
 
 
     const ids: (string | number)[] = items.map((it) => {
-      if (typeof it.id === "number" || typeof it.id === "string") {
-        return it.id;
+      if (typeof it.documentId === "number" || typeof it.documentId === "string") {
+        return it.documentId;
       } else {
         return null;
       }
@@ -51,7 +50,7 @@ export default async function Page(props: {
     const path = `/news-col`;
 
     const urlParamsObject = {
-      filters: { id },
+      filters: { documentId: id },
       populate: {
         img: { populate: "*" },
         gallery: { populate: "*" },

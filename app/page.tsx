@@ -6,6 +6,7 @@ import InterMap3 from "./_components/InterMap3";
 import { useCallback, useEffect, useState } from "react";
 import { fetchAPI } from "../utils/fetch-api";
 import { CircularProgress } from "@mui/material";
+import News from "./_components/News";
 
 
 export default function Home() {
@@ -53,7 +54,11 @@ export default function Home() {
         <About />
         <InterMap3 />
         <WeHave />
-        {/* <News title='Що у нас відбувається' desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/> */}
+        <News 
+          title='Що у нас відбувається' 
+          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          items={[]}
+        />
   </main>
   );
 }
