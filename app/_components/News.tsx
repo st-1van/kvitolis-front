@@ -2,47 +2,31 @@
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedOnScroll from "./ui/AnimatedScroll";
+import { ImageItemProps } from "./StandartGallery";
 
 type NewsProps = {
   title: string;
   desc: string;
+  items: NewsItemProps[];
 };
 
-type NewsItemProps = {
+export type NewsItemProps = {
+  id: string;
   title: string;
-  src?: string;
+  text: string;
   desc: string;
-  date: string;
-  slug: string;
+  publishedAt: string;
+  img?: {
+    url: string;
+  };
+  gallery?: ImageItemProps[];
 };
 
 
-const news: NewsItemProps[] = [
-  {
-    title: "Сезон лаванди у квітолісі",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    date: "14.02.2025",
-    src: "/assets/news/news-1.jpg",
-    slug: "/news/1",
-  },
-  {
-    title: "Сад Українства",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    date: "15.02.2025",
-    src: "/assets/news/news-2.jpg",
-    slug: "/news/2",
-  },
-  {
-    title: "Друга новина",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    date: "15.02.2025",
-    src: "/assets/news/news-3.jpg",
-    slug: "/news/3",
-  },
-];
 
-export default function News({ title, desc }: NewsProps) {
-  //get request for last 3 news
+
+export default function News({ title, desc, items }: NewsProps) {
+
   return (
     <section className="news">
       <div className="container">
@@ -52,8 +36,8 @@ export default function News({ title, desc }: NewsProps) {
             <p>{desc}</p>
           </div>
           <div className="news__list row">
-            {news.map((item, index) => (
-              <NewsItem key={index} item={item} />
+            {items.map((item) => (
+              <NewsItem key={item.id} item={item} />
             ))}
           </div>
         </div>
@@ -63,15 +47,15 @@ export default function News({ title, desc }: NewsProps) {
 }
 
 function NewsItem({ item }: { item: NewsItemProps }) {
-  const { title, src, desc, date, slug } = item;
+  const { title, img, desc, publishedAt, id } = item;
 
   return (
     <AnimatedOnScroll animationClass="fade-in-up">
       <div className="news__item">
 
-        <div className="news__date">{date}</div>
+        <div className="news__date">{publishedAt}</div>
 
-        {src && <Image src={src} alt={title || "News Image"}
+        {img && <Image src={img.url || ''} alt={title || "News Image"}
                 width={371}
                 height={324}
                 className="news__img"
@@ -81,7 +65,7 @@ function NewsItem({ item }: { item: NewsItemProps }) {
           <h5>{title}</h5>
           <div>
             <p className="news__description">{desc}</p>
-            {slug && <Link href={slug}>Більше</Link>}
+            {id && <Link href={`/news/${id}`}>Більше</Link>}
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ type CardItemProps = {
 export default function CardItem({ card, style }: CardItemProps) {
   const { title, desc, photo, src } = card;
   const imgUrl = src ?? getImageUrl(photo?.url ?? '') ?? '';
-  console.log('CardItem imgUrl:', imgUrl);
+  // console.log('CardItem imgUrl:', imgUrl);
 
   return (
     <div className="card col">
