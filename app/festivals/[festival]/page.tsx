@@ -1,4 +1,5 @@
 import React from "react";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import FestivalClient from "./FestivalClient";
 import { fetchAPI } from "../../../utils/fetch-api";
@@ -10,6 +11,71 @@ type Params = { festival: string };
 type ListItem =
   | { id: number | string; slug?: string | null; [k: string]: unknown }
   | { id: number | string; attributes?: { slug?: string | null } };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type StrapiRes = any;
+
+export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
+  const { festival } = await props.params;
+
+  try {
+    // Робимо той самий фільтр по documentId, як і у Page
+    const res: StrapiRes = await fetchAPI("/festivalis", {
+      filters: { slug: festival },
+      populate: {
+        seo: { populate: "*" },
+        img: { populate: "*" },
+      },
+      pagination: { pageSize: 1 },
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const item: any = Array.isArray(res?.data) ? res.data[0] : res?.data ?? null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const seo: any = item?.seo ?? {};
+
+    const title = seo?.metaTitle ?? item?.title ?? "";
+    const description = seo?.metaDescription ?? item?.description ?? item?.desc ?? "";
+    const keywords = seo?.keywords ?? undefined;
+
+    // підтримка різних структур для зображення SEO або поля img
+    const metaImage = seo?.metaImage ?? seo?.meta_image ?? null;
+
+    const imageUrl: string | undefined =
+      // структура: { url: "..." }
+      metaImage?.url ??
+      // структура: { data: { attributes: { url: "..." } } }
+      metaImage?.data?.attributes?.url ??
+      // fallback на загальне поле img
+      item?.img?.url ??
+      item?.img?.data?.attributes?.url ??
+      undefined;
+
+    const canonical = seo?.canonicalUrl ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/festivals/${festival}`;
+
+    const metadata: Metadata = {
+      title,
+      description,
+      keywords,
+      openGraph: {
+        type: "website",
+        title,
+        description,
+        images: imageUrl ? [{ url: imageUrl }] : [],
+        locale: "uk_UA",
+        url: canonical,
+      },
+      alternates: {
+        canonical,
+      },
+    };
+
+    return metadata;
+  } catch (err) {
+    console.error("generateMetadata (news) failed:", err);
+    return {};
+  }
+}
 
 // Спроба дістати slug з різних можливих форматів Strapi
 function extractSlug(item: ListItem): string | null {
@@ -81,6 +147,7 @@ export default async function Page(props: {
         gallery: { populate: "*" },
         time: { populate: "*" },
         price: { populate: "*" },
+        seo: { populate: "*" },
       },
     };
 

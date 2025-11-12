@@ -1,8 +1,24 @@
 import React from "react";
+import { Metadata } from 'next';
 import { fetchAPI } from "../../lib/strapi";
 import NewsClient from "./NewsClient";
 import { notFound } from "next/navigation";
 
+
+
+export function generateMetadata(): Metadata {
+
+    const metadata: Metadata = {
+      title: "Новини Квітолісу",
+      description:'Дізнайтеся останні новини, події та оновлення зі світу Квітолісу. Будьте в курсі всіх захоплюючих подій.',
+      keywords:['новини', 'оновлення', 'події', 'Квітоліс', 'садівництво'],
+      alternates: {
+        canonical: `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/news`,
+      },
+    };
+    return metadata;
+
+}
 
 export default async function Page() {
 

@@ -81,11 +81,9 @@ export async function fetchAPI<T = unknown>(
     } catch (err) {
       clearTimeout(abortId);
       const isLast = attempt > retries;
-      // eslint-disable-next-line no-console
       console.warn(`fetchAPI attempt ${attempt} failed for ${url}: ${(err as Error)?.message || String(err)} ${isLast ? "(no more retries)" : "(retrying)"}`);
       if (isLast) throw err;
       const backoff = 200 * attempt;
-      // eslint-disable-next-line no-await-in-loop
       await new Promise((r) => setTimeout(r, backoff));
     }
   }

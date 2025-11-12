@@ -71,7 +71,7 @@ export default function Persons({ personsData, alleyName }: PersonsProps) {
   const freeList = useMemo(() => indexedList.filter(p => p.free === true), [indexedList]);
   const takenList = useMemo(() => indexedList.filter(p => p.free === false), [indexedList]);
   const allList = indexedList;
-  console.log('freeList:', freeList.length);
+  // console.log('freeList:', freeList.length);
 
   useEffect(() => {
     if (filter === 'free') setDisplayedPeople(freeList);
@@ -197,7 +197,7 @@ export default function Persons({ personsData, alleyName }: PersonsProps) {
 function PersonCardNew({ item, isSelected, selectionHandler }: { item: PersonsDataProps; isSelected?: () => boolean; selectionHandler?: (person: PersonsDataProps) => void; }) {
   const { name, photo, desc, free, mecenat, years, mecenat_note } = item;
 
-  console.log(photo)
+  // console.log(photo)
 
   return (
     <>
