@@ -13,7 +13,7 @@ import AnimatedOnScroll from "../../_components/ui/AnimatedScroll";
 import StandartGallery, { ImageItemProps } from "../../_components/StandartGallery";
 import type { SlideProps } from "../../_components/Carousel";
 
-type FestivalProps ={
+export type FestivalProps ={
   id:string;
   slug:string;
   aboutTitle?:string;

@@ -12,6 +12,10 @@ export const navItems = [
             slug: '/#map'
         },
         {
+            display:'Фестивалі',
+            slug: '/#festivals'
+        },
+        {
             display:'Сад Українства',
             slug: '/garden'
         },

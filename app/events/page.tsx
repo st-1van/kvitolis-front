@@ -29,10 +29,8 @@ export default async function Page() {
       return notFound();
     }
 
-    // Передаємо плоский об'єкт події в клієнтський компонент
     return <EventsClient {...response.data} />;
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error(`Failed to fetch event page data:`, err);
     return notFound();
   }

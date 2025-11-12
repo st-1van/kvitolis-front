@@ -17,7 +17,7 @@
       flex-wrap: nowrap;
       padding: 0 1rem;
       // gap:auto;
-      gap: 1rem;
+      gap: 2.5rem;
       overflow-x: hidden;
       overflow-y: clip;
       scroll-behavior: smooth;
@@ -40,6 +40,10 @@
 
     .--revealed{
       display:block;
+    }
+
+    .more-btn{
+      font-size: 1.5rem;
     }
     .btn.--revealed{
       display: block; 

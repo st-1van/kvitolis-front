@@ -3,8 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import AnimatedOnScroll from "./ui/AnimatedScroll";
 import { ImageItemProps } from "./StandartGallery";
+import { MasonryBlock } from "./garden/MasonaryBlock";
 
-type NewsProps = {
+export type NewsProps = {
   title: string;
   desc: string;
   items: NewsItemProps[];
@@ -12,6 +13,7 @@ type NewsProps = {
 
 export type NewsItemProps = {
   id: string;
+  documentId: string;
   title: string;
   text: string;
   desc: string;
@@ -20,13 +22,10 @@ export type NewsItemProps = {
     url: string;
   };
   gallery?: ImageItemProps[];
-  banner?:{
+  banner?: {
     url: string;
-  }
+  };
 };
-
-
-
 
 export default function News({ title, desc, items }: NewsProps) {
 
@@ -40,7 +39,7 @@ export default function News({ title, desc, items }: NewsProps) {
           </div>
           <div className="news__list row">
             {items.map((item) => (
-              <NewsItem key={item.id} item={item} />
+              <NewsItem key={item.documentId} {...item} />
             ))}
           </div>
         </div>
@@ -49,8 +48,7 @@ export default function News({ title, desc, items }: NewsProps) {
   );
 }
 
-function NewsItem({ item }: { item: NewsItemProps }) {
-  const { title, img, desc, publishedAt, id } = item;
+function NewsItem({ title, img, desc, publishedAt, documentId} :NewsItemProps ) {
 
   return (
     <AnimatedOnScroll animationClass="fade-in-up">
@@ -66,12 +64,27 @@ function NewsItem({ item }: { item: NewsItemProps }) {
 
         <div className="news__headline">
           <h5>{title}</h5>
-          <div>
-            <p className="news__description">{desc}</p>
-            {id && <Link href={`/news/${id}`}>Більше</Link>}
+          <div className="news__description">
+            <p>{desc}</p>
+            {documentId && <Link href={`/news/${documentId}`}>більше</Link>}
           </div>
         </div>
       </div>
     </AnimatedOnScroll>
   );
 }
+
+export function NewsOnMainPage({ title, desc, items }: NewsProps) {
+  return (
+    <section className="news">
+      <div className="container">
+        <div className="content">
+          <div className="news__title">
+            <h2>{title}</h2>
+            <p>{desc}</p>
+          </div>
+          <MasonryBlock data={items} Card={NewsItem} slug={'/news'} />
+        </div>
+      </div>
+    </section>
+  )}

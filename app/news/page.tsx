@@ -35,7 +35,6 @@ export default async function Page() {
     />;
 
     } catch (err) {
-      // eslint-disable-next-line no-console
       console.error(`Failed to fetch news:`, err);
       return notFound();
     }

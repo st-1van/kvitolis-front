@@ -3,11 +3,6 @@ import Image from "next/image";
 import Link from "next/link"
 import { MasonryBlock } from "./MasonaryBlock";
 import AnimatedOnScroll from "../ui/AnimatedScroll";
-
-import { fetchAPI } from "../../../utils/fetch-api";
-import { useState, useEffect, useCallback } from "react";
-
-import { CircularProgress } from "@mui/material";
 import { getImageUrl } from "@/utils/api-helpers";
 import { AlleyItemProps } from "@/app/garden/[alley]/SingleAlleyClient";
 
@@ -29,52 +24,17 @@ export type TreeProps = {
 };
 
 
-export default function Trees() {
 
-  // const [meta, setMeta] = useState<Meta | undefined>();
-  const [data, setData] = useState<AlleyItemProps[]>([]);
-  const [isLoading, setLoading] = useState(true);
+export default function Trees({ alleyData }: { alleyData: AlleyItemProps[] }) {
 
 
-  const fetchData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-      const path = `/alleys-col`;
-      //замінити параметр порядку
-      const urlParamsObject = {
-        sort: { priority: "desc" },
-        populate: {
-          tree: {
-            populate: ['img']
-          },
-        }
-      };
-      const options = { headers: { Authorization: `Bearer ${token}` } };
-      const responseData = await fetchAPI(path, urlParamsObject, options);
-
-      setData(responseData.data);
-      console.log('Fetched alley data:', responseData.data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-
-  const formatedData = data.map(({ alleyName, id, tree, slug, priority }: AlleyItemProps) => ({
+  const formatedData = alleyData.map(({ alleyName, id, tree, slug, priority }: AlleyItemProps) => ({
     id,
     alleyName,
     tree,
     priority,
     slug,
   }));
-  console.log('Formated data for trees:', data);
 
   return (
     <section className="trees" id="alleys">
@@ -87,7 +47,7 @@ export default function Trees() {
               </p>
           </div>
         </AnimatedOnScroll>
-        {isLoading?<CircularProgress/>:<MasonryBlock data={formatedData} Card={TreeCard} />}
+        <MasonryBlock data={formatedData} Card={TreeCard} />
         
       </div>
     </section>

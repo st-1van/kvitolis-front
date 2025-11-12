@@ -1,64 +1,63 @@
-'use client';
-import About from "./_components/About";
-import WeHave from "./_components/WeHave";
-import Carousel, { SlideProps } from "./_components/Carousel";
-import InterMap3 from "./_components/InterMap3";
-import { useCallback, useEffect, useState } from "react";
-import { fetchAPI } from "../utils/fetch-api";
-import { CircularProgress } from "@mui/material";
-import News from "./_components/News";
+import HomeClient from "./HomeClient";
+import { fetchAPI } from "../lib/strapi";
+import { notFound } from "next/navigation";
 
 
-export default function Home() {
-    const [data, setData] = useState<{ carousel?: SlideProps[] } | null>(null);
-    const [isLoading, setLoading] = useState(true);
-  
-    const fetchData = useCallback(async () => {
-      setLoading(true); 
-      try {
-        const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-        const path = `/golovna`;
-        //замінити параметр порядку
-  
-        const urlParamsObject = {
-          populate: {
-            carousel: {
-              populate: ['photo', 'btn']
-            },
-          }
-        };
-        const options = { headers: { Authorization: `Bearer ${token}` } };
-        const responseData = await fetchAPI( path, urlParamsObject, options );
-  
-        setData(responseData.data);
-        console.log('Successfully fetched alley data:');
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
+export default async function Home() {
+  try {
+    
+    const path = `/golovna`;
+    const urlParamsObject = {
+      populate: {
+        carousel: {
+          populate: ['photo', 'btn']
+        },
       }
-    }, []);
-  
-    useEffect(() => {
-      fetchData();
-    }, [fetchData]);
-  
-    if (isLoading) {
-      return <main><CircularProgress className="loader"/></main>
+    };
+
+    const newsPath = "/news-col";
+    const newsUrlParamsObject = {
+      populate:'*',
+      pagination: {
+        pageSize: 9,
+      },
+      sort: ["publishedAt:desc"],
+    };
+
+    const festivalPath = "/festivalis";
+    const festivalUrlParamsObject = {
+      populate: { mainBanner: { populate: '*'}},
+      pagination: {
+        pageSize: 4,
+      },
+      sort: ["publishedAt:desc"],
+    };
+
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const carouselData: any = await fetchAPI( path, urlParamsObject, { timeout: 15000, retries: 1 });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const newsData: any = await fetchAPI( newsPath, newsUrlParamsObject, { timeout: 15000, retries: 1 });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const festivalData: any = await fetchAPI( festivalPath, festivalUrlParamsObject, { timeout: 15000, retries: 1 });
+
+    if (!carouselData && !newsData && !festivalData) {
+      return notFound();
     }
     
+    const carousel = carouselData.data.carousel || [];
+    const newsItems = newsData.data || [];
+    const festivalItems = festivalData.data || [];
 
-  return (
-  <main>
-        <Carousel CarouselData={data?.carousel ?? []}/>
-        <About />
-        <InterMap3 />
-        <WeHave />
-        <News 
-          title='Що у нас відбувається' 
-          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          items={[]}
-        />
-  </main>
-  );
+    return <HomeClient 
+              carouselData={carousel} 
+              newsData={newsItems}
+              festivalData={festivalItems}
+            />;
+
+  } catch (err) {
+    console.error(`Failed to fetch data:`, err);
+    return notFound();
+  }
 }
+

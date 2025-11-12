@@ -1,14 +1,13 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import SingleNewsClient from "./SingleNewsClient";
-// Використай той самий helper, що і в інших сторінках
 import { fetchAPI } from "../../../lib/strapi";
 
 export const revalidate = 60;
 
 type Params = { id: string };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export async function generateStaticParams(): Promise<Params[]> {
   try {
     // Отримуємо до 12 slug для попередньої генерації
@@ -33,7 +32,6 @@ export async function generateStaticParams(): Promise<Params[]> {
     return ids.map((id) => ({ id: String(id) }));
 
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error("generateStaticParams (news):", err);
     return [];
   }
@@ -72,7 +70,6 @@ export default async function Page(props: {
 
     return <SingleNewsClient data={item} />;
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error(`Failed to fetch news by id="${id}":`, err);
     return notFound();
   }

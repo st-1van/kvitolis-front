@@ -15,10 +15,11 @@ export function formatDate(isoString: any) {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function mapItem(raw: any) {
+export function mapNews(raw: any) {
   // Підтримка формату Strapi: або top-level поля, або attributes.*
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const a: any = raw?.attributes ?? raw;
+  const id = raw?.id ? String(raw.id) : '';
 
   const title = a.title;
   const desc = a.desc;
@@ -31,6 +32,7 @@ function mapItem(raw: any) {
   const imgUrl = getImageUrl(a?.img?.url ?? "");
 
   return {
+    id,
     title,
     desc,
     text,
@@ -48,7 +50,7 @@ export default function NewsClient(props: {
   const { title, desc, items } = props;
 
   const mapped = useMemo(
-    () => (Array.isArray(items) ? items.map(mapItem) : []),
+    () => (Array.isArray(items) ? items.map(mapNews) : []),
     [items]
   );
 
@@ -57,7 +59,6 @@ export default function NewsClient(props: {
       <News
         title={title}
         desc={desc}
-        // Передаємо список новин (припускаємо що компонент News може прийняти проп типу items / data; якщо ні — адаптуй під його API)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         items={mapped as any}
       />
