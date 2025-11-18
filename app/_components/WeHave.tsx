@@ -1,12 +1,21 @@
+'use client';
 import Attraction from "./Attraction";
 import CardItem from "./CardItem";
-import { cards } from "./data/WeHave"
+// import { cards } from "./data/WeHave"
 import AnimatedOnScroll from "./ui/AnimatedScroll";
 import { CardProps } from "./CardItem";
 import { FestivalProps } from "../festivals/[festival]/FestivalClient";
 import { getImageUrl } from "@/lib/strapi";
 
-export default function WeHave({festivalData}: {festivalData: FestivalProps[]}){
+type Props = {
+  festivalData?: FestivalProps[];
+  cardsData?: CardProps[];
+};
+
+export default function WeHave({
+  festivalData = [],
+  cardsData = [],
+}: Props) {
 
     const attractions = festivalData.map(({aboutTitle, aboutDesc, slug, mainBanner})=>({
         id: mainBanner?.id || '',
@@ -27,7 +36,7 @@ export default function WeHave({festivalData}: {festivalData: FestivalProps[]}){
             <FoodAndFun 
                 title='Також' 
                 // center='center' 
-                data={cards}
+                data={cardsData}
             />
         </section>
     )

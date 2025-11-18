@@ -30,7 +30,7 @@ export default async function Page() {
       pagination: {
         pageSize: 20,
       },
-      sort: ["publishedAt:desc"],
+      sort: ["date:desc"],
     };
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

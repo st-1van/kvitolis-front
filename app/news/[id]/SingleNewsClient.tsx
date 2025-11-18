@@ -6,7 +6,6 @@ import type { NewsItemProps } from "@/app/_components/News";
 import ReactMarkdown from "react-markdown";
 import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
-import { formatDate } from "../NewsClient";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapToNewsItem(item: any): NewsItemProps {
@@ -15,7 +14,7 @@ function mapToNewsItem(item: any): NewsItemProps {
   const title = item?.title ?? "";
   const desc = item?.desc ?? "";
   const text = item?.text ?? "";
-  const publishedAt = item?.publishedAt ?? "";
+  const date = item?.date ?? "";
   const banner = item?.banner && typeof item.banner?.url === "string" ? { url: item.banner.url } : undefined;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,7 +35,7 @@ function mapToNewsItem(item: any): NewsItemProps {
     title,
     desc,
     text,
-    publishedAt,
+    date,
     gallery,
     banner
   };
@@ -48,8 +47,7 @@ export default function SingleNewsClient(props: {
 }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const news: NewsItemProps = mapToNewsItem(props.data as any);
-  const { title, desc, text, publishedAt, banner } = news;
-  const date = formatDate(publishedAt);
+  const { title, desc, text, date, banner } = news;
 
   if (!news || !news.title) {
     return (

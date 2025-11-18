@@ -19,7 +19,6 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
       filters: { slug: alley },
       populate: {
         seo: { populate: "*" },
-        img: { populate: "*" },
       },
       pagination: { pageSize: 20 },
     });

@@ -17,7 +17,6 @@ export async function generateMetadata({}): Promise<Metadata> {
     const res: any = await fetchAPI(path, {
       populate: {
         seo: { populate: "*" },
-        img: { populate: "*" },
       },
       pagination: { pageSize: 1 },
     });

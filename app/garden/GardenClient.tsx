@@ -11,6 +11,7 @@ import MissionData from "../_components/data/MissionData";
 import PulseMap from "../_components/PulseMap";
 import Visualisation from "../_components/garden/alley/Visualisation";
 import { AlleyItemProps } from "./[alley]/SingleAlleyClient";
+import {SimpleOurTeam} from "../_components/OurTeam";
 
 type GardenClientProps = {
   alleyData: AlleyItemProps[];
@@ -42,6 +43,7 @@ export default function GardenClient({alleyData}: GardenClientProps) {
         <CallToAction {...callToActionData} />
         <SeoQoute {...qouteData[0]}/>
         <FAQ {...faqData} />
+        <SimpleOurTeam/>
     </main>
   );
 }

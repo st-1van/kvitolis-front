@@ -17,7 +17,7 @@ export type NewsItemProps = {
   title: string;
   text: string;
   desc: string;
-  publishedAt: string;
+  date: string;
   img?: {
     url: string;
   };
@@ -48,13 +48,13 @@ export default function News({ title, desc, items }: NewsProps) {
   );
 }
 
-function NewsItem({ title, img, desc, publishedAt, documentId} :NewsItemProps ) {
+function NewsItem({ title, img, desc, date, documentId} :NewsItemProps ) {
 
   return (
     <AnimatedOnScroll animationClass="fade-in-up">
       <div className="news__item">
 
-        <div className="news__date">{publishedAt}</div>
+        <div className="news__date">{date}</div>
 
         {img && <Image src={img.url || ''} alt={title || "News Image"}
                 width={371}
@@ -63,10 +63,12 @@ function NewsItem({ title, img, desc, publishedAt, documentId} :NewsItemProps ) 
         />}
 
         <div className="news__headline">
-          <h5>{title}</h5>
+          <Link href={`/news/${documentId}`}>
+            <h5>{title}</h5>
+          </Link>
           <div className="news__description">
             <p>{desc}</p>
-            {documentId && <Link href={`/news/${documentId}`}>більше</Link>}
+            {/* {documentId && <Link href={`/news/${documentId}`}>більше</Link>} */}
           </div>
         </div>
       </div>

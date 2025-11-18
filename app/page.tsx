@@ -10,8 +10,7 @@ export async function generateMetadata({}): Promise<Metadata> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const res: any = await fetchAPI(path, {
       populate: {
-        seo: { populate: "*" },
-        img: { populate: "*" },
+        seo: { populate: "*" }
       },
       pagination: { pageSize: 1 },
     });
@@ -35,7 +34,7 @@ export async function generateMetadata({}): Promise<Metadata> {
       item?.img?.data?.attributes?.url ??
       undefined;
 
-    const canonical = seo?.canonicalUrl ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/garden`;
+    const canonical = seo?.canonicalUrl ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}`;
 
     const metadata: Metadata = {
       title,
@@ -71,6 +70,10 @@ export default async function Home() {
         carousel: {
           populate: ['photo', 'btn']
         },
+        about: {},  
+        card:{
+          populate: '*'
+        },
         seo: { populate: "*" },
       }
     };
@@ -81,7 +84,7 @@ export default async function Home() {
       pagination: {
         pageSize: 9,
       },
-      sort: ["publishedAt:desc"],
+      sort: ["date:desc"],
     };
 
     const festivalPath = "/festivalis";
@@ -90,27 +93,31 @@ export default async function Home() {
       pagination: {
         pageSize: 4,
       },
-      sort: ["publishedAt:desc"],
+      sort: ["priority:asc"],
     };
 
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const carouselData: any = await fetchAPI( path, urlParamsObject, { timeout: 15000, retries: 1 });
+    const mainData: any = await fetchAPI( path, urlParamsObject, { timeout: 15000, retries: 1 });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const newsData: any = await fetchAPI( newsPath, newsUrlParamsObject, { timeout: 15000, retries: 1 });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const festivalData: any = await fetchAPI( festivalPath, festivalUrlParamsObject, { timeout: 15000, retries: 1 });
 
-    if (!carouselData && !newsData && !festivalData) {
+    if (!mainData && !newsData && !festivalData) {
       return notFound();
     }
     
-    const carousel = carouselData.data.carousel || [];
+    const carousel = mainData.data.carousel || [];
+    const cards = mainData.data.card || [];
+    const about = mainData.data.about || '';
     const newsItems = newsData.data || [];
     const festivalItems = festivalData.data || [];
 
     return <HomeClient 
               carouselData={carousel} 
+              cardsData={cards}
+              aboutData={about}
               newsData={newsItems}
               festivalData={festivalItems}
             />;

@@ -1,5 +1,7 @@
+'use client';
 import { getImageUrl } from "@/utils/api-helpers";
 import Image from "next/image";
+import Link from "next/link";
 
 export type CardProps = {
   title?: string;
@@ -8,9 +10,13 @@ export type CardProps = {
   };
   desc?: string;
   src?:string;
+  btn?:{
+    text:string;
+    slug:string;
+  };
 };
 
-type CardItemProps = {
+export type CardItemProps = {
   card: CardProps;
   index: number;
   style?: string;
@@ -19,8 +25,8 @@ type CardItemProps = {
 export default function CardItem({ card, style }: CardItemProps) {
   const { title, desc, photo, src } = card;
   const imgUrl = src ?? getImageUrl(photo?.url ?? '') ?? '';
-  // console.log('CardItem imgUrl:', imgUrl);
 
+  const url = card.btn?.slug.startsWith('http') ? card.btn?.slug : `${process.env.NEXT_PUBLIC_BASE_URL}/${card.btn?.slug}`;
   return (
     <div className="card col">
         <Image
@@ -32,6 +38,11 @@ export default function CardItem({ card, style }: CardItemProps) {
         />
       <h3 className="card__title">{title}</h3>
       <p>{desc}</p>
+      {card.btn && (
+        <Link href={url} className="sub">
+            {card.btn.text}
+        </Link>
+      )}
     </div>
   );
 }

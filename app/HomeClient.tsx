@@ -7,18 +7,23 @@ import { NewsItemProps, NewsOnMainPage } from "./_components/News";
 import { mapNews } from "./news/NewsClient";
 import { useMemo } from "react";
 import { FestivalProps } from "./festivals/[festival]/FestivalClient";
+import { CardProps } from "./_components/CardItem";
 
 
 type Props = {
   carouselData: SlideProps[];
   newsData?: NewsItemProps[];
   festivalData?: FestivalProps[];
+  cardsData: CardProps[];
+  aboutData: string;
 };
 
 export default function HomeClient({
   carouselData,
   newsData = [],
   festivalData = [],
+  cardsData = [],
+  aboutData,
 }: Props) {
     
   const mapped = useMemo(
@@ -30,14 +35,17 @@ export default function HomeClient({
   return (
     <main>
       <Carousel CarouselData={carouselData}/>
-      <About />
-      <InterMap3 />
-      <WeHave festivalData={festivalData} />
+      <About text={aboutData} />
+      <WeHave 
+        festivalData={festivalData}
+        cardsData={cardsData}
+      />
       <NewsOnMainPage 
         title='Наші новини' 
         desc="Дізнайтеся останні новини та події у нашому парку Квітоліс."
         items={mapped}
       />
+      <InterMap3 />
     </main>
   );
 }

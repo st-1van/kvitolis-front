@@ -15,6 +15,7 @@ import type { SlideProps } from "../../_components/Carousel";
 
 export type FestivalProps ={
   id:string;
+  priority:string;
   slug:string;
   aboutTitle?:string;
   aboutDesc?:string;
