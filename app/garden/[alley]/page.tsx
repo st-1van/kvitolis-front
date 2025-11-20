@@ -93,16 +93,18 @@ export default async function Page(props: {
   const { alley } = await props.params;
 
   try {
-    // const query = `filters[slug][$eq]=${encodeURIComponent(alley)}&populate[tree][populate]=img&populate[famousPeople][populate]=photo`;
-    // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    // const res = await fetchAPI(`/alleys-col?${query}`, undefined, { timeout: 15000, retries: 1 } as any) as StrapiCollection<any>;
     const path = `/alleys-col`;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const res: any = await fetchAPI(path, {
       filters: { slug: alley },
       populate: {
         tree: { populate: 'img' },
-        famousPeople: { populate: 'photo' },
+        famousPeople: { 
+            populate: {
+              photo: { populate: '*' },      
+              mecenat: { populate: '*' } 
+      }
+      },
         seo: { populate: '*' }
       },
       pagination: { pageSize: 20 },
