@@ -18,6 +18,7 @@ export type NewsItemProps = {
   text: string;
   desc: string;
   date: string;
+  videoId?: string;
   img?: {
     url: string;
   };

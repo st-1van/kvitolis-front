@@ -6,6 +6,7 @@ import type { NewsItemProps } from "@/app/_components/News";
 import ReactMarkdown from "react-markdown";
 import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
+import Visualisation from "@/app/_components/garden/alley/Visualisation";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapToNewsItem(item: any): NewsItemProps {
@@ -16,6 +17,7 @@ function mapToNewsItem(item: any): NewsItemProps {
   const text = item?.text ?? "";
   const date = item?.date ?? "";
   const banner = item?.banner && typeof item.banner?.url === "string" ? { url: item.banner.url } : undefined;
+  const videoId = item?.videoId ?? '';
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const galleryRaw: any[] =
@@ -37,7 +39,8 @@ function mapToNewsItem(item: any): NewsItemProps {
     text,
     date,
     gallery,
-    banner
+    banner,
+    videoId,
   };
 }
 
@@ -47,7 +50,7 @@ export default function SingleNewsClient(props: {
 }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const news: NewsItemProps = mapToNewsItem(props.data as any);
-  const { title, desc, text, date, banner } = news;
+  const { title, desc, text, date, banner, videoId } = news;
 
   if (!news || !news.title) {
     return (
@@ -75,14 +78,19 @@ export default function SingleNewsClient(props: {
           <div className="news__date">{date}</div>
           <h1>{title}</h1>
           <p className="subp">{desc}</p>
-        <div>
-          <ReactMarkdown
-            rehypePlugins={[rehypeSanitize]}
-            remarkPlugins={[remarkGfm]}
-          >
-            {text}
-          </ReactMarkdown>
-        </div>
+          <div>
+            <ReactMarkdown
+              rehypePlugins={[rehypeSanitize]}
+              remarkPlugins={[remarkGfm]}
+            >
+              {text}
+            </ReactMarkdown>
+          </div>
+          {videoId && (
+            <Visualisation
+              videoId={videoId}
+            />
+          )}
         </div>
       </section>
       {Array.isArray(news.gallery) && news.gallery.length > 0 && (
