@@ -136,7 +136,7 @@ export default async function Page(props: {
   const { festival } = await props.params;
 
   try {
-    const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+    // const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
     const path = `/festivalis`;
 
     const urlParamsObject = {
@@ -151,12 +151,12 @@ export default async function Page(props: {
       },
     };
 
-    const options: RequestInit = {
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
-    };
+    // const options: RequestInit = {
+    //   headers: token ? { Authorization: `Bearer ${token}` } : {},
+    // };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const responseData: any = await fetchAPI(path, urlParamsObject, options);
+    const responseData: any = await fetchAPI(path, urlParamsObject, { timeout: 15000, retries: 1 });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const item: any = Array.isArray(responseData?.data) ? responseData.data[0] : null;
 
