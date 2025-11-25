@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
       // Для Strapi Cloud
       {
         protocol: 'https',
-        hostname: 'prepared-sparkle-329c72da86.media.strapiapp.com',
+        hostname: 'admin.kvitolis.com.ua',
         port: '',
         pathname: '/**',
       },
