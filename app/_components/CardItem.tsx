@@ -26,7 +26,8 @@ export default function CardItem({ card, style }: CardItemProps) {
   const { title, desc, photo, src } = card;
   const imgUrl = src ?? getImageUrl(photo?.url ?? '') ?? '';
 
-  const url = card.btn?.slug.startsWith('http') ? card.btn?.slug : `${process.env.NEXT_PUBLIC_BASE_URL}/${card.btn?.slug}`;
+  const url = card.btn?.slug.startsWith('http') ? card.btn?.slug : `/${card.btn?.slug}`;
+
   return (
     <div className="card col">
         <Image
