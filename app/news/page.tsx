@@ -4,7 +4,7 @@ import { fetchAPI } from "../../lib/strapi";
 import NewsClient from "./NewsClient";
 import { notFound } from "next/navigation";
 
-
+export const revalidate = 60;
 
 export function generateMetadata(): Metadata {
 

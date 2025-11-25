@@ -3,6 +3,8 @@ import { fetchAPI } from "../lib/strapi";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
+export const revalidate = 60;
+
 export async function generateMetadata({}): Promise<Metadata> {
 
   try {
