@@ -29,7 +29,7 @@ const teamMembers = [
     {
         name: "Іван Стельмах",
         role: ["Розробка сайту", 'Стратегія'],
-        photo:'/assets/team/ivan_stelmakh.jpg',
+        photo:'/assets/team/Ivan_Stelmakh.jpg',
     },
 
     {
