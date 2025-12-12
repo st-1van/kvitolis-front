@@ -16,7 +16,7 @@ export default function StandartGallery({ images }: { images: ImageItem[] }) {
       }}
     >
       <ImageList
-        cols={5}
+        cols={20}
         rowHeight={500}
         sx={{
           minWidth: '1440px',

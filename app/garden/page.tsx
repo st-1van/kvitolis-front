@@ -10,6 +10,7 @@ import MissionData from "../_components/data/MissionData";
 import PulseMap from "../_components/PulseMap";
 import Visualisation from "../_components/garden/alley/Visualisation";
 import actualData from "../_components/data/alleyData/actualData";
+import { SimpleOurTeam } from "../_components/OurTeam";
 
 const alleyData = actualData;
 
@@ -48,6 +49,7 @@ export default function Garden() {
         <CallToAction {...callToActionData} />
         <SeoQoute {...qouteData[0]}/>
         <FAQ {...faqData} />
+        <SimpleOurTeam />
     </main>
   );
 }

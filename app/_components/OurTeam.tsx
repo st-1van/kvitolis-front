@@ -17,7 +17,7 @@ const teamMembers = [
         photo:'/assets/team/lyubomyr_sinchuk.jpg',
     },
     {
-        name: "Світлана", 
+        name: "Гуменюк Світлана", 
         role: ["Менеджмент", 'Стратегія', 'Контент'],
         photo:'/assets/team/svitlana.jpg',
     },
