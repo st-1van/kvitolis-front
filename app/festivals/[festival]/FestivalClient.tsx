@@ -12,6 +12,7 @@ import Image from "next/image";
 import AnimatedOnScroll from "../../_components/ui/AnimatedScroll";
 import StandartGallery, { ImageItemProps } from "../../_components/StandartGallery";
 import type { SlideProps } from "../../_components/Carousel";
+import Visualisation from "@/app/_components/garden/alley/Visualisation";
 
 export type FestivalProps ={
   id:string;
@@ -22,6 +23,7 @@ export type FestivalProps ={
   dateTitle?:string;
   dateDesc?:string;
   mainBanner: SlideProps;
+  showPrice:boolean;
   time:{
     text:string;
   }[];
@@ -38,6 +40,10 @@ export type FestivalProps ={
     };
   }[]
   gallery: ImageItemProps[];
+  video?:{
+    videoId:string;
+    title?:string;
+  };
 };
 
 export default function FestivalClient(props: {
@@ -139,46 +145,59 @@ export default function FestivalClient(props: {
           </AnimatedOnScroll>
         </div>
       </section>
-
-      <section className="tickets">
-        <div className="container">
-          <AnimatedOnScroll animationClass="fade-in-up">
-            <div className="text-block center">
-              <h2>Вартість квитків</h2>
-            </div>
-          </AnimatedOnScroll>
-
-          <AnimatedOnScroll animationClass="fade-sides">
-            <div className="content">
-              <div className="col col-bg grey cost-card">
-                <div>
-                  <p className="subp">{data?.price?.[0]?.days ?? ""}</p>
-                  <Image src="/assets/icons/tickets.svg" width={70} height={61} alt="icon-calendar" />
-                </div>
-                <p>
-                  <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
-                    {data?.price?.[0]?.price ?? ""}
-                  </ReactMarkdown>
-                </p>
+      {/* додати блок з відео, якщо є videoId */}
+      {data?.video?.videoId && (
+        <>
+        <Visualisation
+          title={data.video.title ?? ''}
+          videoId={data.video.videoId}
+        />
+        </>
+      )}
+      
+      {/* приховати блок з цінами, якщо стоїть галочка */}
+      {data.showPrice && (
+        <section className="tickets">
+          <div className="container">
+            <AnimatedOnScroll animationClass="fade-in-up">
+              <div className="text-block center">
+                <h2>Вартість квитків</h2>
               </div>
+            </AnimatedOnScroll>
 
-              {data?.price?.[1] && (
+            <AnimatedOnScroll animationClass="fade-sides">
+              <div className="content">
                 <div className="col col-bg grey cost-card">
                   <div>
-                    <p className="subp">{data?.price?.[1]?.days ?? ""}</p>
+                    <p className="subp">{data?.price?.[0]?.days ?? ""}</p>
                     <Image src="/assets/icons/tickets.svg" width={70} height={61} alt="icon-calendar" />
                   </div>
                   <p>
                     <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
-                      {data?.price?.[1]?.price ?? ""}
+                      {data?.price?.[0]?.price ?? ""}
                     </ReactMarkdown>
                   </p>
                 </div>
-              )}
-            </div>
-          </AnimatedOnScroll>
-        </div>
-      </section>
+
+                {data?.price?.[1] && (
+                  <div className="col col-bg grey cost-card">
+                    <div>
+                      <p className="subp">{data?.price?.[1]?.days ?? ""}</p>
+                      <Image src="/assets/icons/tickets.svg" width={70} height={61} alt="icon-calendar" />
+                    </div>
+                    <p>
+                      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
+                        {data?.price?.[1]?.price ?? ""}
+                      </ReactMarkdown>
+                    </p>
+                  </div>
+                )}
+              </div>
+            </AnimatedOnScroll>
+          </div>
+        </section>
+      )}
+
     </main>
   );
 }

@@ -148,6 +148,7 @@ export default async function Page(props: {
         time: { populate: "*" },
         price: { populate: "*" },
         seo: { populate: "*" },
+        video: { populate: "*" },
       },
     };
 
