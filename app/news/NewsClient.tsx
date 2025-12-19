@@ -5,16 +5,6 @@ import News, { NewsItemProps } from "../_components/News";
 import { getImageUrl } from "@/utils/api-helpers";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-// export function formatDate(isoString: any) {
-//   const date = new Date(isoString);
-//   const day = String(date.getDate()).padStart(2, '0');
-//   const month = String(date.getMonth() + 1).padStart(2, '0'); // Місяці з 0
-//   const year = date.getFullYear();
-
-//   return `${day}.${month}.${year}`;
-// }
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function mapNews(raw: any) {
   // Підтримка формату Strapi: або top-level поля, або attributes.*
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

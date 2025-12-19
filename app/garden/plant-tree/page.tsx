@@ -1,6 +1,5 @@
 import React from "react";
 import PlantTreeClient from "./PlantTreeClient";
-// Використовую той самий helper, що й у ChoseTreeWrapper
 import { fetchAPI } from "../../../utils/fetch-api";
 
 type Search = Record<string, string | string[] | undefined>;
@@ -34,8 +33,10 @@ export default async function Page(props: {
       },
     };
 
-    const options: RequestInit = {
+    const options = {
       headers: { Authorization: `Bearer ${token}` },
+      timeout: 15000, 
+      retries: 1
     };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

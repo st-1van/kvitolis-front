@@ -6,6 +6,16 @@ import { Metadata } from "next";
 
 export const revalidate = 60;
 
+const path = `/alleys-col`;
+const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+const options = {
+  headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+  timeout: 15000, 
+  retries: 1 
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type StrapiRes = any;
 type Params = { alley: string };
 
 export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
@@ -13,15 +23,16 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
   const { alley } = await props.params;
 
   try {
-    const path = `/alleys-col`;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const res: any = await fetchAPI(path, {
-      filters: { slug: alley },
+    const urlParamsObject = {
+    filters: { slug: alley },
       populate: {
         seo: { populate: "*" },
       },
       pagination: { pageSize: 20 },
-    });
+    };
+
+
+    const res: StrapiRes = await fetchAPI(path, urlParamsObject, options);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const item: any = Array.isArray(res?.data) ? res.data[0] : res?.data ?? null;
@@ -70,20 +81,24 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
 
 export async function generateStaticParams(): Promise<Params[]> {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const res = await fetchAPI('/alleys-col', { fields: ['slug'], pagination: { pageSize: 20 } }, { timeout: 15000, retries: 1 } as any) as StrapiCollection<any>;
+
+    const urlParamsObject = {
+      pagination: { pageSize: 100 },
+      fields: ['slug']
+    };
+
+    const res: StrapiRes = await fetchAPI('/alleys-col', urlParamsObject, options);
     const items = res.data ?? [];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return items.map((it: any) => ({ alley: it.slug }));
   } catch (err) {
     console.error('generateStaticParams: failed to fetch slugs from Strapi:', err);
-    // Не падаємо build — повертаємо пустий масив. Можна підключити on-demand revalidation пізніше.
     return [];
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type StrapiCollection<T> = { data: T[]; meta?: any };
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// type StrapiCollection<T> = { data: T[]; meta?: any };
 
 export default async function Page(props: {
   params: Promise<Params>;
@@ -93,9 +108,7 @@ export default async function Page(props: {
   const { alley } = await props.params;
 
   try {
-    const path = `/alleys-col`;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const res: any = await fetchAPI(path, {
+    const urlParamsObject = {
       filters: { slug: alley },
       populate: {
         tree: { populate: 'img' },
@@ -108,7 +121,9 @@ export default async function Page(props: {
         seo: { populate: '*' }
       },
       pagination: { pageSize: 20 },
-    });
+    };
+
+    const res: StrapiRes = await fetchAPI(path, urlParamsObject, options);
 
 
     const items = res.data ?? [];

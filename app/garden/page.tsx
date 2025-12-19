@@ -3,13 +3,17 @@ import GardenClient from "./GardenClient";
 import fetchAPI from "@/lib/strapi";
 import { Metadata } from "next";
 
+export const revalidate = 60;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type StrapiRes = any;
+
 
 export async function generateMetadata({}): Promise<Metadata> {
 
   try {
     const path = `/alleys-col`;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const res: any = await fetchAPI(path, {
+    const res: StrapiRes = await fetchAPI(path, {
       populate: {
         seo: { populate: "*" },
       },
@@ -73,8 +77,8 @@ export default async function Page() {
         },
       }
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const responseData : any = await fetchAPI(path, urlParamsObject, { timeout: 15000, retries: 1 });
+
+    const responseData : StrapiRes = await fetchAPI(path, urlParamsObject, { timeout: 15000, retries: 1 });
 
     return <GardenClient 
               alleyData={responseData.data}

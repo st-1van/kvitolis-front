@@ -12,6 +12,14 @@ type ListItem =
   | { id: number | string; slug?: string | null; [k: string]: unknown }
   | { id: number | string; attributes?: { slug?: string | null } };
 
+const path = `/festivalis`;
+const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+const options = {
+  headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+  timeout: 15000, 
+  retries: 1 
+};
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type StrapiRes = any;
 
@@ -20,14 +28,15 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
 
   try {
     // Робимо той самий фільтр по documentId, як і у Page
-    const res: StrapiRes = await fetchAPI("/festivalis", {
+    const urlParamsObject = {
       filters: { slug: festival },
       populate: {
         seo: { populate: "*" },
-        img: { populate: "*" },
       },
       pagination: { pageSize: 1 },
-    });
+    };
+
+    const res: StrapiRes = await fetchAPI(path, urlParamsObject, options);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const item: any = Array.isArray(res?.data) ? res.data[0] : res?.data ?? null;
@@ -92,8 +101,7 @@ function extractSlug(item: ListItem): string | null {
 export async function generateStaticParams(): Promise<Params[]> {
   try {
     // Підтягнути до 12 slug для попередньої генерації
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const res: any = await fetchAPI("/festivalis", {
+    const res: StrapiRes = await fetchAPI("/festivalis", {
       fields: ["slug"],
       pagination: { pageSize: 12 },
     });
@@ -136,8 +144,6 @@ export default async function Page(props: {
   const { festival } = await props.params;
 
   try {
-    // const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-    const path = `/festivalis`;
 
     const urlParamsObject = {
       filters: { slug: festival },
@@ -152,12 +158,8 @@ export default async function Page(props: {
       },
     };
 
-    // const options: RequestInit = {
-    //   headers: token ? { Authorization: `Bearer ${token}` } : {},
-    // };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const responseData: any = await fetchAPI(path, urlParamsObject, { timeout: 15000, retries: 1 });
+    const responseData: StrapiRes = await fetchAPI(path, urlParamsObject, options);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const item: any = Array.isArray(responseData?.data) ? responseData.data[0] : null;
 

@@ -5,6 +5,13 @@ import SingleNewsClient from "./SingleNewsClient";
 import { fetchAPI } from "../../../lib/strapi";
 
 export const revalidate = 60;
+const path = "/news-col";
+const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+const options = {
+  headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+  timeout: 15000, 
+  retries: 1 
+};
 
 type Params = { id: string };
 
@@ -16,14 +23,16 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
 
   try {
     // Робимо той самий фільтр по documentId, як і у Page
-    const res: StrapiRes = await fetchAPI("/news-col", {
+     const urlParamsObject = {
       filters: { documentId: id },
       populate: {
         seo: { populate: "*" },
-        img: { populate: "*" },
       },
       pagination: { pageSize: 1 },
-    });
+    }
+
+    const res: StrapiRes = await fetchAPI(path, urlParamsObject, options);
+
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const item: any = Array.isArray(res?.data) ? res.data[0] : res?.data ?? null;
@@ -76,12 +85,12 @@ export async function generateMetadata(props: { params: Promise<Params> }): Prom
 
 export async function generateStaticParams(): Promise<Params[]> {
   try {
-    const res: StrapiRes = await fetchAPI("/news-col", {
+    const urlParamsObject = {
       fields: ["documentId"],
       pagination: { pageSize: 1000 },
       sort: ["publishedAt:desc"],
-    });
-
+    }
+    const res: StrapiRes = await fetchAPI(path, urlParamsObject, options);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const items: any[] = Array.isArray(res?.data) ? res.data : [];
 
@@ -108,7 +117,6 @@ export default async function Page(props: {
   const { id } = await props.params;
 
   try {
-    const path = "/news-col";
     const urlParamsObject = {
       filters: { documentId: id },
       populate: {
@@ -120,8 +128,8 @@ export default async function Page(props: {
       pagination: { pageSize: 1 },
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const responseData: StrapiRes = await fetchAPI(path, urlParamsObject, { timeout: 15000, retries: 1 } as any);
+
+    const responseData: StrapiRes = await fetchAPI(path, urlParamsObject, options);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const item: any = Array.isArray(responseData?.data) ? responseData.data[0] : responseData?.data ?? null;
 

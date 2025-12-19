@@ -5,17 +5,29 @@ import { Metadata } from "next";
 
 export const revalidate = 60;
 
+const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+const options = {
+  headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+  timeout: 15000, 
+  retries: 1 
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type StrapiRes = any;
+
 export async function generateMetadata({}): Promise<Metadata> {
 
   try {
     const path = `/golovna`;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const res: any = await fetchAPI(path, {
+    
+    const urlParamsObject = {
       populate: {
         seo: { populate: "*" }
       },
       pagination: { pageSize: 1 },
-    });
+    }
+
+    const res: StrapiRes = await fetchAPI(path, urlParamsObject, options);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const item: any = Array.isArray(res?.data) ? res.data[0] : res?.data ?? null;
@@ -99,12 +111,10 @@ export default async function Home() {
     };
 
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const mainData: any = await fetchAPI( path, urlParamsObject, { timeout: 15000, retries: 1 });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const newsData: any = await fetchAPI( newsPath, newsUrlParamsObject, { timeout: 15000, retries: 1 });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const festivalData: any = await fetchAPI( festivalPath, festivalUrlParamsObject, { timeout: 15000, retries: 1 });
+
+    const mainData: StrapiRes = await fetchAPI( path, urlParamsObject, options);
+    const newsData: StrapiRes = await fetchAPI( newsPath, newsUrlParamsObject, options);
+    const festivalData: StrapiRes = await fetchAPI( festivalPath, festivalUrlParamsObject, options);
 
     if (!mainData && !newsData && !festivalData) {
       return notFound();
