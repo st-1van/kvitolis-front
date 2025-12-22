@@ -110,7 +110,7 @@ export default function Persons({ famousPeople, alleyName }: PersonsProps) {
         <div className="btn-filters">
         {freeList.length === 0 && (takenList.length === allList.length) ? (
           <>
-            <p>Ця алея вже має мецентаів.</p>
+            <h2>Ця алея вже має меценатів.</h2>
             <Link href="/garden#alleys">
               <button className={`btn btn--green btn--medium`}>
                 Обрати іншу алею
@@ -118,27 +118,36 @@ export default function Persons({ famousPeople, alleyName }: PersonsProps) {
             </Link>
           </>
         )
-        
-        : <>
-          <button
-            className={`btn btn--green btn--medium${filter === 'free' ? ' --active' : ''}`}
-            onClick={() => setFilter('free')}
-          >
-            {freeList.length} доступних для вибору
-          </button>
-          <button
-            className={`btn btn--outlined btn--medium${filter === 'taken' ? ' --active' : ''}`}
-            onClick={() => setFilter('taken')}
-          >
-            {takenList.length} знайшли мецената
-          </button>
-          <button
-            className={`btn btn--green btn--medium${filter === 'all' ? ' --active' : ''}`}
-            onClick={() => setFilter('all')}
-          >
-            Всі
-          </button>
-          </>}
+        : 
+        <>
+            {takenList.length !== 0 ? 
+              <>
+                <button
+                  className={`btn btn--outlined btn--medium${filter === 'taken' ? ' --active' : ''}`}
+                  onClick={() => setFilter('taken')}
+                >
+                  {takenList.length} знайшли мецената
+                </button>
+                <button
+                  className={`btn btn--green btn--medium${filter === 'free' ? ' --active' : ''}`}
+                  onClick={() => setFilter('free')}
+                >
+                  {freeList.length} доступних для вибору
+                </button>
+                <button
+                  className={`btn btn--green btn--medium${filter === 'all' ? ' --active' : ''}`}
+                  onClick={() => setFilter('all')}
+                >
+                  Всі
+                </button>
+              </>
+              :
+              <>
+                <h2>Оберіть діячів та станьте меценатом</h2>
+              </>
+            }
+          </>
+        }
 
         </div>
         <div>
