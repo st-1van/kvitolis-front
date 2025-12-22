@@ -16,14 +16,13 @@ export default function About({text}:{text:string}) {
                                 Про парк:
                             </h2>
                             
-                            <p>
-                                <ReactMarkdown
+                            <ReactMarkdown
                                 rehypePlugins={[rehypeSanitize]}
                                 remarkPlugins={[remarkGfm]}
                                 >
                                 {text}
-                                </ReactMarkdown>
-                            </p>
+                            </ReactMarkdown>
+                            
                         </div>
                     </div>
                 </div>
