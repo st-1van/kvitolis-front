@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
-import actualData from "../../../_components/data/alleyData/actualData";
-import { useRouter } from "next/navigation";
+// import Image from "next/image";
+// import actualData from "../../../_components/data/alleyData/actualData";
+// import { useRouter } from "next/navigation";
 
 interface BannerSliderProps {
   id: string;
@@ -12,25 +12,34 @@ interface BannerSliderProps {
   button1?:string;
   gradient: string;
 }
-const AlleyData = actualData;
+// const AlleyData = actualData;
 
 export default function BannerSlider(props: BannerSliderProps) {
-  const { id, title, src, desc, slug, button1, gradient } = props;
-  const router = useRouter();
+  const { 
+      // id,
+      title,
+      src,
+      desc,
+      slug,
+      button1,
+      gradient
+
+   } = props;
+  // const router = useRouter();
 
 
-  function handleMove(direction: "back" | "forward", id: string) {
-    const currentIndex = AlleyData.findIndex(item => item.id === id);
-    if (currentIndex === -1) return;
+  // function handleMove(direction: "back" | "forward", id: string) {
+  //   const currentIndex = AlleyData.findIndex(item => item.id === id);
+  //   if (currentIndex === -1) return;
   
-    const lastIndex = AlleyData.length - 1;
+  //   const lastIndex = AlleyData.length - 1;
   
-    const newIndex = direction === "back"
-      ? (currentIndex === 0 ? lastIndex : currentIndex - 1)
-      : (currentIndex === lastIndex ? 0 : currentIndex + 1);
+  //   const newIndex = direction === "back"
+  //     ? (currentIndex === 0 ? lastIndex : currentIndex - 1)
+  //     : (currentIndex === lastIndex ? 0 : currentIndex + 1);
   
-    return AlleyData[newIndex]?.slug;
-  }
+  //   return AlleyData[newIndex]?.slug;
+  // }
   
   return (
     <section className="bannerSlider">
@@ -57,7 +66,7 @@ export default function BannerSlider(props: BannerSliderProps) {
 
           </div>
 
-          <div className="headBanner__navigation">
+          {/* <div className="headBanner__navigation">
             <div className="arrows">
               <div className="fade">
                 <button
@@ -82,7 +91,7 @@ export default function BannerSlider(props: BannerSliderProps) {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
 
         </div>
       </div>
