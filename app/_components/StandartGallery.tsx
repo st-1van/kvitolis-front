@@ -19,7 +19,7 @@ export default function StandartGallery({ images }: { images: ImageItemProps[] }
       }}
     >
       <ImageList
-        cols={5}
+        cols={20}
         rowHeight={500}
         sx={{
           minWidth: '1440px',
@@ -31,7 +31,7 @@ export default function StandartGallery({ images }: { images: ImageItemProps[] }
             sx={{ position: 'relative', width: '650px', height: '100%' }}
           >
             <Image
-              src={getImageUrl(photo.url)}
+              src={getImageUrl(photo.url)||''}
               alt={photo.alternativeText || "Image"}
               fill={true}
               style={{ objectFit: 'cover', width: '100%', height: '100%' }}

@@ -3,64 +3,107 @@ import Image from "next/image";
 const teamMembers = [
     {
         name: "Олександр Подзізей",
-        photo:'',
-        role: "Засновник та керівник проекту",
-        bio: "Олександр має понад 10 років досвіду у сфері ландшафтного дизайну та урбаністики. Він вірить у створення зелених просторів, які об'єднують людей.",
+        role: ["Ідея", 'Стратегія'],
+        photo:'/assets/team/oleksandr_podzizey.jpg',
     },
     {
-        name: "Марія Петренко", 
-        photo:''   ,
-        role: "Менеджер проекту",
-        bio: "Марія спеціалізується на догляді за рослинами та має глибокі знання про місцеву флору. Вона відповідає за здоров'я та красу нашого саду.",
+        name: "Тетяна Пашковська", 
+        role: ["Проєктний менеджмент", 'Стратегія'],
+        photo:'/assets/team/tetyana_pashkovska.jpg',
     },
     {
-        name: "Любомир Ковальчук", 
-        photo:'',
-        role: "Ландшафтний Дизайн",
-        bio: "Любомир спеціалізується на догляді за рослинами та має глибокі знання про місцеву флору. Він відповідає за здоров'я та красу нашого саду.",
+        name: "Любомир Сінчук", 
+        role: ["Ландшафтний Дизайн", "Візуалізація", 'Стратегія'],
+        photo:'/assets/team/lyubomyr_sinchuk.jpg',
     },
     {
-        name: "Іван Іваненко",
-        photo:'',
-        role: "Розробка та підтримка",
-        bio: "Іван має понад 10 років досвіду у сфері ландшафтного дизайну та урбаністики. Він вірить у створення зелених просторів, які об'єднують людей.",
+        name: "Гуменюк Світлана", 
+        role: ["Менеджмент", 'Стратегія', 'Контент'],
+        photo:'/assets/team/svitlana.jpg',
     },
     {
-        name: "Марія Фоменко", 
-        photo:'',
-        role: "Менеджер",
-        bio: "Марія спеціалізується на догляді за рослинами та має глибокі знання про місцеву флору. Вона відповідає за здоров'я та красу нашого саду.",
+        name: "кафедри фіолології, релігії, філософії, культурознавства, історії ВНУ імені Лесі Українки",
+        role: ["Наукові консультації"],
+        photo:'/assets/team/VNU_logo.jpg',
     },
+    {
+        name: "Іван Стельмах",
+        role: ["Розробка сайту", 'Стратегія'],
+        photo:'/assets/team/Ivan_Stelmakh.jpg',
+    },
+
+    {
+        name: "Ганна Личак",
+        role: ["Брендинг і дизайн", 'Стратегія'],
+        photo:'/assets/team/Hanna_Lychak.jpg',
+    },
+    {
+        name: "Ірина Сінкевич",
+        role: ["Брендинг і дизайн", 'Контент'],
+        photo:'/assets/team/iryna_sinkevuch.jpg',
+    },
+
 ]
 
-// type TeamMember = {
-//     name: string;
-//     photo: string;
-//     role: string;
-//     bio: string;
-// };
+const rolesArray = [
+        'Ідея',
+        'Стратегія',
+        'Проєктний менеджмент',
+        'Брендинг і дизайн',
+        'Ландшафтний Дизайн',
+        'Візуалізація',
+        'Наукові консультації',
+        'Розробка сайту',
+        'Менеджмент',
+        'Контент'
+    ]
 
-export default function OurTeam({title, desc}: {title?:string, desc?:string}) {
+const XY = [
+    {left: '300px', top: '-50px'},
+    {left: '85px', top: '65px'},
+    {left: '250px', top: '300px'},
+    {left: '450px', top: '390px'},
+    {left: '80vw', top: '0px'},
+    {left: '70vw', top: '360px'},
+    {left: '78vw', top: '245px'},
+    {left: '68vw', top: '200px'},
+]
+
+const membersArrayWithPositions = teamMembers.map((member, index) => ({
+    src: member.photo,
+    style: {
+        left: XY[index].left,
+        top: XY[index].top,
+    },
+    className: `animate up-and-down_${(index % 3) + 1}`,
+}));
+
+
+export function SimpleOurTeam(){
     return (
-        <section className="ourTeam container animate fade-in-up">
-            <h2>{title ?? "Наша команда"}</h2>
-            <p>{desc ?? "Ми - команда професіоналів, які працюють над створенням найкращих рішень для вас."}</p>
-            <div className="container ourTeam__grid">
-                {teamMembers.map((member, index) => (
-                    <div key={index} className="ourTeam__member col card">
-                        <div className="ourTeam__photo">
-                            <Image src={member.photo??'/assets/people/default-person1.jpg'} 
-                                alt={member.name} 
-                                layout="fill" 
-                                objectFit="cover"
-                            />
-                        </div>
-                        <div className="ourTeam__info">
-                            <h3>{member.name}</h3>
-                            <p className="ourTeam__role">{member.role}</p>
-                            <p className="ourTeam__bio">{member.bio}</p>
-                        </div>
-                    </div>
+        <section className="ourTeam animate fade-in-up">
+            <div className="container">
+                <div className="ourTeam__content">
+                <h5>Команда проєкту:</h5>
+                {rolesArray.map((role, index) => (
+                    <p key={index} className="ourTeam__roles">
+                        {role}: {teamMembers.filter(member => member.role.includes(role)).map(member => member.name).join(', ')}
+                    </p>
+                ))}
+                </div>
+            </div>
+            <div className="ourTeam__bg">
+                {membersArrayWithPositions.map((photo, index) => (
+                    <Image 
+                        src={photo.src} 
+                        key={index}
+                        alt={`Team member ${index + 1}`} 
+                        loading="lazy"
+                        className={photo.className}
+                        width={120} 
+                        height={120}    
+                        style={photo.style}
+                    />
                 ))}
             </div>
         </section>

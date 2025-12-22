@@ -6,7 +6,8 @@ import Link from "next/link";
 import { socilalLinks } from "../data/Navigation";
 
 export const Footer = ()=>{
-    const year = new Date().getFullYear();
+    // const year = new Date().getFullYear();
+    const year = '2025';
 
     return(
         <footer id="contacts" className='footer'>
@@ -87,16 +88,13 @@ export const Footer = ()=>{
                     <div className="body">
                         <Link href='/'>kvitolis.com.ua ⓒ {year}</Link>
                         <ul>
-                            <li>
-                                <a href={socilalLinks.facebook}>
-                                    facebook
-                                </a>
-                            </li>
-                            <li>
-                                <a href={socilalLinks.instagram}>
-                                    instagram
-                                </a>
-                            </li>
+                            {socilalLinks.map((item)=>(
+                                <li key={item.name}>
+                                    <a href={item.link} target="_blank" rel="noopener noreferrer">
+                                        {item.name}
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>

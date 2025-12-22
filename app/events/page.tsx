@@ -1,125 +1,96 @@
-'use client'
-import { useState, useEffect, useCallback } from "react";
-import { fetchAPI } from "../../utils/fetch-api";
-import ReactMarkdown from "react-markdown";
-import rehypeSanitize from "rehype-sanitize";
-import remarkGfm from "remark-gfm";
+import React from "react";
+import { fetchAPI } from "../../lib/strapi";
+import { notFound } from "next/navigation";
+import EventsClient, { EventsProps } from "./EventsClient";
+import { Metadata } from "next";
 
-import HeadBanner from "../_components/HeadBanner"
-import { FoodAndFun } from "../_components/WeHave"
-import AnimatedOnScroll from "../_components/ui/AnimatedScroll"
-import { EventsCallToAction } from '../_components/data/Events'
-import StandartGallery, { ImageItemProps } from "../_components/StandartGallery"
-import CallToAction from "../_components/garden/CallToAction"
-import { SlideProps } from "../_components/Carousel"
-import { CircularProgress } from "@mui/material";
+export const revalidate = 60;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type StrapiSingle<T> = { data: T | null; meta?: any };
 
-type EventsProps ={
-  id:string;
-  slug:string;
-  aboutTitle?:string;
-  aboutDesc?:string;
-  mainBanner: SlideProps;
-  benefits: {
-    id:string;
-    title:string;
-    desc?:string;
-    photo:{
-      url:string;
+export async function generateMetadata({}): Promise<Metadata> {
+
+  try {
+    const path = `/organizuvati-podiyu`;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const res: any = await fetchAPI(path, {
+      populate: {
+        seo: { populate: "*" },
+      },
+      pagination: { pageSize: 1 },
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const item: any = Array.isArray(res?.data) ? res.data[0] : res?.data ?? null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const seo: any = item?.seo ?? {};
+
+    const title = seo?.metaTitle ?? item?.title ?? "";
+    const description = seo?.metaDescription ?? item?.description ?? item?.desc ?? "";
+    const keywords = seo?.keywords ?? undefined;
+
+    // підтримка різних структур для зображення SEO або поля img
+    const metaImage = seo?.metaImage ?? seo?.meta_image ?? null;
+
+    const imageUrl: string | undefined =
+      metaImage?.url ??
+      metaImage?.data?.attributes?.url ??
+      item?.img?.url ??
+      item?.img?.data?.attributes?.url ??
+      undefined;
+
+    const canonical = seo?.canonicalUrl ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/events`;
+
+    const metadata: Metadata = {
+      title,
+      description,
+      keywords,
+      openGraph: {
+        type: "website",
+        title,
+        description,
+        images: imageUrl ? [{ url: imageUrl }] : [],
+        locale: "uk_UA",
+        url: canonical,
+      },
+      alternates: {
+        canonical,
+      },
     };
-  }[]
-  gallery: ImageItemProps[];
+
+    return metadata;
+  } catch (err) {
+    console.error("generateMetadata (news) failed:", err);
+    return {};
+  }
 }
 
- 
-export default function EventsPage() {
+export default async function Page() {
+  try {
+    const path = `/organizuvati-podiyu`;
+    const urlParamsObject = {
+      populate: {
+        mainBanner: { populate: "*" },
+        benefits: { populate: ["photo"] },
+        gallery: { populate: "*" },
+        seo: { populate: "*" },
+      },
+    };
 
-  const [ data, setData ] = useState<EventsProps>({} as EventsProps);
-  const [ isLoading, setLoading ] = useState(true);
+    const response = await fetchAPI<StrapiSingle<EventsProps>>(
+      path,
+      urlParamsObject,
+      { timeout: 15000, retries: 1 }
+    );
 
-    const fetchData = useCallback(async () => {
-      setLoading(true);
-      try {
-        const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-        const path = `/organizuvati-podiyu`;
-  
-        const urlParamsObject = {  
-          populate: {
-            mainBanner: {
-              populate: '*'
-            },
-            benefits: { populate: ['photo'] },
-            gallery: { populate: '*' },
-          }
-        };
-        const options = { headers: { Authorization: `Bearer ${token}` } };
-        const responseData = await fetchAPI(path, urlParamsObject, options);
-  
-        setData(responseData.data);
-        console.log('Succesfully Fetched alley data:');
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    }, []);
-  
-    useEffect(() => {
-      fetchData();
-    }, [fetchData]);
-  
-    if (isLoading) {
-      return <main><CircularProgress className="loader"/></main>
+    if (!response?.data) {
+      return notFound();
     }
-    
-  return <main>
-        <section className="mainBanner container animate fade-in-up">
-          <HeadBanner {...data.mainBanner}/>
-        </section>
 
-        <section className="gallery">
-          <div className="container">
-            <AnimatedOnScroll animationClass="fade-in-up">
-              <div className="text-block center">
-                <h2>{data.aboutTitle}</h2>
-                <p>
-                  <ReactMarkdown
-                    rehypePlugins={[rehypeSanitize]}
-                    remarkPlugins={[remarkGfm]}
-                  >
-                    {data.aboutDesc || ''}
-                  </ReactMarkdown>
-                </p>
-              </div>
-            </AnimatedOnScroll>
-          </div>
-          {data?.gallery ? 
-                <AnimatedOnScroll animationClass="fade-in-up">
-                  <StandartGallery images={data?.gallery} />
-                </AnimatedOnScroll>
-          :null}
-        </section>
-
-        <section id='about-events'>
-          <div className="container">
-            <AnimatedOnScroll animationClass="fade-in-up">
-              <div className="text-block center">
-                <h2>У нас є все необхідне для вашої події</h2>
-              </div>
-            </AnimatedOnScroll>
-            <div className="content">
-              <FoodAndFun 
-                center="center"
-                style='rounded'
-                data={data?.benefits}
-              />
-            </div>
-          </div>
-        </section>
-        <CallToAction {...EventsCallToAction} />
-    </main>
+    return <EventsClient {...response.data} />;
+  } catch (err) {
+    console.error(`Failed to fetch event page data:`, err);
+    return notFound();
+  }
 }
-
-
-

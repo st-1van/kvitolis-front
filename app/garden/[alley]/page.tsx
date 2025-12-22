@@ -1,115 +1,161 @@
-'use client'
-import { useState, useEffect, useCallback } from "react";
-import BannerSlider from '@/app/_components/garden/alley/BannerSlider';
-import { callToActionData, faqData } from '../../_components/data/Garden'
-import CallToAction from "../../_components/garden/CallToAction";
-import FAQ from "../../_components/garden/FAQ";
-import { useParams } from "next/navigation";
-import TreeDescription from '@/app/_components/garden/alley/TreeDescription';
-import Persons, { PersonsDataProps } from '@/app/_components/garden/alley/Persons';
-import { fetchAPI } from "../../../utils/fetch-api";
-import { TreeProps } from "@/app/_components/garden/Tress";
-import { CircularProgress } from "@mui/material";
-import { getImageUrl} from "@/utils/api-helpers";
+import React from "react";
+import SingleAlleyClient from "./SingleAlleyClient";
+import fetchAPI from "../../../lib/strapi";
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
+export const revalidate = 60;
 
-export type AlleyItemProps = {
-  id: string;
-  alleyName: string;
-  desc?: string;
-  slug?: string;
-  priority: string;
-  alleyImg?: string;
-  tree: TreeProps;
-  famousPeople: PersonsDataProps[];
+const path = `/alleys-col`;
+const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+const options = {
+  headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+  timeout: 15000, 
+  retries: 1 
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type StrapiRes = any;
+type Params = { alley: string };
+
+export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
+  
+  const { alley } = await props.params;
+
+  try {
+    const urlParamsObject = {
+    filters: { slug: alley },
+      populate: {
+        seo: { populate: "*" },
+      },
+      pagination: { pageSize: 20 },
+    };
 
 
+    const res: StrapiRes = await fetchAPI(path, urlParamsObject, options);
 
-export default function SingleAlley() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const item: any = Array.isArray(res?.data) ? res.data[0] : res?.data ?? null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const seo: any = item?.seo ?? {};
 
-  const { alley } = useParams();
+    const title = seo?.metaTitle ?? item?.title ?? "";
+    const description = seo?.metaDescription ?? item?.description ?? item?.desc ?? "";
+    const keywords = seo?.keywords ?? undefined;
 
-  const [data, setData] = useState<AlleyItemProps[]>([]);
-  const [isLoading, setLoading] = useState(true);
+    // підтримка різних структур для зображення SEO або поля img
+    const metaImage = seo?.metaImage ?? seo?.meta_image ?? null;
 
-  const fetchData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-      const path = `/alleys-col`;
-      //замінити параметр порядку
+    const imageUrl: string | undefined =
+      metaImage?.url ??
+      metaImage?.data?.attributes?.url ??
+      item?.img?.url ??
+      item?.img?.data?.attributes?.url ??
+      undefined;
 
-      const urlParamsObject = {
-        filters: { slug: alley },
-        populate: {
-          tree: {
-            populate: ['img']
-          },
-          famousPeople: { populate: ['photo'] }
-        }
+    const canonical = seo?.canonicalUrl ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/garden`;
+
+    const metadata: Metadata = {
+      title,
+      description,
+      keywords,
+      openGraph: {
+        type: "website",
+        title,
+        description,
+        images: imageUrl ? [{ url: imageUrl }] : [],
+        locale: "uk_UA",
+        url: canonical,
+      },
+      alternates: {
+        canonical,
+      },
+    };
+
+    return metadata;
+  } catch (err) {
+    console.error("generateMetadata (news) failed:", err);
+    return {};
+  }
+}
+
+export async function generateStaticParams(): Promise<Params[]> {
+  try {
+
+    const urlParamsObject = {
+      pagination: { pageSize: 100 },
+      fields: ['slug']
+    };
+
+    const res: StrapiRes = await fetchAPI('/alleys-col', urlParamsObject, options);
+    const items = res.data ?? [];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return items.map((it: any) => ({ alley: it.slug }));
+  } catch (err) {
+    console.error('generateStaticParams: failed to fetch slugs from Strapi:', err);
+    return [];
+  }
+}
+
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// type StrapiCollection<T> = { data: T[]; meta?: any };
+
+export default async function Page(props: {
+  params: Promise<Params>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
+
+  const { alley } = await props.params;
+
+  try {
+    const urlParamsObject = {
+      filters: { slug: alley },
+      populate: {
+        tree: { populate: 'img' },
+        famousPeople: { 
+            populate: {
+              photo: { populate: '*' },      
+              mecenat: { populate: '*' } 
+      }
+      },
+        seo: { populate: '*' }
+      },
+      pagination: { pageSize: 20 },
+    };
+
+    const res: StrapiRes = await fetchAPI(path, urlParamsObject, options);
+
+
+    const items = res.data ?? [];
+    if (!items.length) return notFound();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const dataForClient = items.map((it: any) => {
+      return {
+        id: it.id,
+        alleyName: it.alleyName ?? '',
+        desc: it.desc ?? null,
+        slug: it.slug,
+        priority: it.priority ?? '',
+        alleyImg: it.alleyImg?.url ?? it.alleyImg ?? null,
+        tree:{
+          name: it.tree.name,
+          desc: it.tree.desc,
+          img: it.tree.img,
+          price: it.tree.price,
+          latin: it.tree.latin
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        famousPeople: (it.famousPeople ?? []).map((p: any) => ({
+          ...p,
+        }))
       };
-      const options = { headers: { Authorization: `Bearer ${token}` } };
-      const responseData = await fetchAPI(path, urlParamsObject, options);
+    });
 
-      setData(responseData.data);
-      console.log('Succesfully Fetched alley data:');
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  if (isLoading) {
-    return <main><CircularProgress className="loader"/></main>
+    return <SingleAlleyClient data={dataForClient} slug={alley} />;
+  } catch (err) {
+    console.error(`Page: failed to fetch alley data for slug="${alley}":`, err);
+    // Якщо запит впав — повернемо 404, або можна рендерити fallback UI
+    return notFound();
   }
-
-  const bannerData = {
-    id: data[0].id,
-    title: data[0].alleyName,
-    desc: data[0].desc ?? '',
-    gradient: 'light',
-    src: data[0].alleyImg ??"/assets/banners/visual/Клумба-Люпин-01.jpg",
-    slug: `/garden/${alley}#about-alley`,
-    button1: "Детальніше",
-  };
-
-  const dynamicSlug = `/garden/plant-tree${alley ? `?alleyName=${bannerData.title}` : ''}`;
-
-  const treeData = {
-    name:data[0].tree.name,
-    desc:data[0].tree.desc,
-    src: getImageUrl(data[0].tree.img.url),
-    price: data[0].tree.price,
-    latin:data[0].tree.latin,
-  }
-
-  const personsData: PersonsDataProps[] =
-    data[0]?.famousPeople.map(person => ({
-      ...person,
-      desc: person.desc === null ? null : person.desc,
-      photo:
-        person.photo === null
-          ? null
-          : typeof person.photo === 'string'
-          ? person.photo
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          : getImageUrl((person.photo as any).url),
-    })) ?? [];
-
-  return (
-          <main>
-                <BannerSlider  {...bannerData} />
-                <CallToAction {...callToActionData} slug={dynamicSlug} />
-                <TreeDescription {...treeData} />
-                <Persons personsData={personsData} alleyName={bannerData.title} />
-                <FAQ {...faqData} />
-          </main>
-  );
 }

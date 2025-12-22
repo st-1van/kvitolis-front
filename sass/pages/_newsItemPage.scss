@@ -1,0 +1,19 @@
+.first-screen{
+    position: relative;
+    overflow: hidden;
+}
+
+.article{
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    top: -3rem;
+    background-color: #ffffff00 !important;
+}
+
+.article>.container>.news__date{
+    position: relative !important;
+    z-index: 3 !important;
+    margin: 0 !important;
+    margin-bottom: 3rem !important;
+}

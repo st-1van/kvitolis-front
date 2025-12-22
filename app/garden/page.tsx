@@ -1,40 +1,91 @@
-import HeadBanner from "../_components/HeadBanner";
-import { banner, benefitsData, callToActionData, faqData, qouteData } from '../_components/data/Garden';
-import Benefits from "../_components/garden/Benefits";
-import CallToAction from "../_components/garden/CallToAction";
-import FAQ from "../_components/garden/FAQ";
-import Trees from "../_components/garden/Tress";
-import SeoQoute from "../_components/SeoQoute"
-import Mission from "../_components/garden/Mission";
-import MissionData from "../_components/data/MissionData";
-import PulseMap from "../_components/PulseMap";
-import Visualisation from "../_components/garden/alley/Visualisation";
+import { notFound } from "next/navigation";
+import GardenClient from "./GardenClient";
+import fetchAPI from "@/lib/strapi";
+import { Metadata } from "next";
+
+export const revalidate = 60;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type StrapiRes = any;
 
 
-export default function Garden() {
-  return (
-    <main>
-        <section className="mainBanner container animate fade-in-up">
-          <HeadBanner
-                  id={banner.title} 
-                  title={banner.title} 
-                  desc={banner.desc} 
-                  src={banner.src}
-                  btn={banner.btn}
-                  gradient={banner.gradient}
-                  color='green'
-                  photo={banner.photo}
-          />
-        </section>
-        <SeoQoute {...qouteData[1]}/>
-        <Visualisation videoId="EM3RXfKOSoY" title="Місія, цілі та цінності"/>
-        <Mission title='' data={MissionData} />
-        <PulseMap title='Алеї українства' desc='12 алей'/>
-        <Trees />
-        <Benefits {...benefitsData} />
-        <CallToAction {...callToActionData} />
-        <SeoQoute {...qouteData[0]}/>
-        <FAQ {...faqData} />
-    </main>
-  );
+export async function generateMetadata({}): Promise<Metadata> {
+
+  try {
+    const path = `/alleys-col`;
+    const res: StrapiRes = await fetchAPI(path, {
+      populate: {
+        seo: { populate: "*" },
+      },
+      pagination: { pageSize: 1 },
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const item: any = Array.isArray(res?.data) ? res.data[0] : res?.data ?? null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const seo: any = item?.seo ?? {};
+
+    const title = seo?.metaTitle ?? item?.title ?? "";
+    const description = seo?.metaDescription ?? item?.description ?? item?.desc ?? "";
+    const keywords = seo?.keywords ?? undefined;
+
+    // підтримка різних структур для зображення SEO або поля img
+    const metaImage = seo?.metaImage ?? seo?.meta_image ?? null;
+
+    const imageUrl: string | undefined =
+      metaImage?.url ??
+      metaImage?.data?.attributes?.url ??
+      item?.img?.url ??
+      item?.img?.data?.attributes?.url ??
+      undefined;
+
+    const canonical = seo?.canonicalUrl ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/garden`;
+
+    const metadata: Metadata = {
+      title,
+      description,
+      keywords,
+      openGraph: {
+        type: "website",
+        title,
+        description,
+        images: imageUrl ? [{ url: imageUrl }] : [],
+        locale: "uk_UA",
+        url: canonical,
+      },
+      alternates: {
+        canonical,
+      },
+    };
+
+    return metadata;
+  } catch (err) {
+    console.error("generateMetadata (news) failed:", err);
+    return {};
+  }
+}
+
+
+export default async function Page() {
+  try {
+    const path = `/alleys-col`;
+    const urlParamsObject = {
+      sort: { priority: "desc" },
+      populate: {
+        tree: {
+          populate: ['img']
+        },
+      }
+    };
+
+    const responseData : StrapiRes = await fetchAPI(path, urlParamsObject, { timeout: 15000, retries: 1 });
+
+    return <GardenClient 
+              alleyData={responseData.data}
+            />;
+
+  } catch (err) {
+    console.error(`Failed to render garden page:`, err);
+    return notFound();
+  }
 }

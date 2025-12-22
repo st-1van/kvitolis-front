@@ -22,7 +22,7 @@ export default function TreeDescription(props: TreeDescProps) {
         latin,
         price
     } = props;
-    console.log('photo src:', src);
+    // console.log('photo src:', src);
     
     const transformedPrice = price ? price.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : '';
 

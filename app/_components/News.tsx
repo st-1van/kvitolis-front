@@ -2,47 +2,34 @@
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedOnScroll from "./ui/AnimatedScroll";
+import { ImageItemProps } from "./StandartGallery";
+import { MasonryBlock } from "./garden/MasonaryBlock";
 
-type NewsProps = {
+export type NewsProps = {
   title: string;
   desc: string;
+  items: NewsItemProps[];
 };
 
-type NewsItemProps = {
+export type NewsItemProps = {
+  id: string;
+  documentId: string;
   title: string;
-  src?: string;
+  text: string;
   desc: string;
   date: string;
-  slug: string;
+  videoId?: string;
+  img?: {
+    url: string;
+  };
+  gallery?: ImageItemProps[];
+  banner?: {
+    url: string;
+  };
 };
 
+export default function News({ title, desc, items }: NewsProps) {
 
-const news: NewsItemProps[] = [
-  {
-    title: "Сезон лаванди у квітолісі",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    date: "14.02.2025",
-    src: "/assets/news/news-1.jpg",
-    slug: "/news/1",
-  },
-  {
-    title: "Сад Українства",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    date: "15.02.2025",
-    src: "/assets/news/news-2.jpg",
-    slug: "/news/2",
-  },
-  {
-    title: "Друга новина",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    date: "15.02.2025",
-    src: "/assets/news/news-3.jpg",
-    slug: "/news/3",
-  },
-];
-
-export default function News({ title, desc }: NewsProps) {
-  //get request for last 3 news
   return (
     <section className="news">
       <div className="container">
@@ -52,8 +39,8 @@ export default function News({ title, desc }: NewsProps) {
             <p>{desc}</p>
           </div>
           <div className="news__list row">
-            {news.map((item, index) => (
-              <NewsItem key={index} item={item} />
+            {items.map((item) => (
+              <NewsItem key={item.documentId} {...item} />
             ))}
           </div>
         </div>
@@ -62,8 +49,7 @@ export default function News({ title, desc }: NewsProps) {
   );
 }
 
-function NewsItem({ item }: { item: NewsItemProps }) {
-  const { title, src, desc, date, slug } = item;
+function NewsItem({ title, img, desc, date, documentId} :NewsItemProps ) {
 
   return (
     <AnimatedOnScroll animationClass="fade-in-up">
@@ -71,20 +57,37 @@ function NewsItem({ item }: { item: NewsItemProps }) {
 
         <div className="news__date">{date}</div>
 
-        {src && <Image src={src} alt={title || "News Image"}
+        {img && <Image src={img.url || ''} alt={title || "News Image"}
                 width={371}
                 height={324}
                 className="news__img"
         />}
 
         <div className="news__headline">
-          <h5>{title}</h5>
-          <div>
-            <p className="news__description">{desc}</p>
-            {slug && <Link href={slug}>Більше</Link>}
+          <Link href={`/news/${documentId}`}>
+            <h5>{title}</h5>
+          </Link>
+          <div className="news__description">
+            <p>{desc}</p>
+            {/* {documentId && <Link href={`/news/${documentId}`}>більше</Link>} */}
           </div>
         </div>
       </div>
     </AnimatedOnScroll>
   );
 }
+
+export function NewsOnMainPage({ title, desc, items }: NewsProps) {
+  return (
+    <section className="news">
+      <div className="container">
+        <div className="content">
+          <div className="news__title">
+            <h2>{title}</h2>
+            <p>{desc}</p>
+          </div>
+          <MasonryBlock data={items} Card={NewsItem} slug={'/news'} />
+        </div>
+      </div>
+    </section>
+  )}

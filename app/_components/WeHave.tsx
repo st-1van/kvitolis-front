@@ -1,16 +1,43 @@
+'use client';
 import Attraction from "./Attraction";
 import CardItem from "./CardItem";
-import { title, attractions, cards } from "./data/WeHave"
+// import { cards } from "./data/WeHave"
 import AnimatedOnScroll from "./ui/AnimatedScroll";
 import { CardProps } from "./CardItem";
+import { FestivalProps } from "../festivals/[festival]/FestivalClient";
+import { getImageUrl } from "@/lib/strapi";
 
-export default function WeHave(){
+type Props = {
+  festivalData?: FestivalProps[];
+  cardsData?: CardProps[];
+};
+
+export default function WeHave({
+  festivalData = [],
+  cardsData = [],
+}: Props) {
+
+    const attractions = festivalData.map(({aboutTitle, aboutDesc, slug, mainBanner})=>({
+        id: mainBanner?.id || '',
+        title: aboutTitle || '',
+        desc: aboutDesc || '',
+        src: getImageUrl(mainBanner?.photo.url) || '',
+        gradient: mainBanner?.gradient || 'light',
+        slug: `/festivals/${slug}` || '#',
+    }))
     
     return(
-
-        <section className="weHave">
-            <FoodAndFun title={title} data={cards}/>
-            <OtherAttraction attractions={attractions} />
+        <section className="weHave" id='festivals'>
+            <OtherAttraction 
+                title='Наші фестивалі'
+                desc='Щороку у Квітолісі проходить низка унікальних фестивалів, що відображають красу природи та культурну спадщину України.'
+                attractions={attractions}
+            />
+            <FoodAndFun 
+                title='Також' 
+                // center='center' 
+                data={cardsData}
+            />
         </section>
     )
 }
@@ -54,13 +81,20 @@ interface AttractionType {
 }
 
 interface OtherAttractionProps {
+    title: string;
+    desc?: string;
     attractions: AttractionType[];
 }
 
-export function OtherAttraction ({attractions}: OtherAttractionProps){
+export function OtherAttraction ({title, desc, attractions}: OtherAttractionProps){
     return (
             <AnimatedOnScroll animationClass="fade-sides">
                 <div className="container">
+                        <div className="weHave__title content center">
+                            <h2>{title}</h2>      
+                            {desc?<p>{desc}</p>:''}                   
+                        </div>
+
                     {attractions.map((item)=>(
                         <Attraction 
                             key={item.title} 

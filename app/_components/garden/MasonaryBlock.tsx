@@ -1,15 +1,19 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
+import { useMemo } from "react";
+import Link from "next/link";
 
 type MasonryBlockProps<T> = {
   data: T[];
   Card: React.ComponentType<T & { index: number }>;
+  slug?:string;
 };
 
-export function MasonryBlock<T extends { id: string; priority: string }>({
+export function MasonryBlock<T extends { id: string; priority?: string; publishedAt?: string }>({
   data,
   Card,
+  slug,
 }: MasonryBlockProps<T>) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const scrollbarThumbRef = useRef<HTMLDivElement>(null);
@@ -31,6 +35,7 @@ export function MasonryBlock<T extends { id: string; priority: string }>({
   }, []);
 
   const handleScroll = (direction: "left" | "right") => {
+    // console.log('clicked', direction);
     if (scrollContainerRef.current) {
       const scrollAmount = scrollContainerRef.current.clientWidth * 0.3;
       scrollContainerRef.current.scrollBy({
@@ -110,6 +115,25 @@ export function MasonryBlock<T extends { id: string; priority: string }>({
     setShow((prev) => !prev);
   };
 
+
+  const sorted = useMemo(() => {
+    if (!Array.isArray(data)) return [];
+
+    const parsePriority = (v?: string) => {
+      const n = parseFloat(v ?? "0");
+      return Number.isNaN(n) ? 0 : n;
+    };
+
+    return [...data].sort((a, b) => {
+      // Парсимо priority як число (fallback 0)
+      const priorityA = parsePriority(a.priority ?? a.publishedAt);
+      const priorityB = parsePriority(b.priority ?? b.publishedAt);
+
+      return priorityA - priorityB;
+    });
+  }, [data]);
+
+
   return (
     <div className="masonary">
       <div className="masonary__wrapper">
@@ -119,21 +143,29 @@ export function MasonryBlock<T extends { id: string; priority: string }>({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
         >
-          {data
-            .sort((a, b) => Number(a.priority) - Number(b.priority))
-            .map((card, index) => (
+            {sorted.map((card, index) => (
               <Card key={card.id} {...card} index={index} />
             ))}
         </div>
       </div>
 
       <div className={`masonary__navigation row`}>
-        <button
-          className="btn btn--minimal btn--small"
+        {!slug ?(
+         <button
+          className="btn btn--minimal btn--small more-btn"
           onClick={handleShow}
         >
-          {isShowed ? "Сховати" : "Переглянути всі"}
+            {isShowed ? "Сховати" : "Переглянути всі"}
         </button>
+        ):(
+         <button
+          className="btn btn--minimal btn--small more-btn"
+        >
+          <Link href={slug||'#'}>
+            Переглянути всі
+          </Link>
+        </button>
+        )}
 
         <div className={`masonary__scrollbar ${isShowed ? "--hide" : ""}`}>
           <div

@@ -13,9 +13,10 @@ export type PersonsDataProps = {
   desc?: string | null;
   years?: string;
   free?: boolean;
-  date?: string;
-  mecenat?: string;
-  mecenat_note?: string;
+  mecenat?:{
+    name: string;
+    note: string;
+  }
   isSelected?: boolean;
   order?: number;
   photo?: string | null;
@@ -71,7 +72,6 @@ export default function Persons({ personsData, alleyName }: PersonsProps) {
   const freeList = useMemo(() => indexedList.filter(p => p.free === true), [indexedList]);
   const takenList = useMemo(() => indexedList.filter(p => p.free === false), [indexedList]);
   const allList = indexedList;
-  // console.log('freeList:', freeList.length);
 
   useEffect(() => {
     if (filter === 'free') setDisplayedPeople(freeList);
@@ -133,49 +133,49 @@ export default function Persons({ personsData, alleyName }: PersonsProps) {
                 </button>
               </div>
               <div>
-                <div className="persons__selected">
-                  {selectedPersons.length > 0 ? (
-                    <div className="selected-info">
-                      <p className="sub">Ви обрали {selectedPersons.length} {personTextEnding(selectedPersons.length)}</p>
-                      <p>Завдяки вашому меценатству буде висаджено {selectedPersons.length} {treeTextEnding(selectedPersons.length)} присвячених обраним постатям</p>
-                    </div>
-                  ) : ''}
-                  <div className="persons__selected-list">
-                    {selectedPersons.length > 0 ? (
-                      selectedPersons.map((person) => (
-                        <div key={person.id} className="persons__selected-item">
-                          <button
-                            className="remove-btn"
-                            onClick={() => selectionHandler(person)}
-                          >
-                            <X className="icon" size={24} />
-                          </button>
-                          <Image
-                            src={person.photo ?? '/assets/people/default-person1.png'} alt={person.name}
-                            height={100}
-                            width={100}
-                            onClick={() => setActivePersonId(person.id)}
-                          />
-                        </div>
-                      ))
-                    ) : (
-                      <span><i>*клікніть на постаті, щоб дізнатися більше</i></span>
-                    )}
+              <div className="persons__selected">
+                {selectedPersons.length > 0 ? (
+                  <div className="selected-info">
+                    <p className="sub">Ви обрали {selectedPersons.length} {personTextEnding(selectedPersons.length)}</p>
+                    <p>Завдяки вашому меценатству буде висаджено {selectedPersons.length} {treeTextEnding(selectedPersons.length)} присвячених обраним постатям</p>
                   </div>
+                ) : ''}
+                <div className="persons__selected-list">
                   {selectedPersons.length > 0 ? (
-                    <Link href={link}>
-                      <button className="btn btn--green btn--medium">
-                        Оформити меценатство
-                      </button>
-                    </Link>
-                  ) : ''}
+                    selectedPersons.map((person) => (
+                      <div key={person.id} className="persons__selected-item">
+                        <button
+                          className="remove-btn"
+                          onClick={() => selectionHandler(person)}
+                        >
+                          <X className="icon" size={24} />
+                        </button>
+                        <Image
+                          src={person.photo ?? '/assets/people/default-person1.png'} alt={person.name}
+                          height={100}
+                          width={100}
+                          onClick={() => setActivePersonId(person.id)}
+                        />
+                      </div>
+                    ))
+                  ) : (
+                    <span><i>*клікніть на постаті, щоб дізнатися більше</i></span>
+                  )}
                 </div>
-                <PersonsList
-                  personsData={displayedPeople}
-                  setActivePersonId={setActivePersonId}
-                  selectedIds={selectedIds}
-                  selectionHandler={selectionHandler}
-                />
+                {selectedPersons.length > 0 ? (
+                  <Link href={link}>
+                    <button className="btn btn--green btn--medium">
+                      Оформити меценатство
+                    </button>
+                  </Link>
+                ) : ''}
+              </div>
+              <PersonsList
+                personsData={displayedPeople}
+                setActivePersonId={setActivePersonId}
+                selectedIds={selectedIds}
+                selectionHandler={selectionHandler}
+              />
               </div>
             </div>
             {activePerson && (
@@ -195,7 +195,7 @@ export default function Persons({ personsData, alleyName }: PersonsProps) {
 }
 
 function PersonCardNew({ item, isSelected, selectionHandler }: { item: PersonsDataProps; isSelected?: () => boolean; selectionHandler?: (person: PersonsDataProps) => void; }) {
-  const { name, photo, desc, free, mecenat, years, mecenat_note } = item;
+  const { name, photo, desc, free, mecenat, years } = item;
 
   return (
     <>
@@ -229,9 +229,9 @@ function PersonCardNew({ item, isSelected, selectionHandler }: { item: PersonsDa
         ''
       ) : (
         <div className="mecenat green">
-          <p className="mecenat__info">Меценат: {mecenat ?? 'Анонімний меценат'}</p>
+          <p className="mecenat__info">Меценат: {mecenat?.name ?? 'Анонімний меценат'}</p>
           <p className="mecenat__note">
-            {mecenat_note ??
+            {mecenat?.note ??
               "*Історія меценатства цієї постаті буде додана найближчим часом."
             }
           </p>

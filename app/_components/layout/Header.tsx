@@ -2,12 +2,10 @@
 import Image from "next/image";
 import Link from "next/link"
 import { navItems, socilalLinks } from "../data/Navigation";
-import { phones } from "../data/Contacts";
+import { adresse, email, phones } from "../data/Contacts";
 import MenuButton from "./MenuButton";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation"
-import  FacebookIcon from '../ui/FacebookIcon'
-import InstagramIcon from "../ui/InstagramIcon";
 import { useScrollLock } from "../context/scroll-lock-context";
 import ScrollToTopButton from "../ui/ScrollToTopButton";
 
@@ -23,12 +21,11 @@ export const Header = () => {
         <header className="header">
             <div className="header__top container">
                 <div className="header__socials">
-                    <a href={socilalLinks.facebook} target="_blank" rel="noopener noreferrer">
-                        <FacebookIcon type='filled' />
-                    </a>
-                    <a href={socilalLinks.instagram} target="_blank" rel="noopener noreferrer">
-                        <InstagramIcon type='filled' />
-                    </a>
+                    {socilalLinks.map((item)=>(
+                        <a key={item.name} href={item.link} target="_blank" rel="noopener noreferrer">
+                            {item.icon}
+                        </a>
+                    ))}
                 </div>
                 <Link href='/'>
                     <Image
@@ -108,20 +105,30 @@ const Humburger = ({ open, onClose }: BurgerProps) => {
                     ))}
                 </ul>
             </div>
+
+            <div className="humburger__socials">
+                {socilalLinks.map((item)=>(
+                    <a key={item.name} href={item.link} target="_blank" rel="noopener noreferrer">
+                        {item.icon}
+                    </a>
+                ))}
+            </div>
             <div className="humburger__contacts">
+                <p className="sub">Як нас знайти:</p>
+                <p>{adresse}</p>
+            </div>
+            <div className="humburger__contacts">
+                <p className="sub">Графік роботи:</p>
+                <p>Тимчасово зачинені до нового фестивалю</p>
+            </div>
+            <div className="humburger__contacts">
+                <p className="sub">Зв&apos;язатися з нами</p>
                 {phones.map((item, index) => (
                     <a key={index} href={`tel:${item.replaceAll(" ", "")}`}>
                         {item}
                     </a>
                 ))}
-            </div>
-            <div className="humburger__socials">
-                    <a href={socilalLinks.facebook} target="_blank" rel="noopener noreferrer">
-                        <FacebookIcon type='filled' />
-                    </a>
-                    <a href={socilalLinks.instagram} target="_blank" rel="noopener noreferrer">
-                        <InstagramIcon type='filled' />
-                    </a>
+                    <a href={`mailto:${email}`}>{email}</a>
             </div>
         </div>
     );
