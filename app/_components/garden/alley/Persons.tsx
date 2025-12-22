@@ -112,26 +112,46 @@ export default function Persons({ personsData, alleyName }: PersonsProps) {
         <AnimatedOnScroll animationClass="fade-sides">
           <div className="row">
             <div className='persons col-md col'>
-              <div className="btn-filters">
-                <button
-                  className={`btn btn--green btn--medium${filter === 'free' ? ' --active' : ''}`}
-                  onClick={() => setFilter('free')}
-                >
-                  {freeList.length} доступних для вибору
-                </button>
-                <button
-                  className={`btn btn--outlined btn--medium${filter === 'taken' ? ' --active' : ''}`}
-                  onClick={() => setFilter('taken')}
-                >
-                  {takenList.length} знайшли мецената
-                </button>
-                <button
-                  className={`btn btn--green btn--medium${filter === 'all' ? ' --active' : ''}`}
-                  onClick={() => setFilter('all')}
-                >
-                  Всі
-                </button>
-              </div>
+              {freeList.length === 0 && (takenList.length === allList.length) ? (
+                <>
+                  <h2>Ця алея вже має меценатів.</h2>
+                  <Link href="/garden#alleys">
+                    <button className={`btn btn--green btn--medium`}>
+                      Обрати іншу алею
+                    </button>
+                  </Link>
+                </>
+              )
+              : 
+              <>
+                  {takenList.length !== 0 ? 
+                    <>
+                      <button
+                        className={`btn btn--outlined btn--medium${filter === 'taken' ? ' --active' : ''}`}
+                        onClick={() => setFilter('taken')}
+                      >
+                        {takenList.length} знайшли мецената
+                      </button>
+                      <button
+                        className={`btn btn--green btn--medium${filter === 'free' ? ' --active' : ''}`}
+                        onClick={() => setFilter('free')}
+                      >
+                        {freeList.length} доступних для вибору
+                      </button>
+                      <button
+                        className={`btn btn--green btn--medium${filter === 'all' ? ' --active' : ''}`}
+                        onClick={() => setFilter('all')}
+                      >
+                        Всі
+                      </button>
+                    </>
+                    :
+                    <>
+                      <h2>Оберіть діячів та станьте меценатом</h2>
+                    </>
+                  }
+              </>
+              }
               <div>
               <div className="persons__selected">
                 {selectedPersons.length > 0 ? (
