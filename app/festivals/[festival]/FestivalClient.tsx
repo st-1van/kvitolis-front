@@ -119,7 +119,8 @@ export default function FestivalClient(props: {
               <p>{data?.dateDesc}</p>
             </div>
           </AnimatedOnScroll>
-
+          {/* якщо ціни немає то блок не показується */}
+          {data?.time?.[0] && (
           <AnimatedOnScroll animationClass="fade-sides">
             <div className="content">
               <div className="col col-sm green data-card">
@@ -130,7 +131,7 @@ export default function FestivalClient(props: {
                   </ReactMarkdown>
                 </p>
               </div>
-
+              {/* друга ціна показується лише якщо вона є */}
               {data?.time?.[1] && (
                 <div className="col col-sm green data-card">
                   <Image src="/assets/icons/clock.svg" width={65} height={65} alt="icon-clock" />
@@ -143,6 +144,7 @@ export default function FestivalClient(props: {
               )}
             </div>
           </AnimatedOnScroll>
+          )}
         </div>
       </section>
       {/* додати блок з відео, якщо є videoId */}
