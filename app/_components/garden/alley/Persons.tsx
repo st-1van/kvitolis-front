@@ -25,6 +25,7 @@ export type PersonsDataProps = {
 export type PersonsProps = {
   personsData: PersonsDataProps[];
   alleyName: string;
+  searchedPerson?: string | Record<string, string | string[] | undefined>;
 };
 
 const trimText = (text: string, maxLength: number) => {
@@ -52,7 +53,7 @@ const personTextEnding = (count: number) => {
   return 'постатей';
 }
 
-export default function Persons({ personsData, alleyName }: PersonsProps) {
+export default function Persons({ personsData, alleyName, searchedPerson }: PersonsProps) {
   // always memoize indexedList!
   const indexedList = useMemo(
     () =>
@@ -63,11 +64,19 @@ export default function Persons({ personsData, alleyName }: PersonsProps) {
     [personsData]
   );
 
+  // const queridId = 1796;
+  // console.log('Queried person ID:', indexedList.find(p => p.id === queridId));
+  // const searchedPerso = "Мстислав Чернов"
+  // console.log('Queried person Name:', indexedList.find(p => p.name === searchedPerson?.name));
+  const defaultPerson = searchedPerson && typeof searchedPerson === 'object' && 'name' in searchedPerson ? indexedList.find(p => p.name === searchedPerson.name) : indexedList[0];
+  const defaultActiveId = defaultPerson?.id ?? null;
+  // щоб викликати модалку треба клікнути на елемент списку
+
   const [filter, setFilter] = useState<'all' | 'free' | 'taken'>('all');
   const [displayedPeople, setDisplayedPeople] = useState<PersonsDataProps[]>(indexedList);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [activePersonId, setActivePersonId] = useState<string | null>(indexedList[0]?.id ?? null);
-
+  const [activePersonId, setActivePersonId] = useState<string | null>(defaultActiveId);
+  
   // Prepare filtered lists
   const freeList = useMemo(() => indexedList.filter(p => p.free === true), [indexedList]);
   const takenList = useMemo(() => indexedList.filter(p => p.free === false), [indexedList]);
@@ -195,6 +204,7 @@ export default function Persons({ personsData, alleyName }: PersonsProps) {
                 setActivePersonId={setActivePersonId}
                 selectedIds={selectedIds}
                 selectionHandler={selectionHandler}
+                isQueried={searchedPerson}
               />
               </div>
             </div>
@@ -266,11 +276,13 @@ function PersonsList({
   setActivePersonId,
   selectedIds,
   selectionHandler,
+  isQueried,
 }: {
   personsData: PersonsDataProps[];
   setActivePersonId: (id: string) => void;
   selectedIds: string[];
   selectionHandler?: (person: PersonsDataProps) => void;
+  isQueried?: string | Record<string, string | string[] | undefined>;
 }) {
 
   const { showModal } = useModal();
@@ -288,6 +300,16 @@ function PersonsList({
       );
     }
   };
+
+  useEffect(() => {
+    if (isQueried && typeof isQueried === 'object' && 'name' in isQueried) {
+      const queriedPerson = personsData.find(p => p.name === isQueried.name);
+      if (queriedPerson) {
+        handleItemClick(queriedPerson);
+      }
+    }
+
+  }, []);
 
 
   return (

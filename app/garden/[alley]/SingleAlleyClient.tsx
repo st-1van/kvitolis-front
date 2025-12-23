@@ -25,6 +25,7 @@ export type AlleyItemProps = {
     latin: string;
   };
   famousPeople?: PersonsDataProps[];
+  searchedPerson?: string | Record<string, string | string[] | undefined>;
 };
 
 export default function SingleAlleyClient({ data, slug }: { data: AlleyItemProps[]; slug: string }) {
@@ -81,7 +82,7 @@ export default function SingleAlleyClient({ data, slug }: { data: AlleyItemProps
       <BannerSlider {...bannerData} />
       <CallToAction {...callToActionData} slug={`/garden/plant-tree?alleyName=${encodeURIComponent(bannerData.title)}`} />
       {treeData && <TreeDescription {...treeData} />}
-      <Persons personsData={personsData} alleyName={bannerData.title} />
+      <Persons personsData={personsData} alleyName={bannerData.title} searchedPerson={d.searchedPerson} />
       <FAQ {...faqData} />
     </main>
   );
