@@ -35,6 +35,10 @@
       padding-bottom: 3rem;
       text-wrap-mode: wrap;
 
+      p{
+        margin-bottom: 0.7rem;
+      }
+
 
       &--dark {
         background: linear-gradient(90deg, #101916 50%, rgba(16, 25, 22, 0) 100%);

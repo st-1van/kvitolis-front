@@ -80,27 +80,23 @@ export default function FestivalClient(props: {
             </div>
           </AnimatedOnScroll>
 
-          <div className="content">
             <FoodAndFun
               desc="Щодня на вас чекають"
               center="center"
               style="rounded"
               data={(data?.benefits ?? []).filter((_, index) => index < 3)}
             />
-          </div>
         </div>
       </section>
 
       <section className="season">
         <div className="container">
-          <div className="content">
             <FoodAndFun
               desc="У вихідних ще більше розваг"
               center="center"
               style="rounded"
               data={(data?.benefits ?? []).filter((_, index) => 2 < index && index < 6)}
             />
-          </div>
         </div>
       </section>
 
@@ -109,8 +105,8 @@ export default function FestivalClient(props: {
           <StandartGallery images={data?.gallery ?? []} />
         </AnimatedOnScroll>
       </section>
-
-      <section className="date">
+      {data?.dateTitle || data?.dateDesc && (
+        <section className="date">
         <div className="container">
           <AnimatedOnScroll animationClass="fade-in-up">
             <div className="text-block center">
@@ -145,6 +141,8 @@ export default function FestivalClient(props: {
           </AnimatedOnScroll>
         </div>
       </section>
+      )}
+
       {/* додати блок з відео, якщо є videoId */}
       {data?.video?.videoId && (
         <>

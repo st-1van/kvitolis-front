@@ -16,8 +16,8 @@ export default function Attraction({ title, src, desc, slug, button, gradient }:
       className={`attraction attraction--${gradient}`} 
       style={{ backgroundImage: `url(${src})` }}
     >
-      <div className="attraction__overlay"></div>
-      <div className="attraction__content">
+      {/* <div className="attraction__overlay"></div> */}
+      <div className={`attraction__content attraction__content--${gradient}`}>
         <h2 className="attraction__headline">{title}</h2>
         <p className="attraction__description">{desc}</p>
         <div>

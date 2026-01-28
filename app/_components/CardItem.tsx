@@ -31,7 +31,7 @@ export default function CardItem({ card, style }: CardItemProps) {
   return (
     <div className="card col">
         <Image
-          className={`card__img ${style}`}
+          className={`card__img ${style??''}`}
           src={imgUrl}
           alt={title || "Image"}
           width={394}
