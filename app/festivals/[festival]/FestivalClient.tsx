@@ -81,7 +81,7 @@ export default function FestivalClient(props: {
           </AnimatedOnScroll>
 
             <FoodAndFun
-              desc="Щодня на вас чекають"
+              // desc="Щодня на вас чекають"
               center="center"
               style="rounded"
               data={(data?.benefits ?? []).filter((_, index) => index < 3)}
@@ -92,7 +92,7 @@ export default function FestivalClient(props: {
       <section className="season">
         <div className="container">
             <FoodAndFun
-              desc="У вихідних ще більше розваг"
+              // desc="У вихідних ще більше розваг"
               center="center"
               style="rounded"
               data={(data?.benefits ?? []).filter((_, index) => 2 < index && index < 6)}
