@@ -16,7 +16,7 @@ export type NewsItemProps = {
   documentId: string;
   title: string;
   text: string;
-  desc: string;
+  // desc: string;
   date: string;
   videoId?: string;
   img?: {
@@ -49,7 +49,14 @@ export default function News({ title, desc, items }: NewsProps) {
   );
 }
 
-function NewsItem({ title, img, desc, date, documentId} :NewsItemProps ) {
+function NewsItem({ title, text, img, date, documentId} :NewsItemProps ) {
+
+  const trimmedText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.slice(0, maxLength) + '...';
+  };
 
   return (
     <AnimatedOnScroll animationClass="fade-in-up">
@@ -68,7 +75,7 @@ function NewsItem({ title, img, desc, date, documentId} :NewsItemProps ) {
             <h5>{title}</h5>
           </Link>
           <div className="news__description">
-            <p>{desc}</p>
+            <p>{trimmedText(text, 300)}</p>
             {/* {documentId && <Link href={`/news/${documentId}`}>більше</Link>} */}
           </div>
         </div>

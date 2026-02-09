@@ -13,7 +13,7 @@ function mapToNewsItem(item: any): NewsItemProps {
   const id = item.id ? String(item.id) : '';
   const documentId = String(item.documentId);
   const title = item?.title ?? "";
-  const desc = item?.desc ?? "";
+  // const desc = item?.desc ?? "";
   const text = item?.text ?? "";
   const date = item?.date ?? "";
   const banner = item?.banner && typeof item.banner?.url === "string" ? { url: item.banner.url } : undefined;
@@ -35,7 +35,7 @@ function mapToNewsItem(item: any): NewsItemProps {
     id,
     documentId,
     title,
-    desc,
+    // desc,
     text,
     date,
     gallery,
@@ -50,7 +50,7 @@ export default function SingleNewsClient(props: {
 }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const news: NewsItemProps = mapToNewsItem(props.data as any);
-  const { title, desc, text, date, banner, videoId } = news;
+  const { title, text, date, banner, videoId } = news;
 
   if (!news || !news.title) {
     return (
@@ -77,8 +77,8 @@ export default function SingleNewsClient(props: {
         <div className="container col col-lg">
           <div className="news__date">{date}</div>
           <h1>{title}</h1>
-          <p className="subp">{desc}</p>
-          <div>
+          {/* <p className="subp">{desc}</p> */}
+          <div className="article__content">
             <ReactMarkdown
               rehypePlugins={[rehypeSanitize]}
               remarkPlugins={[remarkGfm]}

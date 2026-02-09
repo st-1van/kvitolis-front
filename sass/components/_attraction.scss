@@ -21,12 +21,12 @@
 
       &--dark {
         color: white;
-        background: linear-gradient(90deg, #101916 60%, rgba(16, 25, 22, 0) 100%);
+        background: linear-gradient(90deg, #101916 40%, rgba(16, 25, 22, 0) 100%);
       }
     
       &--light {
         color: black;
-        background: linear-gradient(90deg, #ffffff 60%, rgba(244, 242, 239, 0) 100%);
+        background: linear-gradient(90deg, #ffffff 40%, rgba(244, 242, 239, 0) 100%);
       }
 
     }

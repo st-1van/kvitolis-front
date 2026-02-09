@@ -9,6 +9,13 @@
     align-items: flex-start;
     top: -3rem;
     background-color: #ffffff00 !important;
+    &__content{
+        font-size: 1.7rem ;
+        line-height: 2.5rem;
+        li{
+            margin-bottom: 0.5rem;
+        }
+    }
 }
 
 .article>.container>.news__date{
