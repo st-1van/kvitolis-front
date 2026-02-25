@@ -3,4 +3,4 @@ export const phones = [
 ]
 export const email = 'kvitolis@gmail.com'
 
-export const adresse = '35км від Луцька с.Свидники'
+export const adresse = '35км по трасі Луцьк-Ковель'

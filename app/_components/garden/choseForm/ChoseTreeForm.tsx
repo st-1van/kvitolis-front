@@ -2,17 +2,15 @@
 import { useState, useEffect } from "react";
 import { BenefitsItems } from "../Benefits";
 import { benefitsData } from "../../data/Garden";
-import actualData from "../../data/alleyData/actualData";
 import MultiSelectChip from "./MultipleSelectChip";
 import AlleySelect from "./AlleySelect";
-import type { DataProps } from '../../garden/alley/Persons';
+import { PersonsDataProps } from "../alley/Persons";
 
-
-const AlleyData = actualData;
 
 export type FormProps = {
+  AlleyData: { slug: string; alleyName: string }[];
   chosenAlley?: string;
-  personsList?: DataProps[];
+  personsList?: PersonsDataProps[];
   handleAlleyChange: (newName: string) => void;
   queried: boolean;
 };
@@ -29,7 +27,7 @@ const nameRegex = /^[a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ'’\-\s]{1,80}$/u;
 const phoneRegex = /^\+?\d{10,13}$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default function ChoseTreeForm({ chosenAlley, personsList, handleAlleyChange, queried }: FormProps) {
+export default function ChoseTreeForm({ AlleyData, chosenAlley, personsList, handleAlleyChange, queried }: FormProps) {
   const [formData, setFormData] = useState<{
     alley: string;
     chosenPersons: string[];
@@ -186,10 +184,12 @@ export default function ChoseTreeForm({ chosenAlley, personsList, handleAlleyCha
     }
   }, [chosenAlley, formData.chosenPersons]);
 
+  console.log('chosenAlley:', chosenAlley);
+
 
   return (
     <div className="plantTree__form light-green">
-      <h1>Станьте меценатом</h1>
+      <h1>Залишити заявку</h1>
       <form onSubmit={handleSubmit} noValidate>
 
         {/* Dropdown для вибору алеї */}
@@ -262,7 +262,7 @@ export default function ChoseTreeForm({ chosenAlley, personsList, handleAlleyCha
         </label>
 
         <div className="plantTree__trade">
-          <button type="submit" className="btn btn--green btn--medium">Залишити заявку</button>
+          <button type="submit" className="btn btn--green btn--medium">Відправити</button>
         </div>
       </form>
 

@@ -1,20 +1,13 @@
 'use client';
 
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import ChoseTreeForm from "./ChoseTreeForm";
-import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
-import AnimatedOnScroll from "../../ui/AnimatedScroll";
-import actualData from "../../data/alleyData/actualData";
 import { AlleyDescriptionVertical } from "../alley/AboutAlley";
-
-const AlleyData = actualData;
-const defaultPeople = AlleyData[0].famousPeople
-        .filter(person => person.free !== false)
-        .map(person => ({
-          ...person,
-          free: typeof person.free === "string" ? person.free === "true" : !!person.free,
-          desc: person.desc ?? ""
-        }))
+import { AlleyItemProps } from "@/app/garden/[alley]/SingleAlleyClient";
+import { getImageUrl } from "@/utils/api-helpers";
+import { FormProps } from "./ChoseTreeForm";
+import { callToActionData } from "../../data/Garden";
+import { StepsToBecomeMecenat } from "../../../_components/garden/CallToAction";
 
 export type Person = {
   id: string;
@@ -24,75 +17,148 @@ export type Person = {
   desc?: string | null;
 };
 
-export default function ChoseTreeWrapper() {
-  const searchParams = useSearchParams();
-  const [selectedAlley, setSelectedAlley] = useState(AlleyData[0]);
-  const [personsList, setPersonsList] = useState<Person[]>(defaultPeople);
-  //додати лоадінг
-  const alleyTitle = searchParams.get("alleyName");
+export default function ChoseTreeWrapper(props: {
+  // Дані тепер приходять з сервера (page)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any[];
+  alleyTitleParam: string | null;
+  error: string | null;
+  queried: boolean;
+}) {
+  const { data, alleyTitleParam, error, queried } = props;
 
+  // selected alley from received data
+  const [selectedAlley, setSelectedAlley] = useState<AlleyItemProps | null>(null);
+
+  // Коли приходять нові дані або змінюється query param — обрати поточну алею
   useEffect(() => {
-
-    if (alleyTitle) {
-      const matched = AlleyData.find((a) => a.title === alleyTitle);
-      const filteredPeople = matched?.famousPeople
-        .filter(person => person.free !== false)
-        .map(person => ({
-          ...person,
-          free: typeof person.free === "string" ? person.free === "true" : !!person.free
-        })) || defaultPeople;
-
-      if (matched) {
-        setSelectedAlley(matched);
-        setPersonsList(filteredPeople)
-      }
+    if (!Array.isArray(data) || data.length === 0) {
+      setSelectedAlley(null);
+      return;
     }
 
-  }, [selectedAlley, alleyTitle]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const aMatches = (item: any) => typeof (item as any).alleyName !== "undefined";
 
-  const treeData = {
-    name: selectedAlley.tree.name,
-    desc: selectedAlley.tree.desc,
-    src: selectedAlley.tree.img,
-    latin: selectedAlley.tree.latin,
-    button1: "Посадити дерево",
-    price: selectedAlley.tree.price
-  };
+    const matchByQuery =
+      alleyTitleParam && (aMatches(data[0]) ? data.find((a) => (a as AlleyItemProps).alleyName === alleyTitleParam) : undefined);
 
-  const handleAlleyChange = (newAlleyTitle: string) => {
-    const matched = AlleyData.find((a) => a.title === newAlleyTitle);
+    // fallback: legacy title
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const matchByTitle = alleyTitleParam && data.find((a: any) => (a as any).title === alleyTitleParam);
 
-    if (matched) {
-      setSelectedAlley(matched);
-      const filteredPeople = matched.famousPeople
-        .filter(person => person.free !== false)
-        .map(person => ({
-          ...person,
-          free: typeof person.free === "string" ? person.free === "true" : !!person.free
-        }));
-      setPersonsList(filteredPeople);
+    const chosen = alleyTitleParam ? (matchByQuery ?? matchByTitle ?? null) : null;
+
+    setSelectedAlley(chosen as AlleyItemProps | null);
+  }, [data, alleyTitleParam]);
+
+  // AlleyData for the form
+  const AlleyData = useMemo<FormProps["AlleyData"]>(() => {
+    return (Array.isArray(data) ? data : []).map((item) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const it: any = item;
+      return {
+        slug: (it.slug as string) ?? "",
+        alleyName: (it.alleyName as string) ?? (it.title as string) ?? "",
+      };
+    });
+  }, [data]);
+
+  const personsList = useMemo<Person[]>(() => {
+    if (!selectedAlley) return [];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const rawPeople: any[] = Array.isArray((selectedAlley as any).famousPeople)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ? ((selectedAlley as any).famousPeople as any[])
+      : [];
+
+    return rawPeople
+      .filter((person) => person?.free !== false)
+      .map((person) => ({
+        id: person?.id != null ? String(person.id) : Math.random().toString(36).slice(2, 9),
+        name: person?.name ?? person?.fullName ?? "Unknown",
+        years: person?.years ?? person?.life ?? undefined,
+        free: typeof person?.free === "string" ? person.free === "true" : !!person?.free,
+        desc: person?.desc ?? person?.description ?? "",
+      }));
+  }, [selectedAlley]);
+
+  const treeData = useMemo(() => {
+    if (!selectedAlley) {
+      return {
+        name: "",
+        desc: "",
+        src: "",
+        latin: "",
+        button1: "Посадити дерево",
+        price: null as unknown as string | number | null,
+      };
     }
-  };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const tree: any = (selectedAlley as any).tree ?? {};
+    return {
+      name: tree.name ?? "",
+      desc: tree.desc ?? "",
+      src: getImageUrl(tree?.img?.url) ?? "",
+      latin: tree.latin ?? "",
+      button1: "Посадити дерево",
+      price: tree.price ?? "",
+    };
+  }, [selectedAlley]);
+
+  const handleAlleyChange = useCallback(
+    (newAlleyTitle: string) => {
+      if (!Array.isArray(data)) return;
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const byName = (data as any[]).find((a: any) => a.alleyName === newAlleyTitle);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const byTitle = (data as any[]).find((a: any) => a.title === newAlleyTitle);
+
+      const matched = (byName as AlleyItemProps) ?? (byTitle as AlleyItemProps) ?? null;
+      if (matched) setSelectedAlley(matched);
+    },
+    [data]
+  );
+
+  const chosenAlleySafe: string = selectedAlley
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ? (((selectedAlley as any).title as string) ?? ((selectedAlley as any).alleyName as string) ?? "")
+    : "";
 
   return (
     <main>
       <section className="plantTree">
-        <div className="container" style={{ display: 'flex' }}>
-          <AnimatedOnScroll animationClass="fade-sides">
+        <div className="container">
+          {/* Лоадера більше немає (дані вже з сервера). Якщо потрібен — можна передати прапор з page */}
+          {error ? (
+            <div style={{ color: "red" }}>Error: {error}</div>
+          ) : (
             <div className="row">
-              <AlleyDescriptionVertical
-                treeData={treeData}
-                alleyName={selectedAlley.title}
-                alleyDesc={selectedAlley.desc}
-              />
+              {!selectedAlley ? (
+                <div className="steps-container container grey">
+                  <div className="steps-content">
+                    <StepsToBecomeMecenat {...callToActionData} />
+                  </div>
+                </div>
+              ) : (
+                <AlleyDescriptionVertical
+                  treeData={treeData}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  alleyName={((selectedAlley as any).title as string) ?? ((selectedAlley as any).alleyName as string) ?? ""}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  alleyDesc={((selectedAlley as any).desc as string) ?? ""}
+                />
+              )}
               <ChoseTreeForm
-                handleAlleyChange={handleAlleyChange}
-                chosenAlley={selectedAlley.title}
+                AlleyData={AlleyData}
                 personsList={personsList}
-                queried={alleyTitle !== null}
+                handleAlleyChange={handleAlleyChange}
+                chosenAlley={chosenAlleySafe}
+                queried={queried}
               />
             </div>
-          </AnimatedOnScroll>
+          )}
         </div>
       </section>
     </main>

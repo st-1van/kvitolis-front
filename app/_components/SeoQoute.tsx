@@ -22,10 +22,7 @@ export default function SeoQoute ({text, name, role, img}: SeoQouteProps){
                             height={61}
                             className="qoute__icon"                            
                             />
-                        
-                        <p className="qoute__text">
-                            {text}
-                        </p>
+                        {text}
                         <p className="sub">
                             {name}
                         </p>

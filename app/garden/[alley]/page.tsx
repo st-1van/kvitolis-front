@@ -1,60 +1,161 @@
-'use client'
-import BannerSlider from '@/app/_components/garden/alley/BannerSlider';
-import { callToActionData, faqData } from '../../_components/data/Garden'
-import CallToAction from "../../_components/garden/CallToAction";
-import FAQ from "../../_components/garden/FAQ";
-import { useParams } from "next/navigation";
-import AboutAlley from '@/app/_components/garden/alley/AboutAlley';
-import actualData from "../../_components/data/alleyData/actualData";
-import TreeDescription from '@/app/_components/garden/alley/TreeDescription';
+import React from "react";
+import SingleAlleyClient from "./SingleAlleyClient";
+import fetchAPI from "../../../lib/strapi";
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
-export default function SingleAlley() {
+export const revalidate = 60;
 
-  const { alley } = useParams();
-  const alleyData = actualData.find((item) => item.slug === alley);
+const path = `/alleys-col`;
+const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+const options = {
+  headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+  timeout: 15000, 
+  retries: 1 
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type StrapiRes = any;
+type Params = { alley: string };
+
+export async function generateMetadata(props: { params: Promise<Params> }): Promise<Metadata> {
+  
+  const { alley } = await props.params;
+
+  try {
+    const urlParamsObject = {
+    filters: { slug: alley },
+      populate: {
+        seo: { populate: "*" },
+      },
+      pagination: { pageSize: 20 },
+    };
 
 
+    const res: StrapiRes = await fetchAPI(path, urlParamsObject, options);
 
-  if (!alleyData) {
-    return  <main><p>Сторінка не знайдена</p>;</main>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const item: any = Array.isArray(res?.data) ? res.data[0] : res?.data ?? null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const seo: any = item?.seo ?? {};
+
+    const title = seo?.metaTitle ?? item?.title ?? "";
+    const description = seo?.metaDescription ?? item?.description ?? item?.desc ?? "";
+    const keywords = seo?.keywords ?? undefined;
+
+    // підтримка різних структур для зображення SEO або поля img
+    const metaImage = seo?.metaImage ?? seo?.meta_image ?? null;
+
+    const imageUrl: string | undefined =
+      metaImage?.url ??
+      metaImage?.data?.attributes?.url ??
+      item?.img?.url ??
+      item?.img?.data?.attributes?.url ??
+      undefined;
+
+    const canonical = seo?.canonicalUrl ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/garden`;
+
+    const metadata: Metadata = {
+      title,
+      description,
+      keywords,
+      openGraph: {
+        type: "website",
+        title,
+        description,
+        images: imageUrl ? [{ url: imageUrl }] : [],
+        locale: "uk_UA",
+        url: canonical,
+      },
+      alternates: {
+        canonical,
+      },
+    };
+
+    return metadata;
+  } catch (err) {
+    console.error("generateMetadata (news) failed:", err);
+    return {};
   }
+}
 
-  const transformedData = {
-    id: alleyData.id,
-    title: alleyData.title,
-    desc: alleyData.desc ?? '',
-    gradient: 'light',
-    tree: alleyData.tree.name,
-    src: "/assets/banners/visual/Клумба-Люпин-01.jpg",
-    slug: `/garden/${alley}#about-alley`,
-    button1: "Детальніше",
-  };
+export async function generateStaticParams(): Promise<Params[]> {
+  try {
 
-  const transformedData2 = {
-    name:alleyData.tree.name,
-    desc:alleyData.tree.desc,
-    src: alleyData.tree.img,
-    latin:alleyData.tree.latin,
-    price: alleyData.tree.price,
-    button1: "Посадити дерево",
-    slug: `/garden/plant-tree${alley ? `?alleyName=${alleyData.title}` : ''}`,
+    const urlParamsObject = {
+      pagination: { pageSize: 100 },
+      fields: ['slug']
+    };
+
+    const res: StrapiRes = await fetchAPI('/alleys-col', urlParamsObject, options);
+    const items = res.data ?? [];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return items.map((it: any) => ({ alley: it.slug }));
+  } catch (err) {
+    console.error('generateStaticParams: failed to fetch slugs from Strapi:', err);
+    return [];
   }
+}
+
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// type StrapiCollection<T> = { data: T[]; meta?: any };
+
+export default async function Page(props: {
+  params: Promise<Params>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
+
+  const { alley } = await props.params;
+
+  try {
+    const urlParamsObject = {
+      filters: { slug: alley },
+      populate: {
+        tree: { populate: 'img' },
+        famousPeople: { 
+            populate: {
+              photo: { populate: '*' },      
+              mecenat: { populate: '*' } 
+      }
+      },
+        seo: { populate: '*' }
+      },
+      pagination: { pageSize: 20 },
+    };
+
+    const res: StrapiRes = await fetchAPI(path, urlParamsObject, options);
 
 
-  return (
-          <main>
-                <BannerSlider  {...transformedData} />
-                <CallToAction {...callToActionData} slug={transformedData2.slug} />
-                <TreeDescription {...transformedData2} />
-                <AboutAlley
-                  treeData={transformedData2}
-                  personsData={alleyData.famousPeople?.map(person => ({
-                    ...person,
-                    desc: person.desc === null ? undefined : person.desc
-                  }))}
-                  alleyName={alleyData.title}
-                />
-                <FAQ {...faqData} />
-          </main>
-  );
+    const items = res.data ?? [];
+    if (!items.length) return notFound();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const dataForClient = items.map((it: any) => {
+      return {
+        id: it.id,
+        alleyName: it.alleyName ?? '',
+        desc: it.desc ?? null,
+        slug: it.slug,
+        priority: it.priority ?? '',
+        alleyImg: it.alleyImg?.url ?? it.alleyImg ?? null,
+        tree:{
+          name: it.tree.name,
+          desc: it.tree.desc,
+          img: it.tree.img,
+          price: it.tree.price,
+          latin: it.tree.latin
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        famousPeople: (it.famousPeople ?? []).map((p: any) => ({
+          ...p,
+        }))
+      };
+    });
+
+    return <SingleAlleyClient data={dataForClient} slug={alley} />;
+  } catch (err) {
+    console.error(`Page: failed to fetch alley data for slug="${alley}":`, err);
+    // Якщо запит впав — повернемо 404, або можна рендерити fallback UI
+    return notFound();
+  }
 }

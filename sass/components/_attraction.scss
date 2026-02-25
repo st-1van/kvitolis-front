@@ -1,13 +1,11 @@
 .attraction {
     margin-bottom: 25px;
     position: relative;
-    height: 30rem;
+    height: 40rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
     overflow: hidden;
     border-radius: 6.25rem 0rem;
     background-size:cover;
@@ -17,64 +15,44 @@
       align-self: flex-start;
       z-index: 2;
       font-size: 2rem;
-      padding: 0 3rem 0 9rem;
+      padding: 3rem 9.5rem 3rem 9rem;
       max-width: 45%;
+      height: 100%;
+
+      &--dark {
+        color: white;
+        background: linear-gradient(90deg, #101916 40%, rgba(16, 25, 22, 0) 100%);
+      }
+    
+      &--light {
+        color: black;
+        background: linear-gradient(90deg, #ffffff 40%, rgba(244, 242, 239, 0) 100%);
+      }
+
     }
     &__description{
         margin-bottom: 3rem;
-    }
-  
-    &__overlay {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
+    }  
 
-    &__overlay {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 1;
-    }
-
-    .attraction,
-    &__overlay {
+    .attraction {
       box-sizing: border-box;
-    }
-      
-  
-    &--dark {
-      color: white;
-  
-      .attraction__overlay {
-        background: linear-gradient(90deg, #101916 0%, rgba(16, 25, 22, 0) 100%);
-      }
-    }
-  
-    &--light {
-      color: black;
-  
-      .attraction__overlay {
-        background: linear-gradient(90deg, #F4F2EF 0%, rgba(244, 242, 239, 0) 100%);
-      }
-    }
+    }    
+
+
   }
 
 
   @media screen and (max-width: 769px) {
     .attraction{
+      background-position: 70% 0%;
       &__content {
         align-self: flex-start;
         z-index: 2;
         font-size: 2rem;
-        padding: 0 9rem;
+        padding: 3rem 0;
+        max-width: 39%;
         max-width: none;
+        width: 100%;
       }  
     }
   }
@@ -85,28 +63,33 @@
       border-radius: 0;
       min-height: 70vh ;
       // height: 60rem;
-      padding-bottom: 5rem;
       flex-direction: column-reverse;
+      // background-size: cover;
+      background-position: 40% 0%;
 
       &__content {
-        align-self: flex-start;
-        z-index: 2;
-        font-size: 2rem;
-        padding: 0 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
         max-width: none;
-      }
-    
-      &--dark {
-        .attraction__overlay {
-          background: linear-gradient(0deg, #101916 0%, rgba(16, 25, 22, 0) 100%) !important;
+
+        left:0;
+        font-size: 2rem;
+        padding: 6rem 3rem 0;
+        max-width: none;
+        height: fit-content;
+        min-height: 270px;
+        max-height: 330px;
+
+        
+        &--dark {
+          background: linear-gradient(0deg, #101916 50%, rgba(16, 25, 22, 0) 100%);
+        }
+        &--light{
+          background: linear-gradient(0deg, #ffffff 50%, rgba(244, 242, 239, 0) 100%);
         }
       }
-    
-      &--light {
-        .attraction__overlay {
-          background: linear-gradient(0deg, #F4F2EF 0%, rgba(244, 242, 239, 0) 100%);
-        }
-      }
+
     }
   }
 

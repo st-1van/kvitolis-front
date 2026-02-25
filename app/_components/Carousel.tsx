@@ -1,26 +1,36 @@
 'use client'
-import { useState, useEffect, useCallback, ReactNode } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { getImageUrl } from "@/utils/api-helpers";
 
-interface SlideDataProps {
-    title:string;
-    desc?: ReactNode;
-    src: string;
-    slug?:string;
-    gradient?:string;
-    color:string;
-    button1?:string;
+  type Button = {
+    id: string;
+    text?: string;
+    slug: string;
   };
 
-interface CarouselDataProps {
-  CarouselData:SlideDataProps[];
-}
+  export type SlideProps = {
+    id: string;
+    title: string;
+    desc?: string;
+    gradient?: string;
+    color?: string;
+    photo: {
+      url: string;
+    };
+    src?: string;
+    btn?: Button[];
+  };
+
+  interface CarouselDataProps {
+    CarouselData:SlideProps[];
+  }
 
 
 
-export default function Carousel({CarouselData}:CarouselDataProps) {
+export default function Carousel({ CarouselData }: CarouselDataProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const length = CarouselData.length;
 
@@ -37,34 +47,42 @@ export default function Carousel({CarouselData}:CarouselDataProps) {
     return () => clearInterval(interval);
   }, [nextSlide]);
 
+  const slide = CarouselData[currentIndex];
+  const btns = slide.btn ?? [];
+  const primary = btns[0]; 
+
+  const bgUrl = getImageUrl(slide.photo?.url) ?? '/assets/default-slide.png';
+
   return (
     <section className="carousel">
-        {/* Images */}
-        <div className="container">
-          <div className="relative-wrapper">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 1 }}
+      <div className="container">
+        <div className="relative-wrapper">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 1 }}
+            >
+              <div
+                className={`headBanner carousel-body headBanner--${slide.gradient}`}
+                style={{ backgroundImage: `url(${bgUrl})` }}
               >
-                <div 
-                  className={`headBanner carousel-body headBanner--${CarouselData[currentIndex].gradient}`} 
-                  style={{ backgroundImage: `url(${CarouselData[currentIndex].src})` }}
-                >
-                  <div className={`headBanner__content headBanner__content--${CarouselData[currentIndex].gradient} color--${CarouselData[currentIndex].color}`}>
-                    <h1>{CarouselData[currentIndex].title}</h1>
-                    <p className="headBanner__description">{CarouselData[currentIndex].desc}</p>
-                      <div className="headBanner__buttons">
-                        {CarouselData[currentIndex].src && (
-                          <Link href={CarouselData[currentIndex].slug || '#'} onClick={()=>console.log('click')}>
-                            <button className={`btn btn--medium btn--${CarouselData[currentIndex].color}`}>Дізнатися більше</button>
-                          </Link>
-                        )}
-                        <Arrows prevSlide={prevSlide} nextSlide={nextSlide} />
-                      </div>
+                <div className={`headBanner__content headBanner__content--${slide.gradient} color--${slide.color}`}>
+                  <h1>{slide.title}</h1>
+                  <p className="headBanner__description">{slide.desc}</p>
+
+                  <div className="headBanner__buttons">
+                            {primary?.slug && (
+                              <Link href={primary.slug}>
+                                <button className={`btn btn--medium btn--${slide.color}`}>
+                                  {primary.text ?? 'дізнатися більше'}
+                                </button>
+                              </Link>
+                            )}
+                          <Arrows prevSlide={prevSlide} nextSlide={nextSlide} />
+                        </div>
                   </div>
                 </div>
               </motion.div>

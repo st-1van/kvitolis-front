@@ -176,23 +176,23 @@ export default function InterMap3 () {
           />
           <path d="M332.096 589.221C353.467 586.847 414.322 570.113 439.057 562.693L562.237 512.233L637.926 489.972L761.106 498.876H911.184L949.865 500.182" 
             stroke="#979595" 
-            stroke-width="7" 
-            stroke-linecap="round"
+            strokeWidth="7" 
+            strokeLinecap="round"
             data-name=''
           />
           <path d="M950.745 500.359C952.012 500.5 1002.07 505.111 1026.94 507.398L1106.32 528.806H1164.42" 
             stroke="#979595" 
-            stroke-width="3"
+            strokeWidth="3"
             data-name=''
           />
           <path d="M657.106 489.158L683.657 453.696L1021.67 442" 
             stroke="#979595" 
-            stroke-width="2"
+            strokeWidth="2"
             data-name=''
           />
           <path d="M395.673 485.5L517.173 434.5L645.173 398" 
             stroke="#979595" 
-            stroke-width="2"
+            strokeWidth="2"
             data-name=''
           />
       </svg>

@@ -1,6 +1,6 @@
 export type Alley = {
   slug: string;
-  title: string;
+  alleyName: string;
 };
 
 export type FormData = {

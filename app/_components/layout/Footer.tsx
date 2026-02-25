@@ -6,7 +6,8 @@ import Link from "next/link";
 import { socilalLinks } from "../data/Navigation";
 
 export const Footer = ()=>{
-    const year = new Date().getFullYear();
+    // const year = new Date().getFullYear();
+    const year = '2025';
 
     return(
         <footer id="contacts" className='footer'>
@@ -34,6 +35,31 @@ export const Footer = ()=>{
                             />                            
                         </div>
                         <div className="footer__actions col-bg">
+                            <div className="footer__contacts col">
+                                <h5>Плануєте захід?</h5>
+                                <div>
+                                    <p>
+                                        Пишіть нам на пошту або телефонуйте
+                                    </p>
+                                </div>
+                                <Link href='events#about-events'>
+                                    <button className="btn btn--medium btn--white ">
+                                            Дізнатись більше
+                                    </button>
+                                </Link>
+                            </div>
+                            <div className="footer__contacts col">
+                                <h5>Квитки</h5>
+                                <div>
+                                    <p>
+                                    Можна придбати на вході 
+                                    </p>
+
+                                </div>
+                                {/* <button className="btn btn--medium btn--white ">
+                                        Замовити
+                                </button> */}
+                            </div>
                             <div className="col">
                                 <h5>Контакти</h5>
                                 <div className="footer__links">
@@ -53,18 +79,7 @@ export const Footer = ()=>{
                                     </ul>
                                 </div>
                             </div>
-                            <div className="footer__contacts col">
-                                <h5>Квитки</h5>
-                                <div>
-                                    <p>
-                                    Можна придбати на вході 
-                                    </p>
 
-                                </div>
-                                {/* <button className="btn btn--medium btn--white ">
-                                        Замовити
-                                </button> */}
-                            </div>
                         </div>
                     </div>
 
@@ -73,16 +88,13 @@ export const Footer = ()=>{
                     <div className="body">
                         <Link href='/'>kvitolis.com.ua ⓒ {year}</Link>
                         <ul>
-                            <li>
-                                <a href={socilalLinks.facebook}>
-                                    facebook
-                                </a>
-                            </li>
-                            <li>
-                                <a href={socilalLinks.instagram}>
-                                    instagram
-                                </a>
-                            </li>
+                            {socilalLinks.map((item)=>(
+                                <li key={item.name}>
+                                    <a href={item.link} target="_blank" rel="noopener noreferrer">
+                                        {item.name}
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>

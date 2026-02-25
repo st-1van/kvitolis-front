@@ -35,15 +35,19 @@
       padding-bottom: 3rem;
       text-wrap-mode: wrap;
 
+      p{
+        margin-bottom: 0.7rem;
+      }
+
 
       &--dark {
-        background: linear-gradient(90deg, #101916 50%, rgba(16, 25, 22, 0) 100%);
+        background: linear-gradient(90deg, #101916 40%, rgba(16, 25, 22, 0) 100%);
         background-size:100%;
         background-position:left;
         background-repeat: no-repeat;
       }
       &--light{
-        background: linear-gradient(90deg, #ffffff 50%, rgba(244, 242, 239, 0) 100%);
+        background: linear-gradient(90deg, #ffffff 40%, rgba(244, 242, 239, 0) 100%);
         background-size:100%;
         background-position:left;
         background-repeat: no-repeat;
@@ -51,17 +55,20 @@
     }
     &__description{
         margin-bottom: 3rem;
+        strong{
+          font-size: 1.5rem;
+          line-height: 2rem;
+        }
     }
-
     .color{
       &--green{
-        h1{
+        h1, strong{
           color: variables.$green !important;
         }
         
       }
       &--fiolet{
-        h1{
+        h1, strong{
           color: variables.$fiolet !important;
         }
         
@@ -178,6 +185,13 @@
       background-size: cover;
       background-position: 50% 0%;
 
+      &__description{
+        strong{
+          font-size: 1.75rem;
+          line-height: 2.5rem;
+        }
+      }
+
       &__content {
         display: flex;
         flex-direction: column;
@@ -197,6 +211,18 @@
         }
         &--light{
           background: linear-gradient(0deg, #ffffff 50%, rgba(244, 242, 239, 0) 100%);
+        }
+      }
+
+      &__buttons{
+        display: flex;
+        justify-content: space-between;
+        
+        & >.arrows{
+            display: flex;
+            gap:10px;
+            padding: 0 3rem;
+            bottom: 2rem;
         }
       }
 

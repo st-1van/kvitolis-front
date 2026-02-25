@@ -1,30 +1,24 @@
 'use client'
 import { useState } from "react";
 import { TreeSmallVertical } from '@/app/_components/garden/alley/TreeDescription';
-import Persons from '@/app/_components/garden/alley/Persons';
 import type { TreeDescProps } from '@/app/_components/garden/alley/TreeDescription';
 import type { PersonsProps } from '@/app/_components/garden/alley/Persons';
 import AnimatedOnScroll from '../../ui/AnimatedScroll';
 
+
 type AboutAlleyProps = {
     treeData: TreeDescProps;
-    personsData?: PersonsProps['famousPeople'];
+    personsData?: PersonsProps['personsData'];
     alleyName: string;
     alleyDesc?: string;
   };
 
-export default function AboutAlley ({ 
-  // treeData, 
-  personsData, 
-  alleyName 
-}: AboutAlleyProps){
-    
+export default function AboutAlley (){
     return(
         <section className='aboutAlley'>
           <div className="container">
              <AnimatedOnScroll animationClass="fade-sides">
                <div className="row">
-                 <Persons famousPeople={personsData ?? []} alleyName={alleyName}/>
                </div>
              </AnimatedOnScroll>
            </div>

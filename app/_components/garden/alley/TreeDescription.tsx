@@ -22,6 +22,7 @@ export default function TreeDescription(props: TreeDescProps) {
         latin,
         price
     } = props;
+    // console.log('photo src:', src);
     
     const transformedPrice = price ? price.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : '';
 
@@ -64,9 +65,9 @@ export function TreeVertical (props: TreeDescProps) {
 
     return (
                 <div className="treeDescription grey vertical">
-                    <Image 
+                    <Image
                         className='treeDescription__img' 
-                        src={src} 
+                        src={src}
                         alt={`фото-${name}`}
                         height={400}
                         width={400}
@@ -105,8 +106,8 @@ export function TreeSmallVertical (props: TreeDescProps) {
                         className='treeDescription__img' 
                         src={src} 
                         alt={`фото-${name}`}
-                        height={300}
-                        width={300}
+                        height={250}
+                        width={250}
                     />
                 </div>
                 <div className="treeDescription__price">

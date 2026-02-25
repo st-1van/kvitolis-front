@@ -1,98 +1,96 @@
-'use client'
+import React from "react";
+import { fetchAPI } from "../../lib/strapi";
+import { notFound } from "next/navigation";
+import EventsClient, { EventsProps } from "./EventsClient";
+import { Metadata } from "next";
 
-import HeadBanner from "../_components/HeadBanner"
-import { FoodAndFun } from "../_components/WeHave"
-// import Image from "next/image"
-import AnimatedOnScroll from "../_components/ui/AnimatedScroll"
-import { banner, data1, EventsCallToAction, photos } from '../_components/data/Events'
-import StandartGallery from "../_components/StandartGallery"
-import CallToAction from "../_components/garden/CallToAction"
+export const revalidate = 60;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type StrapiSingle<T> = { data: T | null; meta?: any };
 
- 
-export default function EventsPage() {
-    
-  //get request
-  return <main>
-        <section className="mainBanner container animate fade-in-up">
-          <HeadBanner {...banner} color="green"/>
-        </section>
+export async function generateMetadata({}): Promise<Metadata> {
 
-                <section className="gallery">
-          <div className="container">
-            <AnimatedOnScroll animationClass="fade-in-up">
-              <div className="text-block center">
-                <h2>У нас можна провести:</h2>
-                <p>
-            майстер-класи, кулінарні демонстрації та дегустації,
-            йогу на світанку чи медитацію серед квітів,
-            тренінги, 
-            концерти,
-            модні покази,
-            різноманітні конкурси,
-            сімейне свято та дні народження,
-            освідчення та весільні церемонії з фотосесіями!
-                </p>
-              </div>
-            </AnimatedOnScroll>
-          </div>
-            <AnimatedOnScroll animationClass="fade-in-up">
-              <StandartGallery images={photos} />
-            </AnimatedOnScroll>
-        </section>
+  try {
+    const path = `/organizuvati-podiyu`;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const res: any = await fetchAPI(path, {
+      populate: {
+        seo: { populate: "*" },
+      },
+      pagination: { pageSize: 1 },
+    });
 
-        <section id='about-events'>
-          
-          <div className="container">
-            <AnimatedOnScroll animationClass="fade-in-up">
-              <div className="text-block center">
-                <h2>У нас є все необхідне для вашої події</h2>
-              </div>
-            </AnimatedOnScroll>
-            <div className="content">
-              <FoodAndFun 
-                // desc="Щодня на вас чекають" 
-                center="center" 
-                style='rounded'
-                data={data1}
-              />
-            </div>
-          </div>
-        </section>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const item: any = Array.isArray(res?.data) ? res.data[0] : res?.data ?? null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const seo: any = item?.seo ?? {};
 
+    const title = seo?.metaTitle ?? item?.title ?? "";
+    const description = seo?.metaDescription ?? item?.description ?? item?.desc ?? "";
+    const keywords = seo?.keywords ?? undefined;
 
+    // підтримка різних структур для зображення SEO або поля img
+    const metaImage = seo?.metaImage ?? seo?.meta_image ?? null;
 
+    const imageUrl: string | undefined =
+      metaImage?.url ??
+      metaImage?.data?.attributes?.url ??
+      item?.img?.url ??
+      item?.img?.data?.attributes?.url ??
+      undefined;
 
-        {/* <section className="tickets">
-          <div className="container">
-            <AnimatedOnScroll animationClass="fade-in-up">
-              <div className="text-block center">
-                <h2>І це лише за стандартну вартість квитків</h2>
-              </div>
-            </AnimatedOnScroll>
-            <AnimatedOnScroll animationClass="fade-sides">
-              <div className="content"> 
-                  <div className="col col-bg grey cost-card">
-                    <div>
-                      <p className="subp">БУДНІ ДНІ:</p>
-                      <Image src='/assets/icons/tickets.svg' width={70} height={61} alt='icon-calendar' />
-                    </div>
-                    <p>Дорослий - 150 грн;<br/>Дитячий - 100 грн (від 7-14 років).<br/>Діти до 7 років - БЕЗКОШТОВНО!</p>
-                  </div>
-                  <div className="col col-bg grey cost-card">
-                    <div>
-                      <p className="subp">ВИХІДНІ ДНІ:</p>
-                      <Image src='/assets/icons/tickets.svg' width={70} height={61} alt='icon-calendar' />
-                    </div>
-                    <p>Дорослий - 200 грн;<br/>Дитячий - 100 грн (від 7-14 років).<br/>Діти до 7 років - БЕЗКОШТОВНО!</p>
-                  </div>
-              </div>
-            </AnimatedOnScroll>
-          </div>
-        </section> */}
-        <CallToAction {...EventsCallToAction} />
-    </main>
+    const canonical = seo?.canonicalUrl ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/events`;
+
+    const metadata: Metadata = {
+      title,
+      description,
+      keywords,
+      openGraph: {
+        type: "website",
+        title,
+        description,
+        images: imageUrl ? [{ url: imageUrl }] : [],
+        locale: "uk_UA",
+        url: canonical,
+      },
+      alternates: {
+        canonical,
+      },
+    };
+
+    return metadata;
+  } catch (err) {
+    console.error("generateMetadata (news) failed:", err);
+    return {};
+  }
 }
 
+export default async function Page() {
+  try {
+    const path = `/organizuvati-podiyu`;
+    const urlParamsObject = {
+      populate: {
+        mainBanner: { populate: "*" },
+        benefits: { populate: ["photo"] },
+        gallery: { populate: "*" },
+        seo: { populate: "*" },
+      },
+    };
 
+    const response = await fetchAPI<StrapiSingle<EventsProps>>(
+      path,
+      urlParamsObject,
+      { timeout: 15000, retries: 1 }
+    );
 
+    if (!response?.data) {
+      return notFound();
+    }
+
+    return <EventsClient {...response.data} />;
+  } catch (err) {
+    console.error(`Failed to fetch event page data:`, err);
+    return notFound();
+  }
+}
