@@ -57,16 +57,20 @@
       }
     }
 
-    &__answer.desc{
+    &__answer-desktop {
       width: 50%;
       background-color: variables.$light-green;
       border-radius: 2.75rem;
       padding: 2rem 4rem;
+      height: 500px;
+    }
+
+    .desc{
       scroll-behavior: smooth;
-      max-height: 600px;
       height: 100%;
       overflow-y: auto;
       scroll-behavior: smooth;
+
       p {
         font-size: 1.8rem;
         margin: 10px 0 0;
@@ -74,6 +78,7 @@
         white-space: pre-line !important;
       }
     }
+
 
     &__answer.mobile {
       overflow: hidden;
@@ -110,14 +115,15 @@
       &__base{
         width: 100%;
       }
+      &__answer-desktop{
+      display: none !important;
+      }
     }
 
-    .mobile{
+    .mobile {
       display: block !important;
     }
-    .desc{
-      display: none !important;
-    }
+
     
   }
 

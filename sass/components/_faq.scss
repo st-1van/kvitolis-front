@@ -28,7 +28,7 @@
     background: none;
     border: none;
     text-align: left;
-    font-size: 1.75rem;
+    font-size: 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -58,7 +58,7 @@
   }
   
   &__answer p {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     margin: 10px 0 0;
     line-height: 1.4;
   }
@@ -79,8 +79,7 @@
       text-align: center;
     }
     &__answer p {
-      margin: 10px 0 0;
-      font-size: 1.5rem;
+      margin: 5px 0 0;
       line-height: 1.4;
     }
 

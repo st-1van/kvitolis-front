@@ -69,18 +69,25 @@ export default function Mission({ title, data }: MissionProps) {
               </div>
             ))}
           </div>
+          <div className="accordion__answer-desktop">
+            <div className="desc">
+              {data.map((item, index)=>(
+                <div
+                  key={index} 
+                  className={`${openIndex === index ? "block" : "hidden"}`}
+                >
+                    {item.desc}
+                </div>
+              ))}
+            </div>
 
-          <div className="accordion__answer desc">
-            {data.map((item, index)=>(
-              <div
-                key={index} 
-                className={`${openIndex === index ? "block" : "hidden"}`}
-              >
-                  {item.desc}
-              </div>
-            ))}
-          
+            <div className="fade-overlay">
+              <div className="top" />
+              <div className="bottom" />
+            </div>
           </div>
+
+
         </div>
         </AnimatedOnScroll>
     </section>

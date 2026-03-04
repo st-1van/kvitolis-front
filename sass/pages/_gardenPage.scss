@@ -12,6 +12,7 @@
       max-width: 700px;
       margin: 0 auto;
       text-align: left;
+
       h5,p{
         margin: 0.4em 0
       }
@@ -41,6 +42,9 @@
       @media screen and (max-width: 481px) {
         &__bg{
           display:none;
+        }
+        &__content{
+          padding: 0 1rem;
         }
       }
   

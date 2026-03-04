@@ -120,12 +120,12 @@ export default function PulseMap({title, desc}:PulseMapProps) {
         <div className={`dark-overlay ${active ? 'active' : ''}`} />
 
         <div className={`pulseMap__info-box ${active ? 'visible' : ''}`}>
-          <h5>{active?.title}</h5>
-          <p>{active?.desc || 'Короткий опис локації'}</p>
+          <div className="info-content">
+            <h5>{active?.title}</h5>
+            <p>{active?.desc || 'Короткий опис локації'}</p>
+          </div>
           <Link href={`/garden/${active?.slug}`} >
-            <button
-              className="btn btn--medium btn--green"
-            >Дізнатися більше</button>
+            <button className="btn btn--medium btn--green">Дізнатися більше</button>
           </Link>
         </div>
 

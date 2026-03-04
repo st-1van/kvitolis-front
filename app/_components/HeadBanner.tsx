@@ -28,14 +28,14 @@ export default function HeadBanner({
     >
       <div className={`headBanner__content headBanner__content--${gradient} color--${color}`}>
         <h1 className="headBanner__headline">{title}</h1>
-        <p className="headBanner__description">
+        <div className="headBanner__description">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeSanitize]}
         >
           {desc||''}
         </ReactMarkdown>
-        </p>
+        </div>
         <div>
           {(btn[0] && btn[0].slug) && (
             <Link href={btn[0].slug || '#'}>

@@ -115,7 +115,11 @@ $transition: 0.5s cubic-bezier(.39, .575, .565, 1);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     transition: $transition;
     z-index: 4;
-    text-align: center;
+    text-align: left;
+
+    .info-content {
+        margin-bottom: 1rem;
+    }
 
     &.visible {
       transform: translateX(-50%) translateY(0);
@@ -124,21 +128,28 @@ $transition: 0.5s cubic-bezier(.39, .575, .565, 1);
   }
 
     @media screen and (max-width: 1026px) {
+        &__info-box {
+          top: 30%;
+          right: 0;
+        }
     }
     @media screen and (max-width: 769px) {
+        &__info-box {
+          top: 30%;
+          right:-16%
+        }
     }
 
     @media screen and (max-width: 481px) {
+        &__info-box {
+          display: none;
+        }
         &__bg img{
                 height: 500px;
                 width: 100%;
                 object-position: 45% 50%;
-                // margin-left:5%;
             }
         }
-        // .booble{
-        //             height: 50px;
-        // } 
 
 }
 
