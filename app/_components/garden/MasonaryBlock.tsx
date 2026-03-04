@@ -67,18 +67,36 @@ export function MasonryBlock<T extends { id: string; priority?: string; publishe
   }, []);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
     setIsDragging(true);
     startX.current = e.clientX;
     startScrollLeft.current = scrollContainerRef.current?.scrollLeft || 0;
+    // Disable smooth scrolling during drag for instant response
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.style.scrollBehavior = 'auto';
+    }
   };
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
-      if (!isDragging || !scrollContainerRef.current) return;
+      if (!isDragging || !scrollContainerRef.current || !scrollbarThumbRef.current) return;
+      e.preventDefault();
       const container = scrollContainerRef.current;
+      const scrollbarTrack = scrollbarThumbRef.current.parentElement;
+      if (!scrollbarTrack) return;
+      
       const deltaX = e.clientX - startX.current;
       const scrollWidth = container.scrollWidth - container.clientWidth;
-      const moveAmount = (deltaX / container.clientWidth) * scrollWidth;
+      const scrollbarTrackWidth = scrollbarTrack.clientWidth;
+      
+      // Calculate the available space for thumb to move (track width minus thumb width)
+      const thumbWidth = (container.clientWidth / container.scrollWidth) * scrollbarTrackWidth;
+      const availableThumbSpace = scrollbarTrackWidth - thumbWidth;
+      
+      // Map mouse movement directly to scroll position for natural 1:1 feel
+      const scrollRatio = scrollWidth / availableThumbSpace;
+      const moveAmount = deltaX * scrollRatio;
+      
       container.scrollLeft = startScrollLeft.current + moveAmount;
     },
     [isDragging]
@@ -86,6 +104,10 @@ export function MasonryBlock<T extends { id: string; priority?: string; publishe
 
   const handleMouseUp = () => {
     setIsDragging(false);
+    // Restore smooth scrolling after drag ends
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.style.scrollBehavior = 'smooth';
+    }
   };
 
   useEffect(() => {
