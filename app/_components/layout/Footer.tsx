@@ -7,7 +7,7 @@ import { socilalLinks } from "../data/Navigation";
 
 export const Footer = ()=>{
     // const year = new Date().getFullYear();
-    const year = '2025';
+    const year = '2026';
 
     return(
         <footer id="contacts" className='footer'>
