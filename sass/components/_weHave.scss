@@ -46,6 +46,7 @@
 
     &__img{
         object-position: top;
+        height: 500px;
         width: 100%;
         max-width: 100%;
         display: block;
@@ -56,7 +57,7 @@
         }
     }
     &__title{
-        font-size: 2.27rem;
+        font-size: 2.4rem;
         line-height: normal;
         margin-top:2rem;
         margin-bottom: 1rem;
@@ -70,12 +71,18 @@
         font-size: 1.5rem;
         font-weight: 600;
     }
+    @media screen and (max-width: 1026px) {
+            &__img{
+                    // min-width: 150px;
+                    // border-radius: 4.375rem 0rem;    
+                    // height: 450px;
+            }
+    }
     @media screen and (max-width: 769px) {
                    
             &__img{
                 min-width: 150px;
-                border-radius: 4.375rem 0rem;    
-
+                border-radius: 4.375rem 0rem;
             }
     }
 

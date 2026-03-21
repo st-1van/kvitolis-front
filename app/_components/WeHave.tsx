@@ -17,10 +17,17 @@ export default function WeHave({
   cardsData = [],
 }: Props) {
 
-    const attractions = festivalData.map(({aboutTitle, aboutDesc, slug, mainBanner})=>({
+    const attractions = festivalData.map(({
+            aboutTitle, 
+            // aboutDesc, 
+            dateDesc,
+            slug, 
+            mainBanner
+        })=>({
         id: mainBanner?.id || '',
         title: aboutTitle || '',
-        desc: aboutDesc || '',
+        // desc: aboutDesc || '',
+        desc: dateDesc || '',
         src: getImageUrl(mainBanner?.photo.url) || '',
         gradient: mainBanner?.gradient || 'light',
         slug: `/festivals/${slug}` || '#',

@@ -34,8 +34,9 @@ export default function CardItem({ card, style }: CardItemProps) {
           className={`card__img ${style??''}`}
           src={imgUrl}
           alt={title || "Image"}
-          width={394}
-          height={400}
+          //змінюємо розміри на мобілі, щоб нормально показувалося
+          width={450}
+          height={500}
         />
       <h3 className="card__title">{title}</h3>
       <p>{desc}</p>

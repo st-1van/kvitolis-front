@@ -6,13 +6,14 @@ import ReactMarkdown from "react-markdown";
 import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
 
-import HeadBanner from "../../_components/HeadBanner";
+// import HeadBanner from "../../_components/HeadBanner";
 import { FoodAndFun } from "../../_components/WeHave";
 import Image from "next/image";
 import AnimatedOnScroll from "../../_components/ui/AnimatedScroll";
 import StandartGallery, { ImageItemProps } from "../../_components/StandartGallery";
 import type { SlideProps } from "../../_components/Carousel";
 import Visualisation from "@/app/_components/garden/alley/Visualisation";
+import { getImageUrl } from "@/lib/strapi";
 
 export type FestivalProps ={
   id:string;
@@ -64,11 +65,18 @@ export default function FestivalClient(props: {
     );
   }
 
+  const bgUrl = data?.mainBanner?.photo?.url ? getImageUrl(data.mainBanner.photo.url) : '/assets/default-slide.png';
+
   return (
     <main>
-      <section className="mainBanner container animate fade-in-up">
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        <HeadBanner {...(data?.mainBanner as any)} />
+      <section className="mainBanner animate fade-in-up">
+
+        <div 
+          className='festivalBanner' 
+          style={{ backgroundImage: `url(${bgUrl})` }}
+        >
+        </div>
+
       </section>
 
       <section className="season">
@@ -105,43 +113,7 @@ export default function FestivalClient(props: {
           <StandartGallery images={data?.gallery ?? []} />
         </AnimatedOnScroll>
       </section>
-      {data?.dateTitle || data?.dateDesc && (
-        <section className="date">
-        <div className="container">
-          <AnimatedOnScroll animationClass="fade-in-up">
-            <div className="text-block center">
-              <p>чекаємо на вас</p>
-              <h2>{data?.dateTitle}</h2>
-              <p>{data?.dateDesc}</p>
-            </div>
-          </AnimatedOnScroll>
-
-          <AnimatedOnScroll animationClass="fade-sides">
-            <div className="content">
-              <div className="col col-sm green data-card">
-                <Image src="/assets/icons/clock.svg" width={65} height={65} alt="icon-clock" />
-                <p className="subp">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
-                    {data?.time?.[0]?.text ?? ""}
-                  </ReactMarkdown>
-                </p>
-              </div>
-
-              {data?.time?.[1] && (
-                <div className="col col-sm green data-card">
-                  <Image src="/assets/icons/clock.svg" width={65} height={65} alt="icon-clock" />
-                  <p className="subp">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
-                      {data?.time?.[1]?.text ?? ""}
-                    </ReactMarkdown>
-                  </p>
-                </div>
-              )}
-            </div>
-          </AnimatedOnScroll>
-        </div>
-      </section>
-      )}
+      {/* дата */}
 
       {/* додати блок з відео, якщо є videoId */}
       {data?.video?.videoId && (
@@ -199,3 +171,42 @@ export default function FestivalClient(props: {
     </main>
   );
 }
+
+      // {data?.dateTitle || data?.dateDesc ? (
+      //   <section className="date">
+      //   <div className="container">
+      //     <AnimatedOnScroll animationClass="fade-in-up">
+      //       <div className="text-block center">
+      //         {/* <p>чекаємо на вас</p> */}
+      //         <h2>{data?.dateTitle}</h2>
+      //         <p>{data?.dateDesc}</p>
+      //       </div>
+      //     </AnimatedOnScroll>
+      //     {data?.time?.[1] && (
+      //       <AnimatedOnScroll animationClass="fade-sides">
+      //       <div className="content">
+      //         <div className="col col-sm green data-card">
+      //           <Image src="/assets/icons/clock.svg" width={65} height={65} alt="icon-clock" />
+      //           <p className="subp">
+      //             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
+      //               {data?.time?.[0]?.text ?? ""}
+      //             </ReactMarkdown>
+      //           </p>
+      //         </div>
+
+      //         {data?.time?.[1] && (
+      //           <div className="col col-sm green data-card">
+      //             <Image src="/assets/icons/clock.svg" width={65} height={65} alt="icon-clock" />
+      //             <p className="subp">
+      //               <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
+      //                 {data?.time?.[1]?.text ?? ""}
+      //               </ReactMarkdown>
+      //             </p>
+      //           </div>
+      //         )}
+      //       </div>
+      //     </AnimatedOnScroll>
+      //     )}
+      //   </div>
+      // </section>
+      // ):''}

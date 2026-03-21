@@ -12,44 +12,44 @@ type StrapiRes = any;
 export async function generateMetadata({}): Promise<Metadata> {
 
   try {
-    const path = `/alleys-col`;
-    const res: StrapiRes = await fetchAPI(path, {
-      populate: {
-        seo: { populate: "*" },
-      },
-      pagination: { pageSize: 1 },
-    });
+    // const path = `/alleys-col`;
+    // const res: StrapiRes = await fetchAPI(path, {
+    //   populate: {
+    //     seo: { populate: "*" },
+    //   },
+    //   pagination: { pageSize: 1 },
+    // });
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const item: any = Array.isArray(res?.data) ? res.data[0] : res?.data ?? null;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const seo: any = item?.seo ?? {};
+    // const item: any = Array.isArray(res?.data) ? res.data[0] : res?.data ?? null;
+    // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // const seo: any = item?.seo ?? {};
 
-    const title = seo?.metaTitle ?? item?.title ?? "";
-    const description = seo?.metaDescription ?? item?.description ?? item?.desc ?? "";
-    const keywords = seo?.keywords ?? undefined;
+    // const title = seo?.metaTitle ?? item?.title ?? "";
+    // const description = seo?.metaDescription ?? item?.description ?? item?.desc ?? "";
+    // const keywords = seo?.keywords ?? undefined;
 
-    // підтримка різних структур для зображення SEO або поля img
-    const metaImage = seo?.metaImage ?? seo?.meta_image ?? null;
+    // // підтримка різних структур для зображення SEO або поля img
+    // const metaImage = seo?.metaImage ?? seo?.meta_image ?? null;
 
-    const imageUrl: string | undefined =
-      metaImage?.url ??
-      metaImage?.data?.attributes?.url ??
-      item?.img?.url ??
-      item?.img?.data?.attributes?.url ??
-      undefined;
+    // const imageUrl: string | undefined =
+    //   metaImage?.url ??
+    //   metaImage?.data?.attributes?.url ??
+    //   item?.img?.url ??
+    //   item?.img?.data?.attributes?.url ??
+    //   undefined;
 
-    const canonical = seo?.canonicalUrl ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/garden`;
+    const canonical =  `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/garden`;
 
     const metadata: Metadata = {
-      title,
-      description,
-      keywords,
+      title:'Сад Українства у Квітолісі - Відкрийте для себе красу української природи в нашому унікальному саду, де кожна рослина розповідає свою історію.',
+      description:'Відкрийте для себе красу української природи в нашому унікальному саду, де кожна рослина розповідає свою історію.',
+      keywords:'сад українства, квітоліс, сад, українські митці',
       openGraph: {
         type: "website",
-        title,
-        description,
-        images: imageUrl ? [{ url: imageUrl }] : [],
+        title:'Сад Українства у Квітолісі - Відкрийте для себе красу української природи в нашому унікальному саду, де кожна рослина розповідає свою історію.',
+        description:'Відкрийте для себе красу української природи в нашому унікальному саду, де кожна рослина розповідає свою історію.',
+        images: [],
         locale: "uk_UA",
         url: canonical,
       },
@@ -57,10 +57,11 @@ export async function generateMetadata({}): Promise<Metadata> {
         canonical,
       },
     };
+    // console.log("Generated metadata for garden page:", metadata);
 
     return metadata;
   } catch (err) {
-    console.error("generateMetadata (news) failed:", err);
+    console.error("generateMetadata (garden) failed:", err);
     return {};
   }
 }

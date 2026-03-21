@@ -8,7 +8,7 @@ const teamMembers = [
     },
     {
         name: "Тетяна Пашковська", 
-        role: ["Проєктний менеджмент", 'Стратегія'],
+        role: ["Проєктний менеджмент", 'Стратегія', 'Менеджмент'],
         photo:'/assets/team/tetyana_pashkovska.jpg',
     },
     {
@@ -18,7 +18,7 @@ const teamMembers = [
     },
     {
         name: "Гуменюк Світлана", 
-        role: ["Менеджмент", 'Стратегія', 'Контент'],
+        role: ['Стратегія', 'Контент'],
         photo:'/assets/team/svitlana.jpg',
     },
     {
