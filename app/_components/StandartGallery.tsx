@@ -64,6 +64,7 @@ export default function StandartGallery({ images }: { images: ImageItemProps[] }
               fill={true}
               style={{ objectFit: 'cover', width: '100%', height: '100%' }}
               loading="lazy"
+              unoptimized
             />
           </ImageListItem>
         ))}

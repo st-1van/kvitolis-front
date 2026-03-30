@@ -288,6 +288,7 @@ function PersonsList({
                   height={100}
                   width={100}
                   className="item__img"
+                  unoptimized
                 />
                 <div className={`status-button${item.free ? ' --free' : ' --taken'}`}>
                   {item.free ? (
