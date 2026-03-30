@@ -6,6 +6,7 @@ import { Montserrat } from 'next/font/google'
 import { ScrollLockProvider } from './_components/context/scroll-lock-context';
 import { ModalProvider } from './_components/context/modal-context';
 import { Analytics } from '@vercel/analytics/next';
+import { GoogleTagManager } from '@next/third-parties/google'
 
 
 
@@ -32,6 +33,7 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/NAMU/NAMU-Pro.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/NAMU/NAMU-1400.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
       </head>
+      <GoogleTagManager gtmId={process.env.GTM_ID||''} />
       <body>
         <ScrollLockProvider>
           <ModalProvider>
