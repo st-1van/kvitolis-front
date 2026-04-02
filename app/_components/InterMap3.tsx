@@ -209,6 +209,7 @@ export default function InterMap3 () {
                   key={pin.name}
                   data-name={pin.name}
                   style={{left:`${pin.left}`, bottom:`${pin.bottom}`}}
+                  unoptimized
                 />
             ))}
             </>
@@ -232,6 +233,7 @@ export default function InterMap3 () {
                             height={50} 
                             src={item.icon} 
                             alt={item.name}
+                            unoptimized
                           />
                           <p className="--hiden">{item.name}</p>
                         </div>
@@ -249,6 +251,7 @@ export default function InterMap3 () {
                           alt={active.name || "Image"}
                           width={62}
                           height={62}
+                          unoptimized
                         />
 
                         <p className="sub">{active.name}</p>

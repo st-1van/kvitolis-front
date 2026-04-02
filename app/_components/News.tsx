@@ -68,6 +68,7 @@ function NewsItem({ title, text, img, date, documentId} :NewsItemProps ) {
                 width={371}
                 height={324}
                 className="news__img"
+                unoptimized
         />}
 
         <div className="news__headline">

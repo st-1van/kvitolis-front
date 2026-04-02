@@ -21,6 +21,7 @@ export default function CallToAction({ title, steps, btn, slug}: BenefitsProps) 
                             alt='benefit'
                             height={362}
                             width={300}
+                            unoptimized
                         />
                         <Image 
                             className='benefits__img' 
@@ -28,6 +29,7 @@ export default function CallToAction({ title, steps, btn, slug}: BenefitsProps) 
                             alt='benefit'
                             height={362}
                             width={300}
+                            unoptimized
                         />
                 </div>
             </AnimatedOnScroll>
