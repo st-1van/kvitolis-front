@@ -8,7 +8,7 @@ import { useModal } from "../../context/modal-context";
 import AnimatedOnScroll from "../../ui/AnimatedScroll";
 
 export type PersonsDataProps = {
-  id: string;
+  id: number;
   name: string;
   desc?: string | null;
   years?: string;
@@ -25,7 +25,7 @@ export type PersonsDataProps = {
 export type PersonsProps = {
   personsData: PersonsDataProps[];
   alleyName: string;
-  searchedPerson?: string | Record<string, string | string[] | undefined>;
+  searchedPerson?: Record<string, string | string[] | undefined>;
 };
 
 const trimText = (text: string, maxLength: number) => {
@@ -53,7 +53,11 @@ const personTextEnding = (count: number) => {
   return 'постатей';
 }
 
-export default function Persons({ personsData, alleyName, searchedPerson }: PersonsProps) {
+export default function Persons({ 
+  personsData, 
+  alleyName, 
+  searchedPerson
+}: PersonsProps) {
   // always memoize indexedList!
   const indexedList = useMemo(
     () =>
@@ -64,18 +68,18 @@ export default function Persons({ personsData, alleyName, searchedPerson }: Pers
     [personsData]
   );
 
-  // const queridId = 1796;
-  // console.log('Queried person ID:', indexedList.find(p => p.id === queridId));
-  // const searchedPerso = "Мстислав Чернов"
-  // console.log('Queried person Name:', indexedList.find(p => p.name === searchedPerson?.name));
-  const defaultPerson = searchedPerson && typeof searchedPerson === 'object' && 'name' in searchedPerson ? indexedList.find(p => p.name === searchedPerson.name) : indexedList[0];
-  const defaultActiveId = defaultPerson?.id ?? null;
-  // щоб викликати модалку треба клікнути на елемент списку
+ // по id Шукає норм
+ // чомусь ще шукає по імені, знайти чому так.
+  const personId = Number(searchedPerson?.id);
+  const exists = indexedList.some(person => person.id === personId);
+  const defaultActiveId = exists ? personId : indexedList[0]?.id; //треба змінити порядок рендеру, щоб спочатку показувалися queried person, а потім вже перша особа зі списку. Інакше при переході за посиланням з параметром searchedPerson, який не є валідним, буде показуватися перша особа зі списку, а не queried person (який може бути валідним, але просто не знайденим через помилки в даних).
+
+
 
   const [filter, setFilter] = useState<'all' | 'free' | 'taken'>('all');
   const [displayedPeople, setDisplayedPeople] = useState<PersonsDataProps[]>(indexedList);
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [activePersonId, setActivePersonId] = useState<string | null>(defaultActiveId);
+  const [selectedIds, setSelectedIds] = useState<(number)[]>([]);
+  const [activePersonId, setActivePersonId] = useState<number | null>(defaultActiveId);
   
   // Prepare filtered lists
   const freeList = useMemo(() => indexedList.filter(p => p.free === true), [indexedList]);
@@ -95,6 +99,9 @@ export default function Persons({ personsData, alleyName, searchedPerson }: Pers
     }
   }, [indexedList, activePersonId]);
 
+
+
+
   // Selection logic by id
   const selectionHandler = (person: PersonsDataProps) => {
     setSelectedIds((prev) =>
@@ -107,6 +114,7 @@ export default function Persons({ personsData, alleyName, searchedPerson }: Pers
   const selectedPersons = indexedList.filter(p => selectedIds.includes(p.id));
   const names = selectedPersons.map(p => p.name);
 
+  // серч параметри для формування посилання на форму меценатства з попередньо вибраними постатями. Якщо searchedPerson валідний, то він буде встановлений як активна особа, і її id буде додано до параметрів посилання. Якщо searchedPerson не валідний або відсутній, то використовуватиметься перша особа зі списку (якщо вона є).
   const params = new URLSearchParams({
     alleyName: alleyName,
     names: names.join(","),
@@ -229,7 +237,7 @@ function PersonCardNew({ item, isSelected, selectionHandler }: { item: PersonsDa
 
   return (
     <>
-      <div className='persons__card' key={item.id}>
+      <div className='persons__card' key={item.id} id={String(item.id)}>
         <Image
           className="persons__card-img"
           src={photo ?? '/assets/people/default-person1.png'}
@@ -279,8 +287,8 @@ function PersonsList({
   isQueried,
 }: {
   personsData: PersonsDataProps[];
-  setActivePersonId: (id: string) => void;
-  selectedIds: string[];
+  setActivePersonId: (id: number) => void;
+  selectedIds: number[];
   selectionHandler?: (person: PersonsDataProps) => void;
   isQueried?: string | Record<string, string | string[] | undefined>;
 }) {
@@ -309,7 +317,7 @@ function PersonsList({
       }
     }
 
-  }, []);
+  }, [isQueried, personsData]);
 
 
   return (
@@ -321,6 +329,7 @@ function PersonsList({
               key={item.id}
               className={`item${selectedIds.includes(item.id) ? ' --selected' : ''}`}
               // onClick={() => setActivePersonId(item.id)}
+              id={String(item.id)}
               onClick={() => handleItemClick(item)}
             >
               <div className="item__img-wrapper">

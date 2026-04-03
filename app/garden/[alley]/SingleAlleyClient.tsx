@@ -25,7 +25,7 @@ export type AlleyItemProps = {
     latin: string;
   };
   famousPeople?: PersonsDataProps[];
-  searchedPerson?: string | Record<string, string | string[] | undefined>;
+  searchedPerson?: Record<string, string | string[] | undefined>;
 };
 
 export default function SingleAlleyClient({ data, slug }: { data: AlleyItemProps[]; slug: string }) {

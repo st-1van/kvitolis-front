@@ -107,8 +107,6 @@ export default async function Page(props: {
 
   const { alley } = await props.params;
   const searchedPerson = props.searchParams ? await props.searchParams : undefined;
- 
-
   try {
     const urlParamsObject = {
       filters: { slug: alley },
