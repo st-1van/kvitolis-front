@@ -8,7 +8,7 @@ import { useModal } from "../../context/modal-context";
 import AnimatedOnScroll from "../../ui/AnimatedScroll";
 
 export type PersonsDataProps = {
-  id: string;
+  id: number;
   name: string;
   desc?: string | null;
   years?: string;
@@ -25,6 +25,7 @@ export type PersonsDataProps = {
 export type PersonsProps = {
   personsData: PersonsDataProps[];
   alleyName: string;
+  searchedPerson?: Record<string, string | string[] | undefined>;
 };
 
 const trimText = (text: string, maxLength: number) => {
@@ -52,7 +53,11 @@ const personTextEnding = (count: number) => {
   return 'постатей';
 }
 
-export default function Persons({ personsData, alleyName }: PersonsProps) {
+export default function Persons({ 
+  personsData, 
+  alleyName, 
+  searchedPerson
+}: PersonsProps) {
   // always memoize indexedList!
   const indexedList = useMemo(
     () =>
@@ -63,11 +68,19 @@ export default function Persons({ personsData, alleyName }: PersonsProps) {
     [personsData]
   );
 
+ // по id Шукає норм
+ // чомусь ще шукає по імені, знайти чому так.
+  const personId = Number(searchedPerson?.id);
+  const exists = indexedList.some(person => person.id === personId);
+  const defaultActiveId = exists ? personId : indexedList[0]?.id; //треба змінити порядок рендеру, щоб спочатку показувалися queried person, а потім вже перша особа зі списку. Інакше при переході за посиланням з параметром searchedPerson, який не є валідним, буде показуватися перша особа зі списку, а не queried person (який може бути валідним, але просто не знайденим через помилки в даних).
+
+
+
   const [filter, setFilter] = useState<'all' | 'free' | 'taken'>('all');
   const [displayedPeople, setDisplayedPeople] = useState<PersonsDataProps[]>(indexedList);
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [activePersonId, setActivePersonId] = useState<string | null>(indexedList[0]?.id ?? null);
-
+  const [selectedIds, setSelectedIds] = useState<(number)[]>([]);
+  const [activePersonId, setActivePersonId] = useState<number | null>(defaultActiveId);
+  
   // Prepare filtered lists
   const freeList = useMemo(() => indexedList.filter(p => p.free === true), [indexedList]);
   const takenList = useMemo(() => indexedList.filter(p => p.free === false), [indexedList]);
@@ -86,6 +99,9 @@ export default function Persons({ personsData, alleyName }: PersonsProps) {
     }
   }, [indexedList, activePersonId]);
 
+
+
+
   // Selection logic by id
   const selectionHandler = (person: PersonsDataProps) => {
     setSelectedIds((prev) =>
@@ -98,6 +114,7 @@ export default function Persons({ personsData, alleyName }: PersonsProps) {
   const selectedPersons = indexedList.filter(p => selectedIds.includes(p.id));
   const names = selectedPersons.map(p => p.name);
 
+  // серч параметри для формування посилання на форму меценатства з попередньо вибраними постатями. Якщо searchedPerson валідний, то він буде встановлений як активна особа, і її id буде додано до параметрів посилання. Якщо searchedPerson не валідний або відсутній, то використовуватиметься перша особа зі списку (якщо вона є).
   const params = new URLSearchParams({
     alleyName: alleyName,
     names: names.join(","),
@@ -112,26 +129,46 @@ export default function Persons({ personsData, alleyName }: PersonsProps) {
         <AnimatedOnScroll animationClass="fade-sides">
           <div className="row">
             <div className='persons col-md col'>
-              <div className="btn-filters">
-                <button
-                  className={`btn btn--green btn--medium${filter === 'free' ? ' --active' : ''}`}
-                  onClick={() => setFilter('free')}
-                >
-                  {freeList.length} доступних для вибору
-                </button>
-                <button
-                  className={`btn btn--outlined btn--medium${filter === 'taken' ? ' --active' : ''}`}
-                  onClick={() => setFilter('taken')}
-                >
-                  {takenList.length} знайшли мецената
-                </button>
-                <button
-                  className={`btn btn--green btn--medium${filter === 'all' ? ' --active' : ''}`}
-                  onClick={() => setFilter('all')}
-                >
-                  Всі
-                </button>
-              </div>
+              {freeList.length === 0 && (takenList.length === allList.length) ? (
+                <>
+                  <h2>Ця алея вже має меценатів.</h2>
+                  <Link href="/garden#alleys">
+                    <button className={`btn btn--green btn--medium`}>
+                      Обрати іншу алею
+                    </button>
+                  </Link>
+                </>
+              )
+              : 
+              <>
+                  {takenList.length !== 0 ? 
+                    <>
+                      <button
+                        className={`btn btn--outlined btn--medium${filter === 'taken' ? ' --active' : ''}`}
+                        onClick={() => setFilter('taken')}
+                      >
+                        {takenList.length} знайшли мецената
+                      </button>
+                      <button
+                        className={`btn btn--green btn--medium${filter === 'free' ? ' --active' : ''}`}
+                        onClick={() => setFilter('free')}
+                      >
+                        {freeList.length} доступних для вибору
+                      </button>
+                      <button
+                        className={`btn btn--green btn--medium${filter === 'all' ? ' --active' : ''}`}
+                        onClick={() => setFilter('all')}
+                      >
+                        Всі
+                      </button>
+                    </>
+                    :
+                    <>
+                      <h2>Оберіть діячів та станьте меценатом</h2>
+                    </>
+                  }
+              </>
+              }
               <div>
               <div className="persons__selected">
                 {selectedPersons.length > 0 ? (
@@ -175,6 +212,7 @@ export default function Persons({ personsData, alleyName }: PersonsProps) {
                 setActivePersonId={setActivePersonId}
                 selectedIds={selectedIds}
                 selectionHandler={selectionHandler}
+                isQueried={searchedPerson}
               />
               </div>
             </div>
@@ -199,7 +237,7 @@ function PersonCardNew({ item, isSelected, selectionHandler }: { item: PersonsDa
 
   return (
     <>
-      <div className='persons__card' key={item.id}>
+      <div className='persons__card' key={item.id} id={String(item.id)}>
         <Image
           className="persons__card-img"
           src={photo ?? '/assets/people/default-person1.png'}
@@ -246,11 +284,13 @@ function PersonsList({
   setActivePersonId,
   selectedIds,
   selectionHandler,
+  isQueried,
 }: {
   personsData: PersonsDataProps[];
-  setActivePersonId: (id: string) => void;
-  selectedIds: string[];
+  setActivePersonId: (id: number) => void;
+  selectedIds: number[];
   selectionHandler?: (person: PersonsDataProps) => void;
+  isQueried?: string | Record<string, string | string[] | undefined>;
 }) {
 
   const { showModal } = useModal();
@@ -269,6 +309,16 @@ function PersonsList({
     }
   };
 
+  useEffect(() => {
+    if (isQueried && typeof isQueried === 'object' && 'name' in isQueried) {
+      const queriedPerson = personsData.find(p => p.name === isQueried.name);
+      if (queriedPerson) {
+        handleItemClick(queriedPerson);
+      }
+    }
+
+  }, [isQueried, personsData]);
+
 
   return (
     <div className="container1">
@@ -279,6 +329,7 @@ function PersonsList({
               key={item.id}
               className={`item${selectedIds.includes(item.id) ? ' --selected' : ''}`}
               // onClick={() => setActivePersonId(item.id)}
+              id={String(item.id)}
               onClick={() => handleItemClick(item)}
             >
               <div className="item__img-wrapper">

@@ -106,7 +106,7 @@ export default async function Page(props: {
 }) {
 
   const { alley } = await props.params;
-
+  const searchedPerson = props.searchParams ? await props.searchParams : undefined;
   try {
     const urlParamsObject = {
       filters: { slug: alley },
@@ -148,7 +148,8 @@ export default async function Page(props: {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         famousPeople: (it.famousPeople ?? []).map((p: any) => ({
           ...p,
-        }))
+        })),
+        searchedPerson: searchedPerson
       };
     });
 
