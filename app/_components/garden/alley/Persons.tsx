@@ -6,6 +6,9 @@ import Link from "next/link";
 import MapleIcon from "../../ui/MapleIcon";
 import { useModal } from "../../context/modal-context";
 import AnimatedOnScroll from "../../ui/AnimatedScroll";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeSanitize from "rehype-sanitize";
 
 export type PersonsDataProps = {
   id: number;
@@ -268,10 +271,13 @@ function PersonCardNew({ item, isSelected, selectionHandler }: { item: PersonsDa
       ) : (
         <div className="mecenat green">
           <p className="mecenat__info">Меценат: {mecenat?.name ?? 'Анонімний меценат'}</p>
-          <p className="mecenat__note">
-            {mecenat?.note ??
-              "*Історія меценатства цієї постаті буде додана найближчим часом."
-            }
+          <p className="mecenat__note">          
+          <ReactMarkdown
+              rehypePlugins={[rehypeSanitize]}
+              remarkPlugins={[remarkGfm]}
+          >
+            {mecenat?.note ?? "*Історія меценатства цієї постаті буде додана найближчим часом."}
+          </ReactMarkdown>
           </p>
         </div>
       )}
