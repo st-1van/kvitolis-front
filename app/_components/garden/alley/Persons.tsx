@@ -126,15 +126,24 @@ export default function Persons({
   const link = `/garden/plant-tree?${params.toString()}`;
   const activePerson = indexedList.find(p => p.id === activePersonId) ?? null;
 
+  const isAlleySponsored = alleyName === 'Садівництво' ? true : false;
+  // const isMecenatIsSame = takenList.length === takenList.filter(p => allList[0].mecenat.name === p.mecenat?.name).length;
+  
+  const isAlleysFullyTaken = freeList.length === 0 && takenList.length === allList.length;
+
   return (
     <section className='aboutAlley'>
       <div className="container">
         <AnimatedOnScroll animationClass="fade-sides">
           <div className="row">
             <div className='persons col-md col'>
-              {freeList.length === 0 && (takenList.length === allList.length) ? (
+              <div className="persons__headline">
+              {isAlleysFullyTaken ? (
                 <>
-                  <h2>Ця алея вже має меценатів.</h2>
+                  {/* <h2>Ця алея вже має меценатів.</h2> */}
+                  <h2>{isAlleySponsored ? `Меценат цієї алеї` : `Ця алея вже має меценатів.`}</h2>
+                  {isAlleySponsored ? <img src='/assets/ecoorganic-logo.png' alt='Ecoorganic logo' style={{width: '66%', height: 'auto', marginBottom: '2rem'}} className="mecenat-logo"/> : ''}
+                  
                   <Link href="/garden#alleys">
                     <button className={`btn btn--green btn--medium`}>
                       Обрати іншу алею
@@ -172,6 +181,7 @@ export default function Persons({
                   }
               </>
               }
+              </div>
               <div>
               <div className="persons__selected">
                 {selectedPersons.length > 0 ? (
