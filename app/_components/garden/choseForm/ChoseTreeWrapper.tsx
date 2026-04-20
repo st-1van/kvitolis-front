@@ -10,7 +10,7 @@ import { callToActionData } from "../../data/Garden";
 import { StepsToBecomeMecenat } from "../../../_components/garden/CallToAction";
 
 export type Person = {
-  id: string;
+  id: number;
   name: string;
   years?: string;
   free: boolean;
@@ -75,7 +75,7 @@ export default function ChoseTreeWrapper(props: {
     return rawPeople
       .filter((person) => person?.free !== false)
       .map((person) => ({
-        id: person?.id != null ? String(person.id) : Math.random().toString(36).slice(2, 9),
+        id: person?.id != null ? person.id : Math.random().toString(36).slice(2, 9),
         name: person?.name ?? person?.fullName ?? "Unknown",
         years: person?.years ?? person?.life ?? undefined,
         free: typeof person?.free === "string" ? person.free === "true" : !!person?.free,

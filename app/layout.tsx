@@ -7,6 +7,7 @@ import { ScrollLockProvider } from './_components/context/scroll-lock-context';
 import { ModalProvider } from './_components/context/modal-context';
 import { Analytics } from '@vercel/analytics/next';
 import { GoogleTagManager } from '@next/third-parties/google'
+import GTMDiagnostics from './_components/GTMDiagnostocs';
 
 
 
@@ -35,6 +36,8 @@ export default function RootLayout({
       </head>
       <GoogleTagManager gtmId={process.env.GTM_ID||''} />
       <body>
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || ''} />
+        <GTMDiagnostics />
         <ScrollLockProvider>
           <ModalProvider>
             <Header/>
