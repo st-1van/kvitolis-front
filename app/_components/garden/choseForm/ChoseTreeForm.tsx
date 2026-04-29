@@ -219,7 +219,7 @@ export default function ChoseTreeForm({ AlleyData, chosenAlley, personsList, han
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Ваше ім'я"
+            placeholder="Ваше ім'я та прізвище"
             required
             className={errors.name && submitted ? "input-error" : ""}
             maxLength={80}
@@ -257,7 +257,6 @@ export default function ChoseTreeForm({ AlleyData, chosenAlley, personsList, han
             className={errors.email && submitted ? "input-error" : ""}
             autoComplete="off"
           />
-          <small>*На неї буде надісланий сертифікат і майбутні запрошення</small>
           {errors.email && submitted && <div className="error">{errors.email}</div>}
         </label>
 
