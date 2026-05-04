@@ -162,6 +162,20 @@ export default function FestivalClient(props: {
                     </p>
                   </div>
                 )}
+
+                  {data?.price?.[2] && (
+                  <div className="col col-bg grey cost-card">
+                    <div>
+                      <p className="subp">{data?.price?.[2]?.days ?? ""}</p>
+                      <Image src="/assets/icons/tickets.svg" width={70} height={61} alt="icon-calendar" />
+                    </div>
+                    <p>
+                      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
+                        {data?.price?.[2]?.price ?? ""}
+                      </ReactMarkdown>
+                    </p>
+                  </div>
+                )}
               </div>
             </AnimatedOnScroll>
           </div>
