@@ -38,7 +38,7 @@ async function genereteDynamicPages(){
         priority: 0.7,
       })),
       ...(Array.isArray(alleys?.data) ? alleys.data : []).map((item: { slug: string }) => ({
-        url: `${process.env.NEXT_PUBLIC_SITE_URL}/garden/alleys/${item.slug}`,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL}/garden/${item.slug}`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.7,
