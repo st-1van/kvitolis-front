@@ -42,7 +42,7 @@ export const Footer = ()=>{
                                         Пишіть нам на пошту або телефонуйте
                                     </p>
                                 </div>
-                                <Link href='events#about-events'>
+                                <Link href='/events'>
                                     <button className="btn btn--medium btn--white ">
                                             Дізнатись більше
                                     </button>
