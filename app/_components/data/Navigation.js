@@ -32,17 +32,17 @@ export const navItems = [
 export const socilalLinks = [
         {
             name:'facebook',
-            link: 'https://www.facebook.com/volynska.holandia/',
+            link: 'https://www.facebook.com/kvitolis/',
             icon:<FacebookIcon type='filled' />
         },
         {
             name:'instagram',
-            link: 'https://www.instagram.com/volynska.holandia/',
+            link: 'https://www.instagram.com/kvitolis/',
             icon:<InstagramIcon type='filled' />
         },
         {
             name:'tiktok',
-            link:'https://www.tiktok.com/@volynska.holandia',
+            link:'https://www.tiktok.com/@kvitolis',
             icon:<TikTokIcon type='filled' />
         },
         {
